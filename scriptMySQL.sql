@@ -2,16 +2,16 @@
 CREATE DATABASE localDataBase;
 USE localDataBase;
 
-DROP TABLE localDataBase.PossibleAnswer;
-DROP TABLE localDataBase.Poll;
-DROP TABLE localDataBase.Teacher;
-DROP TABLE localDataBase.Mark;
-DROP TABLE localDataBase.Course;
-DROP TABLE localDataBase.DailyTopic;
-DROP TABLE localDataBase.Administrator;
-DROP TABLE localDataBase.Contact;
-DROP TABLE localDataBase.Student;
-DROP TABLE localDataBase.Person;
+DROP TABLE PossibleAnswer;
+DROP TABLE Poll;
+DROP TABLE Teacher;
+DROP TABLE Mark;
+DROP TABLE Course;
+DROP TABLE DailyTopic;
+DROP TABLE Administrator;
+DROP TABLE Contact;
+DROP TABLE Student;
+DROP TABLE Person;
 
 
 
