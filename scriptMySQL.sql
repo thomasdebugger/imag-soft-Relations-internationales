@@ -1,5 +1,6 @@
 ## BD projet imag soft
-
+CREATE DATABASE localDataBase;
+USE localDataBase;
 
 DROP TABLE localDataBase.PossibleAnswer;
 DROP TABLE localDataBase.Poll;
@@ -14,7 +15,7 @@ DROP TABLE localDataBase.Person;
 
 
 
-CREATE TABLE localDataBase.Person(
+CREATE TABLE Person(
   idPerson varchar(255) NOT NULL,
   emailAdress varchar(255),
   firstName varchar(255),
@@ -25,16 +26,16 @@ CREATE TABLE localDataBase.Person(
   PRIMARY KEY (idPerson)
 );
 
-CREATE TABLE localDataBase.Student(
+CREATE TABLE Student(
   idStudent varchar(255) NOT NULL,
   university varchar(255),
   isArchieved boolean,
   isEntrant boolean,
   PRIMARY KEY (idStudent),
-  FOREIGN KEY (idStudent) REFERENCES localDataBase.Person(idPerson)
+  FOREIGN KEY (idStudent) REFERENCES Person(idPerson)
 );
 
-CREATE TABLE localDataBase.Contact(
+CREATE TABLE Contact(
   idContact varchar(255) NOT NULL,
   idStudent varchar(255),
   emailAdress varchar(255),
@@ -44,16 +45,16 @@ CREATE TABLE localDataBase.Contact(
   affiliation varchar(255),
   description varchar(255),
   PRIMARY KEY (idContact),
-  FOREIGN KEY (idStudent) REFERENCES localDataBase.Student(idStudent)
+  FOREIGN KEY (idStudent) REFERENCES Student(idStudent)
 );
 
-CREATE TABLE localDataBase.Administrator(
+CREATE TABLE Administrator(
   idAdministrator varchar(255) NOT NULL,
   PRIMARY KEY (idAdministrator),
-  FOREIGN KEY (idAdministrator) REFERENCES localDataBase.Person(idPerson)
+  FOREIGN KEY (idAdministrator) REFERENCES Person(idPerson)
 );
 
-CREATE TABLE localDataBase.DailyTopic(
+CREATE TABLE DailyTopic(
   idDailyTopic varchar(255) NOT NULL,
   dateDailyTopic date,
   description varchar(255),
@@ -61,7 +62,7 @@ CREATE TABLE localDataBase.DailyTopic(
   PRIMARY KEY (idDailyTopic)
 );
 
-CREATE TABLE localDataBase.Course(
+CREATE TABLE Course(
   idCourse varchar(255) NOT NULL,
   description varchar(255),
   name varchar(255),
@@ -69,25 +70,25 @@ CREATE TABLE localDataBase.Course(
   PRIMARY KEY (idCourse)
 );
 
-CREATE TABLE localDataBase.Mark(
+CREATE TABLE Mark(
   idMark varchar(255) NOT NULL,
   idCourse varchar(255) NOT NULL,
   typeMark varchar(255),
   valueMark float,
   PRIMARY KEY (idMark),
-  FOREIGN KEY (idCourse) REFERENCES localDataBase.Course(idCourse)
+  FOREIGN KEY (idCourse) REFERENCES Course(idCourse)
 );
 
-CREATE TABLE localDataBase.Teacher(
+CREATE TABLE Teacher(
   idTeacher varchar(255) NOT NULL,
   idCourse varchar(255) NOT NULL,
   lastName varchar(255),
   firstName varchar(255),
   PRIMARY KEY (idTeacher),
-  FOREIGN KEY (idCourse) REFERENCES localDataBase.Course(idCourse)
+  FOREIGN KEY (idCourse) REFERENCES Course(idCourse)
 );
 
-CREATE TABLE localDataBase.Poll(
+CREATE TABLE Poll(
   idPoll varchar(255) NOT NULL,
   idCourse varchar(255) NOT NULL,
   statusPoll varchar(255),
@@ -95,15 +96,15 @@ CREATE TABLE localDataBase.Poll(
   answer varchar(255),
   dateAnswer date,
   PRIMARY KEY (idPoll),
-  FOREIGN KEY (idCourse) REFERENCES localDataBase.Course(idCourse)
+  FOREIGN KEY (idCourse) REFERENCES Course(idCourse)
 );
 
-CREATE TABLE localDataBase.PossibleAnswer(
+CREATE TABLE PossibleAnswer(
   idPossibleAnswer varchar(255) NOT NULL,
   idPoll varchar(255) NOT NULL,
   valuePossibleAnswer varchar(255),
   PRIMARY KEY (idPossibleAnswer),
-  FOREIGN KEY (idPoll) REFERENCES localDataBase.Poll(idPoll)
+  FOREIGN KEY (idPoll) REFERENCES Poll(idPoll)
 );
 
 
