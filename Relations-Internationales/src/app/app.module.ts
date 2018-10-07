@@ -6,10 +6,13 @@ import { MatButtonModule } from '@angular/material';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ErrorComponent } from './pages/error/error.component';
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent }, // localhost/4200
+  { path: '', redirectTo: '/home', pathMatch: 'full' }, // default route
+  { path: 'home', component: HomeComponent }, // localhost/4200/home
   { path: 'login', component: LoginComponent }, // localhost/4200/login
+  { path: '**', component: ErrorComponent }, // localhost/4200/error
 ];
 
 @NgModule({
@@ -17,6 +20,7 @@ const appRoutes: Routes = [
     AppComponent,
     LoginComponent,
     HomeComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
