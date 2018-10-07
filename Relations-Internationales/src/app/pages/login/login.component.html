@@ -1,5 +1,24 @@
-<p>
-  login works!
-</p>
+<div class="pageBody">
+  <h1>Login Page</h1>
 
-<button mat-raised-button color="primary" (click)="navigateTo('home')">Go to home page</button>
+  <!-- Form Login -->
+  <form class="login-form">
+    <!-- Field Username -->
+    <div class="username-field">
+      <mat-form-field>
+        <input matInput type="text" placeholder="Enter your username">
+      </mat-form-field>
+    </div>
+    <!-- Field Password -->
+    <div class="password-field">
+      <mat-form-field>
+        <input matInput type="password" placeholder="Enter your password">
+      </mat-form-field>
+    </div>
+    <!-- Button Connection -->
+    <button mat-raised-button color="primary" class="connection-button" (click)="navigateTo('home')">Connection !</button>
+  </form>
+
+  <!-- Button Navigation -->
+  <button mat-stroked-button color="primary" (click)="navigateTo('home')">Go to home page</button>
+</div>

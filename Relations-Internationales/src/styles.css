@@ -3,4 +3,11 @@
 
 .pageBody {
     text-align: center;
+    font-family: Helvetica;
 }
+
+h1, h3 { font-weight: 300; }
+
+h1 { color: #636363; }
+
+h3 { color: #4a89dc; }
