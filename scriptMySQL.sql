@@ -107,6 +107,10 @@ CREATE TABLE PossibleAnswer(
   FOREIGN KEY (idPoll) REFERENCES Poll(idPoll)
 );
 
+## Commandes utilies
+## SHOW TABLE FROM localDataBase;
+## DESCRIBE localDataBase.Administrator;
+
 
 
 
