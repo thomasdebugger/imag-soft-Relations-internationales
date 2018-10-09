@@ -9,12 +9,14 @@ import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { DatabaseService } from './services/database/database.service';
+import { StudentProfilePageComponent } from './pages/student-profile-page/student-profile-page.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' }, // default route
     { path: 'home', component: HomeComponent }, // localhost/4200/home
     { path: 'login', component: LoginComponent }, // localhost/4200/login
     { path: '**', component: ErrorComponent }, // localhost/4200/error
+    { path: 'student-profile-page', component: StudentProfilePageComponent }, // localhost/4200/login/student-profile-page
 ];
 
 @NgModule({
@@ -23,6 +25,7 @@ const appRoutes: Routes = [
         LoginComponent,
         HomeComponent,
         ErrorComponent,
+        StudentProfilePageComponent,
     ],
     imports: [
         BrowserModule,
