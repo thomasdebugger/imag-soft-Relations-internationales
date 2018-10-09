@@ -15,8 +15,8 @@ const appRoutes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' }, // default route
     { path: 'home', component: HomeComponent }, // localhost/4200/home
     { path: 'login', component: LoginComponent }, // localhost/4200/login
+    { path: 'student-profile-page', component: StudentProfilePageComponent }, // localhost/4200/student-profile-page
     { path: '**', component: ErrorComponent }, // localhost/4200/error
-    { path: 'student-profile-page', component: StudentProfilePageComponent }, // localhost/4200/login/student-profile-page
 ];
 
 @NgModule({
