@@ -12,7 +12,9 @@ import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { DatabaseService } from './services/database/database.service';
+
 import { StudentProfilePageComponent } from './pages/student-profile-page/student-profile-page.component';
+import { SimulatorService } from './services/simulator/simulator.service';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' }, // default route
@@ -43,7 +45,10 @@ const appRoutes: Routes = [
         MatTreeModule,
         MatExpansionModule,
     ],
-    providers: [DatabaseService],
+    providers: [
+        DatabaseService,
+        SimulatorService
+    ],
     bootstrap: [AppComponent],
 })
 export class AppModule { }
