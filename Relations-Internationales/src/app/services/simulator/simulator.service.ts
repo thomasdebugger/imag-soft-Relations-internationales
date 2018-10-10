@@ -15,6 +15,15 @@ import { PossibleAnswer } from '../../models/possible-answer';
 export class SimulatorService {
 
   private objectsSimulated: any[];
+  private students: Student[];
+  private contacts: Contact[];
+  private administrators: Administrator[];
+  private dailyTopics: DailyTopic[];
+  private courses: Course[];
+  private marks: Mark[];
+  private teachers: Teacher[];
+  private polls: Poll[];
+  private possibleAnswers: PossibleAnswer[];
 
   constructor() {
     this.executeSimulation();
@@ -97,18 +106,29 @@ export class SimulatorService {
     const possibleAnswer10: PossibleAnswer = new PossibleAnswer('posAn010', poll4, 'Yes');
     const possibleAnswer11: PossibleAnswer = new PossibleAnswer('posAn011', poll4, 'No');
 
-    this.objectsSimulated = [student1, student2, student3, student4,
-      contact1, contact2, contact3, contact4, contact5, contact6,
-      administrator1,
-      dailyTopic1, dailyTopic2, dailyTopic3, dailyTopic4,
-      course1, course2, course3, course4,
-      mark1, mark2, mark3, mark4, mark5, mark6, mark7, mark8, mark9,
-      teacher1, teacher2, teacher3, teacher4, teacher5,
-      poll1, poll2, poll3, poll4,
-      possibleAnswer1, possibleAnswer2, possibleAnswer3, possibleAnswer4, possibleAnswer5, possibleAnswer6,
-      possibleAnswer7, possibleAnswer8, possibleAnswer9, possibleAnswer10, possibleAnswer11
+    this.students = [student1, student2, student3, student4];
+    this.contacts = [contact1, contact2, contact3, contact4, contact5, contact6];
+    this.administrators = [administrator1];
+    this.dailyTopics = [dailyTopic1, dailyTopic2, dailyTopic3, dailyTopic4];
+    this.courses = [course1, course2, course3, course4];
+    this.marks = [mark1, mark2, mark3, mark4, mark5, mark6, mark7, mark8, mark9];
+    this.teachers = [teacher1, teacher2, teacher3, teacher4, teacher5];
+    this.polls = [poll1, poll2, poll3, poll4];
+    this.possibleAnswers = [possibleAnswer1, possibleAnswer2, possibleAnswer3, possibleAnswer4, possibleAnswer5,
+      possibleAnswer6, possibleAnswer7, possibleAnswer8, possibleAnswer9, possibleAnswer10, possibleAnswer11];
+    this.objectsSimulated = [this.students, this.contacts, this.administrators, this.dailyTopics,
+    this.courses, this.marks, this.teachers, this.polls, this.possibleAnswers
     ];
   }
 
   public getObjectsSimulated(): any[] { return this.objectsSimulated; }
+  public getStudents(): Student[] { return this.students; }
+  public getContacts(): Contact[] { return this.contacts; }
+  public getAdministrators(): Administrator[] { return this.administrators; }
+  public getDailyTopics(): DailyTopic[] { return this.dailyTopics; }
+  public getCourses(): Course[] { return this.courses; }
+  public getMarks(): Mark[] { return this.marks; }
+  public getTeachers(): Teacher[] { return this.teachers; }
+  public getPolls(): Poll[] { return this.polls; }
+  public getPossibleAnswers(): PossibleAnswer[] { return this.possibleAnswers; }
 }
