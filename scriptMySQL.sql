@@ -56,18 +56,22 @@ CREATE TABLE Administrator(
 
 CREATE TABLE DailyTopic(
   idDailyTopic varchar(255) NOT NULL,
+  idStudent varchar(255),
   dateDailyTopic date,
   description varchar(255),
   name varchar(255),
-  PRIMARY KEY (idDailyTopic)
+  PRIMARY KEY (idDailyTopic),
+  FOREIGN KEY (idStudent) REFERENCES Student(idStudent)
 );
 
 CREATE TABLE Course(
   idCourse varchar(255) NOT NULL,
+  idStudent varchar(255),
   description varchar(255),
   name varchar(255),
   ects int,
-  PRIMARY KEY (idCourse)
+  PRIMARY KEY (idCourse),
+  FOREIGN KEY (idStudent) REFERENCES Student(idStudent)
 );
 
 CREATE TABLE Mark(

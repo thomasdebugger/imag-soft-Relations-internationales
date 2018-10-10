@@ -12,6 +12,8 @@ export class Teacher {
         this.course = course;
         this.lastName = lastName;
         this.firstName = firstName;
+
+        this.course.getTeachers().push(this);
     }
 
     public getIdTeacher(): string { return this.idTeacher; }
