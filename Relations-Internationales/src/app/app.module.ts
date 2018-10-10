@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule, MatIconModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTreeModule } from '@angular/material/tree';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -37,6 +40,8 @@ const appRoutes: Routes = [
         MatInputModule,
         MatCardModule,
         MatIconModule,
+        MatTreeModule,
+        MatExpansionModule,
     ],
     providers: [DatabaseService],
     bootstrap: [AppComponent],
