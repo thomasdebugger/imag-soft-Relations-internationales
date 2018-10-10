@@ -17,7 +17,7 @@ DROP TABLE IF EXISTS Person;
 
 CREATE TABLE Person(
   idPerson varchar(255) NOT NULL,
-  emailAdress varchar(255),
+  emailAddress varchar(255),
   firstName varchar(255),
   lastName varchar(255),
   birthDate date,
@@ -29,7 +29,7 @@ CREATE TABLE Person(
 CREATE TABLE Student(
   idStudent varchar(255) NOT NULL,
   university varchar(255),
-  isArchieved boolean,
+  isArchived boolean,
   isEntrant boolean,
   PRIMARY KEY (idStudent),
   FOREIGN KEY (idStudent) REFERENCES Person(idPerson)
@@ -38,7 +38,7 @@ CREATE TABLE Student(
 CREATE TABLE Contact(
   idContact varchar(255) NOT NULL,
   idStudent varchar(255),
-  emailAdress varchar(255),
+  emailAddress varchar(255),
   firstName varchar(255),
   lastName varchar(255),
   phoneNumber varchar(255),
@@ -91,7 +91,7 @@ CREATE TABLE Teacher(
 CREATE TABLE Poll(
   idPoll varchar(255) NOT NULL,
   idCourse varchar(255) NOT NULL,
-  statusPoll varchar(255),
+  status varchar(255),
   question varchar(255),
   answer varchar(255),
   dateAnswer date,
