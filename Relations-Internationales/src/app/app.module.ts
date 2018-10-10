@@ -11,9 +11,9 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ErrorComponent } from './pages/error/error.component';
-import { DatabaseService } from './services/database/database.service';
-
 import { StudentProfilePageComponent } from './pages/student-profile-page/student-profile-page.component';
+
+import { DatabaseService } from './services/database/database.service';
 import { SimulatorService } from './services/simulator/simulator.service';
 
 const appRoutes: Routes = [
