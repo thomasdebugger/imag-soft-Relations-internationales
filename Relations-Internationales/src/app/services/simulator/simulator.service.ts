@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Student } from '../../models/student';
-import { Person } from '../../models/person';
 import { Teacher } from '../../models/teacher';
 import { Contact } from '../../models/contact';
 import { Administrator } from '../../models/administrator';
@@ -15,11 +14,13 @@ import { PossibleAnswer } from '../../models/possible-answer';
 })
 export class SimulatorService {
 
+  private objectsSimulated: any[];
+
   constructor() {
     this.executeSimulation();
   }
 
-  private executeSimulation(): any[] {
+  private executeSimulation(): void {
     const student1: Student = new Student('person001', 'person001@gmail.com', 'Jean', 'Dupont',
       new Date('22/06/2998'), new Date().getDate.toString(), '0610000001', 'UGA', false, false, [], [], []);
     const student2: Student = new Student('person002', 'person002@gmail.com', 'Alice', 'Clerc',
@@ -96,7 +97,7 @@ export class SimulatorService {
     const possibleAnswer10: PossibleAnswer = new PossibleAnswer('posAn010', poll4, 'Yes');
     const possibleAnswer11: PossibleAnswer = new PossibleAnswer('posAn011', poll4, 'No');
 
-    return [student1, student2, student3, student4,
+    this.objectsSimulated = [student1, student2, student3, student4,
       contact1, contact2, contact3, contact4, contact5, contact6,
       administrator1,
       dailyTopic1, dailyTopic2, dailyTopic3, dailyTopic4,
@@ -108,4 +109,6 @@ export class SimulatorService {
       possibleAnswer7, possibleAnswer8, possibleAnswer9, possibleAnswer10, possibleAnswer11
     ];
   }
+
+  public getObjectsSimulated(): any[] { return this.objectsSimulated; }
 }
