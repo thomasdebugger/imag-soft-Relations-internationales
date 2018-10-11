@@ -8,6 +8,7 @@ import { Course } from '../../models/course';
 import { Mark } from '../../models/mark';
 import { Poll } from '../../models/poll';
 import { PossibleAnswer } from '../../models/possible-answer';
+import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -25,19 +26,23 @@ export class SimulatorService {
   private polls: Poll[];
   private possibleAnswers: PossibleAnswer[];
 
-  constructor() {
+  constructor(private datePipe: DatePipe) {
     this.executeSimulation();
   }
 
   private executeSimulation(): void {
     const student1: Student = new Student('person001', 'person001@gmail.com', 'Jean', 'Dupont',
-      new Date('22/06/2998'), new Date().getDate.toString(), '0610000001', 'UGA', false, false, [], [], []);
+      new Date('22/06/2998'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000001',
+      'UGA', false, false, [], [], []);
     const student2: Student = new Student('person002', 'person002@gmail.com', 'Alice', 'Clerc',
-      new Date('24/04/2998'), new Date().getDate.toString(), '0610000002', 'Paris-6', true, true, [], [], []);
+      new Date('24/04/2998'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000002',
+      'Paris-6', true, true, [], [], []);
     const student3: Student = new Student('person003', 'person003@gmail.com', 'Benoit', 'Dumas',
-      new Date('14/11/2998'), new Date().getDate.toString(), '0610000003', 'Jean-Moulin', false, true, [], [], []);
+      new Date('14/11/2998'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000003',
+      'Jean-Moulin', false, true, [], [], []);
     const student4: Student = new Student('person004', 'person004@gmail.com', 'Marie', 'Lambert',
-      new Date('02/01/2998'), new Date().getDate.toString(), '0610000004', 'UPMF', true, false, [], [], []);
+      new Date('02/01/2998'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000004',
+      'UPMF', true, false, [], [], []);
 
     const contact1: Contact = new Contact('cont001', student1, 'cont001@gmail.com', 'Lucie', 'Prevert',
       '0620000001', 'affiliation1', 'descriptionContact001');
