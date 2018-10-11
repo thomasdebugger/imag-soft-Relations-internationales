@@ -5,6 +5,7 @@ import { MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule, Mat
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTableModule } from '@angular/material/table';
 
 
 import { AppComponent } from './app.component';
@@ -44,6 +45,7 @@ const appRoutes: Routes = [
         MatIconModule,
         MatTreeModule,
         MatExpansionModule,
+        MatTableModule
     ],
     providers: [
         DatabaseService,
