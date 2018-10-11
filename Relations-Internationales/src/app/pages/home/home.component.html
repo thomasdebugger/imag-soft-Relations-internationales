@@ -1,5 +1,10 @@
-<p>
-  home works!
+<p *ngIf="isAdmin">
+  Administrator side.
+
+  <app-administrator-side></app-administrator-side>
+</p>
+<p *ngIf="!isAdmin">
+  Student side.
 </p>
 
 <button mat-stroked-button color="primary" (click)="navigateTo('login')">Go to login page</button>

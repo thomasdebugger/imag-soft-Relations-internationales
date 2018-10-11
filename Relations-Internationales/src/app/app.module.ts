@@ -15,6 +15,7 @@ import { StudentProfilePageComponent } from './pages/student-profile-page/studen
 
 import { DatabaseService } from './services/database/database.service';
 import { SimulatorService } from './services/simulator/simulator.service';
+import { AdministratorSideComponent } from './pages/home/administrator-side/administrator-side.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' }, // default route
@@ -31,6 +32,7 @@ const appRoutes: Routes = [
         HomeComponent,
         ErrorComponent,
         StudentProfilePageComponent,
+        AdministratorSideComponent,
     ],
     imports: [
         BrowserModule,

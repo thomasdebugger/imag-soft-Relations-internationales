@@ -9,11 +9,15 @@ import { SimulatorService } from '../../services/simulator/simulator.service';
 })
 export class HomeComponent implements OnInit {
 
+  private isAdmin: boolean;
+
   constructor(private router: Router, private simulator: SimulatorService) { }
 
   ngOnInit() {
     console.log('Welcome to the home component !');
     console.log(this.simulator.getObjectsSimulated());
+
+    this.isAdmin = true;
   }
 
   navigateTo(route: string) {
