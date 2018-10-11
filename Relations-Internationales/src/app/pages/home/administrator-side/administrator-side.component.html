@@ -33,8 +33,11 @@
 
     <!-- Entrant/Leaving Column -->
     <ng-container matColumnDef="Entrant/Leaving">
-      <th mat-header-cell *matHeaderCellDef> Entrant/Leaving </th>
-      <td mat-cell *matCellDef="let student"> {{student.getIsEntrant()}} </td>
+      <th mat-header-cell *matHeaderCellDef> Entrant / Leaving </th>
+      <td mat-cell *matCellDef="let student">
+        <p *ngIf="student.getIsEntrant() == true"> E </p>
+        <p *ngIf="student.getIsEntrant() == false"> L </p>
+      </td>
     </ng-container>
 
     <!-- OpenInNew Column -->
@@ -52,4 +55,13 @@
   </table>
 
   <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
+
+<div class="bottomButtons">
+  <button id="archiveStudentButton" mat-stroked-button color="primary" (click)="archiveStudents()">Archive</button>
+  <button *ngIf="!areDisplayArchived" mat-stroked-button color="primary" (click)="displayArchivedStudents()">Display
+    archived students</button>
+  <button *ngIf="areDisplayArchived" mat-stroked-button color="primary" (click)="displayArchivedStudents()">Display non
+    archived students</button>
+  <button id="addStudentButton" mat-raised-button color="primary" (click)="addStudent()">Add student</button>
 </div>
