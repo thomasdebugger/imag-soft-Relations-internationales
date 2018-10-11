@@ -1,8 +1,21 @@
-<p *ngIf="isAdmin">
-  Logged as Administrator.
+<!-- Header banner -->
+<div class="header">
+  <div>
+    <img src="../../../assets/logo-uga-new-couleurs-bandeau.png" alt="Universite Grenoble Alpes">
+    <div class="languageAndLogs">
+      <h2>Logged as Administrator.</h2>
+      <h3>English version</h3>
+    </div>
+  </div>
+  <div>
+    <h1>Pedagogical workbook</h1>
+  </div>
+</div>
 
+<p *ngIf="isAdmin">
   <app-administrator-side></app-administrator-side>
 </p>
+
 <p *ngIf="!isAdmin">
   Student side.
 </p>
