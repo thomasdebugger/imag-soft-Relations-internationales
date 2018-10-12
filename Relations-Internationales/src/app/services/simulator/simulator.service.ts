@@ -32,16 +32,40 @@ export class SimulatorService {
 
   private executeSimulation(): void {
     const student1: Student = new Student('person001', 'person001@gmail.com', 'Jean', 'Dupont',
-      new Date('22/06/2998'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000001',
+      new Date('22/06/1998'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000001',
       'UGA', false, false, [], [], []);
     const student2: Student = new Student('person002', 'person002@gmail.com', 'Alice', 'Clerc',
-      new Date('24/04/2998'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000002',
+      new Date('24/04/1998'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000002',
       'Paris-6', true, true, [], [], []);
     const student3: Student = new Student('person003', 'person003@gmail.com', 'Benoit', 'Dumas',
-      new Date('14/11/2998'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000003',
+      new Date('14/11/1998'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000003',
       'Jean-Moulin', false, true, [], [], []);
     const student4: Student = new Student('person004', 'person004@gmail.com', 'Marie', 'Lambert',
-      new Date('02/01/2998'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000004',
+      new Date('02/01/1998'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000004',
+      'UPMF', true, false, [], [], []);
+    const student5: Student = new Student('person005', 'person005@gmail.com', 'Alexandra', 'Duris',
+      new Date('14/06/1998'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000005',
+      'UGA', false, false, [], [], []);
+    const student6: Student = new Student('person006', 'person006@gmail.com', 'Quentin', 'Moro',
+      new Date('25/05/1995'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000006',
+      'Ensimag', true, false, [], [], []);
+    const student7: Student = new Student('person007', 'person007@gmail.com', 'Claude', 'Ruyf',
+      new Date('14/12/1998'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000007',
+      'UJF', false, false, [], [], []);
+    const student8: Student = new Student('person008', 'person008@gmail.com', 'Virginie', 'Lemaire',
+      new Date('29/10/1997'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000008',
+      'UPMF', true, false, [], [], []);
+    const student9: Student = new Student('person009', 'person009@gmail.com', 'Chloe', 'Lewom',
+      new Date('08/12/1993'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000009',
+      'UGA', false, false, [], [], []);
+    const student10: Student = new Student('person010', 'person010@gmail.com', 'Martin', 'Man',
+      new Date('24/12/1998'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000010',
+      'UGA', true, true, [], [], []);
+    const student11: Student = new Student('person011', 'person011@gmail.com', 'Xavier', 'Norti',
+      new Date('14/11/1992'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000011',
+      'Jean-Moulin', false, true, [], [], []);
+    const student12: Student = new Student('person012', 'person012@gmail.com', 'Marie', 'Latour',
+      new Date('01/01/1998'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000012',
       'UPMF', true, false, [], [], []);
 
     const contact1: Contact = new Contact('cont001', student1, 'cont001@gmail.com', 'Lucie', 'Prevert',
@@ -111,7 +135,8 @@ export class SimulatorService {
     const possibleAnswer10: PossibleAnswer = new PossibleAnswer('posAn010', poll4, 'Yes');
     const possibleAnswer11: PossibleAnswer = new PossibleAnswer('posAn011', poll4, 'No');
 
-    this.students = [student1, student2, student3, student4];
+    this.students = [student1, student2, student3, student4, student5, student6, student7, student8,
+      student9, student10, student11, student12];
     this.contacts = [contact1, contact2, contact3, contact4, contact5, contact6];
     this.administrators = [administrator1];
     this.dailyTopics = [dailyTopic1, dailyTopic2, dailyTopic3, dailyTopic4];
