@@ -1,0 +1,52 @@
+mat-card {
+    width: 85%;
+    margin: auto auto;
+}
+
+.student-summary {
+    display: contents;
+}
+
+.account-icon {
+    float: left;
+    height: 9.938rem;
+    width: 9.938rem;
+    font-size: 9.938rem;
+}
+
+.student-identity {
+    float: right;
+    margin-left: 1.5rem;
+}
+
+.student-connection {
+    margin: auto auto;
+    text-align: center;
+}
+
+.student-university {
+    float: right;
+}
+
+.university {
+    color: red;
+}
+
+.contact {
+    color: cornflowerblue;
+    text-decoration: underline;
+}
+
+.header {
+    background-color: rgb(221, 221, 221);
+}
+
+.course-column, .contact-column {
+    width: 20%;
+    text-align: center;
+}
+
+.dailyTopic-column {
+    width: 25%;
+    text-align: center;
+}

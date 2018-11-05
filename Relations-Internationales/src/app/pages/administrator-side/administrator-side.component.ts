@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { SimulatorService } from 'src/app/services/simulator/simulator.service';
 import { Student } from 'src/app/models/student';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-administrator-side',
@@ -16,7 +17,7 @@ export class AdministratorSideComponent implements OnInit {
   private displayedColumns: string[];
   private areDisplayArchived: boolean;
 
-  constructor(private simulator: SimulatorService) { }
+  constructor(private simulator: SimulatorService, private router: Router) { }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -61,5 +62,9 @@ export class AdministratorSideComponent implements OnInit {
     } else {
       this.dataSource = new MatTableDataSource<Student>(this.nonArchivedStudents);
     }
+  }
+
+  goToStudentDetailsPage(studentId: string): void {
+    this.router.navigate(['student-details/' + studentId]);
   }
 }
