@@ -1,22 +1,11 @@
 <!-- Header banner -->
-<div class="header">
-  <div>
-    <img src="../../../assets/logo-uga-new-couleurs-bandeau.png" alt="Universite Grenoble Alpes">
-    <div class="languageAndLogs">
-      <h2>Logged as Administrator.</h2>
-      <h3>English version</h3>
-    </div>
-  </div>
-  <div>
-    <h1>Pedagogical workbook</h1>
-  </div>
-</div>
+<app-header [userInput]="user"></app-header>
 
-<p *ngIf="isAdmin">
+<p *ngIf="isAdministrator">
   <app-administrator-side></app-administrator-side>
 </p>
 
-<p *ngIf="!isAdmin">
+<p *ngIf="!isAdministrator">
   Student side.
 </p>
 

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SimulatorService } from '../../services/simulator/simulator.service';
+import { Person } from 'src/app/models/person';
+import { Administrator } from 'src/app/models/administrator';
+import { Student } from 'src/app/models/student';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +12,8 @@ import { SimulatorService } from '../../services/simulator/simulator.service';
 })
 export class HomeComponent implements OnInit {
 
-  private isAdmin: boolean;
+  private user: Person;
+  private isAdministrator: any;
 
   constructor(private router: Router, private simulator: SimulatorService) { }
 
@@ -17,7 +21,11 @@ export class HomeComponent implements OnInit {
     console.log('Welcome to the home component !');
     console.log(this.simulator.getObjectsSimulated());
 
-    this.isAdmin = true;
+    const userAdmin = this.simulator.getAdministrators()[0];
+    const userStudent = this.simulator.getStudents()[0];
+
+    this.user = userAdmin;
+    this.isAdministrator = this.user instanceof Administrator;
   }
 
   navigateTo(route: string) {

@@ -20,6 +20,7 @@ import { DatabaseService } from './services/database/database.service';
 import { SimulatorService } from './services/simulator/simulator.service';
 import { AdministratorSideComponent } from './pages/home/administrator-side/administrator-side.component';
 import { DatePipe } from '@angular/common';
+import { HeaderComponent } from './components/header/header.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' }, // default route
@@ -37,6 +38,7 @@ const appRoutes: Routes = [
         ErrorComponent,
         StudentProfilePageComponent,
         AdministratorSideComponent,
+        HeaderComponent,
     ],
     imports: [
         BrowserModule,
