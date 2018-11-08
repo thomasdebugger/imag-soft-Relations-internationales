@@ -24,8 +24,6 @@ export class Course {
         this.teachers = teacher;
         this.polls = polls;
         this.marks = marks;
-
-        this.student.getCourses().push(this);
     }
 
     public getIdCourse(): string { return this.idCourse; }
