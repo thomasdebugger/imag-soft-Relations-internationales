@@ -8,6 +8,7 @@ import {
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTableModule } from '@angular/material/table';
 
 
 import { AppComponent } from './app.component';
@@ -54,6 +55,7 @@ const appRoutes: Routes = [
         MatExpansionModule,
         MatTableModule,
         MatPaginatorModule,
+        MatTableModule
     ],
     providers: [
         DatabaseService,
