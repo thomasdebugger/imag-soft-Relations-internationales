@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {
     MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule, MatTableModule,
-    MatPaginatorModule, MatIconModule, MatListModule
+    MatPaginatorModule, MatIconModule, MatListModule, MatDialogModule, MatSelectModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTreeModule } from '@angular/material/tree';
@@ -22,6 +22,7 @@ import { DatePipe } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
 import { AdministratorSideComponent } from './pages/administrator-side/administrator-side.component';
 import { StudentDetailsComponent } from './pages/student-details/student-details.component';
+import { AddCourseDialogComponent } from './components/add-element-dialog/add-course-dialog/add-course-dialog.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' }, // default route
@@ -42,6 +43,7 @@ const appRoutes: Routes = [
         AdministratorSideComponent,
         HeaderComponent,
         StudentDetailsComponent,
+        AddCourseDialogComponent,
     ],
     imports: [
         BrowserModule,
@@ -58,6 +60,8 @@ const appRoutes: Routes = [
         MatTableModule,
         MatPaginatorModule,
         MatListModule,
+        MatDialogModule,
+        MatSelectModule,
     ],
     providers: [
         DatabaseService,
@@ -65,5 +69,6 @@ const appRoutes: Routes = [
         DatePipe,
     ],
     bootstrap: [AppComponent],
+    entryComponents: [AddCourseDialogComponent],
 })
 export class AppModule { }

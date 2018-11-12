@@ -49,16 +49,21 @@
           <h2 class="course-column">Last mark</h2>
           <h2 class="course-column"></h2>
         </mat-list-item>
+        <!-- Courses content -->
         <mat-list-item *ngFor="let course of coursesOfSelectedStudent" role="listitem">
           <h2 class="course-column">{{ course.getName() }}</h2>
           <h2 class="course-column">{{ course.getEcts() }}</h2>
           <h2 class="course-column">{{ course.getDescription() }}</h2>
           <h2 class="course-column">{{ course.getMarks()[course.getMarks().length -1].getValue() }}</h2>
           <button mat-icon-button class="course-column">
-            <mat-icon>delete_outline</mat-icon>
+            <mat-icon class="trash-icon">delete_outline</mat-icon>
           </button>
         </mat-list-item>
       </mat-list>
+      <!-- Add Course button -->
+      <button mat-stroked-button color="primary" class="add-element-button" (click)="displayAddElementDialog('course')">
+        Add new course
+      </button>
     </mat-expansion-panel>
 
     <!-- Topics -->
@@ -69,7 +74,7 @@
           <h2>Topics</h2>
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <!-- Courses list -->
+      <!-- Topics list -->
       <mat-list role="list">
         <!-- Column header -->
         <mat-list-item class="header" role="listitem">
@@ -78,15 +83,20 @@
           <h2 class="dailyTopic-column">Description</h2>
           <h2 class="dailyTopic-column"></h2>
         </mat-list-item>
+        <!-- Topics content -->
         <mat-list-item *ngFor="let dailyTopic of dailyTopicsOfSelectedStudent" role="listitem">
           <h2 class="dailyTopic-column">{{ dailyTopic.getName() }}</h2>
           <h2 class="dailyTopic-column">{{ dailyTopic.getDateDailyTopic() }}</h2>
           <h2 class="dailyTopic-column">{{ dailyTopic.getDescription() }}</h2>
           <button mat-icon-button class="dailyTopic-column">
-            <mat-icon>delete_outline</mat-icon>
+            <mat-icon class="trash-icon">delete_outline</mat-icon>
           </button>
         </mat-list-item>
       </mat-list>
+      <!-- Add Topic button -->
+      <button mat-stroked-button color="primary" class="add-element-button" (click)="displayAddElementPopUp('dailyTopic')">
+        Add new daily topic
+      </button>
     </mat-expansion-panel>
 
     <!-- Contacts -->
@@ -97,7 +107,7 @@
           <h2>Contacts</h2>
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <!-- Courses list -->
+      <!-- Contacts list -->
       <mat-list role="list">
         <!-- Column header -->
         <mat-list-item class="header" role="listitem">
@@ -107,16 +117,21 @@
           <h2 class="contact-column">Email address</h2>
           <h2 class="contact-column"></h2>
         </mat-list-item>
+        <!-- Contacts content -->
         <mat-list-item *ngFor="let contact of contactsOfSelectedStudent" role="listitem">
           <h2 class="contact-column">{{ contact.getFirstName() }} {{ contact.getLastName() }}</h2>
           <h2 class="contact-column">{{ contact.getDescription() }}</h2>
           <h2 class="contact-column">{{ contact.getAffiliation() }}</h2>
           <h2 class="contact-column">{{ contact.getEmailAddress() }}</h2>
           <button mat-icon-button class="contact-column">
-            <mat-icon>delete_outline</mat-icon>
+            <mat-icon class="trash-icon">delete_outline</mat-icon>
           </button>
         </mat-list-item>
       </mat-list>
+      <!-- Add Contact button -->
+      <button mat-stroked-button color="primary" class="add-element-button" (click)="displayAddElementPopUp('contact')">
+        Add new contact
+      </button>
     </mat-expansion-panel>
   </mat-card-content>
 </mat-card>

@@ -5,6 +5,8 @@ import { Student } from 'src/app/models/student';
 import { Course } from 'src/app/models/course';
 import { Contact } from 'src/app/models/contact';
 import { DailyTopic } from 'src/app/models/daily-topic';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { AddCourseDialogComponent } from 'src/app/components/add-element-dialog/add-course-dialog/add-course-dialog.component';
 
 @Component({
   selector: 'app-student-details',
@@ -13,16 +15,17 @@ import { DailyTopic } from 'src/app/models/daily-topic';
 })
 export class StudentDetailsComponent implements OnInit {
 
-  constructor(private simulator: SimulatorService, private activatedRoute: ActivatedRoute) { }
+  constructor(private simulator: SimulatorService, private activatedRoute: ActivatedRoute, private dialog: MatDialog) { }
 
-  private simulatedStudents: Student[];
-  private simulatedCourses: Course[];
-  private simulatedContacts: Contact[];
-  private simulatedDailyTopics: DailyTopic[];
   private selectedStudent: Student;
   private coursesOfSelectedStudent: Course[];
   private contactsOfSelectedStudent: Contact[];
   private dailyTopicsOfSelectedStudent: DailyTopic[];
+  // Simulator attributes
+  private simulatedStudents: Student[];
+  private simulatedCourses: Course[];
+  private simulatedContacts: Contact[];
+  private simulatedDailyTopics: DailyTopic[];
 
   ngOnInit() {
     this.simulatedStudents = [];
@@ -74,4 +77,22 @@ export class StudentDetailsComponent implements OnInit {
     });
   }
 
+  displayAddElementDialog(dialogType: string): void {
+    const matDialogConfig = new MatDialogConfig();
+    matDialogConfig.autoFocus = true;
+
+    switch (dialogType) {
+      case 'course':
+        console.log('Course dialog opened.');
+        this.dialog.open(AddCourseDialogComponent, matDialogConfig);
+        this.dialog.afterAllClosed.subscribe(result => console.log('Course dialog closed : ' + result));
+        break;
+      case 'dailyTopic':
+        console.log('DailyTopic dialog opened.');
+        break;
+      case 'contact':
+        console.log('Contact dialog opened.');
+        break;
+    }
+  }
 }

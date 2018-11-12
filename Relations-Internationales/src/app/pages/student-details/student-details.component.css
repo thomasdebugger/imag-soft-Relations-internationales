@@ -3,6 +3,10 @@ mat-card {
     margin: auto auto;
 }
 
+mat-expansion-panel {
+    display: flow-root;
+}
+
 .student-summary {
     display: contents;
 }
@@ -49,4 +53,13 @@ mat-card {
 .dailyTopic-column {
     width: 25%;
     text-align: center;
+}
+
+.add-element-button {
+    float: right;
+    margin: 1rem 1rem 1rem 0;
+}
+
+.trash-icon {
+    color: red;
 }
