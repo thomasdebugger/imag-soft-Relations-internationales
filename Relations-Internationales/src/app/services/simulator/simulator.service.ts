@@ -93,10 +93,10 @@ export class SimulatorService {
     const dailyTopic4: DailyTopic = new DailyTopic('dtopic004', new Date('17/01/2017'), 'descriptionDT004',
       'Looking for a new smartphone ?', student4);
 
-    const course1: Course = new Course('course001', 'descriptionCourse001', 'English', 3, student1, [], [], []);
-    const course2: Course = new Course('course002', 'descriptionCourse002', 'Mathematics', 6, student2, [], [], []);
-    const course3: Course = new Course('course003', 'descriptionCourse003', 'Biology', 6, student2, [], [], []);
-    const course4: Course = new Course('course004', 'descriptionCourse004', 'Algorithms', 2, student3, [], [], []);
+    const course1: Course = new Course('course001', 'English', 'descriptionCourse001', 3, [], student1, [], []);
+    const course2: Course = new Course('course002', 'Mathematics', 'descriptionCourse002', 6, [], student2, [], []);
+    const course3: Course = new Course('course003', 'Biology', 'descriptionCourse003', 6, [], student2, [], []);
+    const course4: Course = new Course('course004', 'Algorithms', 'descriptionCourse004', 2, [], student3, [], []);
 
     const mark1: Mark = new Mark('mark001', course1, 'QCM', 8.5);
     const mark2: Mark = new Mark('mark002', course1, 'CC', 15);

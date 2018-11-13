@@ -78,14 +78,17 @@ export class StudentDetailsComponent implements OnInit {
   }
 
   displayAddElementDialog(dialogType: string): void {
+    let dialogRef = null;
     const matDialogConfig = new MatDialogConfig();
     matDialogConfig.autoFocus = true;
+    matDialogConfig.width = '60%';
 
     switch (dialogType) {
       case 'course':
         console.log('Course dialog opened.');
-        this.dialog.open(AddCourseDialogComponent, matDialogConfig);
-        this.dialog.afterAllClosed.subscribe(result => console.log('Course dialog closed : ' + result));
+        matDialogConfig.data = this.selectedStudent;
+        dialogRef = this.dialog.open(AddCourseDialogComponent, matDialogConfig);
+        dialogRef.afterClosed().subscribe(result => console.log('Course dialog closed : ', result));
         break;
       case 'dailyTopic':
         console.log('DailyTopic dialog opened.');

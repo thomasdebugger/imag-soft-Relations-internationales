@@ -3,28 +3,39 @@
 
   <form class="add-course-form">
     <div class="form-fields">
-      <!-- Field Name -->
-      <div class="name-field">
-        <h3>Name</h3>
-        <mat-form-field>
-          <input matInput type="text" placeholder="Enter the name">
-        </mat-form-field>
+      <div class="column">
+        <!-- Field Name -->
+        <div class="name-field">
+          <h3>Name</h3>
+          <mat-form-field>
+            <input matInput type="text" placeholder="Enter the name" [(ngModel)]="name" name="courseName">
+          </mat-form-field>
+        </div>
+        <!-- Field ECTS -->
+        <div class="ects-field">
+          <h3>ECTS</h3>
+          <mat-form-field>
+            <input matInput type="number" placeholder="Enter the ects" [(ngModel)]="ects" name="courseECTS">
+          </mat-form-field>
+        </div>
       </div>
-      <!-- Field ECTS -->
-      <div class="ects-field">
-        <h3>ECTS</h3>
-        <mat-form-field>
-          <input matInput type="number" placeholder="Enter the ects">
-        </mat-form-field>
-      </div>
-      <!-- Field Teachers -->
-      <div class="ects-field">
-        <h3>Teachers</h3>
-        <mat-form-field>
-          <mat-select placeholder="Select the teachers" multiple>
-            <mat-option *ngFor="let teacher of teachers">{{teacher}}</mat-option>
-          </mat-select>
-        </mat-form-field>
+      <div class="column">
+        <!-- Field Description -->
+        <div class="description-field">
+          <h3>Description</h3>
+          <mat-form-field>
+            <input matInput type="text" placeholder="Enter the description" [(ngModel)]="description" name="courseDescription">
+          </mat-form-field>
+        </div>
+        <!-- Field Teachers -->
+        <div class="ects-field">
+          <h3>Teachers</h3>
+          <mat-form-field>
+            <mat-select placeholder="Select the teachers" multiple [(ngModel)]="teachers" name="courseTeachers">
+              <mat-option *ngFor="let teacher of teachersToSelect">{{teacher}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
       </div>
     </div>
     <!-- Button Create -->

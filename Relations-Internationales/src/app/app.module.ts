@@ -23,6 +23,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { AdministratorSideComponent } from './pages/administrator-side/administrator-side.component';
 import { StudentDetailsComponent } from './pages/student-details/student-details.component';
 import { AddCourseDialogComponent } from './components/add-element-dialog/add-course-dialog/add-course-dialog.component';
+import { FormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' }, // default route
@@ -50,6 +51,7 @@ const appRoutes: Routes = [
         RouterModule.forRoot(appRoutes),
         // Angular Material modules
         BrowserAnimationsModule,
+        FormsModule,
         MatButtonModule,
         MatFormFieldModule,
         MatInputModule,

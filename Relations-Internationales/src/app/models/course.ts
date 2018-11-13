@@ -14,8 +14,8 @@ export class Course {
     private polls: Poll[];
     private marks: Mark[];
 
-    constructor(idCourse: string, description: string, name: string, ects: number, student: Student, teacher: Teacher[],
-        polls: Poll[], marks: Mark[]) {
+    constructor(idCourse: string = null, name: string = null, description: string = null, ects: number = null,
+        teacher: Teacher[] = [], student: Student = null, polls: Poll[] = [], marks: Mark[] = []) {
         this.idCourse = idCourse;
         this.description = description;
         this.name = name;
