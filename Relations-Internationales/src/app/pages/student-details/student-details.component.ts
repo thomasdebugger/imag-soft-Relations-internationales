@@ -7,6 +7,8 @@ import { Contact } from 'src/app/models/contact';
 import { DailyTopic } from 'src/app/models/daily-topic';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AddCourseDialogComponent } from 'src/app/components/add-element-dialog/add-course-dialog/add-course-dialog.component';
+import { AddContactDialogComponent } from 'src/app/components/add-element-dialog/add-contact-dialog/add-contact-dialog.component';
+import { AddDailyTopicDialogComponent } from 'src/app/components/add-element-dialog/add-daily-topic-dialog/add-daily-topic-dialog.component';
 
 @Component({
   selector: 'app-student-details',
@@ -82,19 +84,23 @@ export class StudentDetailsComponent implements OnInit {
     const matDialogConfig = new MatDialogConfig();
     matDialogConfig.autoFocus = true;
     matDialogConfig.width = '60%';
+    matDialogConfig.data = this.selectedStudent;
 
     switch (dialogType) {
       case 'course':
         console.log('Course dialog opened.');
-        matDialogConfig.data = this.selectedStudent;
         dialogRef = this.dialog.open(AddCourseDialogComponent, matDialogConfig);
         dialogRef.afterClosed().subscribe(result => console.log('Course dialog closed : ', result));
         break;
       case 'dailyTopic':
         console.log('DailyTopic dialog opened.');
+        dialogRef = this.dialog.open(AddDailyTopicDialogComponent, matDialogConfig);
+        dialogRef.afterClosed().subscribe(result => console.log('DailyTopic dialog closed : ', result));
         break;
       case 'contact':
         console.log('Contact dialog opened.');
+        dialogRef = this.dialog.open(AddContactDialogComponent, matDialogConfig);
+        dialogRef.afterClosed().subscribe(result => console.log('Contact dialog closed : ', result));
         break;
     }
   }
