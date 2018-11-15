@@ -2,16 +2,12 @@
     text-align: center;
 }
 
-.ects-field {
-    margin: 0 1rem 0 1rem;
-}
-
 .form-fields {
     display: flex;
 }
 
 .column {
-    width: 50%;
+    width: 100%;
 }
 
 mat-form-field {

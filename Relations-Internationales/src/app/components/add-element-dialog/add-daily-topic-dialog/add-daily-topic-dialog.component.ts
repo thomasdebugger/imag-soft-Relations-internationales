@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Student } from 'src/app/models/student';
+import { DailyTopic } from 'src/app/models/daily-topic';
 
 @Component({
   selector: 'app-add-daily-topic-dialog',
@@ -7,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddDailyTopicDialogComponent implements OnInit {
 
-  constructor() { }
+  private student: Student;
+  private description: string;
+  private name: string;
+
+  constructor(private dialogRef: MatDialogRef<AddDailyTopicDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public injectedStudent: Student) { }
 
   ngOnInit() {
+    this.student = this.injectedStudent;
+  }
+
+  createDailyTopic(): void {
+    this.dialogRef.close(new DailyTopic(null, new Date(), this.description, this.name, this.student));
   }
 
 }
