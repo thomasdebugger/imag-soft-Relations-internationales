@@ -1,0 +1,21 @@
+table {
+    width: 100%;
+}
+
+.mat-elevation-z8 {
+    width: 80%;
+    margin: 3% auto 3% auto;
+}
+
+.bottomButtons {
+    width: 80%;
+    margin: auto auto;
+}
+
+#addStudentButton {
+    float: right;
+}
+
+#archiveStudentButton {
+    margin-right: 3%;
+}

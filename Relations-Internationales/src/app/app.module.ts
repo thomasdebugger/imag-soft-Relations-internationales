@@ -23,6 +23,8 @@ import { AddCourseDialogComponent } from './components/add-element-dialog/add-co
 import { FormsModule } from '@angular/forms';
 import { AddContactDialogComponent } from './components/add-element-dialog/add-contact-dialog/add-contact-dialog.component';
 import { AddDailyTopicDialogComponent } from './components/add-element-dialog/add-daily-topic-dialog/add-daily-topic-dialog.component';
+import { HeaderComponent } from './components/header/header.component';
+import { DatePipe } from '@angular/common';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' }, // default route
@@ -41,11 +43,12 @@ const appRoutes: Routes = [
         ErrorComponent,
         StudentProfilePageComponent,
         AdministratorSideComponent,
-        // HeaderComponent,
+        HeaderComponent,
         StudentDetailsComponent,
         AddCourseDialogComponent,
         AddContactDialogComponent,
         AddDailyTopicDialogComponent,
+        HeaderComponent,
     ],
     imports: [
         BrowserModule,
@@ -68,7 +71,8 @@ const appRoutes: Routes = [
     ],
     providers: [
         DatabaseService,
-        SimulatorService
+        SimulatorService,
+        DatePipe,
     ],
     bootstrap: [AppComponent],
     entryComponents: [AddCourseDialogComponent, AddContactDialogComponent, AddDailyTopicDialogComponent],

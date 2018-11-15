@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-/*@import "~@angular/material/prebuilt-themes/indigo-pink.css";*/
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+/* @import '~@angular/material/prebuilt-themes/deeppurple-amber.css'; */
 
 
 .pageBody {
@@ -11,26 +11,19 @@
 body { 
     font-family: Roboto, Arial, sans-serif;
     margin: 0;
-  }
+}
   
-  .basic-container {
+.basic-container {
     padding: 30px;
-  }
+}
   
-  .version-info {
+.version-info {
     font-size: 8pt;
     float: right;
-  }
-  
+}
 
-    h1, h3 { 
-        font-weight: 300; 
-    }
+h1, h2, h3 { font-weight: 300; }
 
-    h1 { 
-        color: #636363; 
-    }
-
-    h3 { 
-        color: #4a89dc; 
-    }
+h1 { color: #363636; }
+h2 { color: #636363; }
+h3 { color: #000000; }
