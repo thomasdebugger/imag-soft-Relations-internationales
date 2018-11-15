@@ -1,0 +1,26 @@
+<div class="dialog-content">
+  <h2 class="dialog-title">Add a new dqily topic</h2>
+
+  <form class="add-daily-topic-form">
+    <div class="form-fields">
+      <div class="column">
+        <!-- Field Name -->
+        <div class="name-field">
+          <h3>Name</h3>
+          <mat-form-field>
+            <input matInput type="text" placeholder="Enter the name" [(ngModel)]="name" name="dailyTopicName">
+          </mat-form-field>
+        </div>
+        <!-- Field Description -->
+        <div class="description-field">
+          <h3>Description</h3>
+          <mat-form-field>
+            <input matInput type="text" placeholder="Enter the phone description" [(ngModel)]="description" name="dailyTopicDescription">
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <!-- Button Create -->
+    <button mat-raised-button color="primary" class="create-button" (click)="createDailyTopic()">Create</button>
+  </form>
+</div>

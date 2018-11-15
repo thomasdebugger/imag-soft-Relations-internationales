@@ -1,0 +1,137 @@
+<mat-card>
+  <!-- Header -->
+  <mat-card-header>
+    <div class="student-summary">
+      <!-- Icon -->
+      <mat-icon class="account-icon">account_circle</mat-icon>
+      <!-- Identity -->
+      <div class="student-identity">
+        <h2>{{ selectedStudent.getFirstName() }} {{ selectedStudent.getLastName() }}</h2>
+        <h3>{{ selectedStudent.getEmailAddress() }}</h3>
+        <h3>{{ selectedStudent.getPhoneNumber() }}</h3>
+      </div>
+      <!-- Last connection -->
+      <div class="student-connection">
+        <h2>Last connection : {{ selectedStudent.getLastConnection() }}</h2>
+        <h3 class="contact">Contact</h3>
+      </div>
+      <!-- University -->
+      <div class="student-university">
+        <h2 class="university">{{ selectedStudent.getUniversity() }}</h2>
+        <h3 *ngIf="selectedStudent.getIsEntrant()"> Entrant student</h3>
+        <h3 *ngIf="!selectedStudent.getIsEntrant()"> Non entrant student</h3>
+        <button mat-stroked-button>Generate PDF</button>
+      </div>
+    </div>
+  </mat-card-header>
+
+  <!-- Content -->
+  <mat-card-content>
+    <!-- Courses -->
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <!-- Panel header -->
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h2>Courses</h2>
+        </mat-panel-title>
+        <!-- Panel description -->
+        <mat-panel-description>
+          <h3>Learning agreement : validated</h3>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <!-- Courses list -->
+      <mat-list role="list">
+        <!-- Column header -->
+        <mat-list-item class="header" role="listitem">
+          <h2 class="course-column">Name</h2>
+          <h2 class="course-column">ECTS</h2>
+          <h2 class="course-column">Description</h2>
+          <h2 class="course-column">Last mark</h2>
+          <h2 class="course-column"></h2>
+        </mat-list-item>
+        <!-- Courses content -->
+        <mat-list-item *ngFor="let course of coursesOfSelectedStudent" role="listitem">
+          <h2 class="course-column">{{ course.getName() }}</h2>
+          <h2 class="course-column">{{ course.getEcts() }}</h2>
+          <h2 class="course-column">{{ course.getDescription() }}</h2>
+          <h2 class="course-column">{{ course.getMarks()[course.getMarks().length -1].getValue() }}</h2>
+          <button mat-icon-button class="course-column">
+            <mat-icon class="trash-icon">delete_outline</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-list>
+      <!-- Add Course button -->
+      <button mat-stroked-button color="primary" class="add-element-button" (click)="displayAddElementDialog('course')">
+        Add new course
+      </button>
+    </mat-expansion-panel>
+
+    <!-- Topics -->
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <!-- Panel header -->
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h2>Topics</h2>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <!-- Topics list -->
+      <mat-list role="list">
+        <!-- Column header -->
+        <mat-list-item class="header" role="listitem">
+          <h2 class="dailyTopic-column">Title</h2>
+          <h2 class="dailyTopic-column">Date</h2>
+          <h2 class="dailyTopic-column">Description</h2>
+          <h2 class="dailyTopic-column"></h2>
+        </mat-list-item>
+        <!-- Topics content -->
+        <mat-list-item *ngFor="let dailyTopic of dailyTopicsOfSelectedStudent" role="listitem">
+          <h2 class="dailyTopic-column">{{ dailyTopic.getName() }}</h2>
+          <h2 class="dailyTopic-column">{{ dailyTopic.getDateDailyTopic() }}</h2>
+          <h2 class="dailyTopic-column">{{ dailyTopic.getDescription() }}</h2>
+          <button mat-icon-button class="dailyTopic-column">
+            <mat-icon class="trash-icon">delete_outline</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-list>
+      <!-- Add Topic button -->
+      <button mat-stroked-button color="primary" class="add-element-button" (click)="displayAddElementDialog('dailyTopic')">
+        Add new daily topic
+      </button>
+    </mat-expansion-panel>
+
+    <!-- Contacts -->
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <!-- Panel header -->
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h2>Contacts</h2>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <!-- Contacts list -->
+      <mat-list role="list">
+        <!-- Column header -->
+        <mat-list-item class="header" role="listitem">
+          <h2 class="contact-column">Name</h2>
+          <h2 class="contact-column">Description</h2>
+          <h2 class="contact-column">Affiliation</h2>
+          <h2 class="contact-column">Email address</h2>
+          <h2 class="contact-column"></h2>
+        </mat-list-item>
+        <!-- Contacts content -->
+        <mat-list-item *ngFor="let contact of contactsOfSelectedStudent" role="listitem">
+          <h2 class="contact-column">{{ contact.getFirstName() }} {{ contact.getLastName() }}</h2>
+          <h2 class="contact-column">{{ contact.getDescription() }}</h2>
+          <h2 class="contact-column">{{ contact.getAffiliation() }}</h2>
+          <h2 class="contact-column">{{ contact.getEmailAddress() }}</h2>
+          <button mat-icon-button class="contact-column">
+            <mat-icon class="trash-icon">delete_outline</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-list>
+      <!-- Add Contact button -->
+      <button mat-stroked-button color="primary" class="add-element-button" (click)="displayAddElementDialog('contact')">
+        Add new contact
+      </button>
+    </mat-expansion-panel>
+  </mat-card-content>
+</mat-card>

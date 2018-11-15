@@ -1,0 +1,15 @@
+.dialog-content {
+    text-align: center;
+}
+
+.form-fields {
+    display: flex;
+}
+
+.column {
+    width: 50%;
+}
+
+mat-form-field {
+    width: 70%;
+}

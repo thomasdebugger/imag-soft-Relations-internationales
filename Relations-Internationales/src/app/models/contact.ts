@@ -26,7 +26,7 @@ export class Contact {
     }
 
     public getIdContact(): string { return this.idContact; }
-    public getIdStudent(): Student { return this.student; }
+    public getStudent(): Student { return this.student; }
     public getEmailAddress(): string { return this.emailAddress; }
     public getFirstName(): string { return this.firstName; }
     public getLastName(): string { return this.lastName; }
