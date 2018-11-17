@@ -12,10 +12,10 @@ table {
     margin: auto auto;
 }
 
-#addStudentButton {
+.leftButtons {
     float: right;
 }
 
-#archiveStudentButton {
-    margin-right: 3%;
+.leftButtons button {
+    margin-left: .625rem;
 }

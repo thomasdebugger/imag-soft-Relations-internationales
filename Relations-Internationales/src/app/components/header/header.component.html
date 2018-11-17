@@ -4,7 +4,12 @@
     <img src="../../../assets/logo-uga-new-couleurs-bandeau.png" alt="Universite Grenoble Alpes">
     <div class="languageAndLogs">
       <h2 *ngIf="userInput">Logged as {{userInput.getFirstName()}} {{userInput.getLastName()}}</h2>
-      <h3>English version</h3>
+
+      <mat-select [(value)]="currentLanguage" (selectionChange)="changeLanguage($event)">
+        <mat-option *ngFor="let language of languages" value="{{language}}">
+          {{language}}
+        </mat-option>
+      </mat-select>
     </div>
   </div>
   <div>

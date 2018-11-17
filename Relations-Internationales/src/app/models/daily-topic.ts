@@ -14,6 +14,8 @@ export class DailyTopic {
         this.description = description;
         this.name = name;
         this.student = student;
+
+        this.student.getDailyTopics().push(this);
     }
 
     public getIdDailyTopic(): string { return this.idDailyTopic; }

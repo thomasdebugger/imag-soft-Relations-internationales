@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {
     MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule, MatTableModule,
-    MatPaginatorModule, MatIconModule, MatListModule, MatDialogModule, MatSelectModule, MatCheckboxModule
+    MatPaginatorModule, MatIconModule, MatListModule, MatDialogModule, MatSelectModule, MatCheckboxModule, MatSlideToggleModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTreeModule } from '@angular/material/tree';
@@ -71,6 +71,7 @@ const appRoutes: Routes = [
         MatDialogModule,
         MatSelectModule,
         MatCheckboxModule,
+        MatSlideToggleModule,
     ],
     providers: [
         DatabaseService,

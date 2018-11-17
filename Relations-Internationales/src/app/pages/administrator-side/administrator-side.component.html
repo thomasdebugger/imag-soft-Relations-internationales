@@ -54,10 +54,11 @@
 </div>
 
 <div class="bottomButtons">
-  <button id="archiveStudentButton" mat-stroked-button color="primary" (click)="archiveStudents()">Archive</button>
-  <button *ngIf="!areDisplayArchived" mat-stroked-button color="primary" (click)="displayArchivedStudents()">Display
-    archived students</button>
-  <button *ngIf="areDisplayArchived" mat-stroked-button color="primary" (click)="displayArchivedStudents()">Display non
-    archived students</button>
-  <button id="addStudentButton" mat-raised-button color="primary" (click)="addStudent()">Add student</button>
+  <mat-slide-toggle class="example-margin" color="primary" (click)="displayArchivedStudents()">Display archived
+    students</mat-slide-toggle>
+
+  <div class="leftButtons">
+    <button mat-stroked-button color="primary" (click)="archiveStudents()">Archive</button>
+    <button mat-raised-button color="primary" (click)="addStudent()">Add student</button>
+  </div>
 </div>
