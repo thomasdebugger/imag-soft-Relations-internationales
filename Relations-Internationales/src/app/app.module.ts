@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {
     MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule, MatTableModule,
-    MatPaginatorModule, MatIconModule, MatListModule, MatDialogModule, MatSelectModule
+    MatPaginatorModule, MatIconModule, MatListModule, MatDialogModule, MatSelectModule, MatCheckboxModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTreeModule } from '@angular/material/tree';
@@ -25,6 +25,7 @@ import { AddContactDialogComponent } from './components/add-element-dialog/add-c
 import { AddDailyTopicDialogComponent } from './components/add-element-dialog/add-daily-topic-dialog/add-daily-topic-dialog.component';
 import { HeaderComponent } from './components/header/header.component';
 import { DatePipe } from '@angular/common';
+import { AddStudentDialogComponent } from './components/add-element-dialog/add-student-dialog/add-student-dialog.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' }, // default route
@@ -49,6 +50,7 @@ const appRoutes: Routes = [
         AddContactDialogComponent,
         AddDailyTopicDialogComponent,
         HeaderComponent,
+        AddStudentDialogComponent,
     ],
     imports: [
         BrowserModule,
@@ -68,6 +70,7 @@ const appRoutes: Routes = [
         MatListModule,
         MatDialogModule,
         MatSelectModule,
+        MatCheckboxModule,
     ],
     providers: [
         DatabaseService,
@@ -75,6 +78,9 @@ const appRoutes: Routes = [
         DatePipe,
     ],
     bootstrap: [AppComponent],
-    entryComponents: [AddCourseDialogComponent, AddContactDialogComponent, AddDailyTopicDialogComponent],
+    entryComponents: [AddCourseDialogComponent,
+        AddContactDialogComponent,
+        AddDailyTopicDialogComponent,
+        AddStudentDialogComponent],
 })
 export class AppModule { }

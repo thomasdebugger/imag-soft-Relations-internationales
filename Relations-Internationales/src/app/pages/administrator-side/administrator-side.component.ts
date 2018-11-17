@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SimulatorService } from 'src/app/services/simulator/simulator.service';
 import { Student } from 'src/app/models/student';
-import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatDialogConfig, MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
+import { AddStudentDialogComponent } from 'src/app/components/add-element-dialog/add-student-dialog/add-student-dialog.component';
 
 @Component({
   selector: 'app-administrator-side',
@@ -17,7 +18,7 @@ export class AdministratorSideComponent implements OnInit {
   private displayedColumns: string[];
   private areDisplayArchived: boolean;
 
-  constructor(private simulator: SimulatorService, private router: Router) { }
+  constructor(private simulator: SimulatorService, private router: Router, private dialog: MatDialog) { }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -54,6 +55,13 @@ export class AdministratorSideComponent implements OnInit {
 
   addStudent() {
     console.log('Add student function clicked.');
+    let dialogRef = null;
+    const matDialogConfig = new MatDialogConfig();
+    matDialogConfig.autoFocus = true;
+    matDialogConfig.width = '60%';
+
+    dialogRef = this.dialog.open(AddStudentDialogComponent, matDialogConfig);
+    dialogRef.afterClosed().subscribe(result => console.log('Course dialog closed : ', result));
   }
 
   setDataSource(): void {
