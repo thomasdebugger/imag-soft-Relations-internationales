@@ -22,8 +22,8 @@ export class StudentProfilePageComponent implements OnInit {
 
   }
 
-  displayedColumnsMark: string[] = ['idMark','course','typeMark','value'];
-  dataSourceMark = this.simulator.getMarks();
+  displayedColumnsMark: string[] = ['name','ects','description','commentaire'];
+  dataSourceMark = this.simulator.getCourses();
 
   displayedColumnsPL: string[] = ['name','dateDailyTopic','description'];
   dataSourcePL = this.simulator.getDailyTopics();
@@ -31,4 +31,7 @@ export class StudentProfilePageComponent implements OnInit {
   displayedColumnsContact: string[] = ['lastName','description','affiliation','emailAddress'];
   dataSourceContact = this.simulator.getContacts();
   
+  addElement(){
+    
+  }
 }
