@@ -44,7 +44,7 @@ export class StudentProfilePageComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      console.log(result.name);
     });
   }
   
