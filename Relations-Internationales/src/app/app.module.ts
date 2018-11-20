@@ -26,6 +26,7 @@ import { AddDailyTopicDialogComponent } from './components/add-element-dialog/ad
 import { HeaderComponent } from './components/header/header.component';
 import { DatePipe } from '@angular/common';
 import { AddStudentDialogComponent } from './components/add-element-dialog/add-student-dialog/add-student-dialog.component';
+import { AddCourseModalComponent } from './pages/add-course-modal/add-course-modal.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' }, // default route
@@ -33,6 +34,7 @@ const appRoutes: Routes = [
     { path: 'login', component: LoginComponent }, // localhost/4200/login
     { path: 'student-profile-page', component: StudentProfilePageComponent }, // localhost/4200/student-profile-page
     { path: 'student-details/:idPerson', component: StudentDetailsComponent }, // localhost/4200/student-profile-page
+    { path: 'Add-Course-Modal', component: AddCourseModalComponent }, // localhost/4200/student-profile-page
     { path: '**', component: ErrorComponent }, // localhost/4200/error
 ];
 
@@ -51,6 +53,7 @@ const appRoutes: Routes = [
         AddDailyTopicDialogComponent,
         HeaderComponent,
         AddStudentDialogComponent,
+        AddCourseModalComponent,
     ],
     imports: [
         BrowserModule,
