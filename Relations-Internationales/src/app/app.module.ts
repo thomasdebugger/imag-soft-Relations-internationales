@@ -26,14 +26,23 @@ import { AddDailyTopicDialogComponent } from './components/add-element-dialog/ad
 import { HeaderComponent } from './components/header/header.component';
 import { DatePipe } from '@angular/common';
 import { AddStudentDialogComponent } from './components/add-element-dialog/add-student-dialog/add-student-dialog.component';
+import { CourseDetailsComponent } from './pages/course-details/course-details.component';
 
 const appRoutes: Routes = [
-    { path: '', redirectTo: '/home', pathMatch: 'full' }, // default route
-    { path: 'home', component: HomeComponent }, // localhost/4200/home
-    { path: 'login', component: LoginComponent }, // localhost/4200/login
-    { path: 'student-profile-page', component: StudentProfilePageComponent }, // localhost/4200/student-profile-page
-    { path: 'student-details/:idPerson', component: StudentDetailsComponent }, // localhost/4200/student-profile-page
-    { path: '**', component: ErrorComponent }, // localhost/4200/error
+    // default route
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
+    // localhost/4200/home
+    { path: 'home', component: HomeComponent },
+    // localhost/4200/login
+    { path: 'login', component: LoginComponent },
+    // localhost/4200/student-profile-page
+    { path: 'student-profile-page', component: StudentProfilePageComponent },
+    // localhost/4200/student-details/:idPerson
+    { path: 'student-details/:idPerson', component: StudentDetailsComponent },
+    // localhost/4200/student-details/:idPerson/:idCourse
+    { path: 'student-details/:idPerson/:idCourse', component: CourseDetailsComponent },
+    // localhost/4200/error
+    { path: '**', component: ErrorComponent },
 ];
 
 @NgModule({
@@ -51,6 +60,7 @@ const appRoutes: Routes = [
         AddDailyTopicDialogComponent,
         HeaderComponent,
         AddStudentDialogComponent,
+        CourseDetailsComponent,
     ],
     imports: [
         BrowserModule,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SimulatorService } from 'src/app/services/simulator/simulator.service';
 import { Student } from 'src/app/models/student';
 import { Course } from 'src/app/models/course';
@@ -17,7 +17,10 @@ import { AddDailyTopicDialogComponent } from 'src/app/components/add-element-dia
 })
 export class StudentDetailsComponent implements OnInit {
 
-  constructor(private simulator: SimulatorService, private activatedRoute: ActivatedRoute, private dialog: MatDialog) { }
+  constructor(private simulator: SimulatorService,
+    private activatedRoute: ActivatedRoute,
+    private dialog: MatDialog,
+    private router: Router) { }
 
   private selectedStudent: Student;
   private coursesOfSelectedStudent: Course[];
@@ -103,5 +106,9 @@ export class StudentDetailsComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => console.log('Contact dialog closed : ', result));
         break;
     }
+  }
+
+  goToCourse(idCourse: string): void {
+    this.router.navigate(['student-details/' + this.selectedStudent.getIdPerson() + '/' + idCourse]);
   }
 }

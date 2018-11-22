@@ -50,7 +50,7 @@
           <h2 class="course-column"></h2>
         </mat-list-item>
         <!-- Courses content -->
-        <mat-list-item *ngFor="let course of coursesOfSelectedStudent" role="listitem">
+        <mat-list-item *ngFor="let course of coursesOfSelectedStudent" role="listitem" (click)="goToCourse(course.getIdCourse())">
           <h2 class="course-column">{{ course.getName() }}</h2>
           <h2 class="course-column">{{ course.getEcts() }}</h2>
           <h2 class="course-column">{{ course.getDescription() }}</h2>
