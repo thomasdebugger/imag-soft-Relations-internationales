@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Student } from '../../models/student';
-import { Teacher } from '../../models/teacher';
 import { Contact } from '../../models/contact';
 import { Administrator } from '../../models/administrator';
 import { DailyTopic } from '../../models/daily-topic';
@@ -22,7 +21,6 @@ export class SimulatorService {
   private dailyTopics: DailyTopic[];
   private courses: Course[];
   private marks: Mark[];
-  private teachers: Teacher[];
   private polls: Poll[];
   private possibleAnswers: PossibleAnswer[];
 
@@ -108,12 +106,6 @@ export class SimulatorService {
     const mark8: Mark = new Mark('mark008', course3, 'CC', 3);
     const mark9: Mark = new Mark('mark009', course3, 'QCM', 12.5);
 
-    const teacher1: Teacher = new Teacher('teach001', course1, 'Hubert', 'Oubert');
-    const teacher2: Teacher = new Teacher('teach002', course2, 'Emilie', 'Tran');
-    const teacher3: Teacher = new Teacher('teach003', course2, 'Gaetan', 'Pin');
-    const teacher4: Teacher = new Teacher('teach003', course3, 'Michel', 'Rond');
-    const teacher5: Teacher = new Teacher('teach003', course4, 'Elise', 'Spid');
-
     const poll1: Poll = new Poll('poll001', course1, 'Sent', 'Which color do you prefer ?', null,
       new Date('01/12/2017'), []);
     const poll2: Poll = new Poll('poll002', course2, 'Answered', 'Are you intagrated ?', 'Pretty well',
@@ -142,12 +134,11 @@ export class SimulatorService {
     this.dailyTopics = [dailyTopic1, dailyTopic2, dailyTopic3, dailyTopic4];
     this.courses = [course1, course2, course3, course4];
     this.marks = [mark1, mark2, mark3, mark4, mark5, mark6, mark7, mark8, mark9];
-    this.teachers = [teacher1, teacher2, teacher3, teacher4, teacher5];
     this.polls = [poll1, poll2, poll3, poll4];
     this.possibleAnswers = [possibleAnswer1, possibleAnswer2, possibleAnswer3, possibleAnswer4, possibleAnswer5,
       possibleAnswer6, possibleAnswer7, possibleAnswer8, possibleAnswer9, possibleAnswer10, possibleAnswer11];
     this.objectsSimulated = [this.students, this.contacts, this.administrators, this.dailyTopics,
-    this.courses, this.marks, this.teachers, this.polls, this.possibleAnswers
+    this.courses, this.marks, this.polls, this.possibleAnswers
     ];
   }
 
@@ -158,7 +149,6 @@ export class SimulatorService {
   public getDailyTopics(): DailyTopic[] { return this.dailyTopics; }
   public getCourses(): Course[] { return this.courses; }
   public getMarks(): Mark[] { return this.marks; }
-  public getTeachers(): Teacher[] { return this.teachers; }
   public getPolls(): Poll[] { return this.polls; }
   public getPossibleAnswers(): PossibleAnswer[] { return this.possibleAnswers; }
 }
