@@ -1,3 +1,88 @@
-<p>
-  course-details works!
-</p>
+<div class="return-to-student-details">
+  <button mat-stroked-button color="primary" class="back-course-column">
+    <mat-icon class="back-icon">keyboard_backspace</mat-icon>
+    Back to student details
+  </button>
+</div>
+
+<div class="course-name">
+  <h2>{{ selectedCourse.getName() }}</h2>
+</div>
+
+<div class="course-description">
+  <h3>Description</h3>
+  <input matInput type="text" placeholder="Enter the description" [(ngModel)]="selectedCourse.description" name="courseDescription">
+</div>
+
+<div class="course-ects">
+  <h3>ECTS</h3>
+  <input matInput type="number" placeholder="Enter the ECTS" [(ngModel)]="selectedCourse.ects" name="courseEcts">
+</div>
+
+<div class="course-teachers">
+  <h3>Teachers</h3>
+  <mat-list role="list">
+    <!-- Column header -->
+    <mat-list-item class="header" role="listitem">
+      <h3 class="teacher-column">Name</h3>
+      <h3 class="teacher-column">Email address</h3>
+    </mat-list-item>
+    <!-- Teacher content -->
+    <mat-list-item *ngFor="let teacher of selectedCourse.teachers" role="listitem">
+      <h3 class="teacher-column">{{ teacher.fullName }}</h3>
+      <h3 class="teacher-column">{{ teacher.emailAddress }}</h3>
+    </mat-list-item>
+  </mat-list>
+</div>
+
+<div class="course-marks">
+  <h3>Marks</h3>
+  <mat-list role="list">
+    <!-- Column header -->
+    <mat-list-item class="header" role="listitem">
+      <h3 class="mark-column">Mark</h3>
+      <h3 class="mark-column">Type</h3>
+    </mat-list-item>
+    <!-- Mark content -->
+    <mat-list-item *ngFor="let mark of selectedCourse.marks" role="listitem">
+      <h3 class="mark-column">{{ mark.value }}</h3>
+      <h3 class="mark-column">{{ mark.typeMark }}</h3>
+    </mat-list-item>
+  </mat-list>
+</div>
+
+<div class="course-poll">
+  <h3>Polls</h3>
+  <ng-container *ngFor="let poll of selectedCourse.polls">
+    <mat-list role="list">
+      <!-- Column header -->
+      <mat-list-item class="header" role="listitem">
+        <h3 class="poll-column">Title</h3>
+        <h3 class="poll-column">Status</h3>
+      </mat-list-item>
+      <!-- Poll content -->
+      <mat-list-item role="listitem">
+        <h3 class="poll-column">{{ poll.question }}</h3>
+        <h3 class="poll-column">{{ poll.status }}</h3>
+      </mat-list-item>
+    </mat-list>
+
+    <mat-list *ngIf="poll.answer" role="list">
+      <!-- Column header -->
+      <mat-list-item class="header" role="listitem">
+        <h3 class="answer-column">Answer</h3>
+        <h3 class="answer-column">Date</h3>
+      </mat-list-item>
+      <!-- Poll content -->
+      <mat-list-item role="listitem">
+        <h3 class="answer-column">{{ poll.answer }}</h3>
+        <h3 class="answer-column">{{ poll.dateAnswer }}</h3>
+      </mat-list-item>
+    </mat-list>
+  </ng-container>
+</div>
+
+<!-- Add Topic button -->
+<button mat-stroked-button color="primary" class="add-element-button" (click)="addNewPoll()">
+  Add new poll
+</button>

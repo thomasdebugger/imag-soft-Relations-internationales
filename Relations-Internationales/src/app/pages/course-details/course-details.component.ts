@@ -32,7 +32,7 @@ export class CourseDetailsComponent implements OnInit {
 
     this.activatedRoute.params.subscribe(params => {
       this.simulatedStudents.forEach(simulatedStudent => {
-        if (simulatedStudent.getIdPerson() === params.isPerson) { this.selectedStudent = simulatedStudent; }
+        if (simulatedStudent.getIdPerson() === params.idPerson) { this.selectedStudent = simulatedStudent; }
       });
 
       this.simulatedCourses.forEach(simulatedCourse => {

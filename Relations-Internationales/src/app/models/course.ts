@@ -10,12 +10,13 @@ export class Course {
     private ects: number;
     private student: Student;
     private isLearningAgreementValid: boolean;
-    private teachers: string[];
+    private teachers: { fullName: string, emailAddress: string }[];
     private polls: Poll[];
     private marks: Mark[];
 
     constructor(idCourse: string = null, name: string = null, description: string = null, ects: number = null,
-        teacher: string[] = [], student: Student = null, polls: Poll[] = [], marks: Mark[] = []) {
+        teacher: { fullName: string, emailAddress: string }[] = [], student: Student = null, polls: Poll[] = [],
+        marks: Mark[] = []) {
         this.idCourse = idCourse;
         this.description = description;
         this.name = name;
@@ -34,7 +35,7 @@ export class Course {
     public getName(): string { return this.name; }
     public getEcts(): number { return this.ects; }
     public getStudent(): Student { return this.student; }
-    public getTeachers(): string[] { return this.teachers; }
+    public getTeachers(): { fullName: string, emailAddress: string }[] { return this.teachers; }
     public getPolls(): Poll[] { return this.polls; }
     public getMarks(): Mark[] { return this.marks; }
 
@@ -43,7 +44,7 @@ export class Course {
     public setName(value: string): void { this.name = value; }
     public setEcts(value: number): void { this.ects = value; }
     public setStudent(value: Student): void { this.student = value; }
-    public setTeachers(value: string[]): void { this.teachers = value; }
+    public setTeachers(value: { fullName: string, emailAddress: string }[]): void { this.teachers = value; }
     public setPolls(value: Poll[]): void { this.polls = value; }
     public setMarks(value: Mark[]): void { this.marks = value; }
 }

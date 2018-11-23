@@ -91,10 +91,14 @@ export class SimulatorService {
     const dailyTopic4: DailyTopic = new DailyTopic('dtopic004', new Date('17/01/2017'), 'descriptionDT004',
       'Looking for a new smartphone ?', student4);
 
-    const course1: Course = new Course('course001', 'English', 'descriptionCourse001', 3, [], student1, [], []);
-    const course2: Course = new Course('course002', 'Mathematics', 'descriptionCourse002', 6, [], student2, [], []);
-    const course3: Course = new Course('course003', 'Biology', 'descriptionCourse003', 6, [], student2, [], []);
-    const course4: Course = new Course('course004', 'Algorithms', 'descriptionCourse004', 2, [], student3, [], []);
+    const course1: Course = new Course('course001', 'English', 'descriptionCourse001', 3,
+      [{ fullName: 'Jean Bertin', emailAddress: 'jean.bertin@gmail.com' }], student1, [], []);
+    const course2: Course = new Course('course002', 'Mathematics', 'descriptionCourse002', 6,
+      [{ fullName: 'Veronique Durand', emailAddress: 'veronique.durand@gmail.com' }], student2, [], []);
+    const course3: Course = new Course('course003', 'Biology', 'descriptionCourse003', 6,
+      [{ fullName: 'Alain Boubou', emailAddress: 'alain.boubou@gmail.com' }], student2, [], []);
+    const course4: Course = new Course('course004', 'Algorithms', 'descriptionCourse004', 2,
+      [{ fullName: 'Martin Dupuy', emailAddress: 'alain.dupuy@gmail.com' }], student3, [], []);
 
     const mark1: Mark = new Mark('mark001', course1, 'QCM', 8.5);
     const mark2: Mark = new Mark('mark002', course1, 'CC', 15);
@@ -107,11 +111,11 @@ export class SimulatorService {
     const mark9: Mark = new Mark('mark009', course3, 'QCM', 12.5);
 
     const poll1: Poll = new Poll('poll001', course1, 'Sent', 'Which color do you prefer ?', null,
-      new Date('01/12/2017'), []);
+      null, []);
     const poll2: Poll = new Poll('poll002', course2, 'Answered', 'Are you intagrated ?', 'Pretty well',
       new Date('07/11/2017'), []);
     const poll3: Poll = new Poll('poll003', course3, 'Sent', 'Do you need help for this chapter ?', null,
-      new Date('13/02/2018'), []);
+      null, []);
     const poll4: Poll = new Poll('poll004', course3, 'Answered', 'Have you forget your headset ?', 'No',
       new Date('28/05/2018'), []);
 
