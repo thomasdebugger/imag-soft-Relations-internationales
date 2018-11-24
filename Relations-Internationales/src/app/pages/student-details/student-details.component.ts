@@ -19,8 +19,7 @@ export class StudentDetailsComponent implements OnInit {
 
   constructor(private simulator: SimulatorService,
     private activatedRoute: ActivatedRoute,
-    private dialog: MatDialog,
-    private router: Router) { }
+    private dialog: MatDialog) { }
 
   private selectedStudent: Student;
   private coursesOfSelectedStudent: Course[];
@@ -113,5 +112,9 @@ export class StudentDetailsComponent implements OnInit {
 
   setSelectedCourse(selectedCourse: Course): void {
     this.selectedCourse = selectedCourse;
+  }
+
+  setIsLearningAgreementValid(value: boolean): void {
+    this.selectedStudent.setIsLearningAgreementValid({ value: value, date: new Date() });
   }
 }

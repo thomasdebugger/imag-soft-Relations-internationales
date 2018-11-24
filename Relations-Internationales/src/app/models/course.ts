@@ -9,7 +9,6 @@ export class Course {
     private name: string;
     private ects: number;
     private student: Student;
-    private isLearningAgreementValid: boolean;
     private teachers: { fullName: string, emailAddress: string }[];
     private polls: Poll[];
     private marks: Mark[];
@@ -25,7 +24,6 @@ export class Course {
         this.teachers = teacher;
         this.polls = polls;
         this.marks = marks;
-        this.isLearningAgreementValid = false;
 
         this.student.getCourses().push(this);
     }

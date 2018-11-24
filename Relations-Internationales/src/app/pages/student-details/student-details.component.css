@@ -67,3 +67,8 @@ mat-expansion-panel {
 .trash-icon {
     color: red;
 }
+
+mat-panel-description button {
+    margin-left: auto;
+    margin-right: 3%;
+}

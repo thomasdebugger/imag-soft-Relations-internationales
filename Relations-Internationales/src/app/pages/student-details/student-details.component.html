@@ -35,9 +35,22 @@
           <h2>Courses</h2>
         </mat-panel-title>
         <!-- Panel description -->
-        <mat-panel-description>
-          <h3>Learning agreement : validated</h3>
+        <mat-panel-description *ngIf="selectedStudent.getIsLearningAgreementValid().value">
+          <h3>Learning agreement : valid {{ selectedStudent.getIsLearningAgreementValid().date }}</h3>
+          <button mat-stroked-button color="primary" class="invalid-la-button" (click)="setIsLearningAgreementValid(false)">
+            Invalid learning agreement
+          </button>
         </mat-panel-description>
+
+        <mat-panel-description *ngIf="!selectedStudent.getIsLearningAgreementValid().value">
+          <h3 *ngIf="!selectedStudent.getIsLearningAgreementValid().value">
+            Learning agreement : unvalid
+          </h3>
+          <button mat-stroked-button color="primary" class="invalid-la-button" (click)="setIsLearningAgreementValid(true)">
+            Valid learning agreement
+          </button>
+        </mat-panel-description>
+
       </mat-expansion-panel-header>
       <!-- Courses list -->
       <mat-list role="list">
