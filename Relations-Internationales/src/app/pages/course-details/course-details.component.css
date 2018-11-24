@@ -17,6 +17,7 @@
 
 .content {
     width: 75%;
+    padding: 1rem;
 }
 
 .course-description, .course-ects, .course-teachers, .course-marks, .course-poll {

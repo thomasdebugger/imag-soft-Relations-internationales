@@ -32,18 +32,27 @@
     <h3>Teachers</h3>
   </div>
   <div class="content">
-    <mat-list role="list">
-      <!-- Column header -->
-      <mat-list-item class="header" role="listitem">
-        <h3 class="teacher-column">Name</h3>
-        <h3 class="teacher-column">Email address</h3>
-      </mat-list-item>
-      <!-- Teacher content -->
-      <mat-list-item *ngFor="let teacher of selectedCourse.teachers" role="listitem">
-        <h3 class="teacher-column">{{ teacher.fullName }}</h3>
-        <h3 class="teacher-column">{{ teacher.emailAddress }}</h3>
-      </mat-list-item>
-    </mat-list>
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <!-- Panel header -->
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h2>Expand the panel to see teachers...</h2>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <!-- Teachers list -->
+      <mat-list role="list">
+        <!-- Column header -->
+        <mat-list-item class="header" role="listitem">
+          <h2 class="teacher-column">Name</h2>
+          <h2 class="teacher-column">Email address</h2>
+        </mat-list-item>
+        <!-- Teacher content -->
+        <mat-list-item *ngFor="let teacher of selectedCourse.teachers" role="listitem">
+          <h2 class="teacher-column">{{ teacher.fullName }}</h2>
+          <h2 class="teacher-column">{{ teacher.emailAddress }}</h2>
+        </mat-list-item>
+      </mat-list>
+    </mat-expansion-panel>
   </div>
 </div>
 
@@ -52,18 +61,27 @@
     <h3>Marks</h3>
   </div>
   <div class="content">
-    <mat-list role="list">
-      <!-- Column header -->
-      <mat-list-item class="header" role="listitem">
-        <h3 class="mark-column">Mark</h3>
-        <h3 class="mark-column">Type</h3>
-      </mat-list-item>
-      <!-- Mark content -->
-      <mat-list-item *ngFor="let mark of selectedCourse.marks" role="listitem">
-        <h3 class="mark-column">{{ mark.value }}</h3>
-        <h3 class="mark-column">{{ mark.typeMark }}</h3>
-      </mat-list-item>
-    </mat-list>
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <!-- Panel header -->
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h2>Expand the panel to see marks...</h2>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <!-- Marks list -->
+      <mat-list role="list">
+        <!-- Column header -->
+        <mat-list-item class="header" role="listitem">
+          <h2 class="mark-column">Mark</h2>
+          <h2 class="mark-column">Type</h2>
+        </mat-list-item>
+        <!-- Teacher content -->
+        <mat-list-item *ngFor="let mark of selectedCourse.marks" role="listitem">
+          <h2 class="mark-column">{{ mark.value }}</h2>
+          <h2 class="mark-column">{{ mark.typeMark }}</h2>
+        </mat-list-item>
+      </mat-list>
+    </mat-expansion-panel>
   </div>
 </div>
 
@@ -73,31 +91,40 @@
   </div>
   <div class="content">
     <ng-container *ngFor="let poll of selectedCourse.polls">
-      <mat-list role="list">
-        <!-- Column header -->
-        <mat-list-item class="header" role="listitem">
-          <h3 class="poll-column">Title</h3>
-          <h3 class="poll-column">Status</h3>
-        </mat-list-item>
-        <!-- Poll content -->
-        <mat-list-item role="listitem">
-          <h3 class="poll-column">{{ poll.question }}</h3>
-          <h3 class="poll-column">{{ poll.status }}</h3>
-        </mat-list-item>
-      </mat-list>
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <!-- Panel header -->
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h2>Expand the panel to see polls...</h2>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <!-- Polls list -->
+        <mat-list role="list">
+          <!-- Column header -->
+          <mat-list-item class="header" role="listitem" *ngFor="let poll of selectedCourse.polls">
+            <h2 class="poll-column">Title</h2>
+            <h2 class="poll-column">Status</h2>
+          </mat-list-item>
+          <!-- Poll content -->
+          <mat-list-item role="listitem">
+            <h2 class="poll-column">{{ poll.question }}</h2>
+            <h2 class="poll-column">{{ poll.status }}</h2>
+          </mat-list-item>
+        </mat-list>
 
-      <mat-list *ngIf="poll.answer" role="list">
-        <!-- Column header -->
-        <mat-list-item class="header" role="listitem">
-          <h3 class="answer-column">Answer</h3>
-          <h3 class="answer-column">Date</h3>
-        </mat-list-item>
-        <!-- Poll content -->
-        <mat-list-item role="listitem">
-          <h3 class="answer-column">{{ poll.answer }}</h3>
-          <h3 class="answer-column">{{ poll.dateAnswer }}</h3>
-        </mat-list-item>
-      </mat-list>
+        <mat-list *ngIf="poll.answer" role="list">
+          <!-- Column header -->
+          <mat-list-item class="header" role="listitem">
+            <h2 class="answer-column">Answer</h2>
+            <h2 class="answer-column">Date</h2>
+          </mat-list-item>
+          <!-- Answer content -->
+          <mat-list-item role="listitem">
+            <h2 class="answer-column">{{ poll.answer }}</h2>
+            <h2 class="answer-column">{{ poll.dateAnswer }}</h2>
+          </mat-list-item>
+        </mat-list>
+      </mat-expansion-panel>
     </ng-container>
   </div>
 </div>
