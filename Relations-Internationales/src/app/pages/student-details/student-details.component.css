@@ -50,6 +50,10 @@ mat-expansion-panel {
     text-align: center;
 }
 
+.course-row {
+    cursor: pointer !important;
+}
+
 .dailyTopic-column {
     width: 25%;
     text-align: center;

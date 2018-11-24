@@ -10,6 +10,20 @@
     text-align: center;
 }
 
+.title {
+    width: 25%;
+    text-align: center;
+}
+
+.content {
+    width: 75%;
+}
+
+.course-description, .course-ects, .course-teachers, .course-marks, .course-poll {
+    display: flex;
+    margin-block-end: 20px;
+}
+
 .teacher-column, .mark-column, .poll-column, .answer-column {
     width: 50%;
     text-align: center;
