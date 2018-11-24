@@ -39,8 +39,6 @@ const appRoutes: Routes = [
     { path: 'student-profile-page', component: StudentProfilePageComponent },
     // localhost/4200/student-details/:idPerson
     { path: 'student-details/:idPerson', component: StudentDetailsComponent },
-    // localhost/4200/student-details/:idPerson/:idCourse
-    { path: 'student-details/:idPerson/:idCourse', component: CourseDetailsComponent },
     // localhost/4200/error
     { path: '**', component: ErrorComponent },
 ];

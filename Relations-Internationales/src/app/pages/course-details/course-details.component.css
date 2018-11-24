@@ -33,3 +33,7 @@
 .header {
     background-color: gainsboro;
 }
+
+.add-element-button {
+    margin-left: .625rem;
+}

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { SimulatorService } from 'src/app/services/simulator/simulator.service';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { Course } from 'src/app/models/course';
 import { Student } from 'src/app/models/student';
 
@@ -11,37 +11,30 @@ import { Student } from 'src/app/models/student';
 })
 export class CourseDetailsComponent implements OnInit {
 
-  constructor(private simulator: SimulatorService, private activatedRoute: ActivatedRoute) { }
+  constructor(private simulator: SimulatorService,
+    private router: Router) { }
 
-  private selectedStudent: Student;
-  private selectedCourse: Course;
+  @Input() selectedStudent: Student;
+  @Input() selectedCourse: Course;
+  @Output() backToStudent: EventEmitter<boolean> = new EventEmitter();
   // Simulator attributes
-  private simulatedStudents: Student[];
   private simulatedCourses: Course[];
 
   ngOnInit() {
-    this.simulatedStudents = [];
     this.simulatedCourses = [];
 
     this.simulator.getObjectsSimulated().forEach(lists => {
       lists.forEach(object => {
-        if (object instanceof Student) { this.simulatedStudents.push(object); }
         if (object instanceof Course) { this.simulatedCourses.push(object); }
       });
     });
 
-    this.activatedRoute.params.subscribe(params => {
-      this.simulatedStudents.forEach(simulatedStudent => {
-        if (simulatedStudent.getIdPerson() === params.idPerson) { this.selectedStudent = simulatedStudent; }
-      });
-
-      this.simulatedCourses.forEach(simulatedCourse => {
-        if (simulatedCourse.getIdCourse() === params.idCourse) { this.selectedCourse = simulatedCourse; }
-      });
-
-      console.log(this.selectedStudent);
-      console.log(this.selectedCourse);
+    this.simulatedCourses.forEach(simulatedCourse => {
+      if (simulatedCourse.getIdCourse() === this.selectedCourse.getIdCourse()) { this.selectedCourse = simulatedCourse; }
     });
   }
 
+  goToStudent(): void {
+    this.backToStudent.emit();
+  }
 }

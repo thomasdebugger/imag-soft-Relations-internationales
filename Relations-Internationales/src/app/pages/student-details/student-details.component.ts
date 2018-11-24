@@ -26,6 +26,9 @@ export class StudentDetailsComponent implements OnInit {
   private coursesOfSelectedStudent: Course[];
   private contactsOfSelectedStudent: Contact[];
   private dailyTopicsOfSelectedStudent: DailyTopic[];
+
+  private selectedCourse: Course;
+
   // Simulator attributes
   private simulatedStudents: Student[];
   private simulatedCourses: Course[];
@@ -108,7 +111,7 @@ export class StudentDetailsComponent implements OnInit {
     }
   }
 
-  goToCourse(idCourse: string): void {
-    this.router.navigate(['student-details/' + this.selectedStudent.getIdPerson() + '/' + idCourse]);
+  setSelectedCourse(selectedCourse: Course): void {
+    this.selectedCourse = selectedCourse;
   }
 }
