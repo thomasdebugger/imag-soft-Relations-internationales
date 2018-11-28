@@ -30,40 +30,40 @@ export class SimulatorService {
 
   private executeSimulation(): void {
     const student1: Student = new Student('person001', 'person001@gmail.com', 'Jean', 'Dupont',
-      new Date('22/06/1998'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000001',
+      new Date(), new Date(), '0610000001',
       'UGA', false, false, [], [], []);
     const student2: Student = new Student('person002', 'person002@gmail.com', 'Alice', 'Clerc',
-      new Date('24/04/1998'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000002',
+      new Date(), new Date(), '0610000002',
       'Paris-6', true, true, [], [], []);
     const student3: Student = new Student('person003', 'person003@gmail.com', 'Benoit', 'Dumas',
-      new Date('14/11/1998'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000003',
+      new Date(), new Date(), '0610000003',
       'Jean-Moulin', false, true, [], [], []);
     const student4: Student = new Student('person004', 'person004@gmail.com', 'Marie', 'Lambert',
-      new Date('02/01/1998'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000004',
+      new Date(), new Date(), '0610000004',
       'UPMF', true, false, [], [], []);
     const student5: Student = new Student('person005', 'person005@gmail.com', 'Alexandra', 'Duris',
-      new Date('14/06/1998'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000005',
+      new Date(), new Date(), '0610000005',
       'UGA', false, false, [], [], []);
     const student6: Student = new Student('person006', 'person006@gmail.com', 'Quentin', 'Moro',
-      new Date('25/05/1995'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000006',
+      new Date(), new Date(), '0610000006',
       'Ensimag', true, false, [], [], []);
     const student7: Student = new Student('person007', 'person007@gmail.com', 'Claude', 'Ruyf',
-      new Date('14/12/1998'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000007',
+      new Date(), new Date(), '0610000007',
       'UJF', false, false, [], [], []);
     const student8: Student = new Student('person008', 'person008@gmail.com', 'Virginie', 'Lemaire',
-      new Date('29/10/1997'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000008',
+      new Date(), new Date(), '0610000008',
       'UPMF', true, false, [], [], []);
     const student9: Student = new Student('person009', 'person009@gmail.com', 'Chloe', 'Lewom',
-      new Date('08/12/1993'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000009',
+      new Date(), new Date(), '0610000009',
       'UGA', false, false, [], [], []);
     const student10: Student = new Student('person010', 'person010@gmail.com', 'Martin', 'Man',
-      new Date('24/12/1998'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000010',
+      new Date(), new Date(), '0610000010',
       'UGA', true, true, [], [], []);
     const student11: Student = new Student('person011', 'person011@gmail.com', 'Xavier', 'Norti',
-      new Date('14/11/1992'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000011',
+      new Date(), new Date(), '0610000011',
       'Jean-Moulin', false, true, [], [], []);
     const student12: Student = new Student('person012', 'person012@gmail.com', 'Marie', 'Latour',
-      new Date('01/01/1998'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000012',
+      new Date(), new Date(), '0610000012',
       'UPMF', true, false, [], [], []);
 
     const contact1: Contact = new Contact('cont001', student1, 'cont001@gmail.com', 'Lucie', 'Prevert',
@@ -80,15 +80,15 @@ export class SimulatorService {
       '0620000006', 'affiliation6', 'descriptionContact006');
 
     const administrator1: Administrator = new Administrator('person005', 'person005@gmail.com', 'Maeva', 'Grunier',
-      new Date('19/04/2968'), new Date().getDate.toString(), '0610000004', 'admin001');
+      new Date(), new Date(), '0610000004', 'admin001');
 
-    const dailyTopic1: DailyTopic = new DailyTopic('dtopic001', new Date('21/07/2016'), 'descriptionDT001',
+    const dailyTopic1: DailyTopic = new DailyTopic('dtopic001', new Date(), 'descriptionDT001',
       'I am well arrived !', student1);
-    const dailyTopic2: DailyTopic = new DailyTopic('dtopic002', new Date('12/07/2016'), 'descriptionDT002',
+    const dailyTopic2: DailyTopic = new DailyTopic('dtopic002', new Date(), 'descriptionDT002',
       'Happy to integrate the football team.', student2);
-    const dailyTopic3: DailyTopic = new DailyTopic('dtopic003', new Date('02/09/2016'), 'descriptionDT003',
+    const dailyTopic3: DailyTopic = new DailyTopic('dtopic003', new Date(), 'descriptionDT003',
       'Canada is a nice country', student4);
-    const dailyTopic4: DailyTopic = new DailyTopic('dtopic004', new Date('17/01/2017'), 'descriptionDT004',
+    const dailyTopic4: DailyTopic = new DailyTopic('dtopic004', new Date(), 'descriptionDT004',
       'Looking for a new smartphone ?', student4);
 
     const course1: Course = new Course('course001', 'English', 'descriptionCourse001', 3,

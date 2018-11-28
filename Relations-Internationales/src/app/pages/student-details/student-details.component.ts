@@ -114,7 +114,9 @@ export class StudentDetailsComponent implements OnInit {
     this.selectedCourse = selectedCourse;
   }
 
-  setIsLearningAgreementValid(value: boolean): void {
-    this.selectedStudent.setIsLearningAgreementValid({ value: value, date: new Date() });
+  setIsLearningAgreementValid(): void {
+    this.selectedStudent.setIsLearningAgreementValid({
+      value: !this.selectedStudent.getIsLearningAgreementValid().value, date: new Date()
+    });
   }
 }

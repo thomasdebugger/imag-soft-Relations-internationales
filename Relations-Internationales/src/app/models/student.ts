@@ -14,7 +14,7 @@ export class Student extends Person {
     private dailyTopics: DailyTopic[];
 
     constructor(idPerson: string, emailAddress: string, firstName: string, lastName: string,
-        birthDate: Date, lastConnection: string, phoneNumber: string,
+        birthDate: Date, lastConnection: Date, phoneNumber: string,
         university: string, isEntrant: boolean, isArchived: boolean, courses: Course[],
         contacts: Contact[], dailyTopics: DailyTopic[]) {
         super(idPerson, emailAddress, firstName, lastName, birthDate, lastConnection, phoneNumber);

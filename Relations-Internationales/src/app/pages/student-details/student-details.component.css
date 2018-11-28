@@ -72,3 +72,7 @@ mat-panel-description button {
     margin-left: auto;
     margin-right: 3%;
 }
+
+mat-card-header button {
+    margin-bottom: .625rem;
+}

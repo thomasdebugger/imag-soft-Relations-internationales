@@ -11,7 +11,7 @@
 
 <div class="course-description">
   <div class="title">
-    <h3>Description</h3>
+    <h2>Description</h2>
   </div>
   <div class="content">
     <input matInput type="text" placeholder="Enter the description" [(ngModel)]="selectedCourse.description" name="courseDescription">
@@ -20,7 +20,7 @@
 
 <div class="course-ects">
   <div class="title">
-    <h3>ECTS</h3>
+    <h2>ECTS</h2>
   </div>
   <div class="content">
     <input matInput type="number" placeholder="Enter the ECTS" [(ngModel)]="selectedCourse.ects" name="courseEcts">
@@ -29,7 +29,7 @@
 
 <div class="course-teachers">
   <div class="title">
-    <h3>Teachers</h3>
+    <h2>Teachers</h2>
   </div>
   <div class="content">
     <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
@@ -58,7 +58,7 @@
 
 <div class="course-marks">
   <div class="title">
-    <h3>Marks</h3>
+    <h2>Marks</h2>
   </div>
   <div class="content">
     <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
@@ -87,45 +87,32 @@
 
 <div class="course-poll">
   <div class="title">
-    <h3>Polls</h3>
+    <h2>Polls</h2>
   </div>
   <div class="content">
-    <ng-container *ngFor="let poll of selectedCourse.polls">
-      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-        <!-- Panel header -->
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <h2>Expand the panel to see polls...</h2>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <!-- Polls list -->
-        <mat-list role="list">
-          <!-- Column header -->
-          <mat-list-item class="header" role="listitem" *ngFor="let poll of selectedCourse.polls">
-            <h2 class="poll-column">Title</h2>
-            <h2 class="poll-column">Status</h2>
-          </mat-list-item>
-          <!-- Poll content -->
-          <mat-list-item role="listitem">
-            <h2 class="poll-column">{{ poll.question }}</h2>
-            <h2 class="poll-column">{{ poll.status }}</h2>
-          </mat-list-item>
-        </mat-list>
-
-        <mat-list *ngIf="poll.answer" role="list">
-          <!-- Column header -->
-          <mat-list-item class="header" role="listitem">
-            <h2 class="answer-column">Answer</h2>
-            <h2 class="answer-column">Date</h2>
-          </mat-list-item>
-          <!-- Answer content -->
-          <mat-list-item role="listitem">
-            <h2 class="answer-column">{{ poll.answer }}</h2>
-            <h2 class="answer-column">{{ poll.dateAnswer }}</h2>
-          </mat-list-item>
-        </mat-list>
-      </mat-expansion-panel>
-    </ng-container>
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <!-- Panel header -->
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h2>Expand the panel to see polls...</h2>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <!-- Polls list -->
+      <mat-list role="list" *ngFor="let poll of selectedCourse.polls">
+        <!-- Column header -->
+        <mat-list-item class="header" role="listitem">
+          <h2 class="poll-column">Title</h2>
+          <h2 class="poll-column">Status</h2>
+          <h2 class="poll-column" *ngIf="poll.answer">Answer</h2>
+        </mat-list-item>
+        <!-- Poll content -->
+        <mat-list-item role="listitem">
+          <h2 class="poll-column">{{ poll.question }}</h2>
+          <h2 class="poll-column">{{ poll.status }}</h2>
+          <h2 class="poll-column" *ngIf="poll.answer">{{ poll.answer }}</h2>
+        </mat-list-item>
+      </mat-list>
+    </mat-expansion-panel>
   </div>
 </div>
 

@@ -12,7 +12,7 @@
       </div>
       <!-- Last connection -->
       <div class="student-connection">
-        <h2>Last connection : {{ selectedStudent.getLastConnection() }}</h2>
+        <h2>Last connection : {{ selectedStudent.getLastConnection() | date: 'medium' }}</h2>
         <h3 class="contact">Contact</h3>
       </div>
       <!-- University -->
@@ -21,6 +21,11 @@
         <h3 *ngIf="selectedStudent.getIsEntrant()"> Entrant student</h3>
         <h3 *ngIf="!selectedStudent.getIsEntrant()"> Non entrant student</h3>
         <button mat-stroked-button>Generate PDF</button>
+        <br />
+        <button mat-stroked-button color="primary" *ngIf="!selectedCourse" (click)="setIsLearningAgreementValid()">
+          <a *ngIf="!selectedStudent.getIsLearningAgreementValid().value">Valid learning agreement</a>
+          <a *ngIf="selectedStudent.getIsLearningAgreementValid().value">Invalid learning agreement</a>
+        </button>
       </div>
     </div>
   </mat-card-header>
@@ -35,20 +40,13 @@
           <h2>Courses</h2>
         </mat-panel-title>
         <!-- Panel description -->
-        <mat-panel-description *ngIf="selectedStudent.getIsLearningAgreementValid().value">
-          <h3>Learning agreement : valid {{ selectedStudent.getIsLearningAgreementValid().date }}</h3>
-          <button mat-stroked-button color="primary" class="invalid-la-button" (click)="setIsLearningAgreementValid(false)">
-            Invalid learning agreement
-          </button>
-        </mat-panel-description>
-
-        <mat-panel-description *ngIf="!selectedStudent.getIsLearningAgreementValid().value">
+        <mat-panel-description>
+          <h3 *ngIf="selectedStudent.getIsLearningAgreementValid().value">
+            Learning agreement : valid - {{ selectedStudent.getIsLearningAgreementValid().date | date: 'medium' }}
+          </h3>
           <h3 *ngIf="!selectedStudent.getIsLearningAgreementValid().value">
             Learning agreement : unvalid
           </h3>
-          <button mat-stroked-button color="primary" class="invalid-la-button" (click)="setIsLearningAgreementValid(true)">
-            Valid learning agreement
-          </button>
         </mat-panel-description>
 
       </mat-expansion-panel-header>
@@ -99,7 +97,7 @@
         <!-- Topics content -->
         <mat-list-item *ngFor="let dailyTopic of dailyTopicsOfSelectedStudent" role="listitem">
           <h2 class="dailyTopic-column">{{ dailyTopic.getName() }}</h2>
-          <h2 class="dailyTopic-column">{{ dailyTopic.getDateDailyTopic() }}</h2>
+          <h2 class="dailyTopic-column">{{ dailyTopic.getDateDailyTopic() | date: 'medium' }}</h2>
           <h2 class="dailyTopic-column">{{ dailyTopic.getDescription() }}</h2>
           <button mat-icon-button class="dailyTopic-column">
             <mat-icon class="trash-icon">delete_outline</mat-icon>
