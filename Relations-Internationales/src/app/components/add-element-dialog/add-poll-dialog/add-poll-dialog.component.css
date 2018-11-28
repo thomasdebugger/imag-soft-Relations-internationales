@@ -1,0 +1,36 @@
+.dialog-content {
+    text-align: center;
+}
+
+.form-fields {
+    display: flex;
+}
+
+.column {
+    width: 100%;
+}
+
+mat-form-field {
+    width: 70%;
+}
+
+.possible-answer {
+    display: flex;
+}
+
+.possible-answer-label {
+    width: 80%;
+}
+
+.add-possible-answer-button {
+    border: none;
+}
+
+.clear-mat-icon {
+    color: red;
+}
+
+.remove-possible-answer-button {
+    margin-top: auto;
+    margin-bottom: auto;
+}
