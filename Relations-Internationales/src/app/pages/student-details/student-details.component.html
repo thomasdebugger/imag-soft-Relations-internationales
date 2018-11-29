@@ -22,7 +22,8 @@
         <h3 *ngIf="!selectedStudent.getIsEntrant()"> Non entrant student</h3>
         <button mat-stroked-button>Generate PDF</button>
         <br />
-        <button mat-stroked-button color="primary" *ngIf="!selectedCourse" (click)="setIsLearningAgreementValid()">
+        <button mat-stroked-button *ngIf="!selectedCourse" [class.redColor]="selectedStudent.getIsLearningAgreementValid().value"
+          (click)="setIsLearningAgreementValid()">
           <a *ngIf="!selectedStudent.getIsLearningAgreementValid().value">Valid learning agreement</a>
           <a *ngIf="selectedStudent.getIsLearningAgreementValid().value">Invalid learning agreement</a>
         </button>
@@ -41,10 +42,10 @@
         </mat-panel-title>
         <!-- Panel description -->
         <mat-panel-description>
-          <h3 *ngIf="selectedStudent.getIsLearningAgreementValid().value">
+          <h3 *ngIf="selectedStudent.getIsLearningAgreementValid().value" class="greenColor">
             Learning agreement : valid - {{ selectedStudent.getIsLearningAgreementValid().date | date: 'medium' }}
           </h3>
-          <h3 *ngIf="!selectedStudent.getIsLearningAgreementValid().value">
+          <h3 *ngIf="!selectedStudent.getIsLearningAgreementValid().value" class="redColor">
             Learning agreement : unvalid
           </h3>
         </mat-panel-description>
@@ -72,9 +73,14 @@
         </mat-list-item>
       </mat-list>
       <!-- Add Course button -->
-      <button mat-stroked-button color="primary" class="add-element-button" (click)="displayAddElementDialog('course')">
-        Add new course
-      </button>
+      <div class="courses-footer">
+        <p [class.redColor]="getNbEcts() !== 30" [class.greenColor]="getNbEcts() === 30">
+          Total ECTS : {{ getNbEcts() }}/30
+        </p>
+        <button mat-stroked-button color="primary" class="add-element-button" (click)="displayAddElementDialog('course')">
+          Add new course
+        </button>
+      </div>
     </mat-expansion-panel>
 
     <!-- Topics -->

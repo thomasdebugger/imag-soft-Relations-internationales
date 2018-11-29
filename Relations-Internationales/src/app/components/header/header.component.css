@@ -4,7 +4,7 @@ h1 {
 
 .languageAndLogs {
     float: right;
-    width: 21.865rem;
+    margin-right: .625rem;
 }
 
 mat-select {

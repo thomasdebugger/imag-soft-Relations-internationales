@@ -119,4 +119,14 @@ export class StudentDetailsComponent implements OnInit {
       value: !this.selectedStudent.getIsLearningAgreementValid().value, date: new Date()
     });
   }
+
+  getNbEcts(): number {
+    let nbEcts = 0;
+
+    this.coursesOfSelectedStudent.forEach(courseOfSelectedStudent => {
+      nbEcts += courseOfSelectedStudent.getEcts();
+    });
+
+    return nbEcts;
+  }
 }
