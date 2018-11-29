@@ -6,6 +6,8 @@ import { AddCourseModalComponent } from '../add-course-modal/add-course-modal.co
 import { Course } from 'src/app/models/course';
 import { DatePipe } from '@angular/common';
 import { CourseDetailModalComponent } from '../course-detail-modal/course-detail-modal.component';
+import { Contact } from 'src/app/models/contact';
+import { AddContactModalComponent } from '../add-contact-modal/add-contact-modal.component';
 
 
 @Component({
@@ -18,7 +20,8 @@ export class StudentProfilePageComponent implements OnInit {
   name    :String = "";
   ects    : String = "";
   description : String = "";
-
+  affiliation :String ="";
+  mail : String = "";
   constructor(private simulator: SimulatorService, public dialog: MatDialog, private datePipe: DatePipe) { 
   }
 
@@ -36,9 +39,9 @@ export class StudentProfilePageComponent implements OnInit {
   dataSourcePL = this.simulator.getDailyTopics();
 
   displayedColumnsContact: string[] = ['lastName','description','affiliation','emailAddress'];
-  dataSourceContact = this.simulator.getContacts();
+  dataSourceContact : MatTableDataSource<Contact> = new MatTableDataSource(this.simulator.getContacts());
   
-  addElement(){
+  addMark(){
     var newData = this.dataSourceMark.data;
     const dialogRef = this.dialog.open(AddCourseModalComponent, {
       width: '250px',
@@ -46,21 +49,16 @@ export class StudentProfilePageComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result.ects);
-
       const student1: Student = new Student('person001', 'person001@gmail.com', 'Jean', 'Dupont',
       new Date('22/06/1998'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000001',
       'UGA', false, false, [], [], []);
 
-      const course1: Course = new Course('course001', result.name, result.descirption, result.ects, [], student1, [], []);
-
-      
+      const course1: Course = new Course('course001', result.name, result.description, result.ects, [], student1, [], []);
       newData.push(course1);
-      
-      console.log(this.dataSourceMark);
+      this.dataSourceMark.data= newData;
     });  
 
-    this.dataSourceMark.data= newData;
+    
 
   }
 
@@ -71,6 +69,31 @@ export class StudentProfilePageComponent implements OnInit {
       width:'90%',
       data: {courseName : course, ects : ects , description : description}
     });
+  }
+
+  addContact(){
+    var newData = this.dataSourceContact.data;
+    const dialogRef = this.dialog.open(AddContactModalComponent, {
+      width: '250px',
+      data: {name: this.name, description : this.description, affiliation : this.affiliation, mail : this.mail}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result.ects);
+
+      const student1: Student = new Student('person001', 'person001@gmail.com', 'Jean', 'Dupont',
+      new Date('22/06/1998'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000001',
+      'UGA', false, false, [], [], []);
+
+      const contact1: Contact = new Contact('cont001', student1, result.mail, 'Lucie', result.name,
+      '0620000001', result.affiliation, result.description);
+
+      newData.push(contact1);
+      this.dataSourceContact.data= newData;
+    });  
+
+    
+
   }
   
 }

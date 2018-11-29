@@ -28,6 +28,7 @@ import { DatePipe } from '@angular/common';
 import { AddStudentDialogComponent } from './components/add-element-dialog/add-student-dialog/add-student-dialog.component';
 import { AddCourseModalComponent } from './pages/add-course-modal/add-course-modal.component';
 import { CourseDetailModalComponent } from './pages/course-detail-modal/course-detail-modal.component';
+import { AddContactModalComponent } from './pages/add-contact-modal/add-contact-modal.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' }, // default route
@@ -36,6 +37,7 @@ const appRoutes: Routes = [
     { path: 'student-profile-page', component: StudentProfilePageComponent }, // localhost/4200/student-profile-page
     { path: 'student-details/:idPerson', component: StudentDetailsComponent }, // localhost/4200/student-profile-page
     { path: 'Add-Course-Modal', component: AddCourseModalComponent },
+    { path: 'AddContactModalComponent', component: AddContactModalComponent },
     { path: 'CourseDetailModalComponent', component: CourseDetailModalComponent }, // localhost/4200/student-profile-page
     { path: '**', component: ErrorComponent }, // localhost/4200/error
 ];
@@ -57,6 +59,7 @@ const appRoutes: Routes = [
         AddStudentDialogComponent,
         AddCourseModalComponent,
         CourseDetailModalComponent,
+        AddContactModalComponent,
     ],
     imports: [
         BrowserModule,

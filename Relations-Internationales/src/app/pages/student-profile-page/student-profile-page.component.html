@@ -31,7 +31,7 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumnsMark"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumnsMark;"></tr>
         </table>
-        <button mat-icon-button (click)="addElement()">
+        <button mat-icon-button (click)="addMark()">
           <mat-icon>add</mat-icon>
         </button>
     </mat-expansion-panel>
@@ -62,7 +62,9 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumnsPL"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumnsPL;"></tr>
     </table>
-
+    <button mat-icon-button (click)="addMark()">
+      <mat-icon>add</mat-icon>
+    </button>
     </mat-expansion-panel>
 
     <mat-expansion-panel [expanded]="true">
@@ -95,6 +97,9 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumnsContact"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumnsContact;"></tr>
       </table>
+      <button mat-icon-button (click)="addContact()">
+        <mat-icon>add</mat-icon>
+      </button>
       </mat-expansion-panel>
   
 
