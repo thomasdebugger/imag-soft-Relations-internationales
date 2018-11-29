@@ -29,6 +29,7 @@ import { AddStudentDialogComponent } from './components/add-element-dialog/add-s
 import { AddCourseModalComponent } from './pages/add-course-modal/add-course-modal.component';
 import { CourseDetailModalComponent } from './pages/course-detail-modal/course-detail-modal.component';
 import { AddContactModalComponent } from './pages/add-contact-modal/add-contact-modal.component';
+import { AddPrivateLifeModalComponent } from './pages/add-private-life-modal/add-private-life-modal.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' }, // default route
@@ -38,6 +39,7 @@ const appRoutes: Routes = [
     { path: 'student-details/:idPerson', component: StudentDetailsComponent }, // localhost/4200/student-profile-page
     { path: 'Add-Course-Modal', component: AddCourseModalComponent },
     { path: 'AddContactModalComponent', component: AddContactModalComponent },
+    { path: 'AddPrivateLifeModalComponent', component: AddPrivateLifeModalComponent },
     { path: 'CourseDetailModalComponent', component: CourseDetailModalComponent }, // localhost/4200/student-profile-page
     { path: '**', component: ErrorComponent }, // localhost/4200/error
 ];
@@ -60,6 +62,7 @@ const appRoutes: Routes = [
         AddCourseModalComponent,
         CourseDetailModalComponent,
         AddContactModalComponent,
+        AddPrivateLifeModalComponent,
     ],
     imports: [
         BrowserModule,
