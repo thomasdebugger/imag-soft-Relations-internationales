@@ -6,21 +6,21 @@
       <div class="column">
         <!-- Field First Name -->
         <div class="first-name-field">
-          <h3>First Name</h3>
+          <h3 [class.invalid-field]="!isFormValid && !isFirstNameValid">First Name</h3>
           <mat-form-field>
             <input matInput type="text" placeholder="Enter the first name" [(ngModel)]="firstName" name="contactFirstName">
           </mat-form-field>
         </div>
         <!-- Field Phone Number -->
         <div class="phone-number-field">
-          <h3>Phone Number</h3>
+          <h3 [class.invalid-field]="!isFormValid && !isPhoneNumberValid">Phone Number</h3>
           <mat-form-field>
             <input matInput type="tel" placeholder="Enter the phone number" [(ngModel)]="phoneNumber" name="contactPhoneNumber">
           </mat-form-field>
         </div>
         <!-- Field Affiliation -->
         <div class="affiliation-field">
-          <h3>Affiliation</h3>
+          <h3 [class.invalid-field]="!isFormValid && !isAffiliationValid">Affiliation</h3>
           <mat-form-field>
             <input matInput type="text" placeholder="Enter the affiliation" [(ngModel)]="affiliation" name="contactAffiliation">
           </mat-form-field>
@@ -29,14 +29,14 @@
       <div class="column">
         <!-- Field Last Name -->
         <div class="last-name-field">
-          <h3>Last Name</h3>
+          <h3 [class.invalid-field]="!isFormValid && !isLastNameValid">Last Name</h3>
           <mat-form-field>
             <input matInput type="text" placeholder="Enter the last name" [(ngModel)]="lastName" name="contactLastName">
           </mat-form-field>
         </div>
         <!-- Field Email Address -->
         <div class="email-address-field">
-          <h3>Email Address</h3>
+          <h3 [class.invalid-field]="!isFormValid && !isEmailAddressValid">Email Address</h3>
           <mat-form-field>
             <input matInput type="email" placeholder="Enter the email address" [(ngModel)]="emailAddress" name="contactEmailAddress">
           </mat-form-field>
