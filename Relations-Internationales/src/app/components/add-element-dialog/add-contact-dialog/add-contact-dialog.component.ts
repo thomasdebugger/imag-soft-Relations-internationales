@@ -41,6 +41,7 @@ export class AddContactDialogComponent implements OnInit {
   }
 
   checkForm(): boolean {
+    this.isFormValid = true;
 
     if (this.firstName && this.firstName.length > 0) {
       this.isFirstNameValid = true;

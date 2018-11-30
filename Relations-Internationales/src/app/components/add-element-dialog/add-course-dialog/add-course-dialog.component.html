@@ -6,14 +6,14 @@
       <div class="column">
         <!-- Field Name -->
         <div class="name-field">
-          <h3>Name</h3>
+          <h3 [class.invalid-field]="!isFormValid && !isNameValid">Name</h3>
           <mat-form-field>
             <input matInput type="text" placeholder="Enter the name" [(ngModel)]="name" name="courseName">
           </mat-form-field>
         </div>
         <!-- Field ECTS -->
         <div class="ects-field">
-          <h3>ECTS</h3>
+          <h3 [class.invalid-field]="!isFormValid && !isEctsValid">ECTS</h3>
           <mat-form-field>
             <input matInput type="number" placeholder="Enter the ects" [(ngModel)]="ects" name="courseECTS">
           </mat-form-field>
@@ -29,7 +29,7 @@
         </div>
         <!-- Field Teachers -->
         <div class="ects-field">
-          <h3>Teachers</h3>
+          <h3 [class.invalid-field]="!isFormValid && !isTeachersValid">Teachers</h3>
           <mat-form-field>
             <mat-select placeholder="Select the teachers" multiple [(ngModel)]="teachers" name="courseTeachers">
               <mat-option *ngFor="let teacher of teachersToSelect">{{teacher}}</mat-option>
