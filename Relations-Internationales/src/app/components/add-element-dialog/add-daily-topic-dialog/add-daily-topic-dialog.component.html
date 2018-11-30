@@ -6,14 +6,14 @@
       <div class="column">
         <!-- Field Name -->
         <div class="name-field">
-          <h3>Name</h3>
+          <h3 [class.invalid-field]="!isFormValid && !isNameValid">Name</h3>
           <mat-form-field>
             <input matInput type="text" placeholder="Enter the name" [(ngModel)]="name" name="dailyTopicName">
           </mat-form-field>
         </div>
         <!-- Field Description -->
         <div class="description-field">
-          <h3>Description</h3>
+          <h3 [class.invalid-field]="!isFormValid && !isDescriptionValid">Description</h3>
           <mat-form-field>
             <textarea matInput placeholder="Enter the phone description" [(ngModel)]="description" name="dailyTopicDescription"></textarea>
           </mat-form-field>
