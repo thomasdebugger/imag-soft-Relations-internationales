@@ -13,7 +13,7 @@
       <!-- Last connection -->
       <div class="student-connection">
         <h2>Last connection : {{ selectedStudent.getLastConnection() | date: 'medium' }}</h2>
-        <h3 class="contact">Contact</h3>
+        <h3 class="contact" (click)="displaySendEmailDialog()">Contact</h3>
       </div>
       <!-- University -->
       <div class="student-university">

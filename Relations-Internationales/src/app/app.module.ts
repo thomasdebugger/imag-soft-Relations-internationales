@@ -28,6 +28,7 @@ import { DatePipe } from '@angular/common';
 import { AddStudentDialogComponent } from './components/add-element-dialog/add-student-dialog/add-student-dialog.component';
 import { CourseDetailsComponent } from './pages/course-details/course-details.component';
 import { AddPollDialogComponent } from './components/add-element-dialog/add-poll-dialog/add-poll-dialog.component';
+import { SendEmailDialogComponent } from './components/send-email-dialog/send-email-dialog.component';
 
 const appRoutes: Routes = [
     // default route
@@ -61,6 +62,7 @@ const appRoutes: Routes = [
         AddStudentDialogComponent,
         CourseDetailsComponent,
         AddPollDialogComponent,
+        SendEmailDialogComponent,
     ],
     imports: [
         BrowserModule,
@@ -93,6 +95,7 @@ const appRoutes: Routes = [
         AddContactDialogComponent,
         AddDailyTopicDialogComponent,
         AddStudentDialogComponent,
-        AddPollDialogComponent],
+        AddPollDialogComponent,
+        SendEmailDialogComponent],
 })
 export class AppModule { }

@@ -9,6 +9,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AddCourseDialogComponent } from 'src/app/components/add-element-dialog/add-course-dialog/add-course-dialog.component';
 import { AddContactDialogComponent } from 'src/app/components/add-element-dialog/add-contact-dialog/add-contact-dialog.component';
 import { AddDailyTopicDialogComponent } from 'src/app/components/add-element-dialog/add-daily-topic-dialog/add-daily-topic-dialog.component';
+import { SendEmailDialogComponent } from 'src/app/components/send-email-dialog/send-email-dialog.component';
 
 @Component({
   selector: 'app-student-details',
@@ -108,6 +109,18 @@ export class StudentDetailsComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => console.log('Contact dialog closed : ', result));
         break;
     }
+  }
+
+  displaySendEmailDialog(): void {
+    let dialogRef = null;
+    const matDialogConfig = new MatDialogConfig();
+    matDialogConfig.autoFocus = true;
+    matDialogConfig.width = '60%';
+    matDialogConfig.data = this.selectedStudent;
+
+    console.log('Send email dialog opened.');
+    dialogRef = this.dialog.open(SendEmailDialogComponent, matDialogConfig);
+    dialogRef.afterClosed().subscribe(result => console.log('Send email dialog closed : ', result));
   }
 
   setSelectedCourse(selectedCourse: Course): void {
