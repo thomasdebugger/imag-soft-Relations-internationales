@@ -83,6 +83,10 @@ export class StudentDetailsComponent implements OnInit {
         }
       });
     });
+
+    this.activatedRoute.data.subscribe(data => {
+      console.log(data);
+    });
   }
 
   displayAddElementDialog(dialogType: string): void {

@@ -29,20 +29,48 @@ import { AddStudentDialogComponent } from './components/add-element-dialog/add-s
 import { CourseDetailsComponent } from './pages/course-details/course-details.component';
 import { AddPollDialogComponent } from './components/add-element-dialog/add-poll-dialog/add-poll-dialog.component';
 import { SendEmailDialogComponent } from './components/send-email-dialog/send-email-dialog.component';
+import { StudentsResolver } from './resolvers/students.resolver';
+import { HttpClientModule } from '@angular/common/http';
+import { StudentResolver } from './resolvers/student.resolver';
 
 const appRoutes: Routes = [
     // default route
-    { path: '', redirectTo: '/home', pathMatch: 'full' },
+    {
+        path: '',
+        redirectTo: '/home',
+        pathMatch: 'full'
+    },
     // localhost/4200/home
-    { path: 'home', component: HomeComponent },
+    {
+        resolve: {
+            studentsResolverResult: StudentsResolver,
+        },
+        path: 'home',
+        component: HomeComponent,
+    },
     // localhost/4200/login
-    { path: 'login', component: LoginComponent },
+    {
+        path: 'login',
+        component: LoginComponent
+    },
     // localhost/4200/student-profile-page
-    { path: 'student-profile-page', component: StudentProfilePageComponent },
+    {
+        path: 'student-profile-page',
+        component: StudentProfilePageComponent
+    },
     // localhost/4200/student-details/:idPerson
-    { path: 'student-details/:idPerson', component: StudentDetailsComponent },
+    {
+        resolve: {
+            studentResolverResult: StudentResolver,
+        },
+        path: 'student-details/:idPerson',
+        component: StudentDetailsComponent
+    },
     // localhost/4200/error
-    { path: '**', component: ErrorComponent },
+    {
+        path: '**',
+        component: ErrorComponent
+    },
 ];
 
 @NgModule({
@@ -67,6 +95,7 @@ const appRoutes: Routes = [
     imports: [
         BrowserModule,
         RouterModule.forRoot(appRoutes),
+        HttpClientModule,
         // Angular Material modules
         BrowserAnimationsModule,
         FormsModule,
@@ -89,6 +118,8 @@ const appRoutes: Routes = [
         DatabaseService,
         SimulatorService,
         DatePipe,
+        StudentsResolver,
+        StudentResolver,
     ],
     bootstrap: [AppComponent],
     entryComponents: [AddCourseDialogComponent,

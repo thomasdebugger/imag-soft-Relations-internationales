@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { SimulatorService } from '../../services/simulator/simulator.service';
 import { Person } from 'src/app/models/person';
 import { Administrator } from 'src/app/models/administrator';
@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   private user: Person;
   private isAdministrator: any;
 
-  constructor(private router: Router, private simulator: SimulatorService) { }
+  constructor(private readonly router: Router, private readonly activatedRoute: ActivatedRoute, private simulator: SimulatorService) { }
 
   ngOnInit() {
     console.log('Welcome to the home component !');
@@ -25,6 +25,10 @@ export class HomeComponent implements OnInit {
 
     this.user = userAdmin;
     this.isAdministrator = this.user instanceof Administrator;
+
+
+
+    this.activatedRoute.data.subscribe(data => console.log(data));
   }
 
   navigateTo(route: string) {
