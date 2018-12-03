@@ -19,66 +19,17 @@ export class StudentService {
       map(response => {
         return {
           students: response['Student'].map((student: Student) => {
-            return new Student(
-              student['idStudent'],
-              student['emailAddress'],
-              student['firstName'],
-              student['lastName'],
-              student['birthDate'],
-              student['lastConnectoin'],
-              student['phoneNumber'],
-              student['university'],
-              student['isEntrant'],
-              student['isArchived'],
-              student['courses'],
-              student['contacts'],
-              student['dailyToipcs']);
+            return new Student(student);
           }),
           nbRows: response['nombre']
         };
       })
     );
-
-
-    // const data = this.http.get<object>(`${environment.ip_address}${environment.back.students}`);
-    // const students: Student[] = data['Student'].pipe(
-    //   map(student => new Student(
-    //     student['idPerson'],
-    //     student['emailAddress'],
-    //     student['firstName'],
-    //     student['lastName'],
-    //     student['birthDate'],
-    //     student['lastConnectoin'],
-    //     student['phoneNumber'],
-    //     student['university'],
-    //     student['isEntrant'],
-    //     student['isArchived'],
-    //     student['courses'],
-    //     student['contacts'],
-    //     student['dailyToipcs'])
-    //   )
-    // );
-
-    // return { students: students, nbRows: data['nombre'] };
   }
 
   getStudent(idStudent: string): Observable<Student> {
     const data = this.http.get<object>(`${environment.ip_address}${environment.back.students}?idStudent=${idStudent}`);
 
-    return of(new Student(
-      data['idPerson'],
-      data['emailAddress'],
-      data['firstName'],
-      data['lastName'],
-      data['birthDate'],
-      data['lastConnectoin'],
-      data['phoneNumber'],
-      data['university'],
-      data['isEntrant'],
-      data['isArchived'],
-      data['courses'],
-      data['contacts'],
-      data['dailyToipcs'])
-    );
+    return of(new Student(data));
   }
 }

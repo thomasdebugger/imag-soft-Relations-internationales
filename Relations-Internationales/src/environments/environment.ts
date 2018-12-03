@@ -7,6 +7,9 @@ export const environment = {
   ip_address: '//127.0.0.1',
   back: {
     students: '/student/get_student.php',
+    courses: '/course/get_course.php',
+    contacts: '/contact/get_contact.php',
+    dailyTopics: '/dailyTopic/get_dailyTopic.php',
   }
 };
 

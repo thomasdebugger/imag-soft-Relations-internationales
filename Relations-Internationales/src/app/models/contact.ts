@@ -11,16 +11,30 @@ export class Contact {
     private affiliation: string;
     private description: string;
 
-    constructor(idContact: string, student: Student, emailAddress: string, firstName: string, lastName: string,
-        phoneNumber: string, affiliation: string, description: string) {
-        this.idContact = idContact;
-        this.student = student;
-        this.emailAddress = emailAddress;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
-        this.affiliation = affiliation;
-        this.description = description;
+    // constructor(idContact: string, student: Student, emailAddress: string, firstName: string, lastName: string,
+    //     phoneNumber: string, affiliation: string, description: string) {
+    //     this.idContact = idContact;
+    //     this.student = student;
+    //     this.emailAddress = emailAddress;
+    //     this.firstName = firstName;
+    //     this.lastName = lastName;
+    //     this.phoneNumber = phoneNumber;
+    //     this.affiliation = affiliation;
+    //     this.description = description;
+
+    //     this.student.getContacts().push(this);
+    // }
+
+    constructor(data: object) {
+        const contact = data || {};
+        this.idContact = contact['idContact'];
+        this.student = new Student(contact['student']);
+        this.emailAddress = contact['emailAddress'];
+        this.firstName = contact['firstName'];
+        this.lastName = contact['lastName'];
+        this.phoneNumber = contact['phoneNumber'];
+        this.affiliation = contact['affiliation'];
+        this.description = contact['description'];
 
         this.student.getContacts().push(this);
     }

@@ -13,18 +13,30 @@ export class Student extends Person {
     private contacts: Contact[];
     private dailyTopics: DailyTopic[];
 
-    constructor(idPerson: string, emailAddress: string, firstName: string, lastName: string,
-        birthDate: Date, lastConnection: Date, phoneNumber: string,
-        university: string, isEntrant: boolean, isArchived: boolean, courses: Course[],
-        contacts: Contact[], dailyTopics: DailyTopic[]) {
-        super(idPerson, emailAddress, firstName, lastName, birthDate, lastConnection, phoneNumber);
-        this.university = university;
-        this.isEntrant = isEntrant;
-        this.isArchived = isArchived;
+    // constructor(idPerson: string, emailAddress: string, firstName: string, lastName: string,
+    //     birthDate: Date, lastConnection: Date, phoneNumber: string,
+    //     university: string, isEntrant: boolean, isArchived: boolean, courses: Course[],
+    //     contacts: Contact[], dailyTopics: DailyTopic[]) {
+    //     super(idPerson, emailAddress, firstName, lastName, birthDate, lastConnection, phoneNumber);
+    //     this.university = university;
+    //     this.isEntrant = isEntrant;
+    //     this.isArchived = isArchived;
+    //     this.isLearningAgreementValid = { value: false, date: null };
+    //     this.courses = courses;
+    //     this.contacts = contacts;
+    //     this.dailyTopics = dailyTopics;
+    // }
+
+    constructor(data: object) {
+        const student = data || {};
+        super(student);
+        this.university = student['university'];
+        this.isEntrant = student['isEntrant'];
+        this.isArchived = student['isArchived'];
         this.isLearningAgreementValid = { value: false, date: null };
-        this.courses = courses;
-        this.contacts = contacts;
-        this.dailyTopics = dailyTopics;
+        this.courses = student['courses'];
+        this.contacts = student['contacts'];
+        this.dailyTopics = student['dailyTopics'];
     }
 
     public getUniversity(): string { return this.university; }

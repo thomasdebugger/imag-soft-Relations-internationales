@@ -6,10 +6,19 @@ export class PossibleAnswer {
     private poll: Poll;
     private value: string;
 
-    constructor(idPossibleAnswer: string, poll: Poll, value: string) {
-        this.idPossibleAnswer = idPossibleAnswer;
-        this.poll = poll;
-        this.value = value;
+    // constructor(idPossibleAnswer: string, poll: Poll, value: string) {
+    //     this.idPossibleAnswer = idPossibleAnswer;
+    //     this.poll = poll;
+    //     this.value = value;
+
+    //     this.poll.getPossiblesAnswers().push(this);
+    // }
+
+    constructor(data: object) {
+        const possibleAnswer = data || {};
+        this.idPossibleAnswer = possibleAnswer['idPossibleAnswer'];
+        this.poll = new Poll(possibleAnswer['poll']);
+        this.value = possibleAnswer['value'];
 
         this.poll.getPossiblesAnswers().push(this);
     }

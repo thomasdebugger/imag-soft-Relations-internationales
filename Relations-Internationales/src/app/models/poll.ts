@@ -11,15 +11,28 @@ export class Poll {
     private dateAnswer: Date;
     private possiblesAnswers: PossibleAnswer[];
 
-    constructor(idPoll: string, course: Course, status: string, question: string, answer: string,
-        dateAnswer: Date, possiblesAnswers: PossibleAnswer[]) {
-        this.idPoll = idPoll;
-        this.course = course;
-        this.status = status;
-        this.question = question;
-        this.answer = answer;
-        this.dateAnswer = dateAnswer;
-        this.possiblesAnswers = possiblesAnswers;
+    // constructor(idPoll: string, course: Course, status: string, question: string, answer: string,
+    //     dateAnswer: Date, possiblesAnswers: PossibleAnswer[]) {
+    //     this.idPoll = idPoll;
+    //     this.course = course;
+    //     this.status = status;
+    //     this.question = question;
+    //     this.answer = answer;
+    //     this.dateAnswer = dateAnswer;
+    //     this.possiblesAnswers = possiblesAnswers;
+
+    //     this.course.getPolls().push(this);
+    // }
+
+    constructor(data: object) {
+        const poll = data || {};
+        this.idPoll = poll['idPoll'];
+        this.course = new Course(poll['course']);
+        this.status = poll['status'];
+        this.question = poll['question'];
+        this.answer = poll['answer'];
+        this.dateAnswer = poll['dateAnswer'];
+        this.possiblesAnswers = (poll['possiblesAnswers'] || []).map(possibleAnswer => new PossibleAnswer(possibleAnswer));
 
         this.course.getPolls().push(this);
     }

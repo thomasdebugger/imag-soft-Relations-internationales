@@ -7,11 +7,21 @@ export class Mark {
     private typeMark: string;
     private value: number;
 
-    constructor(idMark: string, course: Course, typeMark: string, value: number) {
-        this.idMark = idMark;
-        this.course = course;
-        this.typeMark = typeMark;
-        this.value = value;
+    // constructor(idMark: string, course: Course, typeMark: string, value: number) {
+    //     this.idMark = idMark;
+    //     this.course = course;
+    //     this.typeMark = typeMark;
+    //     this.value = value;
+
+    //     this.course.getMarks().push(this);
+    // }
+
+    constructor(data: object) {
+        const mark = data || {};
+        this.idMark = mark['idMark'];
+        this.course = new Course(mark['course']);
+        this.typeMark = mark['typeMark'];
+        this.value = mark['value'];
 
         this.course.getMarks().push(this);
     }

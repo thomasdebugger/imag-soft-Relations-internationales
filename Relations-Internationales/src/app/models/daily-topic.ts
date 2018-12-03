@@ -8,12 +8,23 @@ export class DailyTopic {
     private name: string;
     private student: Student;
 
-    constructor(idDailyTopic: string, dateDailyTopic: Date, description: string, name: string, student: Student) {
-        this.idDailyTopic = idDailyTopic;
-        this.dateDailyTopic = dateDailyTopic;
-        this.description = description;
-        this.name = name;
-        this.student = student;
+    // constructor(idDailyTopic: string, dateDailyTopic: Date, description: string, name: string, student: Student) {
+    //     this.idDailyTopic = idDailyTopic;
+    //     this.dateDailyTopic = dateDailyTopic;
+    //     this.description = description;
+    //     this.name = name;
+    //     this.student = student;
+
+    //     this.student.getDailyTopics().push(this);
+    // }
+
+    constructor(data: object) {
+        const dailyTopic = data || {};
+        this.idDailyTopic = dailyTopic['idDailyTopic'];
+        this.dateDailyTopic = new Date(dailyTopic['dateDailyTopic']);
+        this.description = dailyTopic['description'];
+        this.name = dailyTopic['name'];
+        this.student = new Student(dailyTopic['student']);
 
         this.student.getDailyTopics().push(this);
     }

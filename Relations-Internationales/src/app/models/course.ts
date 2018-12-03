@@ -13,17 +13,31 @@ export class Course {
     private polls: Poll[];
     private marks: Mark[];
 
-    constructor(idCourse: string = null, name: string = null, description: string = null, ects: number = null,
-        teacher: { fullName: string, emailAddress: string }[] = [], student: Student = null, polls: Poll[] = [],
-        marks: Mark[] = []) {
-        this.idCourse = idCourse;
-        this.description = description;
-        this.name = name;
-        this.ects = ects;
-        this.student = student;
-        this.teachers = teacher;
-        this.polls = polls;
-        this.marks = marks;
+    // constructor(idCourse: string = null, name: string = null, description: string = null, ects: number = null,
+    //     teacher: { fullName: string, emailAddress: string }[] = [], student: Student = null, polls: Poll[] = [],
+    //     marks: Mark[] = []) {
+    //     this.idCourse = idCourse;
+    //     this.description = description;
+    //     this.name = name;
+    //     this.ects = ects;
+    //     this.student = student;
+    //     this.teachers = teacher;
+    //     this.polls = polls;
+    //     this.marks = marks;
+
+    //     this.student.getCourses().push(this);
+    // }
+
+    constructor(data?: object) {
+        const course = data || {};
+        this.idCourse = course['idCourse'];
+        this.description = course['description'];
+        this.name = course['name'];
+        this.ects = course['ects'];
+        this.student = new Student(course['student']);
+        this.teachers = course['teachers'] || [];
+        this.polls = (course['polls'] || []).map(poll => new Poll(poll));
+        this.marks = (course['marks'] || []).map(mark => new Mark(mark));
 
         this.student.getCourses().push(this);
     }
