@@ -23,8 +23,21 @@ export class AddStudentDialogComponent implements OnInit {
   }
 
   createDailyTopic(): void {
-    this.dialogRef.close(new Student(null, this.emailAddress, this.firstName, this.lastName,
-      this.birthDate, null, this.phoneNumber, this.university, this.isEntrant || false, false, [], [], []));
+    this.dialogRef.close(new Student({
+      idPerson: null,
+      emailAddress: this.emailAddress,
+      firstNAme: this.firstName,
+      lastName: this.lastName,
+      birthDate: this.birthDate,
+      lastConnexion: null,
+      phoneNumber: this.phoneNumber,
+      university: this.university,
+      isEntrant: this.isEntrant || false,
+      isArchived: false,
+      isLearningAgreementValid: {},
+      courses: [],
+      contacts: []
+    }));
   }
 
 }

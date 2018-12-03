@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Course } from 'src/app/models/course';
 import { Student } from 'src/app/models/student';
 
 @Component({
@@ -37,7 +36,14 @@ export class AddCourseDialogComponent implements OnInit {
         // Get the teachers
       });
 
-      this.dialogRef.close(new Course(null, this.name, this.description, this.ects, teacherToReturn, this.student));
+      this.dialogRef.close({
+        idCourse: null,
+        name: this.name,
+        description: this.description,
+        ects: this.ects,
+        teacher: teacherToReturn,
+        student: this.student
+      });
     }
   }
 

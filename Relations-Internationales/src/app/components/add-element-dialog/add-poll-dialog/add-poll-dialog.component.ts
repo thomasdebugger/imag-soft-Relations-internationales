@@ -35,9 +35,21 @@ export class AddPollDialogComponent implements OnInit {
   }
 
   createPoll(): void {
-    const newPoll = new Poll(null, this.course, 'sent', this.question, null, null, []);
+    const newPoll = new Poll({
+      idPoll: null,
+      course: this.course,
+      status: 'sent',
+      question: this.question,
+      answer: null,
+      dateAnswer: null,
+      possibleAnswers: []
+    });
 
-    this.possibleAnswers.map(value => new PossibleAnswer(null, newPoll, value));
+    this.possibleAnswers.map(value => new PossibleAnswer({
+      idPossibleAnswer: null,
+      poll: newPoll,
+      value: value
+    }));
 
     this.dialogRef.close(newPoll);
   }
