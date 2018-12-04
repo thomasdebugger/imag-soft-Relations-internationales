@@ -1,11 +1,11 @@
-import { Person } from './person';
 import { Contact } from './contact';
 import { Course } from './course';
 import { DailyTopic } from './daily-topic';
 
-export class Student extends Person {
+export class Student {
 
     private university: string;
+    private idStudent: string;
     private isEntrant: boolean;
     private isArchived: boolean;
     private isLearningAgreementValid: { value: boolean, date: Date };
@@ -29,17 +29,18 @@ export class Student extends Person {
 
     constructor(data: object) {
         const student = data || {};
-        super(student);
+        this.idStudent = student['idStudent'];
         this.university = student['university'];
-        this.isEntrant = student['isEntrant'];
-        this.isArchived = student['isArchived'];
+        this.isEntrant = student['isEntrant'] === 1 ? true : false;
+        this.isArchived = student['isArchived'] === 1 ? true : false;
         this.isLearningAgreementValid = { value: false, date: null };
-        this.courses = student['courses'];
-        this.contacts = student['contacts'];
-        this.dailyTopics = student['dailyTopics'];
+        this.courses = student['courses'] || [];
+        this.contacts = student['contacts'] || [];
+        this.dailyTopics = student['dailyTopics'] || [];
     }
 
     public getUniversity(): string { return this.university; }
+    public getIdStudent(): string { return this.idStudent; }
     public getIsEntrant(): boolean { return this.isEntrant; }
     public getIsArchived(): boolean { return this.isArchived; }
     public getIsLearningAgreementValid(): { value: boolean, date: Date } { return this.isLearningAgreementValid; }
@@ -48,6 +49,7 @@ export class Student extends Person {
     public getDailyTopics(): DailyTopic[] { return this.dailyTopics; }
 
     public setUniversity(value: string): void { this.university = value; }
+    public setIdStudent(value: string): void { this.idStudent = value; }
     public setIsEntrant(value: boolean): void { this.isEntrant = value; }
     public setIsArchived(value: boolean): void { this.isArchived = value; }
     public setIsLearningAgreementValid(value: { value: boolean, date: Date }): void { this.isLearningAgreementValid = value; }

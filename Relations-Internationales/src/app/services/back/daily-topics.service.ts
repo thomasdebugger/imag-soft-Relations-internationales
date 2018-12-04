@@ -28,8 +28,11 @@ export class DailyTopicsService {
   }
 
   getDailyTopic(idDailyTopic: string): Observable<DailyTopic> {
-    const data = this.http.get<object>(`${environment.ip_address}${environment.back.dailyTopics}?idDailyTopic=${idDailyTopic}`);
-
-    return of(new DailyTopic(data));
+    return this.http.get<object>(`${environment.ip_address}${environment.back.dailyTopics}?idDailyTopic=${idDailyTopic}`)
+      .pipe(
+        map(dailyTopics => dailyTopics['DailyTopic']
+          .map(dailyTopic => new DailyTopic(dailyTopic))
+        )
+      );
   }
 }

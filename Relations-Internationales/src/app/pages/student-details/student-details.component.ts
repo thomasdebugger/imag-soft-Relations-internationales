@@ -59,24 +59,24 @@ export class StudentDetailsComponent implements OnInit {
 
       this.simulatedStudents.forEach(student => {
         // Recuperation du student selectionne
-        if (student.getIdPerson() === params.idPerson) {
+        if (student.getIdStudent() === params.idPerson) {
           this.selectedStudent = student;
 
           // Recuperation des cours du student selectionne
           this.simulatedCourses.forEach(course => {
-            if (course.getStudent().getIdPerson() === this.selectedStudent.getIdPerson()) {
+            if (course.getStudent().getIdStudent() === this.selectedStudent.getIdStudent()) {
               this.coursesOfSelectedStudent.push(course);
             }
           });
           // Recuperation des contacts du student selectionne
           this.simulatedContacts.forEach(contact => {
-            if (contact.getStudent().getIdPerson() === this.selectedStudent.getIdPerson()) {
+            if (contact.getStudent().getIdStudent() === this.selectedStudent.getIdStudent()) {
               this.contactsOfSelectedStudent.push(contact);
             }
           });
           // Recuperation des contacts du student selectionne
           this.simulatedDailyTopics.forEach(dailyTopic => {
-            if (dailyTopic.getStudent().getIdPerson() === this.selectedStudent.getIdPerson()) {
+            if (dailyTopic.getStudent().getIdStudent() === this.selectedStudent.getIdStudent()) {
               this.dailyTopicsOfSelectedStudent.push(dailyTopic);
             }
           });

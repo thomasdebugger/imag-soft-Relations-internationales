@@ -28,8 +28,11 @@ export class ContactService {
   }
 
   getContact(idContact: string): Observable<Contact> {
-    const data = this.http.get<object>(`${environment.ip_address}${environment.back.contacts}?idContact=${idContact}`);
-
-    return of(new Contact(data));
+    return this.http.get<object>(`${environment.ip_address}${environment.back.contacts}?idContact=${idContact}`)
+      .pipe(
+        map(contacts => contacts['Contact']
+          .map(contact => new Contact(contact))
+        )
+      );
   }
 }

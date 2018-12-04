@@ -9,7 +9,9 @@ export const environment = {
     students: '/student/get_student.php',
     courses: '/course/get_course.php',
     contacts: '/contact/get_contact.php',
-    dailyTopics: '/dailyTopic/get_dailyTopic.php',
+    dailyTopics: '/daily_topic/get_daily_topic.php',
+    administrators: '/administrator/get_administrator.php',
+    persons: '/person/get_person.php',
   }
 };
 

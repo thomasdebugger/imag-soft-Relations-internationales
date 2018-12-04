@@ -28,8 +28,11 @@ export class CourseService {
   }
 
   getCourse(idCourse: string): Observable<Course> {
-    const data = this.http.get<object>(`${environment.ip_address}${environment.back.courses}?idCourse=${idCourse}`);
-
-    return of(new Course(data));
+    return this.http.get<object>(`${environment.ip_address}${environment.back.courses}?idCourse=${idCourse}`)
+      .pipe(
+        map(courses => courses['Course']
+          .map(course => new Course(course))
+        )
+      );
   }
 }

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { SimulatorService } from '../../services/simulator/simulator.service';
 import { Person } from 'src/app/models/person';
 import { Administrator } from 'src/app/models/administrator';
+import { AdministratorService } from 'src/app/services/back/administrator.service';
+import { PersonService } from 'src/app/services/back/person.service';
+import { Student } from 'src/app/models/student';
 
 @Component({
   selector: 'app-home',
@@ -11,24 +13,29 @@ import { Administrator } from 'src/app/models/administrator';
 })
 export class HomeComponent implements OnInit {
 
-  private user: Person;
-  private isAdministrator: any;
+  user: Person;
+  isAdministrator: any;
+  students: Student[];
 
-  constructor(private readonly router: Router, private readonly activatedRoute: ActivatedRoute, private simulator: SimulatorService) { }
+  constructor(private readonly router: Router,
+    private readonly activatedRoute: ActivatedRoute,
+    private readonly personService: PersonService) { }
 
   ngOnInit() {
-    console.log('Welcome to the home component !');
-    console.log(this.simulator.getObjectsSimulated());
+    let userAdmin: Administrator;
+    this.personService.getPerson('5').subscribe(resultPerson => {
+      const person = resultPerson;
+      person['idAdministrator'] = '5';
+      userAdmin = new Administrator(person);
+      // const userStudent = this.simulator.getStudents()[0];
 
-    const userAdmin = this.simulator.getAdministrators()[0];
-    const userStudent = this.simulator.getStudents()[0];
+      this.user = userAdmin;
+      this.isAdministrator = this.user instanceof Administrator;
+    });
 
-    this.user = userAdmin;
-    this.isAdministrator = this.user instanceof Administrator;
-
-
-
-    this.activatedRoute.data.subscribe(data => console.log(data));
+    this.activatedRoute.data.subscribe(data => {
+      this.students = data['studentsResolverResult']['students'];
+    });
   }
 
   navigateTo(route: string) {

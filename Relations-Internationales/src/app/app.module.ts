@@ -32,6 +32,9 @@ import { SendEmailDialogComponent } from './components/send-email-dialog/send-em
 import { StudentsResolver } from './resolvers/students.resolver';
 import { HttpClientModule } from '@angular/common/http';
 import { StudentResolver } from './resolvers/student.resolver';
+import { CoursesResolver } from './resolvers/courses.resolver';
+import { ContactsResolver } from './resolvers/contacts.resolver';
+import { DailyTopicsResolver } from './resolvers/dailyTopics.resolver';
 
 const appRoutes: Routes = [
     // default route
@@ -62,6 +65,9 @@ const appRoutes: Routes = [
     {
         resolve: {
             studentResolverResult: StudentResolver,
+            coursesResolverResult: CoursesResolver,
+            contactsResolverResult: ContactsResolver,
+            dailyTopicsResolverResult: DailyTopicsResolver,
         },
         path: 'student-details/:idPerson',
         component: StudentDetailsComponent
@@ -120,6 +126,9 @@ const appRoutes: Routes = [
         DatePipe,
         StudentsResolver,
         StudentResolver,
+        CoursesResolver,
+        ContactsResolver,
+        DailyTopicsResolver,
     ],
     bootstrap: [AppComponent],
     entryComponents: [AddCourseDialogComponent,

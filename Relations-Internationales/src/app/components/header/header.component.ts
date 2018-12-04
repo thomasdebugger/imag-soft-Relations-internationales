@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() userInput = new Input();
+  @Input() userInput;
 
   private currentLanguage: string;
   private languages: string[];
@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(this.userInput);
     this.currentLanguage = 'English';
     this.languages = ['English', 'Francais', 'Italiano'];
   }

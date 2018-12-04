@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { SimulatorService } from 'src/app/services/simulator/simulator.service';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Student } from 'src/app/models/student';
 import { MatTableDataSource, MatPaginator, MatDialogConfig, MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { AddStudentDialogComponent } from 'src/app/components/add-element-dialog/add-student-dialog/add-student-dialog.component';
+import { StudentService } from 'src/app/services/back/student.service';
 
 @Component({
   selector: 'app-administrator-side',
@@ -12,13 +12,15 @@ import { AddStudentDialogComponent } from 'src/app/components/add-element-dialog
 })
 export class AdministratorSideComponent implements OnInit {
 
+  @Input() studentsInput: Student[] = [];
+
   private archivedStudents: Student[];
   private nonArchivedStudents: Student[];
   private dataSource: MatTableDataSource<Student>;
   private displayedColumns: string[];
   private areDisplayArchived: boolean;
 
-  constructor(private simulator: SimulatorService, private router: Router, private dialog: MatDialog) { }
+  constructor(private router: Router, private dialog: MatDialog) { }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -34,13 +36,21 @@ export class AdministratorSideComponent implements OnInit {
   }
 
   initStudentsLists(): void {
-    this.simulator.getStudents().forEach(student => {
-      if (student.getIsArchived()) {
-        this.archivedStudents.push(student);
-      } else {
-        this.nonArchivedStudents.push(student);
-      }
+    console.log(this.studentsInput);
+    this.studentsInput.forEach(student => {
+      student.getIsArchived() ? this.archivedStudents.push(student) : this.nonArchivedStudents.push(student);
     });
+
+
+
+
+    // this.simulator.getStudents().forEach(student => {
+    //   if (student.getIsArchived()) {
+    //     this.archivedStudents.push(student);
+    //   } else {
+    //     this.nonArchivedStudents.push(student);
+    //   }
+    // });
   }
 
   archiveStudents(): void {
