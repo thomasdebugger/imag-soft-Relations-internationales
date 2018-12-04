@@ -68,7 +68,6 @@ export class StudentProfilePageComponent implements OnInit {
 
 
   openDetailCourse(course: String, ects: String, description: String){
-    console.log(course);
     const dialogCourse = this.dialog.open(CourseDetailModalComponent,{
       width:'90%',
       data: {courseName : course, ects : ects , description : description}
@@ -83,7 +82,6 @@ export class StudentProfilePageComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result.ects);
 
       const student1: Student = new Student('person001', 'person001@gmail.com', 'Jean', 'Dupont',
       new Date('22/06/1998'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000001',
@@ -106,8 +104,6 @@ export class StudentProfilePageComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result.ects);
-
       
       const student1: Student = new Student('person001', 'person001@gmail.com', 'Jean', 'Dupont',
       new Date('22/06/1998'), this.datePipe.transform(new Date(), 'dd-MM-yyyy'), '0610000001',

@@ -37,9 +37,6 @@ const appRoutes: Routes = [
     { path: 'login', component: LoginComponent }, // localhost/4200/login
     { path: 'student-profile-page', component: StudentProfilePageComponent }, // localhost/4200/student-profile-page
     { path: 'student-details/:idPerson', component: StudentDetailsComponent }, // localhost/4200/student-profile-page
-    { path: 'Add-Course-Modal', component: AddCourseModalComponent },
-    { path: 'AddContactModalComponent', component: AddContactModalComponent },
-    { path: 'AddPrivateLifeModalComponent', component: AddPrivateLifeModalComponent },
     { path: 'CourseDetailModalComponent', component: CourseDetailModalComponent }, // localhost/4200/student-profile-page
     { path: '**', component: ErrorComponent }, // localhost/4200/error
 ];
@@ -91,9 +88,14 @@ const appRoutes: Routes = [
         DatePipe,
     ],
     bootstrap: [AppComponent],
-    entryComponents: [AddCourseDialogComponent,
+    entryComponents: [
+        AddCourseDialogComponent,
         AddContactDialogComponent,
         AddDailyTopicDialogComponent,
-        AddStudentDialogComponent],
+        AddStudentDialogComponent,
+        AddPrivateLifeModalComponent,
+        AddContactModalComponent,
+        AddCourseModalComponent
+    ],
 })
 export class AppModule { }
