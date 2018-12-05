@@ -1,6 +1,80 @@
-<mat-list>
-  <mat-list-item>name : {{data.courseName}}</mat-list-item>
-  <mat-list-item>ects : {{data.ects}}</mat-list-item>
-  <mat-list-item>description : {{data.description}}</mat-list-item>
-  <mat-list-item>liste note : </mat-list-item>
-</mat-list>
+<div class="course-name">
+  <h2>{{ data.courseName }}</h2>
+</div>
+
+<div class="course-description">
+  <div class="title">
+    <h2>Description</h2>
+  </div>
+  <div class="content">
+    {{data.description}}
+  </div>
+</div>
+
+<div class="course-ects">
+  <div class="title">
+    <h2>ECTS</h2>
+  </div>
+  <div class="content">
+    {{data.ects}}
+  </div>
+</div>
+
+<div class="course-teachers">
+  <div class="title">
+    <h2>Teachers</h2>
+</div>
+
+<div class="content">
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <!-- Panel header -->
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h2>Expand the panel to see teacher</h2>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <!-- Teachers list -->
+    <mat-list role="list">
+      <!-- Column header -->
+      <mat-list-item class="header" role="listitem">
+        <h2 class="teacher-column">Full name</h2>
+        <h2 class="teacher-column">Email address</h2>
+      </mat-list-item>
+      <!-- Teacher content -->
+      <mat-list-item role="listitem">
+        <h2 class="teacher-column">{{ data.teacherFullName }}</h2>
+        <h2 class="teacher-column">{{ data.teacherEmail }}</h2>
+      </mat-list-item>
+    </mat-list>
+  </mat-expansion-panel>
+</div>
+
+
+<div class="course-marks">
+  <div class="title">
+    <h2>Marks</h2>
+  </div>
+</div> 
+<div class="content">
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <!-- Panel header -->
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h2>Expand the panel to see marks...</h2>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <!-- Marks list -->
+    <mat-list role="list">
+      <!-- Column header -->
+      <mat-list-item class="header" role="listitem">
+        <h2 class="mark-column">Mark</h2>
+        <h2 class="mark-column">Type</h2>
+      </mat-list-item>
+      <!-- Teacher content -->
+      <mat-list-item *ngFor="let mark of marks" role="listitem">
+        <h2 class="mark-column">{{ data.valueMark }}</h2>
+        <h2 class="mark-column">{{ data.typeMark }}</h2>
+      </mat-list-item>
+    </mat-list>
+  </mat-expansion-panel>
+</div>
