@@ -27,12 +27,28 @@ export class ContactService {
     );
   }
 
-  getContact(idContact: string): Observable<Contact> {
+  getContactById(idContact: string): Observable<Contact> {
     return this.http.get<object>(`${environment.ip_address}${environment.back.contacts}?idContact=${idContact}`)
       .pipe(
         map(contacts => contacts['Contact']
           .map(contact => new Contact(contact))
         )
       );
+  }
+
+  getContactsByStudent(idPerson: string): Observable<{
+    contacts: Contact[],
+    nbRows: number
+  }> {
+    return this.http.get<object>(`${environment.ip_address}${environment.back.contacts}?idPerson=${idPerson}`).pipe(
+      map(response => {
+        return {
+          contacts: response['Contact'].map((contact: Contact) => {
+            return new Contact(contact);
+          }),
+          nbRows: response['nombre']
+        };
+      })
+    );
   }
 }

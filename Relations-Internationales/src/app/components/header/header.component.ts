@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() userInput;
+  @Input() userInput = {};
 
   private currentLanguage: string;
   private languages: string[];

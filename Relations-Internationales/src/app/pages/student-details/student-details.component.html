@@ -62,11 +62,14 @@
           <h2 class="course-column"></h2>
         </mat-list-item>
         <!-- Courses content -->
-        <mat-list-item *ngFor="let course of coursesOfSelectedStudent" class="course-row" role="listitem" (click)="setSelectedCourse(course)">
+        <mat-list-item *ngFor="let course of coursesOfSelectedStudent; index as indexCourse" class="course-row" role="listitem"
+          (click)="setSelectedCourse(course)">
           <h2 class="course-column">{{ course.getName() }}</h2>
           <h2 class="course-column">{{ course.getEcts() }}</h2>
           <h2 class="course-column">{{ course.getDescription() }}</h2>
-          <h2 class="course-column">{{ course.getMarks()[course.getMarks().length -1].getValue() }}</h2>
+          <h2 class="course-column" *ngIf="marks[indexCourse].marks.length > 0">{{
+            marks[indexCourse].marks[marks[indexCourse].marks.length-1].getValueMark() }}</h2>
+          <h2 class="course-column" *ngIf="marks[indexCourse].marks.length === 0">/</h2>
           <button mat-icon-button class="course-column">
             <mat-icon class="trash-icon">delete_outline</mat-icon>
           </button>

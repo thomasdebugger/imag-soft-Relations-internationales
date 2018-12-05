@@ -9,6 +9,6 @@ export class CourseResolver implements Resolve<Course> {
     constructor(private readonly courseService: CourseService) { }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Course> {
-        return this.courseService.getCourse(route.params.idCourse);
+        return this.courseService.getCourseById(route.params.idCourse);
     }
 }

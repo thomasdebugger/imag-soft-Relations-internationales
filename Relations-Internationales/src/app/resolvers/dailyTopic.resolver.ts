@@ -9,6 +9,6 @@ export class DailyTopicResolver implements Resolve<DailyTopic> {
     constructor(private readonly dailyTopicService: DailyTopicsService) { }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<DailyTopic> {
-        return this.dailyTopicService.getDailyTopic(route.params.idDqilyTopic);
+        return this.dailyTopicService.getDailyTopicById(route.params.idDailyTopic);
     }
 }

@@ -8,7 +8,7 @@ export class Course {
     private description: string;
     private name: string;
     private ects: number;
-    private student: Student;
+    private idPerson: string;
     private teachers: { fullName: string, emailAddress: string }[];
     private polls: Poll[];
     private marks: Mark[];
@@ -33,20 +33,18 @@ export class Course {
         this.idCourse = course['idCourse'];
         this.description = course['description'];
         this.name = course['name'];
-        this.ects = course['ects'];
-        this.student = new Student(course['student']);
+        this.ects = parseInt(course['ects'], 10);
+        this.idPerson = course['idPerson'];
         this.teachers = course['teachers'] || [];
         this.polls = (course['polls'] || []).map(poll => new Poll(poll));
         this.marks = (course['marks'] || []).map(mark => new Mark(mark));
-
-        this.student.getCourses().push(this);
     }
 
     public getIdCourse(): string { return this.idCourse; }
     public getDescription(): string { return this.description; }
     public getName(): string { return this.name; }
     public getEcts(): number { return this.ects; }
-    public getStudent(): Student { return this.student; }
+    public getIdPerson(): string { return this.idPerson; }
     public getTeachers(): { fullName: string, emailAddress: string }[] { return this.teachers; }
     public getPolls(): Poll[] { return this.polls; }
     public getMarks(): Mark[] { return this.marks; }
@@ -55,7 +53,7 @@ export class Course {
     public setDescription(value: string): void { this.description = value; }
     public setName(value: string): void { this.name = value; }
     public setEcts(value: number): void { this.ects = value; }
-    public setStudent(value: Student): void { this.student = value; }
+    public setIdPerson(value: string): void { this.idPerson = value; }
     public setTeachers(value: { fullName: string, emailAddress: string }[]): void { this.teachers = value; }
     public setPolls(value: Poll[]): void { this.polls = value; }
     public setMarks(value: Mark[]): void { this.marks = value; }

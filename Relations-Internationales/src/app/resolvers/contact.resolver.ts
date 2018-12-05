@@ -9,6 +9,6 @@ export class ContactResolver implements Resolve<Contact> {
     constructor(private readonly contactService: ContactService) { }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Contact> {
-        return this.contactService.getContact(route.params.idContact);
+        return this.contactService.getContactById(route.params.idContact);
     }
 }

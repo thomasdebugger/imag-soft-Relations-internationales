@@ -3,7 +3,7 @@ import { Student } from './student';
 export class Contact {
 
     private idContact: string;
-    private student: Student;
+    private idPerson: string;
     private emailAddress: string;
     private firstName: string;
     private lastName: string;
@@ -28,19 +28,17 @@ export class Contact {
     constructor(data: object) {
         const contact = data || {};
         this.idContact = contact['idContact'];
-        this.student = new Student(contact['student']);
+        this.idPerson = contact['idPerson'];
         this.emailAddress = contact['emailAddress'];
         this.firstName = contact['firstName'];
         this.lastName = contact['lastName'];
         this.phoneNumber = contact['phoneNumber'];
         this.affiliation = contact['affiliation'];
         this.description = contact['description'];
-
-        this.student.getContacts().push(this);
     }
 
     public getIdContact(): string { return this.idContact; }
-    public getStudent(): Student { return this.student; }
+    public getIdPerson(): string { return this.idPerson; }
     public getEmailAddress(): string { return this.emailAddress; }
     public getFirstName(): string { return this.firstName; }
     public getLastName(): string { return this.lastName; }
@@ -49,7 +47,7 @@ export class Contact {
     public getDescription(): string { return this.description; }
 
     public setIdContact(value: string): void { this.idContact = value; }
-    public setIdStudent(value: Student): void { this.student = value; }
+    public setIdPerson(value: string): void { this.idPerson = value; }
     public setEmailAddress(value: string): void { this.emailAddress = value; }
     public setFirstName(value: string): void { this.firstName = value; }
     public setLastName(value: string): void { this.lastName = value; }

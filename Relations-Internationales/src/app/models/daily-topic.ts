@@ -6,7 +6,7 @@ export class DailyTopic {
     private dateDailyTopic: Date;
     private description: string;
     private name: string;
-    private student: Student;
+    private idPerson: string;
 
     // constructor(idDailyTopic: string, dateDailyTopic: Date, description: string, name: string, student: Student) {
     //     this.idDailyTopic = idDailyTopic;
@@ -24,20 +24,18 @@ export class DailyTopic {
         this.dateDailyTopic = new Date(dailyTopic['dateDailyTopic']);
         this.description = dailyTopic['description'];
         this.name = dailyTopic['name'];
-        this.student = new Student(dailyTopic['student']);
-
-        this.student.getDailyTopics().push(this);
+        this.idPerson = dailyTopic['idPerson'];
     }
 
     public getIdDailyTopic(): string { return this.idDailyTopic; }
     public getDateDailyTopic(): Date { return this.dateDailyTopic; }
     public getDescription(): string { return this.description; }
     public getName(): string { return this.name; }
-    public getStudent(): Student { return this.student; }
+    public getIdPerson(): string { return this.idPerson; }
 
     public setIdDailyTopic(value: string): void { this.idDailyTopic = value; }
     public setDateDailyTopic(value: Date): void { this.dateDailyTopic = value; }
     public setDescription(value: string): void { this.description = value; }
     public setName(value: string): void { this.name = value; }
-    public setStudent(value: Student): void { this.student = value; }
+    public setIdPerson(value: string): void { this.idPerson = value; }
 }

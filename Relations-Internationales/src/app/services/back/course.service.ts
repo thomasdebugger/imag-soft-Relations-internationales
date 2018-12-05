@@ -27,12 +27,28 @@ export class CourseService {
     );
   }
 
-  getCourse(idCourse: string): Observable<Course> {
+  getCourseById(idCourse: string): Observable<Course> {
     return this.http.get<object>(`${environment.ip_address}${environment.back.courses}?idCourse=${idCourse}`)
       .pipe(
         map(courses => courses['Course']
           .map(course => new Course(course))
         )
       );
+  }
+
+  getCoursesByStudent(idPerson: string): Observable<{
+    courses: Course[],
+    nbRows: number
+  }> {
+    return this.http.get<object>(`${environment.ip_address}${environment.back.courses}?idPerson=${idPerson}`).pipe(
+      map(response => {
+        return {
+          courses: response['Course'].map((course: Course) => {
+            return new Course(course);
+          }),
+          nbRows: response['nombre']
+        };
+      })
+    );
   }
 }

@@ -27,8 +27,8 @@ export class StudentService {
     );
   }
 
-  getStudent(idStudent: string): Observable<Student> {
-    return this.http.get<object>(`${environment.ip_address}${environment.back.students}?idStudent=${idStudent}`)
+  getStudent(idPerson: string): Observable<Student> {
+    return this.http.get<object>(`${environment.ip_address}${environment.back.students}?idPerson=${idPerson}`)
       .pipe(
         map(students => students['Student']
           .map(student => new Student(student))

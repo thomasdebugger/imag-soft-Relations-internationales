@@ -15,6 +15,6 @@ export class DailyTopicsResolver implements Resolve<{
         dailyTopics: DailyTopic[],
         nbRows: number
     }> {
-        return this.dailyTopicService.getDailyTopics();
+        return this.dailyTopicService.getDailyTopicsByStudent(route.params.idPerson);
     }
 }

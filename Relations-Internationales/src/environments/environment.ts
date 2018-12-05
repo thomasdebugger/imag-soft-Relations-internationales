@@ -11,7 +11,7 @@ export const environment = {
     contacts: '/contact/get_contact.php',
     dailyTopics: '/daily_topic/get_daily_topic.php',
     administrators: '/administrator/get_administrator.php',
-    persons: '/person/get_person.php',
+    marks: '/mark/get_mark.php',
   }
 };
 

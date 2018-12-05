@@ -27,8 +27,8 @@ export class AdministratorService {
     );
   }
 
-  getAdministrator(idAdministrator: string): Observable<Administrator> {
-    return this.http.get<object>(`${environment.ip_address}${environment.back.administrators}?idAdministrator=${idAdministrator}`)
+  getAdministrator(idPerson: string): Observable<Administrator> {
+    return this.http.get<object>(`${environment.ip_address}${environment.back.administrators}?idPerson=${idPerson}`)
       .pipe(
         map(administrators => administrators['Administrator']
           .map(administrator => new Administrator(administrator))
