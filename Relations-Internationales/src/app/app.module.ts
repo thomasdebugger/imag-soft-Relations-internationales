@@ -26,23 +26,22 @@ import { AddDailyTopicDialogComponent } from './components/add-element-dialog/ad
 import { HeaderComponent } from './components/header/header.component';
 import { DatePipe } from '@angular/common';
 import { AddStudentDialogComponent } from './components/add-element-dialog/add-student-dialog/add-student-dialog.component';
+import { AddCourseModalComponent } from './pages/add-course-modal/add-course-modal.component';
+import { CourseDetailModalComponent } from './pages/course-detail-modal/course-detail-modal.component';
+import { AddContactModalComponent } from './pages/add-contact-modal/add-contact-modal.component';
+import { AddPrivateLifeModalComponent } from './pages/add-private-life-modal/add-private-life-modal.component';
 import { CourseDetailsComponent } from './pages/course-details/course-details.component';
 import { AddPollDialogComponent } from './components/add-element-dialog/add-poll-dialog/add-poll-dialog.component';
 import { SendEmailDialogComponent } from './components/send-email-dialog/send-email-dialog.component';
 
 const appRoutes: Routes = [
-    // default route
-    { path: '', redirectTo: '/home', pathMatch: 'full' },
-    // localhost/4200/home
-    { path: 'home', component: HomeComponent },
-    // localhost/4200/login
-    { path: 'login', component: LoginComponent },
-    // localhost/4200/student-profile-page
-    { path: 'student-profile-page', component: StudentProfilePageComponent },
-    // localhost/4200/student-details/:idPerson
-    { path: 'student-details/:idPerson', component: StudentDetailsComponent },
-    // localhost/4200/error
-    { path: '**', component: ErrorComponent },
+    { path: '', redirectTo: '/home', pathMatch: 'full' }, // default route
+    { path: 'home', component: HomeComponent }, // localhost/4200/home
+    { path: 'login', component: LoginComponent }, // localhost/4200/login
+    { path: 'student-profile-page', component: StudentProfilePageComponent }, // localhost/4200/student-profile-page
+    { path: 'student-details/:idPerson', component: StudentDetailsComponent }, // localhost/4200/student-profile-page
+    { path: 'CourseDetailModalComponent', component: CourseDetailModalComponent }, // localhost/4200/student-profile-page
+    { path: '**', component: ErrorComponent }, // localhost/4200/error
 ];
 
 @NgModule({
@@ -63,6 +62,10 @@ const appRoutes: Routes = [
         CourseDetailsComponent,
         AddPollDialogComponent,
         SendEmailDialogComponent,
+        AddCourseModalComponent,
+        CourseDetailModalComponent,
+        AddContactModalComponent,
+        AddPrivateLifeModalComponent,
     ],
     imports: [
         BrowserModule,
@@ -91,11 +94,16 @@ const appRoutes: Routes = [
         DatePipe,
     ],
     bootstrap: [AppComponent],
-    entryComponents: [AddCourseDialogComponent,
+    entryComponents: [
+        AddCourseDialogComponent,
         AddContactDialogComponent,
         AddDailyTopicDialogComponent,
         AddStudentDialogComponent,
         AddPollDialogComponent,
-        SendEmailDialogComponent],
+        SendEmailDialogComponent,
+        AddPrivateLifeModalComponent,
+        AddContactModalComponent,
+        AddCourseModalComponent
+    ],
 })
 export class AppModule { }
