@@ -1,6 +1,6 @@
 <!-- Header banner -->
 <p *ngIf="isAdministrator">
-  <app-administrator-side></app-administrator-side>
+  <app-administrator-side [studentsInput]="students"></app-administrator-side>
 </p>
 
 <p *ngIf="!isAdministrator">

@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Student } from 'src/app/models/student';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { AddContactDialogComponent } from '../add-element-dialog/add-contact-dialog/add-contact-dialog.component';
 
 @Component({
   selector: 'app-send-email-dialog',

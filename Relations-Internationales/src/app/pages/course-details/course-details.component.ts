@@ -5,6 +5,10 @@ import { Course } from 'src/app/models/course';
 import { Student } from 'src/app/models/student';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { AddPollDialogComponent } from 'src/app/components/add-element-dialog/add-poll-dialog/add-poll-dialog.component';
+import { Mark } from 'src/app/models/mark';
+import { MarkService } from 'src/app/services/back/mark.service';
+import { PollService } from 'src/app/services/back/poll.service';
+import { Poll } from 'src/app/models/poll';
 
 @Component({
   selector: 'app-course-details',
@@ -13,28 +17,28 @@ import { AddPollDialogComponent } from 'src/app/components/add-element-dialog/ad
 })
 export class CourseDetailsComponent implements OnInit {
 
-  constructor(private simulator: SimulatorService,
-    private router: Router,
-    private dialog: MatDialog) { }
+  constructor(private readonly router: Router,
+    private readonly dialog: MatDialog,
+    private readonly markService: MarkService,
+    private readonly pollService: PollService) { }
 
   @Input() selectedStudent: Student;
   @Input() selectedCourse: Course;
   @Output() backToStudent: EventEmitter<boolean> = new EventEmitter();
-  // Simulator attributes
-  private simulatedCourses: Course[];
+
+  private marks: Mark[] = [];
+  private polls: Poll[] = [];
 
   ngOnInit() {
-    this.simulatedCourses = [];
-
-    this.simulator.getObjectsSimulated().forEach(lists => {
-      lists.forEach(object => {
-        if (object instanceof Course) { this.simulatedCourses.push(object); }
+    this.markService.getMarksByStudent(this.selectedCourse.getIdCourse(), this.selectedStudent.getIdPerson())
+      .subscribe(result => {
+        result['marks'].forEach(mark => this.marks.push(mark));
       });
-    });
 
-    this.simulatedCourses.forEach(simulatedCourse => {
-      if (simulatedCourse.getIdCourse() === this.selectedCourse.getIdCourse()) { this.selectedCourse = simulatedCourse; }
-    });
+    this.pollService.getPollsByStudent(this.selectedCourse.getIdCourse(), this.selectedStudent.getIdPerson())
+      .subscribe(result => {
+        result['polls'].forEach(poll => this.polls.push(poll));
+      });
   }
 
   goToStudent(): void {

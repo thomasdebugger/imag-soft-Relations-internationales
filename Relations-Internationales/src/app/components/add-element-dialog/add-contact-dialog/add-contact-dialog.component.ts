@@ -35,8 +35,16 @@ export class AddContactDialogComponent implements OnInit {
 
   createContact(): void {
     if (this.checkForm()) {
-      this.dialogRef.close(new Contact(null, this.student, this.emailAddress, this.firstName, this.lastName,
-        this.phoneNumber, this.affiliation, this.description));
+      this.dialogRef.close(new Contact({
+        idConact: null,
+        student: this.student,
+        emailAddress: this.emailAddress,
+        firstName: this.firstName,
+        lastName: this.lastName,
+        phoneNumber: this.phoneNumber,
+        affiliation: this.affiliation,
+        description: this.description
+      }));
     }
   }
 

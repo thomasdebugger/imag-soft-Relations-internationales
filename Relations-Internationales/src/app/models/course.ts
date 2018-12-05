@@ -1,6 +1,3 @@
-import { Poll } from './poll';
-import { Mark } from './mark';
-import { Student } from './student';
 
 export class Course {
 
@@ -8,41 +5,50 @@ export class Course {
     private description: string;
     private name: string;
     private ects: number;
-    private student: Student;
-    private teachers: { fullName: string, emailAddress: string }[];
-    private polls: Poll[];
-    private marks: Mark[];
+    private idPerson: string;
+    private teacherFullName: string;
+    private teacherEmail: string;
 
-    constructor(idCourse: string = null, name: string = null, description: string = null, ects: number = null,
-        teacher: { fullName: string, emailAddress: string }[] = [], student: Student = null, polls: Poll[] = [],
-        marks: Mark[] = []) {
-        this.idCourse = idCourse;
-        this.description = description;
-        this.name = name;
-        this.ects = ects;
-        this.student = student;
-        this.teachers = teacher;
-        this.polls = polls;
-        this.marks = marks;
+    // constructor(idCourse: string = null, name: string = null, description: string = null, ects: number = null,
+    //     teacher: { fullName: string, emailAddress: string }[] = [], student: Student = null, polls: Poll[] = [],
+    //     marks: Mark[] = []) {
+    //     this.idCourse = idCourse;
+    //     this.description = description;
+    //     this.name = name;
+    //     this.ects = ects;
+    //     this.student = student;
+    //     this.teachers = teacher;
+    //     this.polls = polls;
+    //     this.marks = marks;
 
-        this.student.getCourses().push(this);
+    //     this.student.getCourses().push(this);
+    // }
+
+    constructor(data?: object) {
+        const course = data || {};
+
+        this.idCourse = course['idCourse'];
+        this.description = course['description'];
+        this.name = course['name'];
+        this.ects = parseInt(course['ects'], 10);
+        this.idPerson = course['idPerson'];
+        this.teacherFullName = course['teacherFullName'];
+        this.teacherEmail = course['teacherEmail'];
     }
 
     public getIdCourse(): string { return this.idCourse; }
     public getDescription(): string { return this.description; }
     public getName(): string { return this.name; }
     public getEcts(): number { return this.ects; }
-    public getStudent(): Student { return this.student; }
-    public getTeachers(): { fullName: string, emailAddress: string }[] { return this.teachers; }
-    public getPolls(): Poll[] { return this.polls; }
-    public getMarks(): Mark[] { return this.marks; }
+    public getIdPerson(): string { return this.idPerson; }
+    public getTeacherFullName(): string { return this.teacherFullName; }
+    public getTeacherEmail(): string { return this.teacherEmail; }
 
     public setIdCourse(value: string): void { this.idCourse = value; }
     public setDescription(value: string): void { this.description = value; }
     public setName(value: string): void { this.name = value; }
     public setEcts(value: number): void { this.ects = value; }
-    public setStudent(value: Student): void { this.student = value; }
-    public setTeachers(value: { fullName: string, emailAddress: string }[]): void { this.teachers = value; }
-    public setPolls(value: Poll[]): void { this.polls = value; }
-    public setMarks(value: Mark[]): void { this.marks = value; }
+    public setIdPerson(value: string): void { this.idPerson = value; }
+    public setTeacherFullName(value: string): void { this.teacherFullName = value; }
+    public setTeacherEmail(value: string): void { this.teacherEmail = value; }
 }
