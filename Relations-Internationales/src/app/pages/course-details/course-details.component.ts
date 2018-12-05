@@ -13,28 +13,14 @@ import { AddPollDialogComponent } from 'src/app/components/add-element-dialog/ad
 })
 export class CourseDetailsComponent implements OnInit {
 
-  constructor(private simulator: SimulatorService,
-    private router: Router,
-    private dialog: MatDialog) { }
+  constructor(private readonly router: Router,
+    private readonly dialog: MatDialog) { }
 
   @Input() selectedStudent: Student;
   @Input() selectedCourse: Course;
   @Output() backToStudent: EventEmitter<boolean> = new EventEmitter();
-  // Simulator attributes
-  private simulatedCourses: Course[];
 
   ngOnInit() {
-    this.simulatedCourses = [];
-
-    this.simulator.getObjectsSimulated().forEach(lists => {
-      lists.forEach(object => {
-        if (object instanceof Course) { this.simulatedCourses.push(object); }
-      });
-    });
-
-    this.simulatedCourses.forEach(simulatedCourse => {
-      if (simulatedCourse.getIdCourse() === this.selectedCourse.getIdCourse()) { this.selectedCourse = simulatedCourse; }
-    });
   }
 
   goToStudent(): void {

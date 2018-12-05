@@ -27,8 +27,8 @@ export class Student {
         this.lastConnection = student['lastConnection'];
         this.phoneNumber = student['phoneNumber'];
         this.university = student['university'];
-        this.isEntrant = student['isEntrant'] === 1 ? true : false;
-        this.isArchived = student['isArchived'] === 1 ? true : false;
+        this.isEntrant = student['isEntrant'] === '1' ? true : false;
+        this.isArchived = student['isArchived'] === '1' ? true : false;
         this.isLearningAgreementValid = { value: false, date: null };
     }
 
