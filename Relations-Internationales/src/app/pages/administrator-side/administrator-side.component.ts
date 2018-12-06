@@ -80,7 +80,7 @@ export class AdministratorSideComponent implements OnInit {
     matDialogConfig.width = '60%';
 
     dialogRef = this.dialog.open(AddStudentDialogComponent, matDialogConfig);
-    dialogRef.afterClosed().subscribe(result => console.log('Course dialog closed : ', result));
+    dialogRef.afterClosed().subscribe(result => console.log('Student dialog closed : ', result));
   }
 
   setDataSource(): void {

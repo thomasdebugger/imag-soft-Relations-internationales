@@ -12,7 +12,6 @@ export class AddContactDialogComponent implements OnInit {
 
   firstName: string;
   lastName: string;
-  student: Student;
   emailAddress: string;
   phoneNumber: string;
   affiliation: string;
@@ -29,22 +28,23 @@ export class AddContactDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public injectedStudent: Student) { }
 
   ngOnInit() {
-    this.student = this.injectedStudent;
     this.isFormValid = true;
   }
 
   createContact(): void {
     if (this.checkForm()) {
-      this.dialogRef.close(new Contact({
-        idConact: null,
-        student: this.student,
+      const newContact = new Contact({
+        idContact: null,
+        idPerson: this.injectedStudent.getIdPerson(),
         emailAddress: this.emailAddress,
         firstName: this.firstName,
         lastName: this.lastName,
         phoneNumber: this.phoneNumber,
         affiliation: this.affiliation,
         description: this.description
-      }));
+      });
+
+      this.dialogRef.close(newContact);
     }
   }
 
