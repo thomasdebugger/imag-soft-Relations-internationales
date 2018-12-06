@@ -67,9 +67,9 @@
           <h2 class="course-column">{{ course.getName() }}</h2>
           <h2 class="course-column">{{ course.getEcts() }}</h2>
           <h2 class="course-column">{{ course.getDescription() }}</h2>
-          <h2 class="course-column" *ngIf="marks[indexCourse].marks.length > 0">{{
+          <h2 class="course-column" *ngIf="marks[indexCourse] && marks[indexCourse].marks.length > 0">{{
             marks[indexCourse].marks[marks[indexCourse].marks.length-1].getValueMark() }}</h2>
-          <h2 class="course-column" *ngIf="marks[indexCourse].marks.length === 0">/</h2>
+          <h2 class="course-column" *ngIf="marks[indexCourse] && marks[indexCourse].marks.length === 0">/</h2>
           <button mat-icon-button class="course-column">
             <mat-icon class="trash-icon">delete_outline</mat-icon>
           </button>
@@ -159,3 +159,10 @@
     <app-course-details [selectedStudent]="selectedStudent" [selectedCourse]="selectedCourse" (backToStudent)="setSelectedCourse(null)"></app-course-details>
   </mat-card-content>
 </mat-card>
+
+<div class="return-to-student-list">
+  <button mat-stroked-button color="primary" class="back-course-column" (click)="goToStudentList()">
+    <mat-icon class="back-icon">keyboard_backspace</mat-icon>
+    Back to student list
+  </button>
+</div>

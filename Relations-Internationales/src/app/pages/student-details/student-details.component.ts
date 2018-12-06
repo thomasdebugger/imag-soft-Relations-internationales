@@ -23,7 +23,8 @@ export class StudentDetailsComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
-    private readonly markService: MarkService) { }
+    private readonly markService: MarkService,
+    private readonly router: Router) { }
 
   private selectedStudent: Student;
   private coursesOfSelectedStudent: Course[];
@@ -112,5 +113,9 @@ export class StudentDetailsComponent implements OnInit {
     });
 
     return nbEcts;
+  }
+
+  goToStudentList(): void {
+    this.router.navigate(['/']);
   }
 }

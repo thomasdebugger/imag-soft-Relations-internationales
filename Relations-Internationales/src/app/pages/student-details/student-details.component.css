@@ -96,3 +96,8 @@ mat-card-header button {
 .courses-footer button {
     margin-left: auto;
 }
+
+.return-to-student-list {
+    margin-left: 2rem;
+    margin-top: 2rem;
+}
