@@ -25,7 +25,8 @@ export class AdministratorSideComponent implements OnInit {
 
   constructor(private readonly router: Router,
     private readonly dialog: MatDialog,
-    private readonly dailyTopicService: DailyTopicsService) { }
+    private readonly dailyTopicService: DailyTopicsService,
+    private readonly studentService: StudentService) { }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -80,7 +81,13 @@ export class AdministratorSideComponent implements OnInit {
     matDialogConfig.width = '60%';
 
     dialogRef = this.dialog.open(AddStudentDialogComponent, matDialogConfig);
-    dialogRef.afterClosed().subscribe(result => console.log('Student dialog closed : ', result));
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Student dialog closed : ', result);
+      this.studentService.addStudent(result).subscribe(resultAddStudent => {
+        this.nonArchivedStudents.push(new Student(result));
+        this.setDataSource();
+      });
+    });
   }
 
   setDataSource(): void {
