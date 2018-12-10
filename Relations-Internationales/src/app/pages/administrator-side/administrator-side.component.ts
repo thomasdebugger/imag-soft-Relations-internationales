@@ -22,6 +22,7 @@ export class AdministratorSideComponent implements OnInit {
   private displayedColumns: string[];
   private areDisplayArchived: boolean;
   private dailyTopics: { idStudent: string, dailyTopics: DailyTopic[] }[] = [];
+  private checkedStudents: string[];
 
   constructor(private readonly router: Router,
     private readonly dialog: MatDialog,
@@ -34,10 +35,11 @@ export class AdministratorSideComponent implements OnInit {
     this.areDisplayArchived = false;
     this.archivedStudents = [];
     this.nonArchivedStudents = [];
+    this.checkedStudents = [];
     this.initStudentsLists();
 
     this.setDataSource();
-    this.displayedColumns = ['Signal', 'Name', 'University', 'Last connection', 'Entrant/Leaving', 'OpenInNew'];
+    this.displayedColumns = ['Signal', 'Name', 'University', 'Last connection', 'Entrant/Leaving', 'OpenInNew', 'SelectRow'];
     this.dataSource.paginator = this.paginator;
   }
 
@@ -64,17 +66,19 @@ export class AdministratorSideComponent implements OnInit {
   }
 
   archiveStudents(): void {
-    console.log('Archive function clicked.');
+    if (this.areDisplayArchived) {
+      console.log('Desarchive function clicked.');
+    } else {
+      console.log('Archive function clicked.');
+    }
   }
 
   displayArchivedStudents() {
-    console.log('Display archived students function clicked.');
     this.areDisplayArchived = !this.areDisplayArchived;
     this.setDataSource();
   }
 
   addStudent() {
-    console.log('Add student function clicked.');
     let dialogRef = null;
     const matDialogConfig = new MatDialogConfig();
     matDialogConfig.autoFocus = true;
@@ -100,5 +104,13 @@ export class AdministratorSideComponent implements OnInit {
 
   goToStudentDetailsPage(studentId: string): void {
     this.router.navigate(['student-details/' + studentId]);
+  }
+
+  checkStudent(personId: string): void {
+    if (this.checkedStudents.indexOf(personId) !== -1) {
+      this.checkedStudents.splice(this.checkedStudents.indexOf(personId), 1);
+    } else {
+      this.checkedStudents.push(personId);
+    }
   }
 }
