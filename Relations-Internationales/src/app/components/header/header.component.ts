@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +13,6 @@ export class HeaderComponent implements OnInit {
   private currentLanguage: string;
   private languages: string[];
 
-  constructor() { }
 
   ngOnInit() {
     this.currentLanguage = 'English';
@@ -23,5 +23,13 @@ export class HeaderComponent implements OnInit {
     console.log('Set the language to key ', event);
     this.currentLanguage = event.value;
   }
+
+  constructor(private translate: TranslateService) {
+    translate.setDefaultLang('en');
+  }
+
+  switchLanguage(language: string) {
+    this.translate.use(language);
+}
 
 }

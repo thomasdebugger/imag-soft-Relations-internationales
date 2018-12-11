@@ -9,6 +9,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatExpansionModule } from '@angular/material/expansion';
 
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -41,6 +45,10 @@ const appRoutes: Routes = [
     { path: '**', component: ErrorComponent }, // localhost/4200/error
 ];
 
+export function HttpLoaderFactory(http: HttpClient) {
+    return new TranslateHttpLoader(http);
+  }
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -59,7 +67,8 @@ const appRoutes: Routes = [
         AddCourseModalComponent,
         CourseDetailModalComponent,
         AddContactModalComponent,
-        AddPrivateLifeModalComponent,
+        AddPrivateLifeModalComponent, 
+
     ],
     imports: [
         BrowserModule,
@@ -81,6 +90,15 @@ const appRoutes: Routes = [
         MatSelectModule,
         MatCheckboxModule,
         MatSlideToggleModule,
+        BrowserModule,
+        HttpClientModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        })
     ],
     providers: [
         DatabaseService,
