@@ -34,6 +34,7 @@ import { AddCourseModalComponent } from './pages/add-course-modal/add-course-mod
 import { CourseDetailModalComponent } from './pages/course-detail-modal/course-detail-modal.component';
 import { AddContactModalComponent } from './pages/add-contact-modal/add-contact-modal.component';
 import { AddPrivateLifeModalComponent } from './pages/add-private-life-modal/add-private-life-modal.component';
+import { SondageModalComponent } from './pages/sondage-modal/sondage-modal.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' }, // default route
@@ -67,7 +68,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         AddCourseModalComponent,
         CourseDetailModalComponent,
         AddContactModalComponent,
-        AddPrivateLifeModalComponent, 
+        AddPrivateLifeModalComponent,
+        SondageModalComponent, 
 
     ],
     imports: [
