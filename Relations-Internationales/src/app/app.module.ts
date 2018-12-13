@@ -70,6 +70,7 @@ const appRoutes: Routes = [
     // localhost/4200/student-details/:idPerson
     {
         resolve: {
+            loginResolverResult: LoginResolver,
             studentResolverResult: StudentResolver,
             coursesResolverResult: CoursesResolver,
             contactsResolverResult: ContactsResolver,

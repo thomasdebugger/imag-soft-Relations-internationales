@@ -12,6 +12,7 @@ import { SendEmailDialogComponent } from 'src/app/components/send-email-dialog/s
 import { MarkService } from 'src/app/services/back/mark.service';
 import { Mark } from 'src/app/models/mark';
 import * as jsPDF from 'jspdf';
+import { Administrator } from 'src/app/models/administrator';
 // import * as puppeteer from 'puppeteer';
 
 @Component({
@@ -26,33 +27,45 @@ export class StudentDetailsComponent implements OnInit {
     private readonly markService: MarkService,
     private readonly router: Router) { }
 
-  private selectedStudent: Student;
-  private coursesOfSelectedStudent: Course[];
-  private contactsOfSelectedStudent: Contact[];
-  private dailyTopicsOfSelectedStudent: DailyTopic[];
+  selectedStudent: Student;
+  coursesOfSelectedStudent: Course[];
+  contactsOfSelectedStudent: Contact[];
+  dailyTopicsOfSelectedStudent: DailyTopic[];
 
-  private marks: { idCourse: string; marks: Mark[] }[] = [];
-  private selectedCourse: Course;
+  marks: { idCourse: string; marks: Mark[] }[] = [];
+  selectedCourse: Course;
+  fullNameUser: string;
+  logs: { idPerson: string; type: string };
 
   ngOnInit() {
     this.coursesOfSelectedStudent = [];
     this.contactsOfSelectedStudent = [];
     this.dailyTopicsOfSelectedStudent = [];
 
-    this.activatedRoute.data.subscribe(data => {
-      console.log(data);
-      this.selectedStudent = data.studentResolverResult[0];
-      this.coursesOfSelectedStudent = data.coursesResolverResult['courses'];
-      this.contactsOfSelectedStudent = data.contactsResolverResult['contacts'];
-      this.dailyTopicsOfSelectedStudent = data.dailyTopicsResolverResult['dailyTopics'];
+    this.activatedRoute.queryParams.subscribe(queryParams => {
+      const personType = queryParams.type;
+      this.logs = { idPerson: queryParams.idPerson, type: 'administrator' };
 
-      this.coursesOfSelectedStudent.forEach(course => {
-        this.markService.getMarksByStudent(course.getIdCourse(), this.selectedStudent.getIdPerson())
-          .subscribe(result => {
-            const marksByCourse = { idCourse: course.getIdCourse(), marks: [] };
-            result['marks'].forEach(mark => marksByCourse.marks.push(mark));
-            this.marks.push(marksByCourse);
-          });
+      this.activatedRoute.data.subscribe(data => {
+        this.selectedStudent = data.studentResolverResult[0];
+        this.coursesOfSelectedStudent = data.coursesResolverResult['courses'];
+        this.contactsOfSelectedStudent = data.contactsResolverResult['contacts'];
+        this.dailyTopicsOfSelectedStudent = data.dailyTopicsResolverResult['dailyTopics'];
+
+        this.coursesOfSelectedStudent.forEach(course => {
+          this.markService.getMarksByStudent(course.getIdCourse(), this.selectedStudent.getIdPerson())
+            .subscribe(result => {
+              const marksByCourse = { idCourse: course.getIdCourse(), marks: [] };
+              result['marks'].forEach(mark => marksByCourse.marks.push(mark));
+              this.marks.push(marksByCourse);
+            });
+        });
+
+        const userConnected = (personType === 'administrator')
+          ? new Administrator(data['loginResolverResult'][0])
+          : new Student(data['loginResolverResult'][0]);
+
+        this.fullNameUser = userConnected.getFirstName() + ' ' + userConnected.getLastName();
       });
     });
   }
@@ -116,7 +129,7 @@ export class StudentDetailsComponent implements OnInit {
   }
 
   goToStudentList(): void {
-    this.router.navigate(['/']);
+    this.router.navigate(['home'], { queryParams: this.logs });
   }
 
   async generatePDF() {

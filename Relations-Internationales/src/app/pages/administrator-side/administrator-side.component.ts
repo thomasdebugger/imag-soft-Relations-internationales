@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Student } from 'src/app/models/student';
 import { MatTableDataSource, MatPaginator, MatDialogConfig, MatDialog } from '@angular/material';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AddStudentDialogComponent } from 'src/app/components/add-element-dialog/add-student-dialog/add-student-dialog.component';
 import { StudentService } from 'src/app/services/back/student.service';
 import { DailyTopicsService } from 'src/app/services/back/daily-topics.service';
@@ -27,9 +27,12 @@ export class AdministratorSideComponent implements OnInit {
   constructor(private readonly router: Router,
     private readonly dialog: MatDialog,
     private readonly dailyTopicService: DailyTopicsService,
-    private readonly studentService: StudentService) { }
+    private readonly studentService: StudentService,
+    private readonly activatedRoute: ActivatedRoute) { }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  logs: { idPerson: string; type: string };
 
   ngOnInit() {
     this.areDisplayArchived = false;
@@ -41,6 +44,10 @@ export class AdministratorSideComponent implements OnInit {
     this.setDataSource();
     this.displayedColumns = ['Signal', 'Name', 'University', 'Last connection', 'Entrant/Leaving', 'OpenInNew', 'SelectRow'];
     this.dataSource.paginator = this.paginator;
+
+    this.activatedRoute.queryParams.subscribe(queryParams => {
+      this.logs = { idPerson: queryParams.idPerson, type: 'administrator' };
+    });
   }
 
   initStudentsLists(): void {
@@ -103,7 +110,7 @@ export class AdministratorSideComponent implements OnInit {
   }
 
   goToStudentDetailsPage(studentId: string): void {
-    this.router.navigate(['student-details/' + studentId]);
+    this.router.navigate(['student-details/' + studentId], { queryParams: this.logs });
   }
 
   checkStudent(personId: string): void {
