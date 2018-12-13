@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SimulatorService } from 'src/app/services/simulator/simulator.service';
 import { Student } from 'src/app/models/student';
 import { Course } from 'src/app/models/course';
 import { Contact } from 'src/app/models/contact';
@@ -10,9 +9,10 @@ import { AddCourseDialogComponent } from 'src/app/components/add-element-dialog/
 import { AddContactDialogComponent } from 'src/app/components/add-element-dialog/add-contact-dialog/add-contact-dialog.component';
 import { AddDailyTopicDialogComponent } from 'src/app/components/add-element-dialog/add-daily-topic-dialog/add-daily-topic-dialog.component';
 import { SendEmailDialogComponent } from 'src/app/components/send-email-dialog/send-email-dialog.component';
-import { map } from 'rxjs/operators';
 import { MarkService } from 'src/app/services/back/mark.service';
 import { Mark } from 'src/app/models/mark';
+import * as jsPDF from 'jspdf';
+// import * as puppeteer from 'puppeteer';
 
 @Component({
   selector: 'app-student-details',
@@ -117,5 +117,14 @@ export class StudentDetailsComponent implements OnInit {
 
   goToStudentList(): void {
     this.router.navigate(['/']);
+  }
+
+  async generatePDF() {
+    // const browser = await puppeteer.launch();
+    // const page = await browser.newPage();
+
+    // await page.goto(this.router.url);
+    // await page.screenshot({ path: `${this.selectedStudent.getIdPerson()}_${new Date().toDateString()}` });
+    // await browser.close();
   }
 }

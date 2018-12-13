@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card id="contentPdf" #contentPdf>
   <!-- Header -->
   <mat-card-header>
     <div class="student-summary">
@@ -20,7 +20,7 @@
         <h2 class="university">{{ selectedStudent.getUniversity() }}</h2>
         <h3 *ngIf="selectedStudent.getIsEntrant()"> Entrant student</h3>
         <h3 *ngIf="!selectedStudent.getIsEntrant()"> Non entrant student</h3>
-        <button mat-stroked-button>Generate PDF</button>
+        <button mat-stroked-button (click)="generatePDF()">Generate PDF</button>
         <br />
         <button mat-stroked-button *ngIf="!selectedCourse" [class.redColor]="selectedStudent.getIsLearningAgreementValid().value"
           (click)="setIsLearningAgreementValid()">

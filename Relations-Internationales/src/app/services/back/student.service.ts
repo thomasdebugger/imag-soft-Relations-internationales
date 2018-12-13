@@ -11,6 +11,16 @@ import { map } from 'rxjs/operators';
 export class StudentService {
   constructor(private readonly http: HttpClient) { }
 
+  testLogs(login: string, passWord: string): Observable<any> {
+    return this.http.get<any>(
+      `${environment.ip_address}${environment.back.login_student}?loginStudent=${login}&passWordStudent=${passWord}`
+    ).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
+
   getStudents(): Observable<{
     students: Student[],
     nbRows: number

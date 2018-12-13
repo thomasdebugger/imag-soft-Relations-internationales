@@ -12,9 +12,20 @@ mat-form-field {
 }
 
 .password-field {
+	text-align: center;
     margin-bottom: 5%;
+}
+
+.username-field {
+	text-align: center;
 }
 
 .connection-button {
     width: 100%;
+}
+
+.login-error-message {
+	color: red;
+	margin-top: 2rem;
+	text-align: center;
 }

@@ -5,6 +5,7 @@ h1 {
 .languageAndLogs {
     float: right;
     margin-right: .625rem;
+    width: 15%;
 }
 
 mat-select {
@@ -21,4 +22,11 @@ mat-select {
 
 .header {
     display: grid;
+    padding: 1rem;
+}
+
+.logout-button {
+    width: 1.563rem;
+    color: #e73d2c;
+    margin-left: 3.5rem;
 }
