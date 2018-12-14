@@ -18,6 +18,14 @@
             <input matInput type="number" placeholder="Enter the ects" [(ngModel)]="ects" name="courseECTS">
           </mat-form-field>
         </div>
+        <!-- Field TeacherEmail -->
+        <div class="teacher-email-field">
+          <h3 [class.invalid-field]="!isFormValid && !isTeacherEmailValid">Teacher email address</h3>
+          <mat-form-field>
+            <input matInput type="email" placeholder="Enter the teacher'e email address" [(ngModel)]="teacherEmail"
+              name="courseTeacherEmail">
+          </mat-form-field>
+        </div>
       </div>
       <div class="column">
         <!-- Field Description -->
@@ -27,13 +35,11 @@
             <textarea matInput placeholder="Enter the description" [(ngModel)]="description" name="courseDescription"></textarea>
           </mat-form-field>
         </div>
-        <!-- Field Teachers -->
-        <div class="ects-field">
-          <h3 [class.invalid-field]="!isFormValid && !isTeachersValid">Teachers</h3>
+        <!-- Field TeacherFullName -->
+        <div class="teacher-full-name-field">
+          <h3 [class.invalid-field]="!isFormValid && !isTeacherFullNameValid">Teacher full name</h3>
           <mat-form-field>
-            <mat-select placeholder="Select the teachers" multiple [(ngModel)]="teachers" name="courseTeachers">
-              <mat-option *ngFor="let teacher of teachersToSelect">{{teacher}}</mat-option>
-            </mat-select>
+            <input matInput type="text" placeholder="Enter the teacher's full name" [(ngModel)]="teacherFullName" name="courseTeacherFullName">
           </mat-form-field>
         </div>
       </div>

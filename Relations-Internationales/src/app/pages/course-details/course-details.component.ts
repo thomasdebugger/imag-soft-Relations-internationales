@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { SimulatorService } from 'src/app/services/simulator/simulator.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Course } from 'src/app/models/course';
 import { Student } from 'src/app/models/student';
 import { MatDialogConfig, MatDialog } from '@angular/material';
@@ -9,6 +9,7 @@ import { Mark } from 'src/app/models/mark';
 import { MarkService } from 'src/app/services/back/mark.service';
 import { PollService } from 'src/app/services/back/poll.service';
 import { Poll } from 'src/app/models/poll';
+import { Administrator } from 'src/app/models/administrator';
 
 @Component({
   selector: 'app-course-details',
@@ -18,6 +19,7 @@ import { Poll } from 'src/app/models/poll';
 export class CourseDetailsComponent implements OnInit {
 
   constructor(private readonly router: Router,
+    private readonly activatedRoute: ActivatedRoute,
     private readonly dialog: MatDialog,
     private readonly markService: MarkService,
     private readonly pollService: PollService) { }

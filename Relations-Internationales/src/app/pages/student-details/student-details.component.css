@@ -1,6 +1,7 @@
 mat-card {
-    width: 85%;
+    width: 95%;
     margin: auto auto;
+    padding: 1%;
 }
 
 mat-expansion-panel {
@@ -95,4 +96,10 @@ mat-card-header button {
 
 .courses-footer button {
     margin-left: auto;
+}
+
+.return-to-student-list {
+    margin-left: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }

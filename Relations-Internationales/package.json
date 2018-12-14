@@ -23,7 +23,10 @@
     "@angular/platform-browser-dynamic": "^6.1.0",
     "@angular/router": "^6.1.0",
     "@ngx-translate/core": "^11.0.1",
+    "@types/puppeteer": "^1.11.1",
     "core-js": "^2.5.4",
+    "jspdf": "^1.4.1",
+    "puppeteer": "^1.11.0",
     "rxjs": "~6.2.0",
     "zone.js": "~0.8.26"
   },
@@ -34,6 +37,7 @@
     "@angular/language-service": "^6.1.0",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
+    "@types/jspdf": "^1.2.2",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.3.0",
     "jasmine-core": "~2.99.1",

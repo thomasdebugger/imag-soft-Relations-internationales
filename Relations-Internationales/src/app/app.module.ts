@@ -45,6 +45,7 @@ import { StudentResolver } from './resolvers/student.resolver';
 import { CoursesResolver } from './resolvers/courses.resolver';
 import { ContactsResolver } from './resolvers/contacts.resolver';
 import { DailyTopicsResolver } from './resolvers/dailyTopics.resolver';
+import { LoginResolver } from './resolvers/login.resolver';
 
 
 const appRoutes: Routes = [
@@ -57,6 +58,7 @@ const appRoutes: Routes = [
     // localhost/4200/home
     {
         resolve: {
+            loginResolverResult: LoginResolver,
             studentsResolverResult: StudentsResolver,
         },
         path: 'home',
@@ -81,6 +83,7 @@ const appRoutes: Routes = [
     // localhost/4200/student-details/:idPerson
     {
         resolve: {
+            loginResolverResult: LoginResolver,
             studentResolverResult: StudentResolver,
             coursesResolverResult: CoursesResolver,
             contactsResolverResult: ContactsResolver,
@@ -170,6 +173,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         CoursesResolver,
         ContactsResolver,
         DailyTopicsResolver,
+        LoginResolver,
     ],
     bootstrap: [AppComponent],
     entryComponents: [

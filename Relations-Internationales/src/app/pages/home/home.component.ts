@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Administrator } from 'src/app/models/administrator';
 import { AdministratorService } from 'src/app/services/back/administrator.service';
 import { Student } from 'src/app/models/student';
+import { StudentService } from 'src/app/services/back/student.service';
 
 @Component({
   selector: 'app-home',
@@ -11,32 +12,29 @@ import { Student } from 'src/app/models/student';
 })
 export class HomeComponent implements OnInit {
 
-  user: any;
+  userConnected: Student | Administrator;
   isAdministrator: any;
-  students: Student[];
+  students: Student[] = [];
+  fullNameUser: string;
 
-  constructor(private readonly router: Router,
-    private readonly activatedRoute: ActivatedRoute,
-    private readonly administratorService: AdministratorService) { }
+  constructor(private readonly activatedRoute: ActivatedRoute,
+    private readonly studentService: StudentService) { }
 
   ngOnInit() {
-    let userAdmin: Administrator;
-    this.administratorService.getAdministrator('5').subscribe(resultAdministrator => {
-      const person = resultAdministrator;
-      person['idPerson'] = '5';
-      userAdmin = new Administrator(person);
-      // const userStudent = this.simulator.getStudents()[0];
+    this.activatedRoute.queryParams.subscribe(queryParams => {
+      this.isAdministrator = (queryParams.type === 'administrator');
 
-      this.user = userAdmin;
-      this.isAdministrator = this.user instanceof Administrator;
+      this.activatedRoute.data.subscribe(data => {
+        this.userConnected = this.isAdministrator
+          ? new Administrator(data['loginResolverResult'][0])
+          : new Student(data['loginResolverResult'][0]);
+
+        this.students = this.userConnected instanceof Administrator
+          ? data['studentsResolverResult']['students']
+          : null;
+
+        this.fullNameUser = this.userConnected.getFirstName() + ' ' + this.userConnected.getLastName();
+      });
     });
-
-    this.activatedRoute.data.subscribe(data => {
-      this.students = data['studentsResolverResult']['students'];
-    });
-  }
-
-  navigateTo(route: string) {
-    this.router.navigate([route]);
   }
 }

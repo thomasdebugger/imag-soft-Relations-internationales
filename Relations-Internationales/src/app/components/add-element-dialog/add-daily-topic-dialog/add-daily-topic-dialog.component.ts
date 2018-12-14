@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Student } from 'src/app/models/student';
+import { DailyTopic } from 'src/app/models/daily-topic';
 
 @Component({
   selector: 'app-add-daily-topic-dialog',
@@ -9,7 +10,6 @@ import { Student } from 'src/app/models/student';
 })
 export class AddDailyTopicDialogComponent implements OnInit {
 
-  student: Student;
   description: string;
   name: string;
 
@@ -21,18 +21,20 @@ export class AddDailyTopicDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public injectedStudent: Student) { }
 
   ngOnInit() {
-    this.student = this.injectedStudent;
+    this.isFormValid = true;
   }
 
   createDailyTopic(): void {
     if (this.checkForm()) {
-      this.dialogRef.close({
+      const newDailyTopic = new DailyTopic({
         idDailyTopic: null,
         dateDailyTopic: new Date(),
         description: this.description,
         name: this.name,
-        student: this.student
+        idPerson: this.injectedStudent.getIdPerson()
       });
+
+      this.dialogRef.close(newDailyTopic);
     }
   }
 

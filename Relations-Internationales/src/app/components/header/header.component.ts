@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,14 +9,16 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() userInput = {};
+  @Input() fullNameUser: string;
 
-  private currentLanguage: string;
-  private languages: string[];
+  currentLanguage: string;
+  languages: string[];
 
+  constructor(private readonly router: Router, private translate: TranslateService) { 
+    translate.setDefaultLang('en');
+  }
 
   ngOnInit() {
-    console.log(this.userInput);
     this.currentLanguage = 'English';
     this.languages = ['English', 'Francais', 'Italiano'];
   }
@@ -25,12 +28,12 @@ export class HeaderComponent implements OnInit {
     this.currentLanguage = event.value;
   }
 
-  constructor(private translate: TranslateService) {
-    translate.setDefaultLang('en');
-  }
-
   switchLanguage(language: string) {
     this.translate.use(language);
 }
+
+  navigateTo(route: string) {
+    this.router.navigate([route]);
+  }
 
 }

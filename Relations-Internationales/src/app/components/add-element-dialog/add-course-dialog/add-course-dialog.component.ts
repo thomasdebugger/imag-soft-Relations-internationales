@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Student } from 'src/app/models/student';
+import { Course } from 'src/app/models/course';
 
 @Component({
   selector: 'app-add-course-dialog',
@@ -13,37 +14,35 @@ export class AddCourseDialogComponent implements OnInit {
   name: string;
   description: string;
   ects: number;
-  teachers: string[];
-  student: Student;
+  teacherFullName: string;
+  teacherEmail: string;
 
   isNameValid: boolean;
   isEctsValid: boolean;
-  isTeachersValid: boolean;
+  isTeacherFullNameValid: boolean;
+  isTeacherEmailValid: boolean;
   isFormValid: boolean;
 
   constructor(private dialogRef: MatDialogRef<AddCourseDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public injectedStudent: Student) { }
 
   ngOnInit() {
-    this.student = this.injectedStudent;
     this.isFormValid = true;
   }
 
   createCourse(): void {
     if (this.checkForm()) {
-      const teacherToReturn = [];
-      this.teachers.forEach(teacher => {
-        // Get the teachers
-      });
-
-      this.dialogRef.close({
+      const newCourse = new Course({
         idCourse: null,
         name: this.name,
         description: this.description,
         ects: this.ects,
-        teacher: teacherToReturn,
-        student: this.student
+        teacherFullName: this.teacherFullName,
+        teacherEmail: this.teacherEmail,
+        idPerson: this.injectedStudent.getIdPerson()
       });
+
+      this.dialogRef.close(newCourse);
     }
   }
 
@@ -64,10 +63,17 @@ export class AddCourseDialogComponent implements OnInit {
       this.isFormValid = false;
     }
 
-    if (this.teachers && this.teachers.length > 0) {
-      this.isTeachersValid = true;
+    if (this.teacherFullName && this.teacherFullName.length > 0) {
+      this.isTeacherFullNameValid = true;
     } else {
-      this.isTeachersValid = false;
+      this.isTeacherFullNameValid = false;
+      this.isFormValid = false;
+    }
+
+    if (this.teacherEmail && this.teacherEmail.length > 0) {
+      this.isTeacherEmailValid = true;
+    } else {
+      this.isTeacherEmailValid = false;
       this.isFormValid = false;
     }
 
