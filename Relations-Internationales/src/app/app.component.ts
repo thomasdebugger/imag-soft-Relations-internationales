@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { SimulatorService } from './services/simulator/simulator.service';
-import { Person } from './models/person';
+import { Administrator } from './models/administrator';
+import { AdministratorService } from './services/back/administrator.service';
 
 @Component({
   selector: 'app-root',
@@ -9,13 +9,13 @@ import { Person } from './models/person';
 })
 export class AppComponent {
   title = 'Relations-Internationales';
-  private user: Person;
+  private user: any;
 
-  constructor(private simulator: SimulatorService) {
+  constructor(private readonly administratorService: AdministratorService) {
     // Todo A faire avec un resolver
-    const userAdmin = this.simulator.getAdministrators()[0];
-    const userStudent = this.simulator.getStudents()[0];
-
-    this.user = userAdmin;
+    this.administratorService.getAdministrator('5').subscribe(resultPerson => {
+      // const userStudent = this.simulator.getStudents()[0];
+      this.user = new Administrator(resultPerson[0]);
+    });
   }
 }

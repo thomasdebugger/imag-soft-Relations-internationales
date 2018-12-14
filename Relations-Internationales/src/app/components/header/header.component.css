@@ -4,9 +4,21 @@ h1 {
 
 .languageAndLogs {
     float: right;
-    display: inline-block;
+    margin-right: .625rem;
+}
+
+mat-select {
+    width: 70% !important;
+}
+
+img {
+    float: left;
 }
 
 mat-select {
     width: 15%;
+}
+
+.header {
+    display: grid;
 }

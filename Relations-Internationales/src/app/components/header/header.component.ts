@@ -8,13 +8,14 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() userInput = new Input();
+  @Input() userInput = {};
 
   private currentLanguage: string;
   private languages: string[];
 
 
   ngOnInit() {
+    console.log(this.userInput);
     this.currentLanguage = 'English';
     this.languages = ['English', 'Francais', 'Italiano'];
   }

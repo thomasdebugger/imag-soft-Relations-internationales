@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { SimulatorService } from '../../services/simulator/simulator.service';
-import { Person } from 'src/app/models/person';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Administrator } from 'src/app/models/administrator';
+import { AdministratorService } from 'src/app/services/back/administrator.service';
+import { Student } from 'src/app/models/student';
 
 @Component({
   selector: 'app-home',
@@ -11,20 +11,29 @@ import { Administrator } from 'src/app/models/administrator';
 })
 export class HomeComponent implements OnInit {
 
-  private user: Person;
-  private isAdministrator: any;
+  user: any;
+  isAdministrator: any;
+  students: Student[];
 
-  constructor(private router: Router, private simulator: SimulatorService) { }
+  constructor(private readonly router: Router,
+    private readonly activatedRoute: ActivatedRoute,
+    private readonly administratorService: AdministratorService) { }
 
   ngOnInit() {
-    console.log('Welcome to the home component !');
-    console.log(this.simulator.getObjectsSimulated());
+    let userAdmin: Administrator;
+    this.administratorService.getAdministrator('5').subscribe(resultAdministrator => {
+      const person = resultAdministrator;
+      person['idPerson'] = '5';
+      userAdmin = new Administrator(person);
+      // const userStudent = this.simulator.getStudents()[0];
 
-    const userAdmin = this.simulator.getAdministrators()[0];
-    const userStudent = this.simulator.getStudents()[0];
+      this.user = userAdmin;
+      this.isAdministrator = this.user instanceof Administrator;
+    });
 
-    this.user = userAdmin;
-    this.isAdministrator = this.user instanceof Administrator;
+    this.activatedRoute.data.subscribe(data => {
+      this.students = data['studentsResolverResult']['students'];
+    });
   }
 
   navigateTo(route: string) {

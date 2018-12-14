@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SimulatorService } from 'src/app/services/simulator/simulator.service';
 import { Student } from 'src/app/models/student';
 import { Course } from 'src/app/models/course';
@@ -9,6 +9,10 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AddCourseDialogComponent } from 'src/app/components/add-element-dialog/add-course-dialog/add-course-dialog.component';
 import { AddContactDialogComponent } from 'src/app/components/add-element-dialog/add-contact-dialog/add-contact-dialog.component';
 import { AddDailyTopicDialogComponent } from 'src/app/components/add-element-dialog/add-daily-topic-dialog/add-daily-topic-dialog.component';
+import { SendEmailDialogComponent } from 'src/app/components/send-email-dialog/send-email-dialog.component';
+import { map } from 'rxjs/operators';
+import { MarkService } from 'src/app/services/back/mark.service';
+import { Mark } from 'src/app/models/mark';
 
 @Component({
   selector: 'app-student-details',
@@ -17,64 +21,37 @@ import { AddDailyTopicDialogComponent } from 'src/app/components/add-element-dia
 })
 export class StudentDetailsComponent implements OnInit {
 
-  constructor(private simulator: SimulatorService, private activatedRoute: ActivatedRoute, private dialog: MatDialog) { }
+  constructor(private activatedRoute: ActivatedRoute,
+    private dialog: MatDialog,
+    private readonly markService: MarkService) { }
 
   private selectedStudent: Student;
   private coursesOfSelectedStudent: Course[];
   private contactsOfSelectedStudent: Contact[];
   private dailyTopicsOfSelectedStudent: DailyTopic[];
-  // Simulator attributes
-  private simulatedStudents: Student[];
-  private simulatedCourses: Course[];
-  private simulatedContacts: Contact[];
-  private simulatedDailyTopics: DailyTopic[];
+
+  private marks: { idCourse: string; marks: Mark[] }[] = [];
+  private selectedCourse: Course;
 
   ngOnInit() {
-    this.simulatedStudents = [];
-    this.simulatedCourses = [];
-    this.simulatedContacts = [];
-    this.simulatedDailyTopics = [];
     this.coursesOfSelectedStudent = [];
     this.contactsOfSelectedStudent = [];
     this.dailyTopicsOfSelectedStudent = [];
 
-    this.simulator.getObjectsSimulated().forEach(lists => {
-      lists.forEach(object => {
-        if (object instanceof Student) { this.simulatedStudents.push(object); }
-        if (object instanceof Course) { this.simulatedCourses.push(object); }
-        if (object instanceof Contact) { this.simulatedContacts.push(object); }
-        if (object instanceof DailyTopic) { this.simulatedDailyTopics.push(object); }
-      });
-    });
+    this.activatedRoute.data.subscribe(data => {
+      console.log(data);
+      this.selectedStudent = data.studentResolverResult[0];
+      this.coursesOfSelectedStudent = data.coursesResolverResult['courses'];
+      this.contactsOfSelectedStudent = data.contactsResolverResult['contacts'];
+      this.dailyTopicsOfSelectedStudent = data.dailyTopicsResolverResult['dailyTopics'];
 
-    this.activatedRoute.params.subscribe(params => {
-      // TODO Faire getStudent(idPerson) depuis le back
-      // TODO Faire getCourses(idPerson) depuis le back
-
-      this.simulatedStudents.forEach(student => {
-        // Recuperation du student selectionne
-        if (student.getIdPerson() === params.idPerson) {
-          this.selectedStudent = student;
-
-          // Recuperation des cours du student selectionne
-          this.simulatedCourses.forEach(course => {
-            if (course.getStudent().getIdPerson() === this.selectedStudent.getIdPerson()) {
-              this.coursesOfSelectedStudent.push(course);
-            }
+      this.coursesOfSelectedStudent.forEach(course => {
+        this.markService.getMarksByStudent(course.getIdCourse(), this.selectedStudent.getIdPerson())
+          .subscribe(result => {
+            const marksByCourse = { idCourse: course.getIdCourse(), marks: [] };
+            result['marks'].forEach(mark => marksByCourse.marks.push(mark));
+            this.marks.push(marksByCourse);
           });
-          // Recuperation des contacts du student selectionne
-          this.simulatedContacts.forEach(contact => {
-            if (contact.getStudent().getIdPerson() === this.selectedStudent.getIdPerson()) {
-              this.contactsOfSelectedStudent.push(contact);
-            }
-          });
-          // Recuperation des contacts du student selectionne
-          this.simulatedDailyTopics.forEach(dailyTopic => {
-            if (dailyTopic.getStudent().getIdPerson() === this.selectedStudent.getIdPerson()) {
-              this.dailyTopicsOfSelectedStudent.push(dailyTopic);
-            }
-          });
-        }
       });
     });
   }
@@ -103,5 +80,37 @@ export class StudentDetailsComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => console.log('Contact dialog closed : ', result));
         break;
     }
+  }
+
+  displaySendEmailDialog(): void {
+    let dialogRef = null;
+    const matDialogConfig = new MatDialogConfig();
+    matDialogConfig.autoFocus = true;
+    matDialogConfig.width = '60%';
+    matDialogConfig.data = this.selectedStudent;
+
+    console.log('Send email dialog opened.');
+    dialogRef = this.dialog.open(SendEmailDialogComponent, matDialogConfig);
+    dialogRef.afterClosed().subscribe(result => console.log('Send email dialog closed : ', result));
+  }
+
+  setSelectedCourse(selectedCourse: Course): void {
+    this.selectedCourse = selectedCourse;
+  }
+
+  setIsLearningAgreementValid(): void {
+    this.selectedStudent.setIsLearningAgreementValid({
+      value: !this.selectedStudent.getIsLearningAgreementValid().value, date: new Date()
+    });
+  }
+
+  getNbEcts(): number {
+    let nbEcts = 0;
+
+    this.coursesOfSelectedStudent.forEach(courseOfSelectedStudent => {
+      nbEcts = nbEcts + courseOfSelectedStudent.getEcts();
+    });
+
+    return nbEcts;
   }
 }

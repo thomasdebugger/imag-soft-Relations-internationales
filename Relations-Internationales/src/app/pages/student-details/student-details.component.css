@@ -32,6 +32,10 @@ mat-expansion-panel {
     float: right;
 }
 
+.student-university button {
+    width: 100%;
+}
+
 .university {
     color: red;
 }
@@ -50,6 +54,10 @@ mat-expansion-panel {
     text-align: center;
 }
 
+.course-row {
+    cursor: pointer !important;
+}
+
 .dailyTopic-column {
     width: 25%;
     text-align: center;
@@ -62,4 +70,29 @@ mat-expansion-panel {
 
 .trash-icon {
     color: red;
+}
+
+mat-panel-description button {
+    margin-left: auto;
+    margin-right: 3%;
+}
+
+mat-card-header button {
+    margin-bottom: .625rem;
+}
+
+.redColor {
+    color: red;
+}
+
+.greenColor {
+    color: green;
+}
+
+.courses-footer {
+    display: flex
+}
+
+.courses-footer button {
+    margin-left: auto;
 }

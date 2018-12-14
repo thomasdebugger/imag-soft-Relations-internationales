@@ -34,16 +34,66 @@ import { AddCourseModalComponent } from './pages/add-course-modal/add-course-mod
 import { CourseDetailModalComponent } from './pages/course-detail-modal/course-detail-modal.component';
 import { AddContactModalComponent } from './pages/add-contact-modal/add-contact-modal.component';
 import { AddPrivateLifeModalComponent } from './pages/add-private-life-modal/add-private-life-modal.component';
+<<<<<<< HEAD
 import { SondageModalComponent } from './pages/sondage-modal/sondage-modal.component';
+=======
+import { CourseDetailsComponent } from './pages/course-details/course-details.component';
+import { AddPollDialogComponent } from './components/add-element-dialog/add-poll-dialog/add-poll-dialog.component';
+import { SendEmailDialogComponent } from './components/send-email-dialog/send-email-dialog.component';
+import { StudentsResolver } from './resolvers/students.resolver';
+import { HttpClientModule } from '@angular/common/http';
+import { StudentResolver } from './resolvers/student.resolver';
+import { CoursesResolver } from './resolvers/courses.resolver';
+import { ContactsResolver } from './resolvers/contacts.resolver';
+import { DailyTopicsResolver } from './resolvers/dailyTopics.resolver';
+>>>>>>> 87ad2e6933b8149614f0ba6b9321fda174b671d4
 
 const appRoutes: Routes = [
-    { path: '', redirectTo: '/home', pathMatch: 'full' }, // default route
-    { path: 'home', component: HomeComponent }, // localhost/4200/home
-    { path: 'login', component: LoginComponent }, // localhost/4200/login
-    { path: 'student-profile-page', component: StudentProfilePageComponent }, // localhost/4200/student-profile-page
-    { path: 'student-details/:idPerson', component: StudentDetailsComponent }, // localhost/4200/student-profile-page
-    { path: 'CourseDetailModalComponent', component: CourseDetailModalComponent }, // localhost/4200/student-profile-page
-    { path: '**', component: ErrorComponent }, // localhost/4200/error
+    // default route
+    {
+        path: '',
+        redirectTo: '/home',
+        pathMatch: 'full'
+    },
+    // localhost/4200/home
+    {
+        resolve: {
+            studentsResolverResult: StudentsResolver,
+        },
+        path: 'home',
+        component: HomeComponent,
+    },
+    // localhost/4200/login
+    {
+        path: 'login',
+        component: LoginComponent
+    },
+    // localhost/4200/student-profile-page
+    {
+        path: 'student-profile-page',
+        component: StudentProfilePageComponent
+    },
+    // localhost/4200/student-details/:idPerson
+    {
+        resolve: {
+            studentResolverResult: StudentResolver,
+            coursesResolverResult: CoursesResolver,
+            contactsResolverResult: ContactsResolver,
+            dailyTopicsResolverResult: DailyTopicsResolver,
+        },
+        path: 'student-details/:idPerson',
+        component: StudentDetailsComponent
+    },
+    // localhost/4200/student-profile-page
+    {
+        path: 'CourseDetailModalComponent',
+        component: CourseDetailModalComponent
+    },
+    // localhost/4200/error
+    {
+        path: '**',
+        component: ErrorComponent
+    },
 ];
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -65,6 +115,9 @@ export function HttpLoaderFactory(http: HttpClient) {
         AddDailyTopicDialogComponent,
         HeaderComponent,
         AddStudentDialogComponent,
+        CourseDetailsComponent,
+        AddPollDialogComponent,
+        SendEmailDialogComponent,
         AddCourseModalComponent,
         CourseDetailModalComponent,
         AddContactModalComponent,
@@ -75,6 +128,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     imports: [
         BrowserModule,
         RouterModule.forRoot(appRoutes),
+        HttpClientModule,
         // Angular Material modules
         BrowserAnimationsModule,
         FormsModule,
@@ -106,6 +160,11 @@ export function HttpLoaderFactory(http: HttpClient) {
         DatabaseService,
         SimulatorService,
         DatePipe,
+        StudentsResolver,
+        StudentResolver,
+        CoursesResolver,
+        ContactsResolver,
+        DailyTopicsResolver,
     ],
     bootstrap: [AppComponent],
     entryComponents: [
@@ -113,6 +172,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         AddContactDialogComponent,
         AddDailyTopicDialogComponent,
         AddStudentDialogComponent,
+        AddPollDialogComponent,
+        SendEmailDialogComponent,
         AddPrivateLifeModalComponent,
         AddContactModalComponent,
         AddCourseModalComponent

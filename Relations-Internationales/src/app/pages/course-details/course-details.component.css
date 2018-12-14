@@ -1,0 +1,39 @@
+.return-to-student-details {
+    margin-left: .625rem;
+}
+
+.back-icon {
+    margin-right: .625rem;
+}
+
+.course-name {
+    text-align: center;
+}
+
+.title {
+    width: 25%;
+    text-align: center;
+}
+
+.content {
+    width: 75%;
+    padding: 1rem;
+}
+
+.course-description, .course-ects, .course-teachers, .course-marks, .course-poll {
+    display: flex;
+    margin-block-end: 20px;
+}
+
+.teacher-column, .mark-column, .poll-column, .answer-column {
+    width: 50%;
+    text-align: center;
+}
+
+.header {
+    background-color: gainsboro;
+}
+
+.add-element-button {
+    margin-left: .625rem;
+}
