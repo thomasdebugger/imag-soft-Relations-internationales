@@ -1,4 +1,6 @@
 <!-- Header banner -->
+<app-header [fullNameUser]="fullNameUser"></app-header>
+
 <p *ngIf="isAdministrator">
   <app-administrator-side [studentsInput]="students"></app-administrator-side>
 </p>
@@ -6,5 +8,3 @@
 <p *ngIf="!isAdministrator">
   Student side.
 </p>
-
-<button mat-stroked-button color="primary" (click)="navigateTo('login')">Go to login page</button>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import { Student } from 'src/app/models/student';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-add-student-dialog',
@@ -9,35 +10,95 @@ import { Student } from 'src/app/models/student';
 })
 export class AddStudentDialogComponent implements OnInit {
 
-  private firstName: string;
-  private lastName: string;
-  private emailAddress: string;
-  private phoneNumber: string;
-  private university: string;
-  private isEntrant: boolean;
-  private birthDate: Date;
+  firstName: string;
+  emailAddress: string;
+  university: string;
+  isEntrant: number;
+  lastName: string;
+  phoneNumber: string;
+  birthDate: Date;
 
-  constructor(private dialogRef: MatDialogRef<AddStudentDialogComponent>) { }
+  isFormValid: boolean;
+  isFirstNameValid: boolean;
+  isEmailAddressValid: boolean;
+  isUniversityValid: boolean;
+  isEntrantValid: boolean;
+  isLastNameValid: boolean;
+  isPhoneNumberValid: boolean;
+  isBirthDateValid: boolean;
+
+  constructor(private readonly dialogRef: MatDialogRef<AddStudentDialogComponent>,
+    private readonly datePipe: DatePipe) { }
 
   ngOnInit() {
+    this.isFormValid = true;
   }
 
-  createDailyTopic(): void {
-    this.dialogRef.close(new Student({
-      idPerson: null,
-      emailAddress: this.emailAddress,
-      firstNAme: this.firstName,
-      lastName: this.lastName,
-      birthDate: this.birthDate,
-      lastConnexion: null,
-      phoneNumber: this.phoneNumber,
-      university: this.university,
-      isEntrant: this.isEntrant || false,
-      isArchived: false,
-      isLearningAgreementValid: {},
-      courses: [],
-      contacts: []
-    }));
+  createStudent(): void {
+    if (this.checkForm()) {
+      this.dialogRef.close({
+        idPerson: this.firstName + this.lastName + this.university,
+        emailAddress: this.emailAddress,
+        firstName: this.firstName,
+        lastName: this.lastName,
+        birthDate: this.datePipe.transform(this.birthDate, 'yyyy-MM-dd'),
+        lastConnection: null,
+        phoneNumber: this.phoneNumber,
+        university: this.university,
+        isEntrant: this.isEntrant ? 1 : 0,
+        isArchived: 0,
+        login: this.emailAddress,
+        passWord: 'root'
+      });
+    }
+  }
+
+  checkForm(): boolean {
+    this.isFormValid = true;
+
+    if (this.firstName && this.firstName.length > 0) {
+      this.isFirstNameValid = true;
+    } else {
+      this.isFirstNameValid = false;
+      this.isFormValid = false;
+    }
+
+    if (this.lastName && this.lastName.length > 0) {
+      this.isLastNameValid = true;
+    } else {
+      this.isLastNameValid = false;
+      this.isFormValid = false;
+    }
+
+    if (this.emailAddress && this.emailAddress.length > 0) {
+      this.isEmailAddressValid = true;
+    } else {
+      this.isEmailAddressValid = false;
+      this.isFormValid = false;
+    }
+
+    if (this.university && this.university.length > 0) {
+      this.isUniversityValid = true;
+    } else {
+      this.isUniversityValid = false;
+      this.isFormValid = false;
+    }
+
+    if (this.phoneNumber && this.phoneNumber.length > 0) {
+      this.isPhoneNumberValid = true;
+    } else {
+      this.isPhoneNumberValid = false;
+      this.isFormValid = false;
+    }
+
+    if (this.birthDate) {
+      this.isBirthDateValid = true;
+    } else {
+      this.isBirthDateValid = false;
+      this.isFormValid = false;
+    }
+
+    return this.isFormValid;
   }
 
 }

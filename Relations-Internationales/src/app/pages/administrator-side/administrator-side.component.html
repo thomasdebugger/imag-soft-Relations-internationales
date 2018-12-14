@@ -46,19 +46,27 @@
       </td>
     </ng-container>
 
+    <!-- SelectRow Column -->
+    <ng-container matColumnDef="SelectRow">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let student">
+        <mat-checkbox color="primary" (click)="checkStudent(student.getIdPerson())"></mat-checkbox>
+      </td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>
 
 <div class="bottomButtons">
-  <mat-slide-toggle class="example-margin" color="primary" (click)="displayArchivedStudents()">Display archived
+  <mat-slide-toggle color="primary" (click)="displayArchivedStudents()">Display archived
     students</mat-slide-toggle>
 
   <div class="leftButtons">
-    <button mat-stroked-button color="primary" (click)="archiveStudents()">Archive</button>
+    <button mat-stroked-button color="primary" (click)="archiveStudents()" [disabled]="checkedStudents.length === 0">Archive</button>
     <button mat-raised-button color="primary" (click)="addStudent()">Add student</button>
   </div>
 </div>

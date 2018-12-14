@@ -11,6 +11,12 @@ import { map } from 'rxjs/operators';
 export class AdministratorService {
   constructor(private readonly http: HttpClient) { }
 
+  testLogs(login: string, passWord: string): Observable<boolean> {
+    return this.http.get<boolean>(
+      `${environment.ip_address}${environment.back.login_administrator}?loginAdministrator=${login}&passWordAdministrator=${passWord}`
+    );
+  }
+
   getAdministrators(): Observable<{
     administrators: Administrator[],
     nbRows: number

@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Course } from 'src/app/models/course';
 import { Poll } from 'src/app/models/poll';
 import { PossibleAnswer } from 'src/app/models/possible-answer';
+import { Student } from 'src/app/models/student';
 
 @Component({
   selector: 'app-add-poll-dialog',
@@ -11,23 +12,29 @@ import { PossibleAnswer } from 'src/app/models/possible-answer';
 })
 export class AddPollDialogComponent implements OnInit {
 
-  course: Course;
   question: string;
   possibleAnswers: string[];
   possibleAnswer: string;
 
+  arePossibleAnswersValid: boolean;
+  isQuestionValid: boolean;
+  isFormValid: boolean;
+
   constructor(private dialogRef: MatDialogRef<AddPollDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public injectedCourse: Course) { }
+    @Inject(MAT_DIALOG_DATA) public injectedCourse: Course,
+    @Inject(MAT_DIALOG_DATA) public injectedStudent: Student) { }
 
   ngOnInit() {
-    this.course = this.injectedCourse;
     this.possibleAnswers = [];
     this.possibleAnswer = '';
+    this.isFormValid = true;
   }
 
   addPossibleAnswer() {
-    this.possibleAnswers.push(this.possibleAnswer);
-    this.possibleAnswer = '';
+    if (this.possibleAnswer.length > 0) {
+      this.possibleAnswers.push(this.possibleAnswer);
+      this.possibleAnswer = '';
+    }
   }
 
   removePossibleAnswer(index: number) {
@@ -35,22 +42,43 @@ export class AddPollDialogComponent implements OnInit {
   }
 
   createPoll(): void {
-    const newPoll = new Poll({
-      idPoll: null,
-      course: this.course,
-      status: 'sent',
-      question: this.question,
-      answer: null,
-      dateAnswer: null,
-      possibleAnswers: []
-    });
+    if (this.checkForm()) {
+      const newPoll = new Poll({
+        idCourse: this.injectedCourse.getIdCourse(),
+        idPerson: this.injectedStudent.getIdPerson(),
+        status: 'sent',
+        question: this.question,
+        answer: null,
+        dateAnswer: null
+      });
 
-    this.possibleAnswers.map(value => new PossibleAnswer({
-      idPossibleAnswer: null,
-      poll: newPoll,
-      value: value
-    }));
+      const answers = this.possibleAnswers.map(value => new PossibleAnswer({
+        idPossibleAnswer: null,
+        idPoll: newPoll.getIdPoll(),
+        value: value
+      }));
 
-    this.dialogRef.close(newPoll);
+      this.dialogRef.close({ poll: newPoll, answers: answers });
+    }
+  }
+
+  checkForm(): boolean {
+    this.isFormValid = true;
+
+    if (this.question && this.question.length > 0) {
+      this.isQuestionValid = true;
+    } else {
+      this.isQuestionValid = false;
+      this.isFormValid = false;
+    }
+
+    if (this.possibleAnswers && this.possibleAnswers.length > 0) {
+      this.arePossibleAnswersValid = true;
+    } else {
+      this.arePossibleAnswersValid = false;
+      this.isFormValid = false;
+    }
+
+    return this.isFormValid;
   }
 }

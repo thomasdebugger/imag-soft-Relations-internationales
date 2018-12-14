@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SimulatorService } from 'src/app/services/simulator/simulator.service';
 import { Student } from 'src/app/models/student';
 import { Course } from 'src/app/models/course';
 import { Contact } from 'src/app/models/contact';
@@ -10,9 +9,11 @@ import { AddCourseDialogComponent } from 'src/app/components/add-element-dialog/
 import { AddContactDialogComponent } from 'src/app/components/add-element-dialog/add-contact-dialog/add-contact-dialog.component';
 import { AddDailyTopicDialogComponent } from 'src/app/components/add-element-dialog/add-daily-topic-dialog/add-daily-topic-dialog.component';
 import { SendEmailDialogComponent } from 'src/app/components/send-email-dialog/send-email-dialog.component';
-import { map } from 'rxjs/operators';
 import { MarkService } from 'src/app/services/back/mark.service';
 import { Mark } from 'src/app/models/mark';
+import * as jsPDF from 'jspdf';
+import { Administrator } from 'src/app/models/administrator';
+// import * as puppeteer from 'puppeteer';
 
 @Component({
   selector: 'app-student-details',
@@ -23,35 +24,48 @@ export class StudentDetailsComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
-    private readonly markService: MarkService) { }
+    private readonly markService: MarkService,
+    private readonly router: Router) { }
 
-  private selectedStudent: Student;
-  private coursesOfSelectedStudent: Course[];
-  private contactsOfSelectedStudent: Contact[];
-  private dailyTopicsOfSelectedStudent: DailyTopic[];
+  selectedStudent: Student;
+  coursesOfSelectedStudent: Course[];
+  contactsOfSelectedStudent: Contact[];
+  dailyTopicsOfSelectedStudent: DailyTopic[];
 
-  private marks: { idCourse: string; marks: Mark[] }[] = [];
-  private selectedCourse: Course;
+  marks: { idCourse: string; marks: Mark[] }[] = [];
+  selectedCourse: Course;
+  fullNameUser: string;
+  logs: { idPerson: string; type: string };
 
   ngOnInit() {
     this.coursesOfSelectedStudent = [];
     this.contactsOfSelectedStudent = [];
     this.dailyTopicsOfSelectedStudent = [];
 
-    this.activatedRoute.data.subscribe(data => {
-      console.log(data);
-      this.selectedStudent = data.studentResolverResult[0];
-      this.coursesOfSelectedStudent = data.coursesResolverResult['courses'];
-      this.contactsOfSelectedStudent = data.contactsResolverResult['contacts'];
-      this.dailyTopicsOfSelectedStudent = data.dailyTopicsResolverResult['dailyTopics'];
+    this.activatedRoute.queryParams.subscribe(queryParams => {
+      const personType = queryParams.type;
+      this.logs = { idPerson: queryParams.idPerson, type: 'administrator' };
 
-      this.coursesOfSelectedStudent.forEach(course => {
-        this.markService.getMarksByStudent(course.getIdCourse(), this.selectedStudent.getIdPerson())
-          .subscribe(result => {
-            const marksByCourse = { idCourse: course.getIdCourse(), marks: [] };
-            result['marks'].forEach(mark => marksByCourse.marks.push(mark));
-            this.marks.push(marksByCourse);
-          });
+      this.activatedRoute.data.subscribe(data => {
+        this.selectedStudent = data.studentResolverResult[0];
+        this.coursesOfSelectedStudent = data.coursesResolverResult['courses'];
+        this.contactsOfSelectedStudent = data.contactsResolverResult['contacts'];
+        this.dailyTopicsOfSelectedStudent = data.dailyTopicsResolverResult['dailyTopics'];
+
+        this.coursesOfSelectedStudent.forEach(course => {
+          this.markService.getMarksByStudent(course.getIdCourse(), this.selectedStudent.getIdPerson())
+            .subscribe(result => {
+              const marksByCourse = { idCourse: course.getIdCourse(), marks: [] };
+              result['marks'].forEach(mark => marksByCourse.marks.push(mark));
+              this.marks.push(marksByCourse);
+            });
+        });
+
+        const userConnected = (personType === 'administrator')
+          ? new Administrator(data['loginResolverResult'][0])
+          : new Student(data['loginResolverResult'][0]);
+
+        this.fullNameUser = userConnected.getFirstName() + ' ' + userConnected.getLastName();
       });
     });
   }
@@ -112,5 +126,18 @@ export class StudentDetailsComponent implements OnInit {
     });
 
     return nbEcts;
+  }
+
+  goToStudentList(): void {
+    this.router.navigate(['home'], { queryParams: this.logs });
+  }
+
+  async generatePDF() {
+    // const browser = await puppeteer.launch();
+    // const page = await browser.newPage();
+
+    // await page.goto(this.router.url);
+    // await page.screenshot({ path: `${this.selectedStudent.getIdPerson()}_${new Date().toDateString()}` });
+    // await browser.close();
   }
 }

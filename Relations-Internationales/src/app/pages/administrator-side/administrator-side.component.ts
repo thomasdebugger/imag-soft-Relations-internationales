@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Student } from 'src/app/models/student';
 import { MatTableDataSource, MatPaginator, MatDialogConfig, MatDialog } from '@angular/material';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AddStudentDialogComponent } from 'src/app/components/add-element-dialog/add-student-dialog/add-student-dialog.component';
 import { StudentService } from 'src/app/services/back/student.service';
 import { DailyTopicsService } from 'src/app/services/back/daily-topics.service';
@@ -22,22 +22,32 @@ export class AdministratorSideComponent implements OnInit {
   private displayedColumns: string[];
   private areDisplayArchived: boolean;
   private dailyTopics: { idStudent: string, dailyTopics: DailyTopic[] }[] = [];
+  private checkedStudents: string[];
 
   constructor(private readonly router: Router,
     private readonly dialog: MatDialog,
-    private readonly dailyTopicService: DailyTopicsService) { }
+    private readonly dailyTopicService: DailyTopicsService,
+    private readonly studentService: StudentService,
+    private readonly activatedRoute: ActivatedRoute) { }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  logs: { idPerson: string; type: string };
 
   ngOnInit() {
     this.areDisplayArchived = false;
     this.archivedStudents = [];
     this.nonArchivedStudents = [];
+    this.checkedStudents = [];
     this.initStudentsLists();
 
     this.setDataSource();
-    this.displayedColumns = ['Signal', 'Name', 'University', 'Last connection', 'Entrant/Leaving', 'OpenInNew'];
+    this.displayedColumns = ['Signal', 'Name', 'University', 'Last connection', 'Entrant/Leaving', 'OpenInNew', 'SelectRow'];
     this.dataSource.paginator = this.paginator;
+
+    this.activatedRoute.queryParams.subscribe(queryParams => {
+      this.logs = { idPerson: queryParams.idPerson, type: 'administrator' };
+    });
   }
 
   initStudentsLists(): void {
@@ -63,24 +73,32 @@ export class AdministratorSideComponent implements OnInit {
   }
 
   archiveStudents(): void {
-    console.log('Archive function clicked.');
+    if (this.areDisplayArchived) {
+      console.log('Desarchive function clicked.');
+    } else {
+      console.log('Archive function clicked.');
+    }
   }
 
   displayArchivedStudents() {
-    console.log('Display archived students function clicked.');
     this.areDisplayArchived = !this.areDisplayArchived;
     this.setDataSource();
   }
 
   addStudent() {
-    console.log('Add student function clicked.');
     let dialogRef = null;
     const matDialogConfig = new MatDialogConfig();
     matDialogConfig.autoFocus = true;
     matDialogConfig.width = '60%';
 
     dialogRef = this.dialog.open(AddStudentDialogComponent, matDialogConfig);
-    dialogRef.afterClosed().subscribe(result => console.log('Course dialog closed : ', result));
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Student dialog closed : ', result);
+      this.studentService.addStudent(result).subscribe(resultAddStudent => {
+        this.nonArchivedStudents.push(new Student(result));
+        this.setDataSource();
+      });
+    });
   }
 
   setDataSource(): void {
@@ -92,6 +110,14 @@ export class AdministratorSideComponent implements OnInit {
   }
 
   goToStudentDetailsPage(studentId: string): void {
-    this.router.navigate(['student-details/' + studentId]);
+    this.router.navigate(['student-details/' + studentId], { queryParams: this.logs });
+  }
+
+  checkStudent(personId: string): void {
+    if (this.checkedStudents.indexOf(personId) !== -1) {
+      this.checkedStudents.splice(this.checkedStudents.indexOf(personId), 1);
+    } else {
+      this.checkedStudents.push(personId);
+    }
   }
 }
