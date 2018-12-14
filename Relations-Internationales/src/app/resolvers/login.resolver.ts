@@ -13,10 +13,10 @@ export class LoginResolver implements Resolve<any> {
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
         if (route.queryParams.type === 'student') {
             const studentToReturn = this.studentService.getStudent(route.queryParams.idPerson);
-            studentToReturn.subscribe(student => {
-                const lastConnection = new Date(student[0].lastConnection);
 
-                if (this.isDifferenceBetweenDateGreaterThanOneDay(lastConnection) > 1) {
+            studentToReturn.subscribe(student => {
+                if (!student[0]
+                    || this.isDifferenceBetweenDateGreaterThanOneDay(student[0].lastConnection) > 1) {
                     this.router.navigate(['/login']);
                     return null;
                 }
@@ -25,10 +25,10 @@ export class LoginResolver implements Resolve<any> {
         }
         if (route.queryParams.type === 'administrator') {
             const administratorToReturn = this.administratorService.getAdministrator(route.queryParams.idPerson);
-            administratorToReturn.subscribe(administrator => {
-                const lastConnection = new Date(administrator[0].lastConnection);
 
-                if (this.isDifferenceBetweenDateGreaterThanOneDay(lastConnection) > 1) {
+            administratorToReturn.subscribe(administrator => {
+                if (!administrator[0]
+                    || this.isDifferenceBetweenDateGreaterThanOneDay(administrator[0].lastConnection) > 1) {
                     this.router.navigate(['/login']);
                     return null;
                 }
