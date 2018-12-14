@@ -34,19 +34,18 @@ import { AddCourseModalComponent } from './pages/add-course-modal/add-course-mod
 import { CourseDetailModalComponent } from './pages/course-detail-modal/course-detail-modal.component';
 import { AddContactModalComponent } from './pages/add-contact-modal/add-contact-modal.component';
 import { AddPrivateLifeModalComponent } from './pages/add-private-life-modal/add-private-life-modal.component';
-<<<<<<< HEAD
+
 import { SondageModalComponent } from './pages/sondage-modal/sondage-modal.component';
-=======
+
 import { CourseDetailsComponent } from './pages/course-details/course-details.component';
 import { AddPollDialogComponent } from './components/add-element-dialog/add-poll-dialog/add-poll-dialog.component';
 import { SendEmailDialogComponent } from './components/send-email-dialog/send-email-dialog.component';
 import { StudentsResolver } from './resolvers/students.resolver';
-import { HttpClientModule } from '@angular/common/http';
 import { StudentResolver } from './resolvers/student.resolver';
 import { CoursesResolver } from './resolvers/courses.resolver';
 import { ContactsResolver } from './resolvers/contacts.resolver';
 import { DailyTopicsResolver } from './resolvers/dailyTopics.resolver';
->>>>>>> 87ad2e6933b8149614f0ba6b9321fda174b671d4
+
 
 const appRoutes: Routes = [
     // default route
@@ -70,7 +69,13 @@ const appRoutes: Routes = [
     },
     // localhost/4200/student-profile-page
     {
-        path: 'student-profile-page',
+        resolve: {
+            studentResolverResult: StudentResolver,
+            coursesResolverResult: CoursesResolver,
+            contactsResolverResult: ContactsResolver,
+            dailyTopicsResolverResult: DailyTopicsResolver,
+        },
+        path: 'student-profile-page/:idPerson',
         component: StudentProfilePageComponent
     },
     // localhost/4200/student-details/:idPerson

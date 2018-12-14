@@ -11,6 +11,8 @@ import { AddContactModalComponent } from '../add-contact-modal/add-contact-modal
 import { DailyTopic } from 'src/app/models/daily-topic';
 import { AddPrivateLifeModalComponent } from '../add-private-life-modal/add-private-life-modal.component';
 import { MarkService } from 'src/app/services/back/mark.service';
+import { ActivatedRoute } from '@angular/router';
+import { Mark } from 'src/app/models/mark';
 
 
 @Component({
@@ -26,25 +28,53 @@ export class StudentProfilePageComponent implements OnInit {
   affiliation: String = '';
   mail: String = '';
   title: String = '';
-  constructor(private simulator: SimulatorService, public dialog: MatDialog, private datePipe: DatePipe, private mark : MarkService) {
+
+  private selectedStudent: Student;
+  private coursesOfSelectedStudent: Course[];
+  private contactsOfSelectedStudent: Contact[];
+  private dailyTopicsOfSelectedStudent: DailyTopic[];
+
+  private marks: { idCourse: string; marks: Mark[] }[] = [];
+  private selectedCourse: Course;
+
+  constructor(private activatedRoute: ActivatedRoute, public dialog: MatDialog, private datePipe: DatePipe, private readonly markService: MarkService) {
   }
 
 
   ngOnInit() {
+    this.coursesOfSelectedStudent = [];
+    this.contactsOfSelectedStudent = [];
+    this.dailyTopicsOfSelectedStudent = [];
 
+    this.activatedRoute.data.subscribe(data => {
+      console.log(data);
+      this.selectedStudent = data.studentResolverResult[0];
+      this.coursesOfSelectedStudent = data.coursesResolverResult['courses'];
+      this.contactsOfSelectedStudent = data.contactsResolverResult['contacts'];
+      this.dailyTopicsOfSelectedStudent = data.dailyTopicsResolverResult['dailyTopics'];
+
+      this.coursesOfSelectedStudent.forEach(course => {
+        this.markService.getMarksByStudent(course.getIdCourse(), this.selectedStudent.getIdPerson())
+          .subscribe(result => {
+            const marksByCourse = { idCourse: course.getIdCourse(), marks: [] };
+            result['marks'].forEach(mark => marksByCourse.marks.push(mark));
+            this.marks.push(marksByCourse);
+          });
+      });
+    });
 
   }
 
   displayedColumnsMark: string[] = ['name', 'ects', 'description', 'commentaire'];
-  dataSourceMark: MatTableDataSource<Course> = new MatTableDataSource(this.mark.getMarksByStudent("1"););
+  //dataSourceMark: MatTableDataSource<Course> = new MatTableDataSource(this.mark.getMarksByStudent("1");
 
 
   displayedColumnsPL: string[] = ['name', 'dateDailyTopic', 'description'];
-  dataSourcePL: MatTableDataSource<DailyTopic> = new MatTableDataSource(this.simulator.getDailyTopics());
+  //dataSourcePL: MatTableDataSource<DailyTopic> = new MatTableDataSource(this.simulator.getDailyTopics());
 
 
   displayedColumnsContact: string[] = ['lastName', 'description', 'affiliation', 'emailAddress'];
-   dataSourceContact: MatTableDataSource<Contact> = new MatTableDataSource(this.simulator.getContacts());
+   //dataSourceContact: MatTableDataSource<Contact> = new MatTableDataSource(this.simulator.getContacts());
 
   addMark() {
     // var newData = this.dataSourceMark.data;
