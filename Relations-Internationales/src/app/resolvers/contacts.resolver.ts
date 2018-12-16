@@ -15,6 +15,6 @@ export class ContactsResolver implements Resolve<{
         contacts: Contact[],
         nbRows: number
     }> {
-        return this.contactService.getContactsByStudent(route.params.idPerson);
+        return this.contactService.getContactsByStudent(route.queryParams.idPerson);
     }
 }

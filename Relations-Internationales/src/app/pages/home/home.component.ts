@@ -4,6 +4,9 @@ import { Administrator } from 'src/app/models/administrator';
 import { AdministratorService } from 'src/app/services/back/administrator.service';
 import { Student } from 'src/app/models/student';
 import { StudentService } from 'src/app/services/back/student.service';
+import { Course } from 'src/app/models/course';
+import { Contact } from 'src/app/models/contact';
+import { DailyTopic } from 'src/app/models/daily-topic';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +20,12 @@ export class HomeComponent implements OnInit {
   students: Student[] = [];
   fullNameUser: string;
 
+  selectedStudent: Student;
+  coursesOfSelectedStudent: Course[];
+  contactsOfSelectedStudent: Contact[];
+  dailyTopicsOfSelectedStudent: DailyTopic[];
+
+
   constructor(private readonly activatedRoute: ActivatedRoute,
     private readonly studentService: StudentService) { }
 
@@ -25,6 +34,7 @@ export class HomeComponent implements OnInit {
       this.isAdministrator = (queryParams.type === 'administrator');
 
       this.activatedRoute.data.subscribe(data => {
+        console.log(data);
         this.userConnected = this.isAdministrator
           ? new Administrator(data['loginResolverResult'][0])
           : new Student(data['loginResolverResult'][0]);
@@ -34,6 +44,11 @@ export class HomeComponent implements OnInit {
           : null;
 
         this.fullNameUser = this.userConnected.getFirstName() + ' ' + this.userConnected.getLastName();
+
+        this.selectedStudent = data.studentResolverResult[0];
+        this.coursesOfSelectedStudent = data.coursesResolverResult['courses'];
+        this.contactsOfSelectedStudent = data.contactsResolverResult['contacts'];
+        this.dailyTopicsOfSelectedStudent = data.dailyTopicsResolverResult['dailyTopics'];
       });
     });
   }

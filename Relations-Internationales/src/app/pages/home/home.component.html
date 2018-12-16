@@ -6,5 +6,8 @@
 </p>
 
 <p *ngIf="!isAdministrator">
-  Student side.
+  <app-student-profile-page [selectedStudent]="selectedStudent" 
+                [coursesOfSelectedStudent]="coursesOfSelectedStudent" 
+                [contactsOfSelectedStudent]="contactsOfSelectedStudent" 
+                [dailyTopicsOfSelectedStudent]="dailyTopicsOfSelectedStudent"></app-student-profile-page>
 </p>

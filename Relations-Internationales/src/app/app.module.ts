@@ -60,6 +60,10 @@ const appRoutes: Routes = [
         resolve: {
             loginResolverResult: LoginResolver,
             studentsResolverResult: StudentsResolver,
+            studentResolverResult: StudentResolver,
+            coursesResolverResult: CoursesResolver,
+            contactsResolverResult: ContactsResolver,
+            dailyTopicsResolverResult: DailyTopicsResolver,
         },
         path: 'home',
         component: HomeComponent,
@@ -68,17 +72,6 @@ const appRoutes: Routes = [
     {
         path: 'login',
         component: LoginComponent
-    },
-    // localhost/4200/student-profile-page
-    {
-        resolve: {
-            studentResolverResult: StudentResolver,
-            coursesResolverResult: CoursesResolver,
-            contactsResolverResult: ContactsResolver,
-            dailyTopicsResolverResult: DailyTopicsResolver,
-        },
-        path: 'student-profile-page/:idPerson',
-        component: StudentProfilePageComponent
     },
     // localhost/4200/student-details/:idPerson
     {
