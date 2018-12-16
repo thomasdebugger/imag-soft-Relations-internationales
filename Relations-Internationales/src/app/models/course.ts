@@ -4,7 +4,7 @@ export class Course {
     private idCourse: string;
     private description: string;
     private name: string;
-    private ects: number;
+    private ects: string;
     private idPerson: string;
     private teacherFullName: string;
     private teacherEmail: string;
@@ -30,7 +30,8 @@ export class Course {
         this.idCourse = course['idCourse'];
         this.description = course['description'];
         this.name = course['name'];
-        this.ects = parseInt(course['ects'], 10);
+        //this.ects = parseInt(course['ects'], 10);
+        this.ects = course['ects'];
         this.idPerson = course['idPerson'];
         this.teacherFullName = course['teacherFullName'];
         this.teacherEmail = course['teacherEmail'];
@@ -39,7 +40,7 @@ export class Course {
     public getIdCourse(): string { return this.idCourse; }
     public getDescription(): string { return this.description; }
     public getName(): string { return this.name; }
-    public getEcts(): number { return this.ects; }
+    public getEcts(): string { return this.ects; }
     public getIdPerson(): string { return this.idPerson; }
     public getTeacherFullName(): string { return this.teacherFullName; }
     public getTeacherEmail(): string { return this.teacherEmail; }
@@ -47,7 +48,7 @@ export class Course {
     public setIdCourse(value: string): void { this.idCourse = value; }
     public setDescription(value: string): void { this.description = value; }
     public setName(value: string): void { this.name = value; }
-    public setEcts(value: number): void { this.ects = value; }
+    public setEcts(value: string): void { this.ects = value; }
     public setIdPerson(value: string): void { this.idPerson = value; }
     public setTeacherFullName(value: string): void { this.teacherFullName = value; }
     public setTeacherEmail(value: string): void { this.teacherEmail = value; }
