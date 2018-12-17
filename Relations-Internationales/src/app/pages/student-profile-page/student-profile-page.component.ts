@@ -13,6 +13,9 @@ import { AddPrivateLifeModalComponent } from '../add-private-life-modal/add-priv
 import { MarkService } from 'src/app/services/back/mark.service';
 import { ActivatedRoute } from '@angular/router';
 import { Mark } from 'src/app/models/mark';
+import { Poll } from 'src/app/models/poll';
+import { PollService } from 'src/app/services/back/poll.service';
+
 
 
 @Component({
@@ -29,7 +32,7 @@ export class StudentProfilePageComponent implements OnInit {
   mail: String = '';
   title: String = '';
 
-  
+  polls: Poll[] = [];
 
   @Input() selectedStudent: Student = null;
   @Input() coursesOfSelectedStudent: Course[] = [];
@@ -49,7 +52,7 @@ export class StudentProfilePageComponent implements OnInit {
   dataSourcePL: MatTableDataSource<DailyTopic> =null;
   dataSourceContact: MatTableDataSource<Contact> = null;
 
-  constructor(private activatedRoute: ActivatedRoute, public dialog: MatDialog, private datePipe: DatePipe, private readonly markService: MarkService) {
+  constructor(private activatedRoute: ActivatedRoute, public dialog: MatDialog, private datePipe: DatePipe, private readonly markService: MarkService, private readonly pollService: PollService) {
   }
 
 
@@ -76,11 +79,6 @@ export class StudentProfilePageComponent implements OnInit {
     
   }
 
-  
-
-
-  
-
   addMark() {
      var newData = this.dataSourceMark.data;
      const dialogRef = this.dialog.open(AddCourseModalComponent, {
@@ -106,10 +104,16 @@ export class StudentProfilePageComponent implements OnInit {
   }
 
 
-  openDetailCourse(course: String, ects: String, description: String) {
-    const dialogCourse = this.dialog.open(CourseDetailModalComponent, {
-      width: '90%',
-      data: { courseName: course, ects: ects, description: description }
+  openDetailCourse(courseName: string, ects: string, description: string,idCourse : string) {
+    console.log(idCourse);
+    this.pollService.getPollsByStudent(idCourse,this.selectedStudent.getIdPerson()).subscribe(pollResponse=>{
+      console.log(pollResponse.polls);
+      this.polls = pollResponse.polls;
+
+      const dialogCourse = this.dialog.open(CourseDetailModalComponent, {
+        width: '90%',
+        data: { courseName: courseName, ects: ects, description: description , polls : this.polls}
+      });
     });
   }
 

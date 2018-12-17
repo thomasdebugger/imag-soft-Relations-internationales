@@ -7,6 +7,7 @@ import { StudentService } from 'src/app/services/back/student.service';
 import { Course } from 'src/app/models/course';
 import { Contact } from 'src/app/models/contact';
 import { DailyTopic } from 'src/app/models/daily-topic';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -27,7 +28,7 @@ export class HomeComponent implements OnInit {
 
 
   constructor(private readonly activatedRoute: ActivatedRoute,
-    private readonly studentService: StudentService) { }
+    private readonly studentService: StudentService, private translate: TranslateService) { }
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe(queryParams => {
@@ -51,5 +52,9 @@ export class HomeComponent implements OnInit {
         this.dailyTopicsOfSelectedStudent = data.dailyTopicsResolverResult['dailyTopics'];
       });
     });
+  }
+
+  switchLanguage(event){
+   // this.translate.use(language);
   }
 }

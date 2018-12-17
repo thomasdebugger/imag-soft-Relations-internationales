@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
+import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-header',
@@ -10,6 +11,7 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   @Input() fullNameUser: string;
+  @Output() setLanguage = new EventEmitter<string>();
 
   currentLanguage: string;
   languages: string[];
@@ -19,8 +21,8 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.currentLanguage = 'English';
-    this.languages = ['English', 'Francais', 'Italiano'];
+    this.currentLanguage = 'en';
+    this.languages = ['en', 'fr'];
   }
 
   changeLanguage(event): void {
@@ -28,8 +30,10 @@ export class HeaderComponent implements OnInit {
     this.currentLanguage = event.value;
   }
 
-  switchLanguage(language: string) {
-    this.translate.use(language);
+  switchLanguage(event) {
+    this.translate.use(event.value);
+    this.setLanguage.emit(event.value);
+
 }
 
   navigateTo(route: string) {

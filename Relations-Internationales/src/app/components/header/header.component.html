@@ -5,8 +5,8 @@
     <div class="languageAndLogs">
       <h2 *ngIf="fullNameUser">Logged as {{fullNameUser}}</h2>
 
-      <mat-select [(value)]="currentLanguage" (selectionChange)="changeLanguage($event)">
-        <mat-option *ngFor="let language of languages" value="{{language}}">
+      <mat-select [(value)]="currentLanguage" (selectionChange)="switchLanguage($event)">
+        <mat-option *ngFor="let language of languages" value="{{language}}" >
           {{language}}
         </mat-option>
       </mat-select>
@@ -18,6 +18,4 @@
   <div>
     <h1 translate>Pedagogical workbook</h1>
   </div>
-  <button (click)="switchLanguage('en')">en</button>
-  <button (click)="switchLanguage('fr')">fr</button>
 </div>
