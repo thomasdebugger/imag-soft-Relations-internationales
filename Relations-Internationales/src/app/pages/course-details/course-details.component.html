@@ -6,30 +6,30 @@
 </div>
 
 <div class="course-name">
-  <h2>{{ selectedCourse.getName() }}</h2>
+  <h2 class="bold">{{ selectedCourse.getName() }}</h2>
 </div>
 
 <div class="course-description">
   <div class="title">
-    <h2>Description</h2>
+    <h2 class="bold">Description</h2>
   </div>
   <div class="content">
-    <input matInput type="text" placeholder="Enter the description" [(ngModel)]="selectedCourse.description" name="courseDescription">
+    <h2>{{ selectedCourse.description }}</h2>
   </div>
 </div>
 
 <div class="course-ects">
   <div class="title">
-    <h2>ECTS</h2>
+    <h2 class="bold">ECTS</h2>
   </div>
   <div class="content">
-    <input matInput type="number" placeholder="Enter the ECTS" [(ngModel)]="selectedCourse.ects" name="courseEcts">
+    <h2>{{ selectedCourse.ects }}</h2>
   </div>
 </div>
 
 <div class="course-teachers">
   <div class="title">
-    <h2>Teachers</h2>
+    <h2 class="bold">Teachers</h2>
   </div>
   <div class="content">
     <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
@@ -58,7 +58,7 @@
 
 <div class="course-marks">
   <div class="title">
-    <h2>Marks</h2>
+    <h2 class="bold">Marks</h2>
   </div>
   <div class="content">
     <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
@@ -87,7 +87,7 @@
 
 <div class="course-poll">
   <div class="title">
-    <h2>Polls</h2>
+    <h2 class="bold">Polls</h2>
   </div>
   <div class="content">
     <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
@@ -102,13 +102,13 @@
         <!-- Column header -->
         <mat-list-item class="header" role="listitem">
           <h2 class="poll-column">Title</h2>
-          <h2 class="poll-column">Status</h2>
+          <h2 class="poll-column" *ngIf="!poll.answer">Status</h2>
           <h2 class="poll-column" *ngIf="poll.answer">Answer</h2>
         </mat-list-item>
         <!-- Poll content -->
         <mat-list-item role="listitem">
           <h2 class="poll-column">{{ poll.question }}</h2>
-          <h2 class="poll-column">{{ poll.status }}</h2>
+          <h2 class="poll-column" *ngIf="!poll.answer">{{ poll.status }}</h2>
           <h2 class="poll-column" *ngIf="poll.answer">{{ poll.answer }}</h2>
         </mat-list-item>
       </mat-list>

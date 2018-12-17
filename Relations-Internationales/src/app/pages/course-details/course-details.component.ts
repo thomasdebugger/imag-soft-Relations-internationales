@@ -9,7 +9,6 @@ import { Mark } from 'src/app/models/mark';
 import { MarkService } from 'src/app/services/back/mark.service';
 import { PollService } from 'src/app/services/back/poll.service';
 import { Poll } from 'src/app/models/poll';
-import { Administrator } from 'src/app/models/administrator';
 
 @Component({
   selector: 'app-course-details',
@@ -56,6 +55,19 @@ export class CourseDetailsComponent implements OnInit {
 
     console.log('Poll dialog opened.');
     dialogRef = this.dialog.open(AddPollDialogComponent, matDialogConfig);
-    dialogRef.afterClosed().subscribe(result => console.log('Poll dialog closed : ', result));
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Poll dialog closed : ', result);
+      this.pollService.addPoll(result['poll']).subscribe(resultAddPoll => {
+        this.polls.push(result['poll']);
+
+        result['answers'].map(possibleAnswer => {
+          possibleAnswer['idPoll'] = resultAddPoll[0]['idPoll'];
+          this.pollService.addPossibleAnswer(possibleAnswer).subscribe();
+        });
+      });
+    },
+      err => {
+        console.log(err);
+      });
   }
 }

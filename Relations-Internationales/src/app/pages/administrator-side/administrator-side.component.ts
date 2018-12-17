@@ -94,10 +94,13 @@ export class AdministratorSideComponent implements OnInit {
     dialogRef = this.dialog.open(AddStudentDialogComponent, matDialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       console.log('Student dialog closed : ', result);
-      this.studentService.addStudent(result).subscribe(resultAddStudent => {
+      this.studentService.addStudent(result).subscribe(() => {
         this.nonArchivedStudents.push(new Student(result));
         this.setDataSource();
-      });
+      },
+        err => {
+          console.log(err);
+        });
     });
   }
 

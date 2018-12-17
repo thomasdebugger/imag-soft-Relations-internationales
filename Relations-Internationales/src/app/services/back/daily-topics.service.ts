@@ -15,7 +15,7 @@ export class DailyTopicsService {
     dailyTopics: DailyTopic[],
     nbRows: number
   }> {
-    return this.http.get<object>(`${environment.ip_address}${environment.back.dailyTopics}`).pipe(
+    return this.http.get<object>(`${environment.ip_address}${environment.back.get_dailyTopics}`).pipe(
       map(response => {
         return {
           dailyTopics: response['DailyTopic'].map((dailyTopic: DailyTopic) => {
@@ -28,7 +28,7 @@ export class DailyTopicsService {
   }
 
   getDailyTopicById(idDailyTopic: string): Observable<DailyTopic> {
-    return this.http.get<object>(`${environment.ip_address}${environment.back.dailyTopics}?idDailyTopic=${idDailyTopic}`)
+    return this.http.get<object>(`${environment.ip_address}${environment.back.get_dailyTopics}?idDailyTopic=${idDailyTopic}`)
       .pipe(
         map(dailyTopics => dailyTopics['DailyTopic']
           .map(dailyTopic => new DailyTopic(dailyTopic))
@@ -40,7 +40,7 @@ export class DailyTopicsService {
     dailyTopics: DailyTopic[],
     nbRows: number
   }> {
-    return this.http.get<object>(`${environment.ip_address}${environment.back.dailyTopics}?idPerson=${idPerson}`).pipe(
+    return this.http.get<object>(`${environment.ip_address}${environment.back.get_dailyTopics}?idPerson=${idPerson}`).pipe(
       map(response => {
         return {
           dailyTopics: response['DailyTopic'].map((dailyTopic: DailyTopic) => {
@@ -50,5 +50,14 @@ export class DailyTopicsService {
         };
       })
     );
+  }
+
+  addDailyTopic(dailyTopic: object): Observable<any> {
+    // tslint:disable-next-line:max-line-length
+    return this.http.get<object>(`${environment.ip_address}${environment.back.add_dailyTopic}?idPerson=${dailyTopic['idPerson']}&dateDailyTopic=${dailyTopic['dateDailyTopic']}&description=${dailyTopic['description']}&name=${dailyTopic['name']}`);
+  }
+
+  deleteDailyTopic(idDailyTopic: string): Observable<any> {
+    return this.http.get<object>(`${environment.ip_address}${environment.back.delete_dailyTopic}?idDailyTopic=${idDailyTopic}`);
   }
 }

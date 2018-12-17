@@ -16,7 +16,7 @@ export class LoginResolver implements Resolve<any> {
 
             studentToReturn.subscribe(student => {
                 if (!student[0]
-                    || this.isDifferenceBetweenDateGreaterThanOneDay(student[0].lastConnection) > 1) {
+                    || this.isDifferenceBetweenDateGreaterThanOneDay(new Date(student[0].lastConnection)) > 1) {
                     this.router.navigate(['/login']);
                     return null;
                 }
@@ -28,7 +28,7 @@ export class LoginResolver implements Resolve<any> {
 
             administratorToReturn.subscribe(administrator => {
                 if (!administrator[0]
-                    || this.isDifferenceBetweenDateGreaterThanOneDay(administrator[0].lastConnection) > 1) {
+                    || this.isDifferenceBetweenDateGreaterThanOneDay(new Date(administrator[0].lastConnection)) > 1) {
                     this.router.navigate(['/login']);
                     return null;
                 }

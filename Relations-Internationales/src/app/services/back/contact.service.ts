@@ -15,7 +15,7 @@ export class ContactService {
     contacts: Contact[],
     nbRows: number
   }> {
-    return this.http.get<object>(`${environment.ip_address}${environment.back.contacts}`).pipe(
+    return this.http.get<object>(`${environment.ip_address}${environment.back.get_contacts}`).pipe(
       map(response => {
         return {
           contacts: response['Contact'].map((contact: Contact) => {
@@ -28,7 +28,7 @@ export class ContactService {
   }
 
   getContactById(idContact: string): Observable<Contact> {
-    return this.http.get<object>(`${environment.ip_address}${environment.back.contacts}?idContact=${idContact}`)
+    return this.http.get<object>(`${environment.ip_address}${environment.back.get_contacts}?idContact=${idContact}`)
       .pipe(
         map(contacts => contacts['Contact']
           .map(contact => new Contact(contact))
@@ -40,7 +40,7 @@ export class ContactService {
     contacts: Contact[],
     nbRows: number
   }> {
-    return this.http.get<object>(`${environment.ip_address}${environment.back.contacts}?idPerson=${idPerson}`).pipe(
+    return this.http.get<object>(`${environment.ip_address}${environment.back.get_contacts}?idPerson=${idPerson}`).pipe(
       map(response => {
         return {
           contacts: response['Contact'].map((contact: Contact) => {
@@ -50,5 +50,14 @@ export class ContactService {
         };
       })
     );
+  }
+
+  addContact(contact: object): Observable<any> {
+    // tslint:disable-next-line:max-line-length
+    return this.http.get<object>(`${environment.ip_address}${environment.back.add_contact}?idPerson=${contact['idPerson']}&emailAddress=${contact['emailAddress']}&firstName=${contact['firstName']}&lastName=${contact['lastName']}&phoneNumber=${contact['phoneNumber']}&affiliation=${contact['affiliation']}&description=${contact['description']}`);
+  }
+
+  deleteContact(idContact: string): Observable<any> {
+    return this.http.get<object>(`${environment.ip_address}${environment.back.delete_contact}?idContact=${idContact}`);
   }
 }

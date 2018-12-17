@@ -13,6 +13,9 @@ import { MarkService } from 'src/app/services/back/mark.service';
 import { Mark } from 'src/app/models/mark';
 import * as jsPDF from 'jspdf';
 import { Administrator } from 'src/app/models/administrator';
+import { CourseService } from 'src/app/services/back/course.service';
+import { DailyTopicsService } from 'src/app/services/back/daily-topics.service';
+import { ContactService } from 'src/app/services/back/contact.service';
 // import * as puppeteer from 'puppeteer';
 
 @Component({
@@ -25,7 +28,10 @@ export class StudentDetailsComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
     private readonly markService: MarkService,
-    private readonly router: Router) { }
+    private readonly router: Router,
+    private readonly contactService: ContactService,
+    private readonly courseService: CourseService,
+    private readonly dailyTopicService: DailyTopicsService) { }
 
   selectedStudent: Student;
   coursesOfSelectedStudent: Course[];
@@ -79,19 +85,62 @@ export class StudentDetailsComponent implements OnInit {
 
     switch (dialogType) {
       case 'course':
-        console.log('Course dialog opened.');
         dialogRef = this.dialog.open(AddCourseDialogComponent, matDialogConfig);
-        dialogRef.afterClosed().subscribe(result => console.log('Course dialog closed : ', result));
+        dialogRef.afterClosed().subscribe(result => {
+          this.courseService.addCourse(result).subscribe(() => {
+
+            this.courseService.getCoursesByStudent(this.selectedStudent.getIdPerson())
+              .subscribe(coursesResult => {
+                this.coursesOfSelectedStudent = [];
+
+                coursesResult.courses.map(course => {
+                  this.coursesOfSelectedStudent.push(course);
+                  this.markService.getMarksByStudent(course.getIdCourse(), this.selectedStudent.getIdPerson())
+                    .subscribe(marks => {
+                      const marksByCourse = { idCourse: course.getIdCourse(), marks: [] };
+                      marks['marks'].forEach(mark => marksByCourse.marks.push(mark));
+                      this.marks.push(marksByCourse);
+                    });
+                });
+              });
+
+            this.marks.push({ idCourse: '', marks: [] });
+          });
+        });
         break;
       case 'dailyTopic':
-        console.log('DailyTopic dialog opened.');
         dialogRef = this.dialog.open(AddDailyTopicDialogComponent, matDialogConfig);
-        dialogRef.afterClosed().subscribe(result => console.log('DailyTopic dialog closed : ', result));
+        dialogRef.afterClosed().subscribe(result => {
+          this.dailyTopicService.addDailyTopic(result).subscribe(() => {
+
+            this.dailyTopicService.getDailyTopicsByStudent(this.selectedStudent.getIdPerson())
+              .subscribe(dailyTopicsResult => {
+                this.dailyTopicsOfSelectedStudent = [];
+
+                dailyTopicsResult.dailyTopics.map(dailyTopic => {
+                  this.dailyTopicsOfSelectedStudent.push(dailyTopic);
+                });
+              });
+
+          });
+        });
         break;
       case 'contact':
-        console.log('Contact dialog opened.');
         dialogRef = this.dialog.open(AddContactDialogComponent, matDialogConfig);
-        dialogRef.afterClosed().subscribe(result => console.log('Contact dialog closed : ', result));
+        dialogRef.afterClosed().subscribe(result => {
+          this.contactService.addContact(result).subscribe(() => {
+
+            this.contactService.getContactsByStudent(this.selectedStudent.getIdPerson())
+              .subscribe(contactsResult => {
+                this.contactsOfSelectedStudent = [];
+
+                contactsResult.contacts.map(contact => {
+                  this.contactsOfSelectedStudent.push(contact);
+                });
+              });
+
+          });
+        });
         break;
     }
   }
@@ -103,7 +152,6 @@ export class StudentDetailsComponent implements OnInit {
     matDialogConfig.width = '60%';
     matDialogConfig.data = this.selectedStudent;
 
-    console.log('Send email dialog opened.');
     dialogRef = this.dialog.open(SendEmailDialogComponent, matDialogConfig);
     dialogRef.afterClosed().subscribe(result => console.log('Send email dialog closed : ', result));
   }
@@ -139,5 +187,61 @@ export class StudentDetailsComponent implements OnInit {
     // await page.goto(this.router.url);
     // await page.screenshot({ path: `${this.selectedStudent.getIdPerson()}_${new Date().toDateString()}` });
     // await browser.close();
+  }
+
+  deleteCourse(idCourse: string) {
+    console.log(idCourse);
+    this.courseService.deleteCourse(idCourse).subscribe(() => {
+
+      this.courseService.getCoursesByStudent(this.selectedStudent.getIdPerson())
+        .subscribe(coursesResult => {
+          this.coursesOfSelectedStudent = [];
+
+          coursesResult.courses.map(course => {
+            this.coursesOfSelectedStudent.push(course);
+            this.markService.getMarksByStudent(course.getIdCourse(), this.selectedStudent.getIdPerson())
+              .subscribe(marks => {
+                const marksByCourse = { idCourse: course.getIdCourse(), marks: [] };
+                marks['marks'].forEach(mark => marksByCourse.marks.push(mark));
+                this.marks.push(marksByCourse);
+              });
+          });
+        });
+
+      this.marks.push({ idCourse: '', marks: [] });
+
+    });
+  }
+
+  deleteDailyTopic(idDailyTopic: string) {
+    console.log(idDailyTopic);
+    this.dailyTopicService.deleteDailyTopic(idDailyTopic).subscribe(() => {
+
+      this.dailyTopicService.getDailyTopicsByStudent(this.selectedStudent.getIdPerson())
+        .subscribe(dailyTopicsResult => {
+          this.dailyTopicsOfSelectedStudent = [];
+
+          dailyTopicsResult.dailyTopics.map(dailyTopic => {
+            this.dailyTopicsOfSelectedStudent.push(dailyTopic);
+          });
+        });
+
+    });
+  }
+
+  deleteContact(idContact: string) {
+    console.log(idContact);
+    this.contactService.deleteContact(idContact).subscribe(() => {
+
+      this.contactService.getContactsByStudent(this.selectedStudent.getIdPerson())
+        .subscribe(contactsResult => {
+          this.contactsOfSelectedStudent = [];
+
+          contactsResult.contacts.map(contact => {
+            this.contactsOfSelectedStudent.push(contact);
+          });
+        });
+
+    });
   }
 }

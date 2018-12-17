@@ -15,7 +15,7 @@ export class CourseService {
     courses: Course[],
     nbRows: number
   }> {
-    return this.http.get<object>(`${environment.ip_address}${environment.back.courses}`).pipe(
+    return this.http.get<object>(`${environment.ip_address}${environment.back.get_courses}`).pipe(
       map(response => {
         return {
           courses: response['Course'].map((course: Course) => {
@@ -28,7 +28,7 @@ export class CourseService {
   }
 
   getCourseById(idCourse: string): Observable<Course> {
-    return this.http.get<object>(`${environment.ip_address}${environment.back.courses}?idCourse=${idCourse}`)
+    return this.http.get<object>(`${environment.ip_address}${environment.back.get_courses}?idCourse=${idCourse}`)
       .pipe(
         map(courses => courses['Course']
           .map(course => new Course(course))
@@ -40,7 +40,7 @@ export class CourseService {
     courses: Course[],
     nbRows: number
   }> {
-    return this.http.get<object>(`${environment.ip_address}${environment.back.courses}?idPerson=${idPerson}`).pipe(
+    return this.http.get<object>(`${environment.ip_address}${environment.back.get_courses}?idPerson=${idPerson}`).pipe(
       map(response => {
         return {
           courses: response['Course'].map((course: Course) => {
@@ -50,5 +50,14 @@ export class CourseService {
         };
       })
     );
+  }
+
+  addCourse(course: object): Observable<any> {
+    // tslint:disable-next-line:max-line-length
+    return this.http.get<object>(`${environment.ip_address}${environment.back.add_course}?idPerson=${course['idPerson']}&description=${course['description']}&name=${course['name']}&ects=${course['ects']}&lastCommentary=${course['lastCommentary']}&teacherFullName=${course['teacherFullName']}&teacherEmail=${course['teacherEmail']}`);
+  }
+
+  deleteCourse(idCourse: string): Observable<any> {
+    return this.http.get<object>(`${environment.ip_address}${environment.back.delete_course}?idCourse=${idCourse}`);
   }
 }

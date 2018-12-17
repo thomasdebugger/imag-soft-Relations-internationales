@@ -36,8 +36,7 @@ export class AddStudentDialogComponent implements OnInit {
 
   createStudent(): void {
     if (this.checkForm()) {
-      this.dialogRef.close({
-        idPerson: this.firstName + this.lastName + this.university,
+      this.dialogRef.close(new Student({
         emailAddress: this.emailAddress,
         firstName: this.firstName,
         lastName: this.lastName,
@@ -49,7 +48,7 @@ export class AddStudentDialogComponent implements OnInit {
         isArchived: 0,
         login: this.emailAddress,
         passWord: 'root'
-      });
+      }));
     }
   }
 

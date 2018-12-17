@@ -15,7 +15,7 @@ export class MarkService {
     marks: Mark[],
     nbRows: number
   }> {
-    return this.http.get<object>(`${environment.ip_address}${environment.back.marks}`).pipe(
+    return this.http.get<object>(`${environment.ip_address}${environment.back.get_marks}`).pipe(
       map(response => {
         return {
           marks: response['Mark'].map((mark: Mark) => {
@@ -28,7 +28,7 @@ export class MarkService {
   }
 
   getMarkById(idMark: string): Observable<Mark> {
-    return this.http.get<object>(`${environment.ip_address}${environment.back.marks}?idMark=${idMark}`)
+    return this.http.get<object>(`${environment.ip_address}${environment.back.get_marks}?idMark=${idMark}`)
       .pipe(
         map(marks => marks['Mark']
           .map(mark => new Mark(mark))
@@ -40,7 +40,7 @@ export class MarkService {
     marks: Mark[],
     nbRows: number
   }> {
-    return this.http.get<object>(`${environment.ip_address}${environment.back.marks}?idCourse=${idCourse}&idPerson=${idPerson}`).pipe(
+    return this.http.get<object>(`${environment.ip_address}${environment.back.get_marks}?idCourse=${idCourse}&idPerson=${idPerson}`).pipe(
       map(response => {
         return {
           marks: response['Mark'].map((mark: Mark) => {
@@ -50,5 +50,10 @@ export class MarkService {
         };
       })
     );
+  }
+
+  addMark(mark: object): Observable<any> {
+    // tslint:disable-next-line:max-line-length
+    return this.http.get<object>(`${environment.ip_address}${environment.back.add_mark}?idPerson=${mark['idPerson']}&idCourse=${mark['idCourse']}&typeMark=${mark['typeMark']}&valueMark=${mark['valueMark']}`);
   }
 }

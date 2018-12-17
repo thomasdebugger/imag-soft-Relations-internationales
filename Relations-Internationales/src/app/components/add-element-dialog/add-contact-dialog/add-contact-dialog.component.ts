@@ -34,7 +34,6 @@ export class AddContactDialogComponent implements OnInit {
   createContact(): void {
     if (this.checkForm()) {
       const newContact = new Contact({
-        idContact: null,
         idPerson: this.injectedStudent.getIdPerson(),
         emailAddress: this.emailAddress,
         firstName: this.firstName,

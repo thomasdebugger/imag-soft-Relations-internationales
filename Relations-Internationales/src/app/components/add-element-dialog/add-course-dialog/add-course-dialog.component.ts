@@ -33,7 +33,6 @@ export class AddCourseDialogComponent implements OnInit {
   createCourse(): void {
     if (this.checkForm()) {
       const newCourse = new Course({
-        idCourse: null,
         name: this.name,
         description: this.description,
         ects: this.ects,

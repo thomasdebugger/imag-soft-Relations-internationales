@@ -13,7 +13,6 @@ export class LoginService {
 
   logIn(login: string, passWord: string) {
     this.studentService.testLogs(login, passWord).subscribe(resultStudent => {
-      console.log(resultStudent['result']);
       if (resultStudent['result'] !== 0) {
         return 'student';
       } else {

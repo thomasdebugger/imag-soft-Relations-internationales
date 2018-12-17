@@ -7,15 +7,35 @@ export const environment = {
   ip_address: '//127.0.0.1',
   back: {
     login_student: '/student/login_student.php',
-    get_students: '/student/get_student.php',
-    add_students: '/student/add_student.php',
-    courses: '/course/get_course.php',
-    contacts: '/contact/get_contact.php',
-    dailyTopics: '/daily_topic/get_daily_topic.php',
     login_administrator: '/administrator/login_administrator.php',
-    administrators: '/administrator/get_administrator.php',
-    marks: '/mark/get_mark.php',
-    polls: '/poll/get_poll.php',
+
+    get_administrators: '/administrator/get_administrator.php',
+
+    get_students: '/student/get_student.php',
+    add_student: '/student/add_student.php',
+    delete_student: '/student/delete_student.php',
+
+    get_courses: '/course/get_course.php',
+    add_course: '/course/add_course.php',
+    delete_course: '/course/delete_course.php',
+
+    get_contacts: '/contact/get_contact.php',
+    add_contact: '/contact/add_contact.php',
+    delete_contact: '/contact/delete_contact.php',
+
+    get_dailyTopics: '/daily_topic/get_daily_topic.php',
+    add_dailyTopic: '/daily_topic/add_daily_topic.php',
+    delete_dailyTopic: '/daily_topic/delete_daily_topic.php',
+
+    get_marks: '/mark/get_mark.php',
+    add_mark: '/mark/add_mark.php',
+    delete_mark: '/mark/delete_mark.php',
+
+    get_polls: '/poll/get_poll.php',
+    add_poll: '/poll/add_poll.php',
+    delete_poll: '/poll/delete_poll.php',
+
+    add_possibleAnswer: '/possibleAnswer/add_possibleAnswer.php',
   }
 };
 

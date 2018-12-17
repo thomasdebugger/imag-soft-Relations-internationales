@@ -15,7 +15,7 @@ export class PollService {
     polls: Poll[],
     nbRows: number
   }> {
-    return this.http.get<object>(`${environment.ip_address}${environment.back.polls}`).pipe(
+    return this.http.get<object>(`${environment.ip_address}${environment.back.get_polls}`).pipe(
       map(response => {
         return {
           polls: response['Poll'].map((poll: Poll) => {
@@ -28,7 +28,7 @@ export class PollService {
   }
 
   getPollById(idPoll: string): Observable<Poll> {
-    return this.http.get<object>(`${environment.ip_address}${environment.back.polls}?idPoll=${idPoll}`)
+    return this.http.get<object>(`${environment.ip_address}${environment.back.get_polls}?idPoll=${idPoll}`)
       .pipe(
         map(polls => polls['Poll']
           .map(poll => new Poll(poll))
@@ -40,7 +40,7 @@ export class PollService {
     polls: Poll[],
     nbRows: number
   }> {
-    return this.http.get<object>(`${environment.ip_address}${environment.back.polls}?idCourse=${idCourse}&idPerson=${idPerson}`).pipe(
+    return this.http.get<object>(`${environment.ip_address}${environment.back.get_polls}?idCourse=${idCourse}&idPerson=${idPerson}`).pipe(
       map(response => {
         return {
           polls: response['Poll'].map((poll: Poll) => {
@@ -50,5 +50,15 @@ export class PollService {
         };
       })
     );
+  }
+
+  addPoll(poll: object): Observable<any> {
+    // tslint:disable-next-line:max-line-length
+    return this.http.get<object>(`${environment.ip_address}${environment.back.add_poll}?question=${poll['question']}&idCourse=${poll['idCourse']}&idPerson=${poll['idPerson']}`);
+  }
+
+  addPossibleAnswer(possibleAnswer: object): Observable<any> {
+    // tslint:disable-next-line:max-line-length
+    return this.http.get<object>(`${environment.ip_address}${environment.back.add_possibleAnswer}?idPoll=${possibleAnswer['idPoll']}&valuePossibleAnswer=${possibleAnswer['value']}`);
   }
 }
