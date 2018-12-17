@@ -1,6 +1,3 @@
-import { Contact } from './contact';
-import { Course } from './course';
-import { DailyTopic } from './daily-topic';
 
 export class Student {
 
@@ -14,7 +11,8 @@ export class Student {
     private university: string;
     private isEntrant: boolean;
     private isArchived: boolean;
-    private isLearningAgreementValid: { value: boolean, date: Date };
+    private isLearningAgreementValid: boolean;
+    private dateLearningAgreementValid: Date;
 
     constructor(data: object) {
         const student = data || {};
@@ -27,9 +25,10 @@ export class Student {
         this.lastConnection = student['lastConnection'];
         this.phoneNumber = student['phoneNumber'];
         this.university = student['university'];
-        this.isEntrant = student['isEntrant'] === '1' ? true : false;
-        this.isArchived = student['isArchived'] === '1' ? true : false;
-        this.isLearningAgreementValid = { value: false, date: null };
+        this.isEntrant = student['isEntrant'] === 1 ? true : false;
+        this.isArchived = student['isArchived'] === 1 ? true : false;
+        this.isLearningAgreementValid = student['isLearningAgreementValid'] === 1 ? true : false;
+        this.dateLearningAgreementValid = student['dateLearningAgreementValid'] || null;
     }
 
     public getIdPerson(): string { return this.idPerson; }
@@ -42,7 +41,8 @@ export class Student {
     public getUniversity(): string { return this.university; }
     public getIsEntrant(): boolean { return this.isEntrant; }
     public getIsArchived(): boolean { return this.isArchived; }
-    public getIsLearningAgreementValid(): { value: boolean, date: Date } { return this.isLearningAgreementValid; }
+    public getIsLearningAgreementValid(): boolean { return this.isLearningAgreementValid; }
+    public getDateLearningAgreementValid(): Date { return this.dateLearningAgreementValid; }
 
     public setIdPerson(value: string): void { this.idPerson = value; }
     public setEmailAddress(value: string): void { this.emailAddress = value; }
@@ -54,5 +54,6 @@ export class Student {
     public setUniversity(value: string): void { this.university = value; }
     public setIsEntrant(value: boolean): void { this.isEntrant = value; }
     public setIsArchived(value: boolean): void { this.isArchived = value; }
-    public setIsLearningAgreementValid(value: { value: boolean, date: Date }): void { this.isLearningAgreementValid = value; }
+    public setIsLearningAgreementValid(value: boolean): void { this.isLearningAgreementValid = value; }
+    public setDateLearningAgreementValid(value: Date): void { this.dateLearningAgreementValid = value; }
 }

@@ -14,6 +14,7 @@ export const environment = {
     get_students: '/student/get_student.php',
     add_student: '/student/add_student.php',
     delete_student: '/student/delete_student.php',
+    update_student: '/student/update_student.php',
 
     get_courses: '/course/get_course.php',
     add_course: '/course/add_course.php',

@@ -27,8 +27,8 @@
         <br />
         <button mat-stroked-button *ngIf="!selectedCourse" [class.redColor]="selectedStudent.getIsLearningAgreementValid().value"
           (click)="setIsLearningAgreementValid()">
-          <a *ngIf="!selectedStudent.getIsLearningAgreementValid().value">Valid learning agreement</a>
-          <a *ngIf="selectedStudent.getIsLearningAgreementValid().value">Invalid learning agreement</a>
+          <a *ngIf="!selectedStudent.getIsLearningAgreementValid()">Valid learning agreement</a>
+          <a *ngIf="selectedStudent.getIsLearningAgreementValid()">Invalid learning agreement</a>
         </button>
       </div>
     </div>
@@ -45,10 +45,10 @@
         </mat-panel-title>
         <!-- Panel description -->
         <mat-panel-description>
-          <h3 *ngIf="selectedStudent.getIsLearningAgreementValid().value" class="greenColor">
-            Learning agreement : valid - {{ selectedStudent.getIsLearningAgreementValid().date | date: 'medium' }}
+          <h3 *ngIf="selectedStudent.getIsLearningAgreementValid()" class="greenColor">
+            Learning agreement : valid - {{ selectedStudent.getDateLearningAgreementValid() | date: 'medium' }}
           </h3>
-          <h3 *ngIf="!selectedStudent.getIsLearningAgreementValid().value" class="redColor">
+          <h3 *ngIf="!selectedStudent.getIsLearningAgreementValid()" class="redColor">
             Learning agreement : unvalid
           </h3>
         </mat-panel-description>

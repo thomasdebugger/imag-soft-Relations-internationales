@@ -16,6 +16,7 @@ import { Administrator } from 'src/app/models/administrator';
 import { CourseService } from 'src/app/services/back/course.service';
 import { DailyTopicsService } from 'src/app/services/back/daily-topics.service';
 import { ContactService } from 'src/app/services/back/contact.service';
+import { StudentService } from 'src/app/services/back/student.service';
 // import * as puppeteer from 'puppeteer';
 
 @Component({
@@ -31,7 +32,8 @@ export class StudentDetailsComponent implements OnInit {
     private readonly router: Router,
     private readonly contactService: ContactService,
     private readonly courseService: CourseService,
-    private readonly dailyTopicService: DailyTopicsService) { }
+    private readonly dailyTopicService: DailyTopicsService,
+    private readonly studentService: StudentService) { }
 
   selectedStudent: Student;
   coursesOfSelectedStudent: Course[];
@@ -161,9 +163,9 @@ export class StudentDetailsComponent implements OnInit {
   }
 
   setIsLearningAgreementValid(): void {
-    this.selectedStudent.setIsLearningAgreementValid({
-      value: !this.selectedStudent.getIsLearningAgreementValid().value, date: new Date()
-    });
+    this.selectedStudent.setIsLearningAgreementValid(!this.selectedStudent.getIsLearningAgreementValid());
+    this.selectedStudent.setDateLearningAgreementValid(new Date());
+    this.studentService.updateStudent(this.selectedStudent).subscribe();
   }
 
   getNbEcts(): number {
