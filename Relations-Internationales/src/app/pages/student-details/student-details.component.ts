@@ -201,6 +201,7 @@ export class StudentDetailsComponent implements OnInit {
             this.coursesOfSelectedStudent.push(course);
             this.markService.getMarksByStudent(course.getIdCourse(), this.selectedStudent.getIdPerson())
               .subscribe(marks => {
+                this.marks = [];
                 const marksByCourse = { idCourse: course.getIdCourse(), marks: [] };
                 marks['marks'].forEach(mark => marksByCourse.marks.push(mark));
                 this.marks.push(marksByCourse);
