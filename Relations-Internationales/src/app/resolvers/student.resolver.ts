@@ -9,6 +9,6 @@ export class StudentResolver implements Resolve<Student> {
     constructor(private readonly studentService: StudentService) { }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Student> {
-        return this.studentService.getStudent(route.params.idPerson);
+        return this.studentService.getStudent(route.queryParams.idPerson);
     }
 }
