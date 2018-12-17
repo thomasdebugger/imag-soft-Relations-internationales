@@ -14,7 +14,7 @@ export class CourseDetailModalComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log(this.data);
+    console.log("daté" ,this.data);
   }
 
 }
