@@ -9,22 +9,22 @@
 
         <table mat-table [dataSource]="dataSourceMark" class="mat-elevation-z8">
             <ng-container matColumnDef="name">
-              <th mat-header-cell *matHeaderCellDef><div translate >Mark</div></th>
+              <th mat-header-cell *matHeaderCellDef>Mark</th>
               <td mat-cell *matCellDef="let element" (click)="openDetailCourse(element.getName(),element.getEcts(),element.getDescription(),element.getIdCourse())"> {{element.getName()}} </td>
             </ng-container>
 
             <ng-container matColumnDef="ects">
-              <th mat-header-cell *matHeaderCellDef ><div translate >ECTS</div></th>
+              <th mat-header-cell *matHeaderCellDef>ECTS</th>
               <td mat-cell *matCellDef="let element"> {{element.getEcts()}} </td>
             </ng-container> 
 
             <ng-container matColumnDef="description">
-              <th mat-header-cell *matHeaderCellDef><div translate >Description</div></th>
+              <th mat-header-cell *matHeaderCellDef>Description</th>
               <td mat-cell *matCellDef="let element" > {{element.getDescription()}} </td>
             </ng-container> 
 
             <ng-container matColumnDef="commentaire">
-              <th mat-header-cell *matHeaderCellDef><div translate >Dernier commentaire</div></th>
+              <th mat-header-cell *matHeaderCellDef>Dernier commentaire</th>
               <td mat-cell *matCellDef="let element"> {{element.getName()}} </td>
             </ng-container>  
             
@@ -39,22 +39,22 @@
   <mat-expansion-panel [expanded]="true">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <div translate>Private life</div>
+          Private life
         </mat-panel-title>
       </mat-expansion-panel-header>
       <table mat-table [dataSource]="dataSourcePL" class="mat-elevation-z8">
         <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef><div translate>Titre</div></th>
+          <th mat-header-cell *matHeaderCellDef>Titre</th>
           <td mat-cell *matCellDef="let element"> {{element.getName()}} </td>
         </ng-container>
 
         <ng-container matColumnDef="dateDailyTopic">
-          <th mat-header-cell *matHeaderCellDef><div translate>Date</div></th>
+          <th mat-header-cell *matHeaderCellDef>Date</th>
           <td mat-cell *matCellDef="let element"> {{element.getDateDailyTopic()}} </td>
         </ng-container> 
 
         <ng-container matColumnDef="description">
-          <th mat-header-cell *matHeaderCellDef><div translate>DescriptionPL</div></th>
+          <th mat-header-cell *matHeaderCellDef>Description</th>
           <td mat-cell *matCellDef="let element" > {{element.getDescription()}} </td>
         </ng-container> 
  
@@ -70,22 +70,22 @@
     <mat-expansion-panel [expanded]="true">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            <div translate>Contact</div> 
+            Contact 
           </mat-panel-title>
         </mat-expansion-panel-header>
         <table mat-table [dataSource]="dataSourceContact" class="mat-elevation-z8">
           <ng-container matColumnDef="lastName">
-            <th mat-header-cell *matHeaderCellDef><div translate>Name</div></th>
+            <th mat-header-cell *matHeaderCellDef>Name</th>
             <td mat-cell *matCellDef="let element"> {{element.getLastName()}} </td>
           </ng-container>
 
           <ng-container matColumnDef="description">
-            <th mat-header-cell *matHeaderCellDef><div translate>DescriptionC</div></th>
+            <th mat-header-cell *matHeaderCellDef>Description</th>
             <td mat-cell *matCellDef="let element"> {{element.getDescription()}} </td>
           </ng-container> 
 
           <ng-container matColumnDef="affiliation">
-            <th mat-header-cell *matHeaderCellDef><div translate>Affiliation</div></th>
+            <th mat-header-cell *matHeaderCellDef>Affiliation</th>
             <td mat-cell *matCellDef="let element" > {{element.getAffiliation()}} </td>
           </ng-container> 
 

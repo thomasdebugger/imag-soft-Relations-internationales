@@ -168,8 +168,8 @@ export class StudentDetailsComponent implements OnInit {
     this.studentService.updateStudent(this.selectedStudent).subscribe();
   }
 
-  getNbEcts(): string {
-    let nbEcts = '0';
+  getNbEcts(): number {
+    let nbEcts = 0;
 
     this.coursesOfSelectedStudent.forEach(courseOfSelectedStudent => {
       nbEcts = nbEcts + courseOfSelectedStudent.getEcts();
