@@ -46,6 +46,7 @@ export class AddStudentDialogComponent implements OnInit {
         university: this.university,
         isEntrant: this.isEntrant ? 'true' : 'false',
         isArchived: 'false',
+        isLearningAgreementValid: 'false',
         login: this.emailAddress,
         passWord: 'root'
       }));
