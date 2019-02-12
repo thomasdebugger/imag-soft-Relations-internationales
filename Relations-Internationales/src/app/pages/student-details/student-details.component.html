@@ -15,7 +15,9 @@
       </div>
       <!-- Last connection -->
       <div class="student-connection">
-        <h2>Last connection : {{ selectedStudent.getLastConnection() | date: 'medium' }}</h2>
+        <h2 *ngIf="selectedStudent.getLastConnection()">Last connection : {{ selectedStudent.getLastConnection() |
+          date: 'medium' }}</h2>
+        <h2 *ngIf="!selectedStudent.getLastConnection()">Last connection : /</h2>
         <h3 class="contact" (click)="displaySendEmailDialog()">Contact</h3>
       </div>
       <!-- University -->
@@ -25,9 +27,9 @@
         <h3 *ngIf="selectedStudent.getIsEntrant() === 'false'"> Non entrant student</h3>
         <button mat-stroked-button (click)="generatePDF()">Generate PDF</button>
         <br />
-        <button mat-stroked-button *ngIf="!selectedCourse" [class.redColor]="selectedStudent.getIsLearningAgreementValid().value"
+        <button mat-stroked-button *ngIf="!selectedCourse" [class.redColor]="selectedStudent.getIsLearningAgreementValid() === 'false'"
           (click)="setIsLearningAgreementValid()">
-          <a *ngIf="selectedStudent.getIsLearningAgreementValid() === 'false'">Valid learning agreement</a>
+          <a *ngIf="selectedStudent.getIsLearningAgreementValid() !== 'true'">Valid learning agreement</a>
           <a *ngIf="selectedStudent.getIsLearningAgreementValid() === 'true'">Invalid learning agreement</a>
         </button>
       </div>
