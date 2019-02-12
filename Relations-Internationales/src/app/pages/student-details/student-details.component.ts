@@ -167,7 +167,7 @@ export class StudentDetailsComponent implements OnInit {
       this.selectedStudent.getIsLearningAgreementValid() === 'false' ? 'true' : 'false'
     );
     this.selectedStudent.setDateLearningAgreementValid(new Date());
-    this.studentService.updateStudent(this.selectedStudent).subscribe();
+    this.studentService.updateLAStudent(this.selectedStudent).subscribe();
   }
 
   getNbEcts(): number {
@@ -194,7 +194,6 @@ export class StudentDetailsComponent implements OnInit {
   }
 
   deleteCourse(idCourse: string) {
-    console.log(idCourse);
     this.courseService.deleteCourse(idCourse).subscribe(() => {
 
       this.courseService.getCoursesByStudent(this.selectedStudent.getIdPerson())
@@ -219,7 +218,6 @@ export class StudentDetailsComponent implements OnInit {
   }
 
   deleteDailyTopic(idDailyTopic: string) {
-    console.log(idDailyTopic);
     this.dailyTopicService.deleteDailyTopic(idDailyTopic).subscribe(() => {
 
       this.dailyTopicService.getDailyTopicsByStudent(this.selectedStudent.getIdPerson())
@@ -235,7 +233,6 @@ export class StudentDetailsComponent implements OnInit {
   }
 
   deleteContact(idContact: string) {
-    console.log(idContact);
     this.contactService.deleteContact(idContact).subscribe(() => {
 
       this.contactService.getContactsByStudent(this.selectedStudent.getIdPerson())

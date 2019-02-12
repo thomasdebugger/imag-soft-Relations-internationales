@@ -51,9 +51,13 @@ export class StudentService {
     return this.http.get<object>(`${environment.ip_address}${environment.back.add_student}?emailAddress=${student['emailAddress']}&firstName=${student['firstName']}&lastName=${student['lastName']}&birthDate=${student['birthDate']}&phoneNumber=${student['phoneNumber']}&university=${student['university']}&isEntrant=${student['isEntrant']}&login=${student['login']}&passWord=${student['passWord']}`);
   }
 
-  updateStudent(student: object): Observable<any> {
-    const boolean = student['isLearningAgreementValid'] === true ? 1 : 0;
+  updateLAStudent(student: object): Observable<any> {
     // tslint:disable-next-line:max-line-length
-    return this.http.get<object>(`${environment.ip_address}${environment.back.update_student}?idPerson=${student['idPerson']}&isLearningAgreementValid=${boolean}`);
+    return this.http.get<object>(`${environment.ip_address}${environment.back.update_LA_student}?idPerson=${student['idPerson']}&isLearningAgreementValid=${student['isLearningAgreementValid']}`);
+  }
+
+  updateIsArchivedStudent(personId: string, isArchived: string): Observable<any> {
+    // tslint:disable-next-line:max-line-length
+    return this.http.get<object>(`${environment.ip_address}${environment.back.update_isArchived_student}?idPerson=${personId}&isArchived=${isArchived}`);
   }
 }
