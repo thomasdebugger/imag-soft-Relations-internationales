@@ -21,14 +21,14 @@
       <!-- University -->
       <div class="student-university">
         <h2 class="university">{{ selectedStudent.getUniversity() }}</h2>
-        <h3 *ngIf="selectedStudent.getIsEntrant()"> Entrant student</h3>
-        <h3 *ngIf="!selectedStudent.getIsEntrant()"> Non entrant student</h3>
+        <h3 *ngIf="selectedStudent.getIsEntrant() === 'true'"> Entrant student</h3>
+        <h3 *ngIf="selectedStudent.getIsEntrant() === 'false'"> Non entrant student</h3>
         <button mat-stroked-button (click)="generatePDF()">Generate PDF</button>
         <br />
         <button mat-stroked-button *ngIf="!selectedCourse" [class.redColor]="selectedStudent.getIsLearningAgreementValid().value"
           (click)="setIsLearningAgreementValid()">
-          <a *ngIf="!selectedStudent.getIsLearningAgreementValid()">Valid learning agreement</a>
-          <a *ngIf="selectedStudent.getIsLearningAgreementValid()">Invalid learning agreement</a>
+          <a *ngIf="selectedStudent.getIsLearningAgreementValid() === 'false'">Valid learning agreement</a>
+          <a *ngIf="selectedStudent.getIsLearningAgreementValid() === 'true'">Invalid learning agreement</a>
         </button>
       </div>
     </div>
@@ -45,10 +45,10 @@
         </mat-panel-title>
         <!-- Panel description -->
         <mat-panel-description>
-          <h3 *ngIf="selectedStudent.getIsLearningAgreementValid()" class="greenColor">
+          <h3 *ngIf="selectedStudent.getIsLearningAgreementValid() === 'true'" class="greenColor">
             Learning agreement : valid - {{ selectedStudent.getDateLearningAgreementValid() | date: 'medium' }}
           </h3>
-          <h3 *ngIf="!selectedStudent.getIsLearningAgreementValid()" class="redColor">
+          <h3 *ngIf="selectedStudent.getIsLearningAgreementValid() === 'false'" class="redColor">
             Learning agreement : unvalid
           </h3>
         </mat-panel-description>

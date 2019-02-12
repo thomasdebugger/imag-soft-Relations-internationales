@@ -9,9 +9,9 @@ export class Student {
     private lastConnection: Date;
     private phoneNumber: string;
     private university: string;
-    private isEntrant: boolean;
-    private isArchived: boolean;
-    private isLearningAgreementValid: boolean;
+    private isEntrant: string;
+    private isArchived: string;
+    private isLearningAgreementValid: string;
     private dateLearningAgreementValid: Date;
 
     constructor(data: object) {
@@ -25,9 +25,9 @@ export class Student {
         this.lastConnection = student['lastConnection'];
         this.phoneNumber = student['phoneNumber'];
         this.university = student['university'];
-        this.isEntrant = student['isEntrant'] === 1 ? true : false;
-        this.isArchived = student['isArchived'] === 1 ? true : false;
-        this.isLearningAgreementValid = student['isLearningAgreementValid'] === 1 ? true : false;
+        this.isEntrant = student['isEntrant'];
+        this.isArchived = student['isArchived'];
+        this.isLearningAgreementValid = student['isLearningAgreementValid'];
         this.dateLearningAgreementValid = student['dateLearningAgreementValid'] || null;
     }
 
@@ -39,9 +39,9 @@ export class Student {
     public getLastConnection(): Date { return this.lastConnection; }
     public getPhoneNumber(): string { return this.phoneNumber; }
     public getUniversity(): string { return this.university; }
-    public getIsEntrant(): boolean { return this.isEntrant; }
-    public getIsArchived(): boolean { return this.isArchived; }
-    public getIsLearningAgreementValid(): boolean { return this.isLearningAgreementValid; }
+    public getIsEntrant(): string { return this.isEntrant; }
+    public getIsArchived(): string { return this.isArchived; }
+    public getIsLearningAgreementValid(): string { return this.isLearningAgreementValid; }
     public getDateLearningAgreementValid(): Date { return this.dateLearningAgreementValid; }
 
     public setIdPerson(value: string): void { this.idPerson = value; }
@@ -52,8 +52,8 @@ export class Student {
     public setLastConnection(value: Date): void { this.lastConnection = value; }
     public setPhoneNumber(value: string): void { this.phoneNumber = value; }
     public setUniversity(value: string): void { this.university = value; }
-    public setIsEntrant(value: boolean): void { this.isEntrant = value; }
-    public setIsArchived(value: boolean): void { this.isArchived = value; }
-    public setIsLearningAgreementValid(value: boolean): void { this.isLearningAgreementValid = value; }
+    public setIsEntrant(value: string): void { this.isEntrant = value; }
+    public setIsArchived(value: string): void { this.isArchived = value; }
+    public setIsLearningAgreementValid(value: string): void { this.isLearningAgreementValid = value; }
     public setDateLearningAgreementValid(value: Date): void { this.dateLearningAgreementValid = value; }
 }

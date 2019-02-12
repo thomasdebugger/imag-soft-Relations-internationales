@@ -44,8 +44,8 @@ export class AddStudentDialogComponent implements OnInit {
         lastConnection: null,
         phoneNumber: this.phoneNumber,
         university: this.university,
-        isEntrant: this.isEntrant ? 1 : 0,
-        isArchived: 0,
+        isEntrant: this.isEntrant ? 'true' : 'false',
+        isArchived: 'false',
         login: this.emailAddress,
         passWord: 'root'
       }));

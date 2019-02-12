@@ -52,7 +52,7 @@ export class AdministratorSideComponent implements OnInit {
 
   initStudentsLists(): void {
     this.studentsInput.forEach(student => {
-      student.getIsArchived() ? this.archivedStudents.push(student) : this.nonArchivedStudents.push(student);
+      student.getIsArchived() === 'true' ? this.archivedStudents.push(student) : this.nonArchivedStudents.push(student);
 
       this.dailyTopicService.getDailyTopicsByStudent(student.getIdPerson())
         .subscribe(result => {
