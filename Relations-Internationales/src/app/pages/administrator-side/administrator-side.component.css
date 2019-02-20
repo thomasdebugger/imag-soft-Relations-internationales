@@ -19,3 +19,8 @@ table {
 .leftButtons button {
     margin-left: .625rem;
 }
+
+.input-checkbox {
+    border: grey 2px solid;
+    background-color: transparent;
+}

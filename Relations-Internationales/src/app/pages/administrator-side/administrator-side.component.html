@@ -31,8 +31,8 @@
     <ng-container matColumnDef="Entrant/Leaving">
       <th mat-header-cell *matHeaderCellDef> Entrant / Leaving </th>
       <td mat-cell *matCellDef="let student">
-        <p *ngIf="student.getIsEntrant() == true"> E </p>
-        <p *ngIf="student.getIsEntrant() == false"> L </p>
+        <p *ngIf="student.getIsEntrant() === 'true'"> E </p>
+        <p *ngIf="student.getIsEntrant() === 'false'"> L </p>
       </td>
     </ng-container>
 
@@ -50,7 +50,8 @@
     <ng-container matColumnDef="SelectRow">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let student">
-        <mat-checkbox color="primary" (click)="checkStudent(student.getIdPerson())"></mat-checkbox>
+        <mat-checkbox color="primary" [checked]="checkedStudents.indexOf(student) !== -1" (change)="checkStudent(student)"></mat-checkbox>
+        <!-- <input type="checkbox" class="input-checkbox" [checked]="checkedStudents.indexOf(student) > -1" (click)="checkStudent(student)"> -->
       </td>
     </ng-container>
 
@@ -66,7 +67,8 @@
     students</mat-slide-toggle>
 
   <div class="leftButtons">
-    <button mat-stroked-button color="primary" (click)="archiveStudents()" [disabled]="checkedStudents.length === 0">Archive</button>
+    <button mat-stroked-button color="primary" *ngIf="!areDisplayArchived" (click)="archiveStudents()" [disabled]="checkedStudents.length === 0">Archive</button>
+    <button mat-stroked-button color="primary" *ngIf="areDisplayArchived" (click)="archiveStudents()" [disabled]="checkedStudents.length === 0">Disarchive</button>
     <button mat-raised-button color="primary" (click)="addStudent()">Add student</button>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, ChangeDetectorRef } from '@angular/core';
 import { Student } from 'src/app/models/student';
 import { MatTableDataSource, MatPaginator, MatDialogConfig, MatDialog } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -16,13 +16,13 @@ export class AdministratorSideComponent implements OnInit {
 
   @Input() studentsInput: Student[] = [];
 
-  private archivedStudents: Student[];
-  private nonArchivedStudents: Student[];
-  private dataSource: MatTableDataSource<Student>;
-  private displayedColumns: string[];
-  private areDisplayArchived: boolean;
-  private dailyTopics: { idStudent: string, dailyTopics: DailyTopic[] }[] = [];
-  private checkedStudents: string[];
+  archivedStudents: Student[];
+  nonArchivedStudents: Student[];
+  dataSource: MatTableDataSource<Student>;
+  displayedColumns: string[];
+  areDisplayArchived: boolean;
+  dailyTopics: { idStudent: string, dailyTopics: DailyTopic[] }[] = [];
+  checkedStudents: Student[];
 
   constructor(private readonly router: Router,
     private readonly dialog: MatDialog,
@@ -40,10 +40,11 @@ export class AdministratorSideComponent implements OnInit {
     this.nonArchivedStudents = [];
     this.checkedStudents = [];
     this.initStudentsLists();
+    this.dataSource = new MatTableDataSource<Student>([]);
 
-    this.setDataSource();
     this.displayedColumns = ['Signal', 'Name', 'University', 'Last connection', 'Entrant/Leaving', 'OpenInNew', 'SelectRow'];
     this.dataSource.paginator = this.paginator;
+    this.setDataSource();
 
     this.activatedRoute.queryParams.subscribe(queryParams => {
       this.logs = { idPerson: queryParams.idPerson, type: 'administrator' };
@@ -52,7 +53,7 @@ export class AdministratorSideComponent implements OnInit {
 
   initStudentsLists(): void {
     this.studentsInput.forEach(student => {
-      student.getIsArchived() ? this.archivedStudents.push(student) : this.nonArchivedStudents.push(student);
+      student.getIsArchived() === 'true' ? this.archivedStudents.push(student) : this.nonArchivedStudents.push(student);
 
       this.dailyTopicService.getDailyTopicsByStudent(student.getIdPerson())
         .subscribe(result => {
@@ -74,14 +75,39 @@ export class AdministratorSideComponent implements OnInit {
 
   archiveStudents(): void {
     if (this.areDisplayArchived) {
-      console.log('Desarchive function clicked.');
+      this.checkedStudents.forEach(student => {
+        this.studentService.updateIsArchivedStudent(student.getIdPerson(), 'false').subscribe(() => {
+          this.archivedStudents.splice(this.archivedStudents.indexOf(student), 1);
+          this.nonArchivedStudents.push(student);
+          this.setDataSource();
+        },
+          err => {// TODO C'est super bizarre
+            console.log(err);
+            this.archivedStudents.splice(this.archivedStudents.indexOf(student), 1);
+            this.nonArchivedStudents.push(student);
+            this.setDataSource();
+          });
+      });
     } else {
-      console.log('Archive function clicked.');
+      this.checkedStudents.forEach(student => {
+        this.studentService.updateIsArchivedStudent(student.getIdPerson(), 'true').subscribe(() => {
+          this.nonArchivedStudents.splice(this.archivedStudents.indexOf(student), 1);
+          this.archivedStudents.push(student);
+          this.setDataSource();
+        },
+          err => {// TODO C'est super bizarre
+            console.log(err);
+            this.nonArchivedStudents.splice(this.archivedStudents.indexOf(student), 1);
+            this.archivedStudents.push(student);
+            this.setDataSource();
+          });
+      });
     }
   }
 
   displayArchivedStudents() {
     this.areDisplayArchived = !this.areDisplayArchived;
+    this.checkedStudents = [];
     this.setDataSource();
   }
 
@@ -94,8 +120,8 @@ export class AdministratorSideComponent implements OnInit {
     dialogRef = this.dialog.open(AddStudentDialogComponent, matDialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       console.log('Student dialog closed : ', result);
-      this.studentService.addStudent(result).subscribe(() => {
-        this.nonArchivedStudents.push(new Student(result));
+      this.studentService.addStudent(result).subscribe((newStudent) => {
+        this.nonArchivedStudents.push(new Student(newStudent['Student'][0]));
         this.setDataSource();
       },
         err => {
@@ -106,21 +132,26 @@ export class AdministratorSideComponent implements OnInit {
 
   setDataSource(): void {
     if (this.areDisplayArchived) {
-      this.dataSource = new MatTableDataSource<Student>(this.archivedStudents);
+      this.dataSource.data = this.archivedStudents;
     } else {
-      this.dataSource = new MatTableDataSource<Student>(this.nonArchivedStudents);
+      this.dataSource.data = this.nonArchivedStudents;
     }
+    this.dataSource.paginator.firstPage();
   }
 
   goToStudentDetailsPage(studentId: string): void {
     this.router.navigate(['student-details/' + studentId], { queryParams: this.logs });
   }
 
-  checkStudent(personId: string): void {
-    if (this.checkedStudents.indexOf(personId) !== -1) {
-      this.checkedStudents.splice(this.checkedStudents.indexOf(personId), 1);
+  checkStudent(student: Student): void {
+    if (this.checkedStudents.indexOf(student) !== -1) {
+      this.checkedStudents.splice(this.checkedStudents.indexOf(student), 1);
     } else {
-      this.checkedStudents.push(personId);
+      this.checkedStudents.push(student);
     }
+  }
+
+  isCheckboxChecked(student: Student): boolean {
+    return this.checkedStudents.indexOf(student) !== -1;
   }
 }
