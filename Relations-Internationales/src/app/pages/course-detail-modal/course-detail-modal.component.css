@@ -20,7 +20,7 @@
     padding: 1rem;
 }
 
-.course-description, .course-ects, .course-teachers, .course-marks, .course-poll {
+.course-description, .course-ects, .course-marks, .course-poll {
     display: flex;
     margin-block-end: 20px;
 }
@@ -36,4 +36,9 @@
 
 .add-element-button {
     margin-left: .625rem;
+}
+
+.polls
+{
+    display : flex;
 }

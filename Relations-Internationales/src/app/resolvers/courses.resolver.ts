@@ -15,6 +15,9 @@ export class CoursesResolver implements Resolve<{
         courses: Course[],
         nbRows: number
     }> {
+        if (route.queryParams.type === 'administrator') {
+            return this.courseService.getCoursesByStudent(route.params.idPerson);
+        }
         return this.courseService.getCoursesByStudent(route.queryParams.idPerson);
     }
 }

@@ -7,7 +7,7 @@
     <h2>Description</h2>
   </div>
   <div class="content">
-    {{data.description}}
+    {{data.course.getDescription()}}
   </div>
 </div>
 
@@ -16,15 +16,11 @@
     <h2>ECTS</h2>
   </div>
   <div class="content">
-    {{data.ects}}
+    {{data.course.getEcts()}}
   </div>
 </div>
 
 <div class="course-teachers">
-  <div class="title">
-    <h2>Teachers</h2>
-</div>
-
 <div class="content">
   <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
     <!-- Panel header -->
@@ -42,8 +38,8 @@
       </mat-list-item>
       <!-- Teacher content -->
       <mat-list-item role="listitem">
-        <h2 class="teacher-column">{{ data.teacherFullName }}</h2>
-        <h2 class="teacher-column">{{ data.teacherEmail }}</h2>
+        <h2 class="teacher-column">{{ data.course.getTeacherFullName() }}</h2>
+        <h2 class="teacher-column">{{ data.course.getTeacherEmail() }}</h2>
       </mat-list-item>
     </mat-list>
   </mat-expansion-panel>
@@ -51,9 +47,6 @@
 
 
 <div class="course-marks">
-  <div class="title">
-    <h2>Marks</h2>
-  </div>
 </div> 
 <div class="content">
   <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
@@ -72,15 +65,26 @@
       </mat-list-item>
       <!-- Teacher content -->
       <mat-list-item *ngFor="let mark of marks" role="listitem">
-        <h2 class="mark-column">{{ data.valueMark }}</h2>
-        <h2 class="mark-column">{{ data.typeMark }}</h2>
+        <h2 class="mark-column">{{ mark.getValueMark() }}</h2>
+        <h2 class="mark-column">{{ mark.getTypeMark() }}</h2>
       </mat-list-item>
     </mat-list>
   </mat-expansion-panel>
 </div>
 
-<div *ngIf="data.polls.length>0">
-  new POLL : {{data.poll}}
+
+<div *ngFor="let poll of polls; let pollIndex = index" class="polls">
+  <div>{{poll.getQuestion()}}</div>
+  <mat-form-field>
+      <mat-select placeholder="Selectionner votre réponse" (selectionChange)="selectedAnswers[poll.getIdPoll()] = $event.value">
+        <mat-option *ngFor="let possibleAnswer of possibleAnswers[poll.getIdPoll()]" [value]="possibleAnswer.getValue()">
+            {{possibleAnswer.getValue()}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-stroked-button (click)="sendAnswer(poll.getIdPoll(), pollIndex)">
+      <a>send my answer</a>
+    </button>
 </div>
 
 

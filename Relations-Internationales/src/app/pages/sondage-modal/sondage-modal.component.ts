@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Poll } from 'src/app/models/poll';
 
 @Component({
   selector: 'app-sondage-modal',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sondage-modal.component.css']
 })
 export class SondageModalComponent implements OnInit {
+
+
+  @Input() selectedSondage: Poll = null;
 
   constructor() { }
 

@@ -32,7 +32,6 @@ export class StudentProfilePageComponent implements OnInit {
   mail: String = '';
   title: String = '';
 
-  polls: Poll[] = [];
 
   @Input() selectedStudent: Student = null;
   @Input() coursesOfSelectedStudent: Course[] = [];
@@ -40,6 +39,7 @@ export class StudentProfilePageComponent implements OnInit {
   @Input() dailyTopicsOfSelectedStudent: DailyTopic[] = [];
 
   private marks: { idCourse: string; marks: Mark[] }[] = [];
+ 
   private selectedCourse: Course;
 
   displayedColumnsMark: string[] = ['name', 'ects', 'description', 'commentaire'];
@@ -69,10 +69,13 @@ export class StudentProfilePageComponent implements OnInit {
             result['marks'].forEach(mark => marksByCourse.marks.push(mark));
             this.marks.push(marksByCourse);
           });
+          
       });
       this.dataSourceMark = new MatTableDataSource(this.coursesOfSelectedStudent);
       this.dataSourcePL = new MatTableDataSource(this.dailyTopicsOfSelectedStudent);
       this.dataSourceContact = new MatTableDataSource(this.contactsOfSelectedStudent);
+      
+      
     
     });
   
@@ -104,17 +107,12 @@ export class StudentProfilePageComponent implements OnInit {
   }
 
 
-  openDetailCourse(courseName: string, ects: string, description: string,idCourse : string) {
-    console.log(idCourse);
-    this.pollService.getPollsByStudent(idCourse,this.selectedStudent.getIdPerson()).subscribe(pollResponse=>{
-      console.log(pollResponse.polls);
-      this.polls = pollResponse.polls;
-
-      const dialogCourse = this.dialog.open(CourseDetailModalComponent, {
-        width: '90%',
-        data: { courseName: courseName, ects: ects, description: description , polls : this.polls}
-      });
+  openDetailCourse(course: Course) {
+    const dialogCourse = this.dialog.open(CourseDetailModalComponent, {
+      width: '90%',
+      data: {course : course, idStudent : this.selectedStudent.getIdPerson()}
     });
+  
   }
 
   addContact() {

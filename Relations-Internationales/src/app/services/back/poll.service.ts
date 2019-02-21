@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Poll } from 'src/app/models/poll';
 import { environment } from 'src/environments/environment';
+import { PossibleAnswer } from 'src/app/models/possible-answer';
 
 @Injectable({
   providedIn: 'root'
@@ -60,5 +61,9 @@ export class PollService {
   addPossibleAnswer(possibleAnswer: object): Observable<any> {
     // tslint:disable-next-line:max-line-length
     return this.http.get<object>(`${environment.ip_address}${environment.back.add_possibleAnswer}?idPoll=${possibleAnswer['idPoll']}&valuePossibleAnswer=${possibleAnswer['value']}`);
+  }
+
+  update_poll(answer : string, idPoll : string){
+    return this.http.get<object>(`${environment.ip_address}${environment.back.update_poll}?idPoll=${idPoll}&answer=${answer}`);
   }
 }

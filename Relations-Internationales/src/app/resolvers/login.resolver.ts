@@ -13,6 +13,7 @@ export class LoginResolver implements Resolve<any> {
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
         if (route.queryParams.type === 'student') {
             const studentToReturn = this.studentService.getStudent(route.queryParams.idPerson);
+            console.log(route.queryParams);
 
             studentToReturn.subscribe(student => {
                 if (!student[0]

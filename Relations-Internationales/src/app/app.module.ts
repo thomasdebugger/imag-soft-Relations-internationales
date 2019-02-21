@@ -89,12 +89,17 @@ const appRoutes: Routes = [
     {
         path: 'CourseDetailModalComponent',
         component: CourseDetailModalComponent
-    },
+    },/*
+    {
+        path: 'SondageModalComponent/:idPoll',
+        component: SondageModalComponent
+    },*/
     // localhost/4200/error
     {
         path: '**',
         component: ErrorComponent
     },
+  
 ];
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -123,7 +128,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         CourseDetailModalComponent,
         AddContactModalComponent,
         AddPrivateLifeModalComponent,
-        SondageModalComponent, 
+        SondageModalComponent,
 
     ],
     imports: [

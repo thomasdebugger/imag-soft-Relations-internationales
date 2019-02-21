@@ -18,7 +18,7 @@ export class PossibleAnswer {
         const possibleAnswer = data || {};
         this.idPossibleAnswer = possibleAnswer['idPossibleAnswer'];
         this.idPoll = possibleAnswer['idPoll'];
-        this.value = possibleAnswer['value'];
+        this.value = possibleAnswer['valuePossibleAnswer'];
     }
 
     public getIdPossibleAnswer(): string { return this.idPossibleAnswer; }

@@ -57,6 +57,7 @@ export class CourseDetailsComponent implements OnInit {
     dialogRef = this.dialog.open(AddPollDialogComponent, matDialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       console.log('Poll dialog closed : ', result);
+      
       this.pollService.addPoll(result['poll']).subscribe(resultAddPoll => {
         this.polls.push(result['poll']);
 
