@@ -58,7 +58,7 @@ export class AddPollDialogComponent implements OnInit {
         value: value
       }));
 
-      this.dialogRef.close({ poll: newPoll, answers: answers });
+      this.dialogRef.close({ poll: newPoll, answers: this.possibleAnswers });
     }
   }
 

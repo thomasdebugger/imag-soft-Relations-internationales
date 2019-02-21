@@ -58,9 +58,9 @@ export class PollService {
     return this.http.get<object>(`${environment.ip_address}${environment.back.add_poll}?question=${poll['question']}&idCourse=${poll['idCourse']}&idPerson=${poll['idPerson']}`);
   }
 
-  addPossibleAnswer(possibleAnswer: object): Observable<any> {
+  addPossibleAnswer(idPoll: string, value : string): Observable<any> {
     // tslint:disable-next-line:max-line-length
-    return this.http.get<object>(`${environment.ip_address}${environment.back.add_possibleAnswer}?idPoll=${possibleAnswer['idPoll']}&valuePossibleAnswer=${possibleAnswer['value']}`);
+    return this.http.get<object>(`${environment.ip_address}${environment.back.add_possibleAnswer}?idPoll=${idPoll}&valuePossibleAnswer=${value}`);
   }
 
   update_poll(answer : string, idPoll : string){

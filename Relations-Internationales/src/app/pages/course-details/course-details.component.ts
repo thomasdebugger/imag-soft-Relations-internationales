@@ -61,10 +61,10 @@ export class CourseDetailsComponent implements OnInit {
       this.pollService.addPoll(result['poll']).subscribe(resultAddPoll => {
         this.polls.push(result['poll']);
 
-        result['answers'].map(possibleAnswer => {
-          possibleAnswer['idPoll'] = resultAddPoll[0]['idPoll'];
-          this.pollService.addPossibleAnswer(possibleAnswer).subscribe();
-        });
+      result['answers'].forEach(possibleAnswer => {
+        this.pollService.addPossibleAnswer(result['poll']['idPoll'],possibleAnswer).subscribe();
+      });
+
       });
     },
       err => {
