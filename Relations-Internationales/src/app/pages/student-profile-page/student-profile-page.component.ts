@@ -39,29 +39,26 @@ export class StudentProfilePageComponent implements OnInit {
   @Input() dailyTopicsOfSelectedStudent: DailyTopic[] = [];
 
   private marks: { idCourse: string; marks: Mark[] }[] = [];
- 
   private selectedCourse: Course;
 
   displayedColumnsMark: string[] = ['name', 'ects', 'description', 'commentaire'];
   displayedColumnsPL: string[] = ['name', 'dateDailyTopic', 'description'];
   displayedColumnsContact: string[] = ['lastName', 'description', 'affiliation', 'emailAddress'];
 
-  
-
   dataSourceMark: MatTableDataSource<Course> = null;
-  dataSourcePL: MatTableDataSource<DailyTopic> =null;
+  dataSourcePL: MatTableDataSource<DailyTopic> = null;
   dataSourceContact: MatTableDataSource<Contact> = null;
 
-  constructor(private activatedRoute: ActivatedRoute, public dialog: MatDialog, private datePipe: DatePipe, private readonly markService: MarkService, private readonly pollService: PollService) {
+  constructor(private activatedRoute: ActivatedRoute,
+    public dialog: MatDialog, private datePipe: DatePipe,
+    private readonly markService: MarkService,
+    private readonly pollService: PollService) {
   }
 
 
   ngOnInit() {
 
     this.activatedRoute.data.subscribe(data => {
-      console.log(data);
-     
-
       this.coursesOfSelectedStudent.forEach(course => {
         this.markService.getMarksByStudent(course.getIdCourse(), this.selectedStudent.getIdPerson())
           .subscribe(result => {
@@ -69,40 +66,34 @@ export class StudentProfilePageComponent implements OnInit {
             result['marks'].forEach(mark => marksByCourse.marks.push(mark));
             this.marks.push(marksByCourse);
           });
-          
       });
       this.dataSourceMark = new MatTableDataSource(this.coursesOfSelectedStudent);
       this.dataSourcePL = new MatTableDataSource(this.dailyTopicsOfSelectedStudent);
       this.dataSourceContact = new MatTableDataSource(this.contactsOfSelectedStudent);
-      
-      
-    
     });
-  
-    
   }
 
   addMark() {
-     var newData = this.dataSourceMark.data;
-     const dialogRef = this.dialog.open(AddCourseModalComponent, {
-       width: '250px',
-       data: { name: this.name, ects: this.ects, description: this.description }
-     });
+    const newData = this.dataSourceMark.data;
+    const dialogRef = this.dialog.open(AddCourseModalComponent, {
+      width: '250px',
+      data: { name: this.name, ects: this.ects, description: this.description }
+    });
 
-     dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(result => {
 
       const newCourse = new Course({
         idCourse: null,
-        name:result.name,
+        name: result.name,
         description: result.description,
         ects: result.ects,
         teacherFullName: '',
         teacherEmail: '',
         idPerson: this.selectedStudent.getIdPerson()
       });
-       newData.push(newCourse);
-       this.dataSourceMark.data = newData;
-     });
+      newData.push(newCourse);
+      this.dataSourceMark.data = newData;
+    });
 
   }
 
@@ -110,23 +101,19 @@ export class StudentProfilePageComponent implements OnInit {
   openDetailCourse(course: Course) {
     const dialogCourse = this.dialog.open(CourseDetailModalComponent, {
       width: '90%',
-      data: {course : course, idStudent : this.selectedStudent.getIdPerson()}
+      data: { course: course, idStudent: this.selectedStudent.getIdPerson() }
     });
-  
   }
 
   addContact() {
+    const newData = this.dataSourceContact.data;
+    const dialogRef = this.dialog.open(AddContactModalComponent, {
+      width: '250px',
+      data: { name: this.name, description: this.description, affiliation: this.affiliation, mail: this.mail }
+    });
 
-     var newData = this.dataSourceContact.data;
-     const dialogRef = this.dialog.open(AddContactModalComponent, {
-       width: '250px',
-       data: { name: this.name, description: this.description, affiliation: this.affiliation, mail: this.mail }
-     });
-
-     dialogRef.afterClosed().subscribe(result => {
-
-      
-       const newContact = new Contact({
+    dialogRef.afterClosed().subscribe(result => {
+      const newContact = new Contact({
         idContact: null,
         idPerson: this.selectedStudent.getIdPerson(),
         emailAddress: result.mail,
@@ -136,22 +123,20 @@ export class StudentProfilePageComponent implements OnInit {
         affiliation: result.affiliation,
         description: result.description
       });
-      console.log(newContact);
-       newData.push(newContact);
-       this.dataSourceContact.data = newData;
-       
-     });
+      newData.push(newContact);
+      this.dataSourceContact.data = newData;
+    });
 
   }
 
   addPrivateLife() {
-     var newData = this.dataSourcePL.data;
-     const dialogRef = this.dialog.open(AddPrivateLifeModalComponent, {
-       width: '250px',
-       data: { title: this.title, description: this.description }
-     });
+    const newData = this.dataSourcePL.data;
+    const dialogRef = this.dialog.open(AddPrivateLifeModalComponent, {
+      width: '250px',
+      data: { title: this.title, description: this.description }
+    });
 
-     dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(result => {
 
       const newDailyTopic = new DailyTopic({
         idDailyTopic: null,
@@ -161,9 +146,9 @@ export class StudentProfilePageComponent implements OnInit {
         idPerson: this.selectedStudent.getIdPerson()
       });
 
-       newData.push(newDailyTopic);
-       this.dataSourcePL.data = newData;
-     });
+      newData.push(newDailyTopic);
+      this.dataSourcePL.data = newData;
+    });
 
   }
 

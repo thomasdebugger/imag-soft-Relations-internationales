@@ -57,7 +57,6 @@ export class StudentDetailsComponent implements OnInit {
       this.activatedRoute.data.subscribe(data => {
         this.selectedStudent = data.studentResolverResult[0];
         this.coursesOfSelectedStudent = data.coursesResolverResult['courses'];
-        console.log(this.coursesOfSelectedStudent);
         this.contactsOfSelectedStudent = data.contactsResolverResult['contacts'];
         this.dailyTopicsOfSelectedStudent = data.dailyTopicsResolverResult['dailyTopics'];
 

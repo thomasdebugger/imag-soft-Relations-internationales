@@ -35,7 +35,6 @@ export class HomeComponent implements OnInit {
       this.isAdministrator = (queryParams.type === 'administrator');
 
       this.activatedRoute.data.subscribe(data => {
-        console.log(data);
         this.userConnected = this.isAdministrator
           ? new Administrator(data['loginResolverResult'][0])
           : new Student(data['loginResolverResult'][0]);
@@ -54,7 +53,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  switchLanguage(event){
-   // this.translate.use(language);
+  switchLanguage(event) {
+    // this.translate.use(language);
   }
 }

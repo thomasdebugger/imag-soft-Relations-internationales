@@ -81,7 +81,7 @@ export class AdministratorSideComponent implements OnInit {
           this.nonArchivedStudents.push(student);
           this.setDataSource();
         },
-          err => {// TODO C'est super bizarre
+          err => {
             console.log(err);
             this.archivedStudents.splice(this.archivedStudents.indexOf(student), 1);
             this.nonArchivedStudents.push(student);
@@ -95,7 +95,7 @@ export class AdministratorSideComponent implements OnInit {
           this.archivedStudents.push(student);
           this.setDataSource();
         },
-          err => {// TODO C'est super bizarre
+          err => {
             console.log(err);
             this.nonArchivedStudents.splice(this.archivedStudents.indexOf(student), 1);
             this.archivedStudents.push(student);

@@ -16,7 +16,7 @@
       <!-- Last connection -->
       <div class="student-connection">
         <h2 *ngIf="selectedStudent.getLastConnection()">Last connection : {{ selectedStudent.getLastConnection() |
-          date: 'medium' }}</h2>
+          date: 'dd-MM-yyyy' }}</h2>
         <h2 *ngIf="!selectedStudent.getLastConnection()">Last connection : /</h2>
         <h3 class="contact" (click)="displaySendEmailDialog()">Contact</h3>
       </div>
@@ -27,7 +27,8 @@
         <h3 *ngIf="selectedStudent.getIsEntrant() === 'false'"> Non entrant student</h3>
         <button mat-stroked-button (click)="generatePDF()">Generate PDF</button>
         <br />
-        <button mat-stroked-button *ngIf="!selectedCourse" [class.redColor]="selectedStudent.getIsLearningAgreementValid() === 'false'"
+        <button mat-stroked-button *ngIf="!selectedCourse"
+          [class.redColor]="selectedStudent.getIsLearningAgreementValid() === 'false'"
           (click)="setIsLearningAgreementValid()">
           <a *ngIf="selectedStudent.getIsLearningAgreementValid() !== 'true'">Valid learning agreement</a>
           <a *ngIf="selectedStudent.getIsLearningAgreementValid() === 'true'">Invalid learning agreement</a>
@@ -67,13 +68,16 @@
           <h2 class="course-column"></h2>
         </mat-list-item>
         <!-- Courses content -->
-        <mat-list-item *ngFor="let course of coursesOfSelectedStudent; index as indexCourse" class="course-row" role="listitem">
+        <mat-list-item *ngFor="let course of coursesOfSelectedStudent; index as indexCourse" class="course-row"
+          role="listitem">
           <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getName() }}</h2>
           <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getEcts() }}</h2>
           <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getDescription() }}</h2>
-          <h2 class="course-column" *ngIf="marks[indexCourse] && marks[indexCourse].marks.length > 0" (click)="setSelectedCourse(course)">{{
+          <h2 class="course-column" *ngIf="marks[indexCourse] && marks[indexCourse].marks.length > 0"
+            (click)="setSelectedCourse(course)">{{
             marks[indexCourse].marks[marks[indexCourse].marks.length-1].getValueMark() }}</h2>
-          <h2 class="course-column" *ngIf="marks[indexCourse] && marks[indexCourse].marks.length === 0" (click)="setSelectedCourse(course)">/</h2>
+          <h2 class="course-column" *ngIf="marks[indexCourse] && marks[indexCourse].marks.length === 0"
+            (click)="setSelectedCourse(course)">/</h2>
           <button mat-icon-button class="course-column" (click)="deleteCourse(course.getIdCourse())">
             <mat-icon class="trash-icon">delete_outline</mat-icon>
           </button>
@@ -81,10 +85,8 @@
       </mat-list>
       <!-- Add Course button -->
       <div class="courses-footer">
-        <p [class.redColor]="getNbEcts() !== 30" [class.greenColor]="getNbEcts() === 30">
-          Total ECTS : {{ getNbEcts() }}/30
-        </p>
-        <button mat-stroked-button color="primary" class="add-element-button" (click)="displayAddElementDialog('course')">
+        <button mat-stroked-button color="primary" class="add-element-button"
+          (click)="displayAddElementDialog('course')">
           Add new course
         </button>
       </div>
@@ -118,7 +120,8 @@
         </mat-list-item>
       </mat-list>
       <!-- Add Topic button -->
-      <button mat-stroked-button color="primary" class="add-element-button" (click)="displayAddElementDialog('dailyTopic')">
+      <button mat-stroked-button color="primary" class="add-element-button"
+        (click)="displayAddElementDialog('dailyTopic')">
         Add new daily topic
       </button>
     </mat-expansion-panel>
@@ -153,14 +156,16 @@
         </mat-list-item>
       </mat-list>
       <!-- Add Contact button -->
-      <button mat-stroked-button color="primary" class="add-element-button" (click)="displayAddElementDialog('contact')">
+      <button mat-stroked-button color="primary" class="add-element-button"
+        (click)="displayAddElementDialog('contact')">
         Add new contact
       </button>
     </mat-expansion-panel>
   </mat-card-content>
 
   <mat-card-content *ngIf="selectedCourse">
-    <app-course-details [selectedStudent]="selectedStudent" [selectedCourse]="selectedCourse" (backToStudent)="setSelectedCourse(null)"></app-course-details>
+    <app-course-details [selectedStudent]="selectedStudent" [selectedCourse]="selectedCourse"
+      (backToStudent)="setSelectedCourse(null)"></app-course-details>
   </mat-card-content>
 </mat-card>
 

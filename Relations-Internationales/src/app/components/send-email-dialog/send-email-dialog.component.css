@@ -15,5 +15,9 @@ mat-form-field {
 }
 
 .send-button {
+    padding: .4375rem 1.0625rem;
+    background-color: #3f51b5;
     margin-top: 1.25rem;
+    text-decoration: none;
+    color: white;
 }
