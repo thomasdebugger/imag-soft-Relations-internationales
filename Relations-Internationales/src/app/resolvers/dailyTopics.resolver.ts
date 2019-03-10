@@ -15,9 +15,9 @@ export class DailyTopicsResolver implements Resolve<{
         dailyTopics: DailyTopic[],
         nbRows: number
     }> {
-        if (route.queryParams.type === 'administrator') {
+        if (localStorage.getItem('type') === 'administrator') {
             return this.dailyTopicService.getDailyTopicsByStudent(route.params.idPerson);
         }
-        return this.dailyTopicService.getDailyTopicsByStudent(route.queryParams.idPerson);
+        return this.dailyTopicService.getDailyTopicsByStudent(localStorage.getItem('idPerson'));
     }
 }

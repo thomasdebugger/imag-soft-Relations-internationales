@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { EventEmitter } from 'events';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +17,7 @@ export class HeaderComponent implements OnInit {
   currentLanguage: string;
   languages: string[];
 
-  constructor(private readonly router: Router, private translate: TranslateService) { 
+  constructor(private readonly router: Router, private translate: TranslateService, private readonly loginService: LoginService) {
     translate.setDefaultLang('en');
   }
 
@@ -34,10 +35,14 @@ export class HeaderComponent implements OnInit {
     this.translate.use(event.value);
     this.setLanguage.emit(event.value);
 
-}
+  }
 
   navigateTo(route: string) {
     this.router.navigate([route]);
   }
 
+  logout() {
+    this.loginService.logOut();
+    this.navigateTo('/login');
+  }
 }

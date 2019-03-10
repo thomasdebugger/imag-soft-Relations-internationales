@@ -15,9 +15,9 @@ export class ContactsResolver implements Resolve<{
         contacts: Contact[],
         nbRows: number
     }> {
-        if (route.queryParams.type === 'administrator') {
+        if (localStorage.getItem('type') === 'administrator') {
             return this.contactService.getContactsByStudent(route.params.idPerson);
         }
-        return this.contactService.getContactsByStudent(route.queryParams.idPerson);
+        return this.contactService.getContactsByStudent(localStorage.getItem('idPerson'));
     }
 }

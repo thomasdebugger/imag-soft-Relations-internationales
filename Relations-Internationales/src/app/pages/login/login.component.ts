@@ -36,16 +36,18 @@ export class LoginComponent implements OnInit {
     this.studentService.testLogs(this.login, this.passWord).subscribe(resultStudent => {
       if (resultStudent['result']) {
         this.hasLoginFailed = false;
-        this.logs.idPerson = resultStudent['result'];
-        this.logs.type = 'student';
-        this.router.navigate(['home'], { queryParams: this.logs });
+        localStorage.setItem('idPerson', resultStudent['result']);
+        localStorage.setItem('type', 'student');
+
+        this.router.navigate(['home']);
       } else {
         this.administratorService.testLogs(this.login, this.passWord).subscribe(resultAdmin => {
           if (resultAdmin['result']) {
             this.hasLoginFailed = false;
-            this.logs.idPerson = resultAdmin['result'];
-            this.logs.type = 'administrator';
-            this.router.navigate(['home'], { queryParams: this.logs });
+            localStorage.setItem('idPerson', resultAdmin['result']);
+            localStorage.setItem('type', 'administrator');
+
+            this.router.navigate(['home']);
           }
         });
       }

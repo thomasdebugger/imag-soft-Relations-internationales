@@ -11,8 +11,8 @@ export class LoginResolver implements Resolve<any> {
         private readonly router: Router) { }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
-        if (route.queryParams.type === 'student') {
-            const studentToReturn = this.studentService.getStudent(route.queryParams.idPerson);
+        if (localStorage.getItem('type') === 'student') {
+            const studentToReturn = this.studentService.getStudent(localStorage.getItem('idPerson'));
 
             studentToReturn.subscribe(student => {
                 if (!student[0]
@@ -23,8 +23,8 @@ export class LoginResolver implements Resolve<any> {
             });
             return studentToReturn;
         }
-        if (route.queryParams.type === 'administrator') {
-            const administratorToReturn = this.administratorService.getAdministrator(route.queryParams.idPerson);
+        if (localStorage.getItem('type') === 'administrator') {
+            const administratorToReturn = this.administratorService.getAdministrator(localStorage.getItem('idPerson'));
 
             administratorToReturn.subscribe(administrator => {
                 if (!administrator[0]

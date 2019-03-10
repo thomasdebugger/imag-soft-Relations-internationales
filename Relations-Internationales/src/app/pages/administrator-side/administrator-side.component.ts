@@ -46,9 +46,7 @@ export class AdministratorSideComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.setDataSource();
 
-    this.activatedRoute.queryParams.subscribe(queryParams => {
-      this.logs = { idPerson: queryParams.idPerson, type: 'administrator' };
-    });
+      this.logs = { idPerson: localStorage.getItem('idPerson'), type: localStorage.getItem('type') };
   }
 
   initStudentsLists(): void {
@@ -140,7 +138,7 @@ export class AdministratorSideComponent implements OnInit {
   }
 
   goToStudentDetailsPage(studentId: string): void {
-    this.router.navigate(['student-details/' + studentId], { queryParams: this.logs });
+    this.router.navigate(['student-details/' + studentId]);
   }
 
   checkStudent(student: Student): void {

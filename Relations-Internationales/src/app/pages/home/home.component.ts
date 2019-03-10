@@ -31,25 +31,23 @@ export class HomeComponent implements OnInit {
     private readonly studentService: StudentService, private translate: TranslateService) { }
 
   ngOnInit() {
-    this.activatedRoute.queryParams.subscribe(queryParams => {
-      this.isAdministrator = (queryParams.type === 'administrator');
+    this.isAdministrator = localStorage.getItem('type') === 'administrator';
 
-      this.activatedRoute.data.subscribe(data => {
-        this.userConnected = this.isAdministrator
-          ? new Administrator(data['loginResolverResult'][0])
-          : new Student(data['loginResolverResult'][0]);
+    this.activatedRoute.data.subscribe(data => {
+      this.userConnected = this.isAdministrator
+        ? new Administrator(data['loginResolverResult'][0])
+        : new Student(data['loginResolverResult'][0]);
 
-        this.students = this.userConnected instanceof Administrator
-          ? data['studentsResolverResult']['students']
-          : null;
+      this.students = this.userConnected instanceof Administrator
+        ? data['studentsResolverResult']['students']
+        : null;
 
-        this.fullNameUser = this.userConnected.getFirstName() + ' ' + this.userConnected.getLastName();
+      this.fullNameUser = this.userConnected.getFirstName() + ' ' + this.userConnected.getLastName();
 
-        this.selectedStudent = data.studentResolverResult[0];
-        this.coursesOfSelectedStudent = data.coursesResolverResult['courses'];
-        this.contactsOfSelectedStudent = data.contactsResolverResult['contacts'];
-        this.dailyTopicsOfSelectedStudent = data.dailyTopicsResolverResult['dailyTopics'];
-      });
+      this.selectedStudent = data.studentResolverResult[0];
+      this.coursesOfSelectedStudent = data.coursesResolverResult['courses'];
+      this.contactsOfSelectedStudent = data.contactsResolverResult['contacts'];
+      this.dailyTopicsOfSelectedStudent = data.dailyTopicsResolverResult['dailyTopics'];
     });
   }
 

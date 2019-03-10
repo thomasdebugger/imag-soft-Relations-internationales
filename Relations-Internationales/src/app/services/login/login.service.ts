@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { StudentService } from '../back/student.service';
 import { AdministratorService } from '../back/administrator.service';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +22,10 @@ export class LoginService {
         });
       }
     });
+  }
+
+  logOut() {
+    localStorage.removeItem('idPerson');
+    localStorage.removeItem('type');
   }
 }
