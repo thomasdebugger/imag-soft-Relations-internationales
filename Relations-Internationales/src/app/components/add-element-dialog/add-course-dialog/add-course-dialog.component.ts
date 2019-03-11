@@ -34,7 +34,7 @@ export class AddCourseDialogComponent implements OnInit {
     if (this.checkForm()) {
       const newCourse = new Course({
         name: this.name,
-        description: this.description || 'aucune description',
+        description: this.description || 'no description',
         ects: this.ects,
         teacherFullName: this.teacherFullName,
         teacherEmail: this.teacherEmail,
