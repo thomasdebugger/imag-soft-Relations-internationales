@@ -41,4 +41,18 @@ export class AdministratorService {
         )
       );
   }
+
+  getHasBeenSeenTopicsByStudent(idPerson: string): Observable<number> {
+    return this.http.get<object>(`${environment.ip_address}${environment.back.count_dailyTopics_not_seen}?idPerson=${idPerson}`)
+      .pipe(
+        map(result => result['nombre'])
+      );
+  }
+
+  updateDailyTopicOnSeeForAStudent(idPerson: string): Observable<any> {
+    return this.http.get<object>(`${environment.ip_address}${environment.back.update_dailyTopic}?idPerson=${idPerson}`)
+      .pipe(
+        map(result => result)
+      );
+  }
 }
