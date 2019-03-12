@@ -48,7 +48,7 @@ export class StudentService {
 
   addStudent(student: object): Observable<any> {
     // tslint:disable-next-line:max-line-length
-    return this.http.get<object>(`${environment.ip_address}${environment.back.add_student}?emailAddress=${student['emailAddress']}&firstName=${student['firstName']}&lastName=${student['lastName']}&birthDate=${student['birthDate']}&phoneNumber=${student['phoneNumber']}&university=${student['university']}&isEntrant=${student['isEntrant']}&login=${student['login']}&passWord=${student['passWord']}`);
+    return this.http.get<object>(`${environment.ip_address}${environment.back.add_student}?emailAddress=${student['emailAddress']}&firstName=${student['firstName']}&lastName=${student['lastName']}&birthDate=${student['birthDate']}&phoneNumber=${student['phoneNumber']}&university=${student['university']}&isEntrant=${student['isEntrant']}`);
   }
 
   updateLAStudent(student: object): Observable<any> {

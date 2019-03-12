@@ -154,7 +154,6 @@ export class StudentDetailsComponent implements OnInit {
     matDialogConfig.data = this.selectedStudent;
 
     dialogRef = this.dialog.open(SendEmailDialogComponent, matDialogConfig);
-    dialogRef.afterClosed().subscribe(result => console.log('Send email dialog closed : ', result));
   }
 
   setSelectedCourse(selectedCourse: Course): void {
