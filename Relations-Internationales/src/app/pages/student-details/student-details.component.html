@@ -93,7 +93,8 @@
     </mat-expansion-panel>
 
     <!-- Topics -->
-    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+      (click)="updateDailtTopic()">
       <!-- Panel header -->
       <mat-expansion-panel-header>
         <mat-panel-title>

@@ -17,6 +17,7 @@ import { CourseService } from 'src/app/services/back/course.service';
 import { DailyTopicsService } from 'src/app/services/back/daily-topics.service';
 import { ContactService } from 'src/app/services/back/contact.service';
 import { StudentService } from 'src/app/services/back/student.service';
+import { AdministratorService } from 'src/app/services/back/administrator.service';
 // import * as puppeteer from 'puppeteer';
 
 @Component({
@@ -33,7 +34,8 @@ export class StudentDetailsComponent implements OnInit {
     private readonly contactService: ContactService,
     private readonly courseService: CourseService,
     private readonly dailyTopicService: DailyTopicsService,
-    private readonly studentService: StudentService) { }
+    private readonly studentService: StudentService,
+    private readonly administratorService: AdministratorService) { }
 
   selectedStudent: Student;
   coursesOfSelectedStudent: Course[];
@@ -242,5 +244,9 @@ export class StudentDetailsComponent implements OnInit {
         });
 
     });
+  }
+
+  updateDailtTopic(): void {
+    this.administratorService.updateDailyTopicOnSeeForAStudent(this.selectedStudent.getIdPerson()).subscribe();
   }
 }
