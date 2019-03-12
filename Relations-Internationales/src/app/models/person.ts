@@ -8,17 +8,6 @@ export class Person {
     private lastConnection: Date;
     private phoneNumber: string;
 
-    // constructor(idPerson: string, emailAddress: string, firstName: string, lastName: string,
-    //     birthDate: Date, lastConnection: Date, phoneNumber: string) {
-    //     this.idPerson = idPerson;
-    //     this.emailAddress = emailAddress;
-    //     this.firstName = firstName;
-    //     this.lastName = lastName;
-    //     this.birthDate = birthDate;
-    //     this.lastConnection = lastConnection;
-    //     this.phoneNumber = phoneNumber;
-    // }
-
     constructor(data: object) {
         const person = data || {};
         this.idPerson = person['idPerson'];
