@@ -5,7 +5,7 @@
     <ng-container matColumnDef="Signal">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let student">
-        <mat-icon *ngIf="true">notification_important</mat-icon>
+        <mat-icon *ngIf="student.getHasNewDAilyTopics() === 'true'">notification_important</mat-icon>
       </td>
     </ng-container>
 

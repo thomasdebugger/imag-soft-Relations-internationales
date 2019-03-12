@@ -6,6 +6,7 @@ import { AddStudentDialogComponent } from 'src/app/components/add-element-dialog
 import { StudentService } from 'src/app/services/back/student.service';
 import { DailyTopicsService } from 'src/app/services/back/daily-topics.service';
 import { DailyTopic } from 'src/app/models/daily-topic';
+import { AdministratorService } from 'src/app/services/back/administrator.service';
 
 @Component({
   selector: 'app-administrator-side',
@@ -28,7 +29,7 @@ export class AdministratorSideComponent implements OnInit {
     private readonly dialog: MatDialog,
     private readonly dailyTopicService: DailyTopicsService,
     private readonly studentService: StudentService,
-    private readonly activatedRoute: ActivatedRoute) { }
+    private readonly administratorService: AdministratorService) { }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -46,11 +47,16 @@ export class AdministratorSideComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.setDataSource();
 
-      this.logs = { idPerson: localStorage.getItem('idPerson'), type: localStorage.getItem('type') };
+    this.logs = { idPerson: localStorage.getItem('idPerson'), type: localStorage.getItem('type') };
   }
 
   initStudentsLists(): void {
     this.studentsInput.forEach(student => {
+
+      this.administratorService.getHasBeenSeenTopicsByStudent(student.getIdPerson()).subscribe(result => {
+        result === 1 ? student.setHasNewDAilyTopics('true') : student.setHasNewDAilyTopics('false');
+      });
+
       student.getIsArchived() === 'true' ? this.archivedStudents.push(student) : this.nonArchivedStudents.push(student);
 
       this.dailyTopicService.getDailyTopicsByStudent(student.getIdPerson())
