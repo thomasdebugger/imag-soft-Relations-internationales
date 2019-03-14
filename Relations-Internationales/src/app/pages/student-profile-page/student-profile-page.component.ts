@@ -1,5 +1,4 @@
 import { Student } from './../../models/student';
-import { SimulatorService } from './../../services/simulator/simulator.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog, MatTableDataSource } from '@angular/material';
 import { AddCourseModalComponent } from '../add-course-modal/add-course-modal.component';
@@ -15,6 +14,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Mark } from 'src/app/models/mark';
 import { Poll } from 'src/app/models/poll';
 import { PollService } from 'src/app/services/back/poll.service';
+import { CourseService } from 'src/app/services/back/course.service';
+import { ContactService } from 'src/app/services/back/contact.service';
+import { DailyTopicsService } from 'src/app/services/back/daily-topics.service';
 
 
 
@@ -31,6 +33,8 @@ export class StudentProfilePageComponent implements OnInit {
   affiliation: String = '';
   mail: String = '';
   title: String = '';
+  teacherName : string = '';
+  commentary : string = ' ;'
 
 
   @Input() selectedStudent: Student = null;
@@ -52,7 +56,9 @@ export class StudentProfilePageComponent implements OnInit {
   dataSourcePL: MatTableDataSource<DailyTopic> =null;
   dataSourceContact: MatTableDataSource<Contact> = null;
 
-  constructor(private activatedRoute: ActivatedRoute, public dialog: MatDialog, private datePipe: DatePipe, private readonly markService: MarkService, private readonly pollService: PollService) {
+  constructor(private activatedRoute: ActivatedRoute, public dialog: MatDialog, private datePipe: DatePipe,
+     private readonly markService: MarkService, private readonly pollService: PollService, private courseService : CourseService,
+     private contactService : ContactService, private privateService : DailyTopicsService) {
   }
 
 
@@ -86,7 +92,8 @@ export class StudentProfilePageComponent implements OnInit {
      var newData = this.dataSourceMark.data;
      const dialogRef = this.dialog.open(AddCourseModalComponent, {
        width: '250px',
-       data: { name: this.name, ects: this.ects, description: this.description }
+       data: { name: this.name, ects: this.ects, description: this.description,
+         teacherName: this.teacherName, commentary: this.commentary, mail: this.mail}
      });
 
      dialogRef.afterClosed().subscribe(result => {
@@ -96,12 +103,18 @@ export class StudentProfilePageComponent implements OnInit {
         name:result.name,
         description: result.description,
         ects: result.ects,
-        teacherFullName: '',
-        teacherEmail: '',
-        idPerson: this.selectedStudent.getIdPerson()
+        teacherFullName: result.teacherName,
+        teacherEmail: result.mail,
+        idPerson: this.selectedStudent.getIdPerson(),
+        lastCommentary : result.commentary
       });
-       newData.push(newCourse);
-       this.dataSourceMark.data = newData;
+      newData.push(newCourse);
+      this.dataSourceMark.data = newData;
+      this.courseService.addCourse(newCourse).subscribe();
+     
+      
+
+       
      });
 
   }
@@ -127,7 +140,7 @@ export class StudentProfilePageComponent implements OnInit {
 
       
        const newContact = new Contact({
-        idContact: null,
+        idContact: '',
         idPerson: this.selectedStudent.getIdPerson(),
         emailAddress: result.mail,
         firstName: ' ',
@@ -136,9 +149,9 @@ export class StudentProfilePageComponent implements OnInit {
         affiliation: result.affiliation,
         description: result.description
       });
-      console.log(newContact);
        newData.push(newContact);
        this.dataSourceContact.data = newData;
+       this.contactService.addContact(newContact).subscribe();
        
      });
 
@@ -154,7 +167,7 @@ export class StudentProfilePageComponent implements OnInit {
      dialogRef.afterClosed().subscribe(result => {
 
       const newDailyTopic = new DailyTopic({
-        idDailyTopic: null,
+        idDailyTopic: '',
         dateDailyTopic: new Date(),
         description: result.description,
         name: result.title,
@@ -163,6 +176,7 @@ export class StudentProfilePageComponent implements OnInit {
 
        newData.push(newDailyTopic);
        this.dataSourcePL.data = newData;
+       this.privateService.addDailyTopic(newDailyTopic).subscribe();
      });
 
   }

@@ -76,14 +76,14 @@
 <div *ngFor="let poll of polls; let pollIndex = index" class="polls">
   <div>{{poll.getQuestion()}}</div>
   <mat-form-field>
-      <mat-select placeholder="Selectionner votre réponse" (selectionChange)="selectedAnswers[poll.getIdPoll()] = $event.value">
+      <mat-select placeholder="Selectionner votre réponse :" (selectionChange)="selectedAnswers[poll.getIdPoll()] = $event.value">
         <mat-option *ngFor="let possibleAnswer of possibleAnswers[poll.getIdPoll()]" [value]="possibleAnswer.getValue()">
             {{possibleAnswer.getValue()}}
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <button mat-stroked-button (click)="sendAnswer(poll.getIdPoll(), pollIndex)">
-      <a>send my answer</a>
+    <button (click)="sendAnswer(poll.getIdPoll(), pollIndex)" class="button">
+      <a>ok</a>
     </button>
 </div>
 

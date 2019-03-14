@@ -8,6 +8,7 @@ export class Course {
     private idPerson: string;
     private teacherFullName: string;
     private teacherEmail: string;
+    private lastCommentary: string;
 
     // constructor(idCourse: string = null, name: string = null, description: string = null, ects: number = null,
     //     teacher: { fullName: string, emailAddress: string }[] = [], student: Student = null, polls: Poll[] = [],
@@ -35,6 +36,7 @@ export class Course {
         this.idPerson = course['idPerson'];
         this.teacherFullName = course['teacherFullName'];
         this.teacherEmail = course['teacherEmail'];
+        this.lastCommentary = course['lastCommentary'];
     }
 
     public getIdCourse(): string { return this.idCourse; }
@@ -44,6 +46,7 @@ export class Course {
     public getIdPerson(): string { return this.idPerson; }
     public getTeacherFullName(): string { return this.teacherFullName; }
     public getTeacherEmail(): string { return this.teacherEmail; }
+    public getLastCommentary(): string { return this.lastCommentary; }
 
     public setIdCourse(value: string): void { this.idCourse = value; }
     public setDescription(value: string): void { this.description = value; }
@@ -52,4 +55,5 @@ export class Course {
     public setIdPerson(value: string): void { this.idPerson = value; }
     public setTeacherFullName(value: string): void { this.teacherFullName = value; }
     public setTeacherEmail(value: string): void { this.teacherEmail = value; }
+    public setLastCommentary(value: string): void { this.lastCommentary = value; }
 }

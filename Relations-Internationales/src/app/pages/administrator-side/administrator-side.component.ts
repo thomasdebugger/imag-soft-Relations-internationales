@@ -7,6 +7,7 @@ import { StudentService } from 'src/app/services/back/student.service';
 import { DailyTopicsService } from 'src/app/services/back/daily-topics.service';
 import { DailyTopic } from 'src/app/models/daily-topic';
 
+
 @Component({
   selector: 'app-administrator-side',
   templateUrl: './administrator-side.component.html',

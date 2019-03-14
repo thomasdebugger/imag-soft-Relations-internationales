@@ -9,5 +9,9 @@
     "Private life":"Private life",
     "Titre":"Title",
     "Date":"Date",
-    "DescriptionPL":"Description"
+    "DescriptionPL":"Description",
+    "NameAdminSide" : "Name",
+    "UniversityAdminSide" : "University",
+    "LastConnectionAdminSide" : "Last connection",
+    "Entrant / Leaving" : "Incoming / Outgoing"
 }

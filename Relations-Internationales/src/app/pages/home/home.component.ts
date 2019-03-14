@@ -55,6 +55,6 @@ export class HomeComponent implements OnInit {
   }
 
   switchLanguage(event){
-   // this.translate.use(language);
+   //this.translate.use(event);
   }
 }
