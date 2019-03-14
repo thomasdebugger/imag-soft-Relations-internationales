@@ -36,11 +36,13 @@ export const environment = {
     get_polls: '/poll/get_poll.php',
     add_poll: '/poll/add_poll.php',
     delete_poll: '/poll/delete_poll.php',
-    update_poll : '/poll/update_poll.php',
+    update_poll: '/poll/update_poll.php',
 
     add_possibleAnswer: '/possibleAnswer/add_possibleAnswer.php',
     get_possibleAnswers: '/possibleAnswer/get_possibleAnswer.php',
-    
+
+    count_dailyTopics_not_seen: '/administrator/count_daily_topic_not_seen.php',
+    update_dailyTopic: '/administrator/update_daily_topic.php',
   }
 };
 

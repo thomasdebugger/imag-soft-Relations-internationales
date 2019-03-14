@@ -15,7 +15,8 @@
         <div class="ects-field">
           <h3 [class.invalid-field]="!isFormValid && !isEctsValid">ECTS</h3>
           <mat-form-field>
-            <input matInput type="number" placeholder="Enter the ects" [(ngModel)]="ects" name="courseECTS">
+            <input matInput type="number" onkeydown="return event.keyCode !== 69" placeholder="Enter the ects"
+              [(ngModel)]="ects" name="courseECTS">
           </mat-form-field>
         </div>
         <!-- Field TeacherEmail -->
@@ -32,14 +33,16 @@
         <div class="description-field">
           <h3>Description</h3>
           <mat-form-field>
-            <textarea matInput placeholder="Enter the description" [(ngModel)]="description" name="courseDescription"></textarea>
+            <textarea matInput placeholder="Enter the description" [(ngModel)]="description"
+              name="courseDescription"></textarea>
           </mat-form-field>
         </div>
         <!-- Field TeacherFullName -->
         <div class="teacher-full-name-field">
           <h3 [class.invalid-field]="!isFormValid && !isTeacherFullNameValid">Teacher full name</h3>
           <mat-form-field>
-            <input matInput type="text" placeholder="Enter the teacher's full name" [(ngModel)]="teacherFullName" name="courseTeacherFullName">
+            <input matInput type="text" placeholder="Enter the teacher's full name" [(ngModel)]="teacherFullName"
+              name="courseTeacherFullName">
           </mat-form-field>
         </div>
       </div>

@@ -43,31 +43,27 @@ export class StudentProfilePageComponent implements OnInit {
   @Input() dailyTopicsOfSelectedStudent: DailyTopic[] = [];
 
   private marks: { idCourse: string; marks: Mark[] }[] = [];
- 
   private selectedCourse: Course;
 
   displayedColumnsMark: string[] = ['name', 'ects', 'description', 'commentaire'];
   displayedColumnsPL: string[] = ['name', 'dateDailyTopic', 'description'];
   displayedColumnsContact: string[] = ['lastName', 'description', 'affiliation', 'emailAddress'];
 
-  
-
   dataSourceMark: MatTableDataSource<Course> = null;
-  dataSourcePL: MatTableDataSource<DailyTopic> =null;
+  dataSourcePL: MatTableDataSource<DailyTopic> = null;
   dataSourceContact: MatTableDataSource<Contact> = null;
+
 
   constructor(private activatedRoute: ActivatedRoute, public dialog: MatDialog, private datePipe: DatePipe,
      private readonly markService: MarkService, private readonly pollService: PollService, private courseService : CourseService,
      private contactService : ContactService, private privateService : DailyTopicsService) {
+
   }
 
 
   ngOnInit() {
 
     this.activatedRoute.data.subscribe(data => {
-      console.log(data);
-     
-
       this.coursesOfSelectedStudent.forEach(course => {
         this.markService.getMarksByStudent(course.getIdCourse(), this.selectedStudent.getIdPerson())
           .subscribe(result => {
@@ -75,20 +71,15 @@ export class StudentProfilePageComponent implements OnInit {
             result['marks'].forEach(mark => marksByCourse.marks.push(mark));
             this.marks.push(marksByCourse);
           });
-          
       });
       this.dataSourceMark = new MatTableDataSource(this.coursesOfSelectedStudent);
       this.dataSourcePL = new MatTableDataSource(this.dailyTopicsOfSelectedStudent);
       this.dataSourceContact = new MatTableDataSource(this.contactsOfSelectedStudent);
-      
-      
-    
     });
-  
-    
   }
 
   addMark() {
+
      var newData = this.dataSourceMark.data;
      const dialogRef = this.dialog.open(AddCourseModalComponent, {
        width: '250px',
@@ -96,11 +87,12 @@ export class StudentProfilePageComponent implements OnInit {
          teacherName: this.teacherName, commentary: this.commentary, mail: this.mail}
      });
 
-     dialogRef.afterClosed().subscribe(result => {
+
+    dialogRef.afterClosed().subscribe(result => {
 
       const newCourse = new Course({
         idCourse: null,
-        name:result.name,
+        name: result.name,
         description: result.description,
         ects: result.ects,
         teacherFullName: result.teacherName,
@@ -111,11 +103,10 @@ export class StudentProfilePageComponent implements OnInit {
       newData.push(newCourse);
       this.dataSourceMark.data = newData;
       this.courseService.addCourse(newCourse).subscribe();
-     
       
-
-       
      });
+
+
 
   }
 
@@ -123,9 +114,8 @@ export class StudentProfilePageComponent implements OnInit {
   openDetailCourse(course: Course) {
     const dialogCourse = this.dialog.open(CourseDetailModalComponent, {
       width: '90%',
-      data: {course : course, idStudent : this.selectedStudent.getIdPerson()}
+      data: { course: course, idStudent: this.selectedStudent.getIdPerson() }
     });
-  
   }
 
   addContact() {
@@ -136,11 +126,9 @@ export class StudentProfilePageComponent implements OnInit {
        data: { name: this.name, description: this.description, affiliation: this.affiliation, mail: this.mail }
      });
 
-     dialogRef.afterClosed().subscribe(result => {
-
-      
-       const newContact = new Contact({
-        idContact: '',
+    dialogRef.afterClosed().subscribe(result => {
+      const newContact = new Contact({
+        idContact: null,
         idPerson: this.selectedStudent.getIdPerson(),
         emailAddress: result.mail,
         firstName: ' ',
@@ -155,16 +143,17 @@ export class StudentProfilePageComponent implements OnInit {
        
      });
 
+
   }
 
   addPrivateLife() {
-     var newData = this.dataSourcePL.data;
-     const dialogRef = this.dialog.open(AddPrivateLifeModalComponent, {
-       width: '250px',
-       data: { title: this.title, description: this.description }
-     });
+    const newData = this.dataSourcePL.data;
+    const dialogRef = this.dialog.open(AddPrivateLifeModalComponent, {
+      width: '250px',
+      data: { title: this.title, description: this.description }
+    });
 
-     dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(result => {
 
       const newDailyTopic = new DailyTopic({
         idDailyTopic: '',
@@ -178,6 +167,7 @@ export class StudentProfilePageComponent implements OnInit {
        this.dataSourcePL.data = newData;
        this.privateService.addDailyTopic(newDailyTopic).subscribe();
      });
+
 
   }
 

@@ -6,11 +6,11 @@
       <h2 *ngIf="fullNameUser">Logged as {{fullNameUser}}</h2>
 
       <mat-select [(value)]="currentLanguage" (selectionChange)="switchLanguage($event)">
-        <mat-option *ngFor="let language of languages" value="{{language}}" >
+        <mat-option *ngFor="let language of languages" value="{{language}}">
           {{language}}
         </mat-option>
       </mat-select>
-      <button *ngIf="fullNameUser" mat-icon-button class="logout-button" (click)="navigateTo('login')">
+      <button *ngIf="fullNameUser" mat-icon-button class="logout-button" (click)="logout()">
         <mat-icon>logout</mat-icon>
       </button>
     </div>

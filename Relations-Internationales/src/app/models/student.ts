@@ -13,6 +13,7 @@ export class Student {
     private isArchived: string;
     private isLearningAgreementValid: string;
     private dateLearningAgreementValid: Date;
+    private hasNewDailyTopics: string;
 
     constructor(data: object) {
         const student = data || {};
@@ -43,6 +44,7 @@ export class Student {
     public getIsArchived(): string { return this.isArchived; }
     public getIsLearningAgreementValid(): string { return this.isLearningAgreementValid; }
     public getDateLearningAgreementValid(): Date { return this.dateLearningAgreementValid; }
+    public getHasNewDAilyTopics(): string { return this.hasNewDailyTopics; }
 
     public setIdPerson(value: string): void { this.idPerson = value; }
     public setEmailAddress(value: string): void { this.emailAddress = value; }
@@ -56,4 +58,5 @@ export class Student {
     public setIsArchived(value: string): void { this.isArchived = value; }
     public setIsLearningAgreementValid(value: string): void { this.isLearningAgreementValid = value; }
     public setDateLearningAgreementValid(value: Date): void { this.dateLearningAgreementValid = value; }
+    public setHasNewDAilyTopics(value: string): void { this.hasNewDailyTopics = value; }
 }

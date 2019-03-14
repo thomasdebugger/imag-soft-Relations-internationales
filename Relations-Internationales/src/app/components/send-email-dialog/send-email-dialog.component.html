@@ -20,7 +20,8 @@
         </div>
 
         <!-- Button Send email -->
-        <button mat-raised-button color="primary" class="send-button" (click)="sendEmail()">Create</button>
+        <a class="send-button" (click)="sendEmail()"
+          href="mailto:{{student.getEmailAddress()}}?subject={{object}}&body={{body}}">Send</a>
       </div>
     </div>
   </form>

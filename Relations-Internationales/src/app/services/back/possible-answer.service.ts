@@ -19,10 +19,8 @@ export class PossibleAnswerService {
   }> {
     return this.http.get<object>(`${environment.ip_address}${environment.back.get_possibleAnswers}?idPoll=${idPoll}`).pipe(
       map(response => {
-        console.log("rep = " , response);
         return {
           possibleAnswers: response['PossibleAnswer'].map((possibleAnswer: PossibleAnswer) => {
-            
             return new PossibleAnswer(possibleAnswer);
           }),
           nbRows: response['nombre']

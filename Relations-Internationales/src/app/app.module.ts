@@ -46,17 +46,20 @@ import { CoursesResolver } from './resolvers/courses.resolver';
 import { ContactsResolver } from './resolvers/contacts.resolver';
 import { DailyTopicsResolver } from './resolvers/dailyTopics.resolver';
 import { LoginResolver } from './resolvers/login.resolver';
+import { AuthenticationGuard } from './guards/authentication.guard';
 
 
 const appRoutes: Routes = [
     // default route
     {
+        canActivate: [AuthenticationGuard],
         path: '',
         redirectTo: '/home',
         pathMatch: 'full'
     },
     // localhost/4200/home
     {
+        canActivate: [AuthenticationGuard],
         resolve: {
             loginResolverResult: LoginResolver,
             studentsResolverResult: StudentsResolver,
@@ -75,6 +78,7 @@ const appRoutes: Routes = [
     },
     // localhost/4200/student-details/:idPerson
     {
+        canActivate: [AuthenticationGuard],
         resolve: {
             loginResolverResult: LoginResolver,
             studentResolverResult: StudentResolver,
@@ -87,24 +91,20 @@ const appRoutes: Routes = [
     },
     // localhost/4200/student-profile-page
     {
+        canActivate: [AuthenticationGuard],
         path: 'CourseDetailModalComponent',
         component: CourseDetailModalComponent
-    },/*
-    {
-        path: 'SondageModalComponent/:idPoll',
-        component: SondageModalComponent
-    },*/
+    },
     // localhost/4200/error
     {
         path: '**',
         component: ErrorComponent
     },
-  
 ];
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
-  }
+}
 
 @NgModule({
     declarations: [
@@ -129,7 +129,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         AddContactModalComponent,
         AddPrivateLifeModalComponent,
         SondageModalComponent,
-
     ],
     imports: [
         BrowserModule,
@@ -172,6 +171,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         ContactsResolver,
         DailyTopicsResolver,
         LoginResolver,
+        AuthenticationGuard
     ],
     bootstrap: [AppComponent],
     entryComponents: [

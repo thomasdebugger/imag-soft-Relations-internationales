@@ -28,7 +28,7 @@ export class AddDailyTopicDialogComponent implements OnInit {
     if (this.checkForm()) {
       const newDailyTopic = new DailyTopic({
         dateDailyTopic: new Date(),
-        description: this.description,
+        description: this.description || 'no description',
         name: this.name,
         idPerson: this.injectedStudent.getIdPerson()
       });

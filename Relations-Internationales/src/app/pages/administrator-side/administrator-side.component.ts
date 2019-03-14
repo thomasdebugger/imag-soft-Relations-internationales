@@ -6,6 +6,7 @@ import { AddStudentDialogComponent } from 'src/app/components/add-element-dialog
 import { StudentService } from 'src/app/services/back/student.service';
 import { DailyTopicsService } from 'src/app/services/back/daily-topics.service';
 import { DailyTopic } from 'src/app/models/daily-topic';
+import { AdministratorService } from 'src/app/services/back/administrator.service';
 
 
 @Component({
@@ -29,7 +30,7 @@ export class AdministratorSideComponent implements OnInit {
     private readonly dialog: MatDialog,
     private readonly dailyTopicService: DailyTopicsService,
     private readonly studentService: StudentService,
-    private readonly activatedRoute: ActivatedRoute) { }
+    private readonly administratorService: AdministratorService) { }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -47,13 +48,16 @@ export class AdministratorSideComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.setDataSource();
 
-    this.activatedRoute.queryParams.subscribe(queryParams => {
-      this.logs = { idPerson: queryParams.idPerson, type: 'administrator' };
-    });
+    this.logs = { idPerson: localStorage.getItem('idPerson'), type: localStorage.getItem('type') };
   }
 
   initStudentsLists(): void {
     this.studentsInput.forEach(student => {
+
+      this.administratorService.getHasBeenSeenTopicsByStudent(student.getIdPerson()).subscribe(result => {
+        result === 1 ? student.setHasNewDAilyTopics('true') : student.setHasNewDAilyTopics('false');
+      });
+
       student.getIsArchived() === 'true' ? this.archivedStudents.push(student) : this.nonArchivedStudents.push(student);
 
       this.dailyTopicService.getDailyTopicsByStudent(student.getIdPerson())
@@ -82,7 +86,7 @@ export class AdministratorSideComponent implements OnInit {
           this.nonArchivedStudents.push(student);
           this.setDataSource();
         },
-          err => {// TODO C'est super bizarre
+          err => {
             console.log(err);
             this.archivedStudents.splice(this.archivedStudents.indexOf(student), 1);
             this.nonArchivedStudents.push(student);
@@ -96,7 +100,7 @@ export class AdministratorSideComponent implements OnInit {
           this.archivedStudents.push(student);
           this.setDataSource();
         },
-          err => {// TODO C'est super bizarre
+          err => {
             console.log(err);
             this.nonArchivedStudents.splice(this.archivedStudents.indexOf(student), 1);
             this.archivedStudents.push(student);
@@ -120,7 +124,6 @@ export class AdministratorSideComponent implements OnInit {
 
     dialogRef = this.dialog.open(AddStudentDialogComponent, matDialogConfig);
     dialogRef.afterClosed().subscribe(result => {
-      console.log('Student dialog closed : ', result);
       this.studentService.addStudent(result).subscribe((newStudent) => {
         this.nonArchivedStudents.push(new Student(newStudent['Student'][0]));
         this.setDataSource();
@@ -141,7 +144,7 @@ export class AdministratorSideComponent implements OnInit {
   }
 
   goToStudentDetailsPage(studentId: string): void {
-    this.router.navigate(['student-details/' + studentId], { queryParams: this.logs });
+    this.router.navigate(['student-details/' + studentId]);
   }
 
   checkStudent(student: Student): void {

@@ -9,9 +9,9 @@ export class StudentResolver implements Resolve<Student> {
     constructor(private readonly studentService: StudentService) { }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Student> {
-        if (route.queryParams.type === 'administrator') {
+        if (localStorage.getItem('type') === 'administrator') {
             return this.studentService.getStudent(route.params.idPerson);
         }
-        return this.studentService.getStudent(route.queryParams.idPerson);
+        return this.studentService.getStudent(localStorage.getItem('idPerson'));
     }
 }

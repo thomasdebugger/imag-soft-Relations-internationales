@@ -42,6 +42,7 @@ mat-expansion-panel {
 }
 
 .contact {
+    cursor: pointer;
     color: cornflowerblue;
     text-decoration: underline;
 }
@@ -53,6 +54,8 @@ mat-expansion-panel {
 .course-column, .contact-column {
     width: 20%;
     text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .course-row {
@@ -62,6 +65,8 @@ mat-expansion-panel {
 .dailyTopic-column {
     width: 25%;
     text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .add-element-button {
