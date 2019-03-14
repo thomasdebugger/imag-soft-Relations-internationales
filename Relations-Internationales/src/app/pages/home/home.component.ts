@@ -51,12 +51,8 @@ export class HomeComponent implements OnInit {
     });
   }
 
-<<<<<<< HEAD
   switchLanguage(event){
    //this.translate.use(event);
-=======
-  switchLanguage(event) {
-    // this.translate.use(language);
->>>>>>> e6fe9fe4b56b3866e2e1216a482d6695d54a766f
+
   }
 }
