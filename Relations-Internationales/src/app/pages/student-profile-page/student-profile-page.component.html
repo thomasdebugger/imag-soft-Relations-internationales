@@ -1,5 +1,11 @@
 <div class="pageBody">
   <h1 translate class ="titre" >Student profile</h1>
+  <h3 *ngIf="selectedStudent.getIsLearningAgreementValid() === 'true'" class="greenColor">
+    Learning agreement : valid - {{ selectedStudent.getDateLearningAgreementValid() | date: 'medium' }}
+  </h3>
+  <h3 *ngIf="selectedStudent.getIsLearningAgreementValid() === 'false'" class="redColor">
+    Learning agreement : unvalid
+  </h3>
   <mat-expansion-panel [expanded]="true">
       <mat-expansion-panel-header>
         <mat-panel-title  translate>

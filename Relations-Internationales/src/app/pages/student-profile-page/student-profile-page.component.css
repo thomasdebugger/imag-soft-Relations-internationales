@@ -9,3 +9,16 @@ table {
 .titre{
   text-align:center;
 }
+
+.redColor {
+  color: red;
+}
+
+.greenColor {
+  color: green;
+}
+
+.pageBody{
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
