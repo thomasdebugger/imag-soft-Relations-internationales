@@ -37,14 +37,25 @@
     </div>
   </mat-card-header>
 
-  <!-- Content -->
-  <mat-card-content *ngIf="!selectedCourse">
-    <!-- Courses -->
+
+
+
+
+
+
+
+
+
+
+
+
+  <mat-card-content>
+    <!-- Learning agreement -->
     <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
       <!-- Panel header -->
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <h2>Courses</h2>
+          <h2>Learning agreement</h2>
         </mat-panel-title>
         <!-- Panel description -->
         <mat-panel-description>
@@ -56,6 +67,94 @@
           </h3>
         </mat-panel-description>
 
+      </mat-expansion-panel-header>
+      <!-- Courses list -->
+      <mat-list role="list">
+        <!-- Column header -->
+        <mat-list-item class="header" role="listitem">
+          <h2 class="course-column">Name</h2>
+          <h2 class="course-column">ECTS</h2>
+          <h2 class="course-column">Description</h2>
+          <h2 class="course-column">Semestre</h2>
+          <h2 class="course-column">Added at</h2>
+          <h2 class="course-column"></h2>
+        </mat-list-item>
+        <!-- Courses content -->
+        <mat-list-item *ngFor="let course of [1]; index as indexCourse" class="course-row" role="listitem">
+          <h2 class="course-column">Nom du cours</h2>
+          <h2 class="course-column">333</h2>
+          <h2 class="course-column">une pitite description</h2>
+          <h2 class="course-column">s8</h2>
+          <h2 class="course-column">la date d'ajout</h2>
+          <button mat-icon-button class="course-column" (click)="deleteCourse(course.getIdCourse())">
+            <mat-icon class="trash-icon">delete_outline</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-list>
+      <!-- Add Course button -->
+      <div class="courses-footer">
+        <button mat-stroked-button color="primary" class="add-element-button"
+          (click)="displayAddElementDialog('course')">
+          Add new course
+        </button>
+      </div>
+    </mat-expansion-panel>
+
+    <!-- History -->
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <!-- Panel header -->
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h2>History</h2>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <!-- Courses list -->
+      <mat-list role="list">
+        <!-- Column header -->
+        <mat-list-item class="header" role="listitem">
+          <h2 class="course-column">Name</h2>
+          <h2 class="course-column">ECTS</h2>
+          <h2 class="course-column">Description</h2>
+          <h2 class="course-column">Semestre</h2>
+          <h2 class="course-column">Refused at</h2>
+          <h2 class="course-column"></h2>
+        </mat-list-item>
+        <!-- Courses content -->
+        <mat-list-item *ngFor="let course of [1, 2, 3]; index as indexCourse" class="course-row" role="listitem">
+          <h2 class="course-column">Nom du cours</h2>
+          <h2 class="course-column">333</h2>
+          <h2 class="course-column">une pitite description</h2>
+          <h2 class="course-column">s8</h2>
+          <h2 class="course-column">la date de refus</h2>
+          <button mat-icon-button class="course-column" (click)="deleteCourse(course.getIdCourse())">
+            <mat-icon class="trash-icon">delete_outline</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-list>
+    </mat-expansion-panel>
+  </mat-card-content>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Content -->
+  <mat-card-content *ngIf="!selectedCourse">
+    <!-- Courses -->
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <!-- Panel header -->
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h2>Courses</h2>
+        </mat-panel-title>
       </mat-expansion-panel-header>
       <!-- Courses list -->
       <mat-list role="list">
