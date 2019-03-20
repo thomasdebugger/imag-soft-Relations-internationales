@@ -31,10 +31,15 @@
               <td mat-cell *matCellDef="let element" > {{element.getDescription()}} </td>
             </ng-container> 
 
-            <ng-container matColumnDef="commentaire">
-              <th mat-header-cell *matHeaderCellDef><div translate >Dernier commentaire</div></th>
-              <td mat-cell *matCellDef="let element"> {{element.getLastCommentary()}} </td>
-            </ng-container>  
+            <ng-container matColumnDef="codeUE">
+              <th mat-header-cell *matHeaderCellDef><div translate >Code UE</div></th>
+              <td mat-cell *matCellDef="let element"> {{element.getCodeUE()}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="semester">
+              <th mat-header-cell *matHeaderCellDef><div translate >Semester</div></th>
+              <td mat-cell *matCellDef="let element"> {{element.getSemester()}} </td>
+            </ng-container>    
             
             <tr mat-header-row *matHeaderRowDef="displayedColumnsMark"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumnsMark;"></tr>

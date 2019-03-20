@@ -45,7 +45,7 @@ export class StudentProfilePageComponent implements OnInit {
   private marks: { idCourse: string; marks: Mark[] }[] = [];
   private selectedCourse: Course;
 
-  displayedColumnsMark: string[] = ['name', 'ects', 'description', 'commentaire'];
+  displayedColumnsMark: string[] = ['name', 'ects', 'description','codeUE','semester'];
   displayedColumnsPL: string[] = ['name', 'dateDailyTopic', 'description'];
   displayedColumnsContact: string[] = ['lastName', 'description', 'affiliation', 'emailAddress'];
 
