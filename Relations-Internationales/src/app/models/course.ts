@@ -9,8 +9,10 @@ export class Course {
     private teacherFullName: string;
     private teacherEmail: string;
     private lastCommentary: string;
-    private codeUE :  string;
-    private semester : string;
+    private codeUE: string;
+    private semester: string;
+    private state: string;
+    private lastModificaiton: Date;
 
     // constructor(idCourse: string = null, name: string = null, description: string = null, ects: number = null,
     //     teacher: { fullName: string, emailAddress: string }[] = [], student: Student = null, polls: Poll[] = [],
@@ -33,13 +35,14 @@ export class Course {
         this.idCourse = course['idCourse'];
         this.description = course['description'];
         this.name = course['name'];
-        //this.ects = parseInt(course['ects'], 10);
         this.ects = course['ects'];
         this.idPerson = course['idPerson'];
         this.teacherFullName = course['teacherFullName'];
         this.teacherEmail = course['teacherEmail'];
         this.codeUE = course['codeUE'];
         this.semester = course['semester'];
+        this.state = course['state'];
+        this.lastModificaiton = course['lastModificaiton'];
     }
 
     public getIdCourse(): string { return this.idCourse; }
@@ -51,6 +54,8 @@ export class Course {
     public getTeacherEmail(): string { return this.teacherEmail; }
     public getCodeUE(): string { return this.codeUE; }
     public getSemester(): string { return this.semester; }
+    public getState(): string { return this.state; }
+    public getLastModification(): Date { return this.lastModificaiton; }
 
     public setIdCourse(value: string): void { this.idCourse = value; }
     public setDescription(value: string): void { this.description = value; }

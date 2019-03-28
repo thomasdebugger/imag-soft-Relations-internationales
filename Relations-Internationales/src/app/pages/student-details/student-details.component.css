@@ -95,6 +95,10 @@ mat-card-header button {
     color: green;
 }
 
+.orangeColor {
+    color: orange;
+}
+
 .courses-footer {
     display: flex
 }

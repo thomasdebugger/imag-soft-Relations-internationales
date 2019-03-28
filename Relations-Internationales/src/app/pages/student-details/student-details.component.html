@@ -28,7 +28,7 @@
         <button mat-stroked-button (click)="generatePDF()">Generate PDF</button>
         <br />
         <button mat-stroked-button *ngIf="!selectedCourse"
-          [class.redColor]="selectedStudent.getIsLearningAgreementValid() === 'false'"
+          [class.redColor]="selectedStudent.getIsLearningAgreementValid() === 'true'"
           (click)="setIsLearningAgreementValid()">
           <a *ngIf="selectedStudent.getIsLearningAgreementValid() !== 'true'">Valid learning agreement</a>
           <a *ngIf="selectedStudent.getIsLearningAgreementValid() === 'true'">Invalid learning agreement</a>
@@ -63,7 +63,7 @@
             Learning agreement : valid - {{ selectedStudent.getDateLearningAgreementValid() | date: 'medium' }}
           </h3>
           <h3 *ngIf="selectedStudent.getIsLearningAgreementValid() === 'false'" class="redColor">
-            Learning agreement : unvalid
+            Learning agreement : unvalid - {{ selectedStudent.getDateLearningAgreementValid() | date: 'medium' }}
           </h3>
         </mat-panel-description>
 
@@ -80,12 +80,13 @@
           <h2 class="course-column"></h2>
         </mat-list-item>
         <!-- Courses content -->
-        <mat-list-item *ngFor="let course of [1]; index as indexCourse" class="course-row" role="listitem">
-          <h2 class="course-column">Nom du cours</h2>
-          <h2 class="course-column">333</h2>
-          <h2 class="course-column">une pitite description</h2>
-          <h2 class="course-column">s8</h2>
-          <h2 class="course-column">la date d'ajout</h2>
+        <mat-list-item *ngFor="let course of coursesOfSelectedStudentNotRejected; index as indexCourse"
+          class="course-row" role="listitem">
+          <h2 class="course-column">{{ course.getName() }}</h2>
+          <h2 class="course-column">{{ course.getEcts() }}</h2>
+          <h2 class="course-column">{{ course.getDescription() }}</h2>
+          <h2 class="course-column">{{ course.getSemester() }}</h2>
+          <h2 class="course-column">{{ course.getLastModification() }}</h2>
           <button mat-icon-button class="course-column" (click)="deleteCourse(course.getIdCourse())">
             <mat-icon class="trash-icon">delete_outline</mat-icon>
           </button>
@@ -116,16 +117,21 @@
           <h2 class="course-column">ECTS</h2>
           <h2 class="course-column">Description</h2>
           <h2 class="course-column">Semestre</h2>
-          <h2 class="course-column">Refused at</h2>
+          <h2 class="course-column">state</h2>
           <h2 class="course-column"></h2>
         </mat-list-item>
         <!-- Courses content -->
-        <mat-list-item *ngFor="let course of [1, 2, 3]; index as indexCourse" class="course-row" role="listitem">
-          <h2 class="course-column">Nom du cours</h2>
-          <h2 class="course-column">333</h2>
-          <h2 class="course-column">une pitite description</h2>
-          <h2 class="course-column">s8</h2>
-          <h2 class="course-column">la date de refus</h2>
+        <mat-list-item *ngFor="let course of coursesOfSelectedStudent; index as indexCourse" class="course-row"
+          role="listitem">
+          <h2 class="course-column">{{ course.getName() }}</h2>
+          <h2 class="course-column">{{ course.getEcts() }}</h2>
+          <h2 class="course-column">{{ course.getDescription() }}</h2>
+          <h2 class="course-column">{{ course.getSemester() }}</h2>
+          <h2 class="course-column
+          [class.redColor]='course.getState() === rejected'
+          [class.greenColor]='course.getState() === valid'
+          [class.orangeColor]='course.getState() === pending'">{{ course.getState() - course.getLastModification() }}
+          </h2>
           <button mat-icon-button class="course-column" (click)="deleteCourse(course.getIdCourse())">
             <mat-icon class="trash-icon">delete_outline</mat-icon>
           </button>
@@ -167,8 +173,8 @@
           <h2 class="course-column"></h2>
         </mat-list-item>
         <!-- Courses content -->
-        <mat-list-item *ngFor="let course of coursesOfSelectedStudent; index as indexCourse" class="course-row"
-          role="listitem">
+        <mat-list-item *ngFor="let course of coursesOfSelectedStudentNotRejected; index as indexCourse"
+          class="course-row" role="listitem">
           <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getName() }}</h2>
           <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getEcts() }}</h2>
           <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getDescription() }}</h2>

@@ -42,6 +42,8 @@ export class StudentDetailsComponent implements OnInit {
   contactsOfSelectedStudent: Contact[];
   dailyTopicsOfSelectedStudent: DailyTopic[];
 
+  coursesOfSelectedStudentNotRejected: Course[];
+
   marks: { idCourse: string; marks: Mark[] }[] = [];
   selectedCourse: Course;
   fullNameUser: string;
@@ -74,6 +76,12 @@ export class StudentDetailsComponent implements OnInit {
         : new Student(data['loginResolverResult'][0]);
 
       this.fullNameUser = userConnected.getFirstName() + ' ' + userConnected.getLastName();
+
+      this.coursesOfSelectedStudent.forEach(course => {
+        if (course.getState() !== 'rejected') {
+          this.coursesOfSelectedStudentNotRejected.push(course);
+        }
+      });
     });
   }
 

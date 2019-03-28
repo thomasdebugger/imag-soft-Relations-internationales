@@ -11,6 +11,9 @@ export class LoginService {
     private readonly administratorService: AdministratorService) { }
 
   logIn(login: string, passWord: string) {
+    localStorage.removeItem('idPerson');
+    localStorage.removeItem('type');
+
     this.studentService.testLogs(login, passWord).subscribe(resultStudent => {
       if (resultStudent['result'] !== 0) {
         return 'student';
