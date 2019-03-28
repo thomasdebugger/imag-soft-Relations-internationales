@@ -8,6 +8,7 @@ import {
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatExpansionModule } from '@angular/material/expansion';
+import {MatTabsModule} from '@angular/material/tabs';
 
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -153,6 +154,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         MatSlideToggleModule,
         BrowserModule,
         HttpClientModule,
+        MatTabsModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,

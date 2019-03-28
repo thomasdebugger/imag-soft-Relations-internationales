@@ -47,10 +47,12 @@ export class StudentProfilePageComponent implements OnInit {
 
   displayedColumnsMark: string[] = ['name', 'ects', 'description','codeUE','semester'];
   displayedColumnsPL: string[] = ['name', 'dateDailyTopic', 'description'];
+  displayedTopicsCourses: string[] = ['name', 'dateDailyTopic', 'description'];
   displayedColumnsContact: string[] = ['lastName', 'description', 'affiliation', 'emailAddress'];
 
   dataSourceMark: MatTableDataSource<Course> = null;
   dataSourcePL: MatTableDataSource<DailyTopic> = null;
+  dataSourceTC: MatTableDataSource<DailyTopic> = null;
   dataSourceContact: MatTableDataSource<Contact> = null;
 
 
@@ -74,6 +76,7 @@ export class StudentProfilePageComponent implements OnInit {
       });
       this.dataSourceMark = new MatTableDataSource(this.coursesOfSelectedStudent);
       this.dataSourcePL = new MatTableDataSource(this.dailyTopicsOfSelectedStudent);
+      this.dataSourceTC = new MatTableDataSource(this.dailyTopicsOfSelectedStudent);
       this.dataSourceContact = new MatTableDataSource(this.contactsOfSelectedStudent);
     });
   }
@@ -160,15 +163,38 @@ export class StudentProfilePageComponent implements OnInit {
         dateDailyTopic: new Date(),
         description: result.description,
         name: result.title,
-        idPerson: this.selectedStudent.getIdPerson()
+        idPerson: this.selectedStudent.getIdPerson(),
+        type: 'privateLife'
       });
 
        newData.push(newDailyTopic);
        this.dataSourcePL.data = newData;
        this.privateService.addDailyTopic(newDailyTopic).subscribe();
      });
+  }
 
+  addTopicsCourses() {
+    const newData = this.dataSourcePL.data;
+    const dialogRef = this.dialog.open(AddPrivateLifeModalComponent, {
+      width: '250px',
+      data: { title: this.title, description: this.description }
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+
+      const newDailyTopic = new DailyTopic({
+        idDailyTopic: '',
+        dateDailyTopic: new Date(),
+        description: result.description,
+        name: result.title,
+        idPerson: this.selectedStudent.getIdPerson(),
+        type: 'course'
+      });
+
+       newData.push(newDailyTopic);
+       this.dataSourcePL.data = newData;
+       this.privateService.addDailyTopic(newDailyTopic).subscribe();
+     });
   }
 
 }
