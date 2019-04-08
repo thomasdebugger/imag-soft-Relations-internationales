@@ -48,9 +48,11 @@ export class StudentDetailsComponent implements OnInit {
   selectedCourse: Course;
   fullNameUser: string;
   logs: { idPerson: string; type: string };
+  isLAPending = false;
 
   ngOnInit() {
     this.coursesOfSelectedStudent = [];
+    this.coursesOfSelectedStudentNotRejected = [];
     this.contactsOfSelectedStudent = [];
     this.dailyTopicsOfSelectedStudent = [];
 
@@ -78,6 +80,10 @@ export class StudentDetailsComponent implements OnInit {
       this.fullNameUser = userConnected.getFirstName() + ' ' + userConnected.getLastName();
 
       this.coursesOfSelectedStudent.forEach(course => {
+        if (course.getState() === 'pending') {
+          this.isLAPending = true;
+        }
+
         if (course.getState() !== 'rejected') {
           this.coursesOfSelectedStudentNotRejected.push(course);
         }
@@ -207,6 +213,7 @@ export class StudentDetailsComponent implements OnInit {
           this.coursesOfSelectedStudent = [];
 
           coursesResult.courses.map(course => {
+            this.coursesOfSelectedStudentNotRejected.push(course);
             this.coursesOfSelectedStudent.push(course);
             this.markService.getMarksByStudent(course.getIdCourse(), this.selectedStudent.getIdPerson())
               .subscribe(marks => {
@@ -244,6 +251,7 @@ export class StudentDetailsComponent implements OnInit {
       this.contactService.getContactsByStudent(this.selectedStudent.getIdPerson())
         .subscribe(contactsResult => {
           this.contactsOfSelectedStudent = [];
+          this.coursesOfSelectedStudentNotRejected = [];
 
           contactsResult.contacts.map(contact => {
             this.contactsOfSelectedStudent.push(contact);

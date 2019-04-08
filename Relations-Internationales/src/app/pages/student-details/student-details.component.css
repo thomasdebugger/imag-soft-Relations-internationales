@@ -58,6 +58,18 @@ mat-expansion-panel {
     overflow: hidden;
 }
 
+.course-column--big {
+    width: 30%;
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.delete-column {
+    width: 10%;
+    text-align: center;
+}
+
 .course-row {
     cursor: pointer !important;
 }
@@ -111,4 +123,16 @@ mat-card-header button {
     margin-left: 2rem;
     margin-top: 2rem;
     margin-bottom: 2rem;
+}
+
+.table-red {
+    box-shadow: 0 0 1px 3px red inset !important;
+}
+
+.table-green {
+    box-shadow: 0 0 1px 3px green inset !important;
+}
+
+.table-orange {
+    box-shadow: 0 0 1px 3px orange inset !important;
 }

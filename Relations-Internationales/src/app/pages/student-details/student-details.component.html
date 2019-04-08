@@ -51,7 +51,10 @@
 
   <mat-card-content>
     <!-- Learning agreement -->
-    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel [class.table-green]="selectedStudent.getIsLearningAgreementValid() === 'true'"
+      [class.table-red]="selectedStudent.getIsLearningAgreementValid() === 'false' && !isLAPending"
+      [class.table-orange]="isLAPending && selectedStudent.getIsLearningAgreementValid() === 'false'"
+      (opened)="panelOpenState = true" (closed)="panelOpenState = false">
       <!-- Panel header -->
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -82,12 +85,12 @@
         <!-- Courses content -->
         <mat-list-item *ngFor="let course of coursesOfSelectedStudentNotRejected; index as indexCourse"
           class="course-row" role="listitem">
-          <h2 class="course-column">{{ course.getName() }}</h2>
-          <h2 class="course-column">{{ course.getEcts() }}</h2>
-          <h2 class="course-column">{{ course.getDescription() }}</h2>
-          <h2 class="course-column">{{ course.getSemester() }}</h2>
-          <h2 class="course-column">{{ course.getLastModification() }}</h2>
-          <button mat-icon-button class="course-column" (click)="deleteCourse(course.getIdCourse())">
+          <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getName() }}</h2>
+          <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getEcts() }}</h2>
+          <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getDescription() }}</h2>
+          <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getSemester() }}</h2>
+          <h2 class="course-column--big" (click)="setSelectedCourse(course)">{{ course.getLastModification() }}</h2>
+          <button mat-icon-button class="delete-column" (click)="deleteCourse(course.getIdCourse())">
             <mat-icon class="trash-icon">delete_outline</mat-icon>
           </button>
         </mat-list-item>
@@ -123,16 +126,18 @@
         <!-- Courses content -->
         <mat-list-item *ngFor="let course of coursesOfSelectedStudent; index as indexCourse" class="course-row"
           role="listitem">
-          <h2 class="course-column">{{ course.getName() }}</h2>
-          <h2 class="course-column">{{ course.getEcts() }}</h2>
-          <h2 class="course-column">{{ course.getDescription() }}</h2>
-          <h2 class="course-column">{{ course.getSemester() }}</h2>
-          <h2 class="course-column
+          <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getName() }}</h2>
+          <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getEcts() }}</h2>
+          <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getDescription() }}</h2>
+          <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getSemester() }}</h2>
+          <h2 class="course-column--big
           [class.redColor]='course.getState() === rejected'
           [class.greenColor]='course.getState() === valid'
-          [class.orangeColor]='course.getState() === pending'">{{ course.getState() - course.getLastModification() }}
+          [class.orangeColor]='course.getState() === pending'" (click)="setSelectedCourse(course)">
+            {{ course.getState() }} -
+            {{ course.getLastModification() }}
           </h2>
-          <button mat-icon-button class="course-column" (click)="deleteCourse(course.getIdCourse())">
+          <button mat-icon-button class="delete-column" (click)="deleteCourse(course.getIdCourse())">
             <mat-icon class="trash-icon">delete_outline</mat-icon>
           </button>
         </mat-list-item>

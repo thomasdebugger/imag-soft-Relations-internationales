@@ -12,7 +12,7 @@ export class Course {
     private codeUE: string;
     private semester: string;
     private state: string;
-    private lastModificaiton: Date;
+    private lastModification: Date;
 
     // constructor(idCourse: string = null, name: string = null, description: string = null, ects: number = null,
     //     teacher: { fullName: string, emailAddress: string }[] = [], student: Student = null, polls: Poll[] = [],
@@ -42,7 +42,7 @@ export class Course {
         this.codeUE = course['codeUE'];
         this.semester = course['semester'];
         this.state = course['state'];
-        this.lastModificaiton = course['lastModificaiton'];
+        this.lastModification = course['lastModification'];
     }
 
     public getIdCourse(): string { return this.idCourse; }
@@ -55,7 +55,7 @@ export class Course {
     public getCodeUE(): string { return this.codeUE; }
     public getSemester(): string { return this.semester; }
     public getState(): string { return this.state; }
-    public getLastModification(): Date { return this.lastModificaiton; }
+    public getLastModification(): Date { return this.lastModification; }
 
     public setIdCourse(value: string): void { this.idCourse = value; }
     public setDescription(value: string): void { this.description = value; }
