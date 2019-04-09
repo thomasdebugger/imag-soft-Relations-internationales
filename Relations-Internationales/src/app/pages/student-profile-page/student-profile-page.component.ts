@@ -34,7 +34,8 @@ export class StudentProfilePageComponent implements OnInit {
   mail: String = '';
   title: String = '';
   teacherName : string = '';
-  commentary : string = ' ;'
+  codeUE : string = '' ;
+  semester : string = '' ;
 
 
   @Input() selectedStudent: Student = null;
@@ -87,7 +88,7 @@ export class StudentProfilePageComponent implements OnInit {
      const dialogRef = this.dialog.open(AddCourseModalComponent, {
        width: '250px',
        data: { name: this.name, ects: this.ects, description: this.description,
-         teacherName: this.teacherName, commentary: this.commentary, mail: this.mail}
+         teacherName: this.teacherName, codeUE: this.codeUE, semester : this.semester, mail: this.mail}
      });
 
 
@@ -101,7 +102,8 @@ export class StudentProfilePageComponent implements OnInit {
         teacherFullName: result.teacherName,
         teacherEmail: result.mail,
         idPerson: this.selectedStudent.getIdPerson(),
-        lastCommentary : result.commentary
+        codeUE : result.codeUE,
+        semester : result.semester
       });
       newData.push(newCourse);
       this.dataSourceMark.data = newData;

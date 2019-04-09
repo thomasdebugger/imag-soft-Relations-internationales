@@ -8,13 +8,16 @@
   <input matInput [(ngModel)]="data.description" placeholder="description" value="">
 </mat-form-field>
 <mat-form-field>
+  <input matInput [(ngModel)]="data.codeUE" placeholder="codeUE" value="">
+</mat-form-field>
+<mat-form-field>
+  <input matInput [(ngModel)]="data.semester" placeholder="semester" value="">
+</mat-form-field>
+<mat-form-field>
   <input matInput [(ngModel)]="data.teacherName" placeholder="Teacher" value="">
 </mat-form-field>
 <mat-form-field>
   <input matInput [(ngModel)]="data.mail" placeholder="mail" value="">
-</mat-form-field>
-<mat-form-field>
-  <input matInput [(ngModel)]="data.commentary" placeholder="description" value="">
 </mat-form-field>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">cancel</button>

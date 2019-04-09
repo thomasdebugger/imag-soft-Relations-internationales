@@ -38,7 +38,6 @@ export class Course {
         this.idPerson = course['idPerson'];
         this.teacherFullName = course['teacherFullName'];
         this.teacherEmail = course['teacherEmail'];
-        this.lastCommentary = course['lastCommentary'];
         this.codeUE = course['codeUE'];
         this.semester = course['semester'];
     }
@@ -50,7 +49,6 @@ export class Course {
     public getIdPerson(): string { return this.idPerson; }
     public getTeacherFullName(): string { return this.teacherFullName; }
     public getTeacherEmail(): string { return this.teacherEmail; }
-    public getLastCommentary(): string { return this.lastCommentary; }
     public getCodeUE(): string { return this.codeUE; }
     public getSemester(): string { return this.semester; }
 
@@ -61,7 +59,6 @@ export class Course {
     public setIdPerson(value: string): void { this.idPerson = value; }
     public setTeacherFullName(value: string): void { this.teacherFullName = value; }
     public setTeacherEmail(value: string): void { this.teacherEmail = value; }
-    public setLastCommentary(value: string): void { this.lastCommentary = value; }
     public setCodeUE(value: string): void { this.codeUE = value; }
     public setCemester(value: string): void { this.semester = value; }
 }

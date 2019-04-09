@@ -54,7 +54,7 @@ export class CourseService {
 
   addCourse(course: object): Observable<any> {
     // tslint:disable-next-line:max-line-length
-    return this.http.get<object>(`${environment.ip_address}${environment.back.add_course}?idPerson=${course['idPerson']}&description=${course['description']}&name=${course['name']}&ects=${course['ects']}&lastCommentary=${course['lastCommentary']}&teacherFullName=${course['teacherFullName']}&teacherEmail=${course['teacherEmail']}`);
+    return this.http.get<object>(`${environment.ip_address}${environment.back.add_course}?idPerson=${course['idPerson']}&description=${course['description']}&name=${course['name']}&ects=${course['ects']}&teacherFullName=${course['teacherFullName']}&teacherEmail=${course['teacherEmail']}&codeUE=${course['codeUE']}&semester=${course['semester']}`);
   }
 
   deleteCourse(idCourse: string): Observable<any> {
