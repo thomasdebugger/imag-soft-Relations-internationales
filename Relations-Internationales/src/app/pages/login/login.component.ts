@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
   }
 
   connexion() {
-    this.hasLoginFailed = true;
     this.studentService.testLogs(this.login, this.passWord).subscribe(resultStudent => {
       if (resultStudent['result']) {
         this.hasLoginFailed = false;
@@ -40,6 +39,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('type', 'student');
 
         this.router.navigate(['home']);
+        return;
       } else {
         this.administratorService.testLogs(this.login, this.passWord).subscribe(resultAdmin => {
           if (resultAdmin['result']) {
@@ -48,7 +48,9 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('type', 'administrator');
 
             this.router.navigate(['home']);
+            return;
           }
+          this.hasLoginFailed = true;
         });
       }
     });
