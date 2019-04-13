@@ -124,13 +124,14 @@
           <h2 class="course-column"></h2>
         </mat-list-item>
         <!-- Courses content -->
-        <mat-list-item *ngFor="let course of coursesOfSelectedStudentRejected; index as indexCourse" class="course-row"
-          role="listitem">
+        <mat-list-item *ngFor="let course of coursesOfSelectedStudent; index as indexCourse" class="course-row"
+          role="listitem" [class.rejected-course-cell]="course.getState() === 'rejected'">
           <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getName() }}</h2>
           <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getEcts() }}</h2>
           <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getDescription() }}</h2>
           <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getSemester() }}</h2>
           <h2 class="course-column--big" (click)="setSelectedCourse(course)">
+            {{ course.getState() }} -
             {{ course.getLastModification() }}
           </h2>
           <button mat-icon-button class="delete-column" (click)="deleteCourse(course.getIdCourse())">

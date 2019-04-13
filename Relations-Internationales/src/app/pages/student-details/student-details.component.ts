@@ -43,7 +43,6 @@ export class StudentDetailsComponent implements OnInit {
   dailyTopicsOfSelectedStudent: DailyTopic[];
 
   coursesOfSelectedStudentNotRejected: Course[];
-  coursesOfSelectedStudentRejected: Course[];
 
   marks: { idCourse: string; marks: Mark[] }[] = [];
   selectedCourse: Course;
@@ -54,7 +53,6 @@ export class StudentDetailsComponent implements OnInit {
   ngOnInit() {
     this.coursesOfSelectedStudent = [];
     this.coursesOfSelectedStudentNotRejected = [];
-    this.coursesOfSelectedStudentRejected = [];
     this.contactsOfSelectedStudent = [];
     this.dailyTopicsOfSelectedStudent = [];
 
@@ -86,9 +84,7 @@ export class StudentDetailsComponent implements OnInit {
           this.isLAPending = true;
         }
 
-        if (course.getState() === 'rejected') {
-          this.coursesOfSelectedStudentRejected.push(course);
-        } else {
+        if (course.getState() !== 'rejected') {
           this.coursesOfSelectedStudentNotRejected.push(course);
         }
       });
@@ -216,14 +212,11 @@ export class StudentDetailsComponent implements OnInit {
         .subscribe(coursesResult => {
           this.coursesOfSelectedStudent = [];
           this.coursesOfSelectedStudentNotRejected = [];
-          this.coursesOfSelectedStudentRejected = [];
 
           coursesResult.courses.map(course => {
             this.coursesOfSelectedStudent.push(course);
 
-            if (course.getState() === 'rejected') {
-              this.coursesOfSelectedStudentRejected.push(course);
-            } else {
+            if (course.getState() !== 'rejected') {
               this.coursesOfSelectedStudentNotRejected.push(course);
             }
 
@@ -239,6 +232,9 @@ export class StudentDetailsComponent implements OnInit {
 
       this.marks.push({ idCourse: '', marks: [] });
 
+      if (this.selectedStudent.getIsLearningAgreementValid() === 'true') {
+        this.setIsLearningAgreementValid();
+      }
     });
   }
 

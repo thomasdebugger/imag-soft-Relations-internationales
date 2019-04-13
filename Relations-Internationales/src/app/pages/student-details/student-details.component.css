@@ -136,3 +136,7 @@ mat-card-header button {
 .table-orange {
     box-shadow: 0 0 1px 3px orange inset !important;
 }
+
+.rejected-course-cell {
+    background-color: #ff171721;
+}
