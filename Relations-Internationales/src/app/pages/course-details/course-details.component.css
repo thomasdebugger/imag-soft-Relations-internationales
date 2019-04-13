@@ -25,7 +25,7 @@
     margin-bottom: auto;
 }
 
-.course-description, .course-ects, .course-teachers, .course-marks, .course-poll {
+.course-description, .course-ects, .course-teachers, .course-marks, .course-poll, .course-semester {
     display: flex;
     margin-block-end: 20px;
 }

@@ -109,7 +109,7 @@
       <!-- Panel header -->
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <h2>History</h2>
+          <h2>History of rejected courses</h2>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <!-- Courses list -->
@@ -120,21 +120,17 @@
           <h2 class="course-column">ECTS</h2>
           <h2 class="course-column">Description</h2>
           <h2 class="course-column">Semestre</h2>
-          <h2 class="course-column">state</h2>
+          <h2 class="course-column">Date</h2>
           <h2 class="course-column"></h2>
         </mat-list-item>
         <!-- Courses content -->
-        <mat-list-item *ngFor="let course of coursesOfSelectedStudent; index as indexCourse" class="course-row"
+        <mat-list-item *ngFor="let course of coursesOfSelectedStudentRejected; index as indexCourse" class="course-row"
           role="listitem">
           <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getName() }}</h2>
           <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getEcts() }}</h2>
           <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getDescription() }}</h2>
           <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getSemester() }}</h2>
-          <h2 class="course-column--big
-          [class.redColor]='course.getState() === rejected'
-          [class.greenColor]='course.getState() === valid'
-          [class.orangeColor]='course.getState() === pending'" (click)="setSelectedCourse(course)">
-            {{ course.getState() }} -
+          <h2 class="course-column--big" (click)="setSelectedCourse(course)">
             {{ course.getLastModification() }}
           </h2>
           <button mat-icon-button class="delete-column" (click)="deleteCourse(course.getIdCourse())">
