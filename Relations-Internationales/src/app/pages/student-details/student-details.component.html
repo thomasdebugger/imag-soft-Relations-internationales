@@ -63,10 +63,10 @@
         <!-- Panel description -->
         <mat-panel-description>
           <h3 *ngIf="selectedStudent.getIsLearningAgreementValid() === 'true'" class="greenColor">
-            Learning agreement : valid - {{ selectedStudent.getDateLearningAgreementValid() | date: 'medium' }}
+            Learning agreement : valid - {{ selectedStudent.getDateLearningAgreementValid() | date: 'dd-MM-yyyy' }}
           </h3>
           <h3 *ngIf="selectedStudent.getIsLearningAgreementValid() === 'false'" class="redColor">
-            Learning agreement : unvalid - {{ selectedStudent.getDateLearningAgreementValid() | date: 'medium' }}
+            Learning agreement : unvalid - {{ selectedStudent.getDateLearningAgreementValid() | date: 'dd-MM-yyyy' }}
           </h3>
         </mat-panel-description>
 
@@ -90,8 +90,8 @@
           <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getDescription() }}</h2>
           <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getSemester() }}</h2>
           <h2 class="course-column--big" (click)="setSelectedCourse(course)">{{ course.getLastModification() }}</h2>
-          <button mat-icon-button class="delete-column" (click)="deleteCourse(course.getIdCourse())">
-            <mat-icon class="trash-icon">delete_outline</mat-icon>
+          <button mat-icon-button class="delete-column" (click)="rejectCourse(course.getIdCourse())">
+            <mat-icon class="trash-icon">block</mat-icon>
           </button>
         </mat-list-item>
       </mat-list>
@@ -132,7 +132,7 @@
           <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getSemester() }}</h2>
           <h2 class="course-column--big" (click)="setSelectedCourse(course)">
             {{ course.getState() }} -
-            {{ course.getLastModification() }}
+            {{ course.getLastModification() |date : 'dd-MM-yyyy' }}
           </h2>
           <button mat-icon-button class="delete-column" (click)="deleteCourse(course.getIdCourse())">
             <mat-icon class="trash-icon">delete_outline</mat-icon>
@@ -218,7 +218,7 @@
           <h2 class="dailyTopic-column"></h2>
         </mat-list-item>
         <!-- Topics content -->
-        <mat-list-item *ngFor="let dailyTopic of dailyTopicsOfSelectedStudent" role="listitem">
+        <mat-list-item *ngFor="let dailyTopic of dailyTopicsOfSelectedStudent" class="row" role="listitem">
           <h2 class="dailyTopic-column">{{ dailyTopic.getName() }}</h2>
           <h2 class="dailyTopic-column">{{ dailyTopic.getDateDailyTopic() | date:"MM-dd-yyyy" }}</h2>
           <h2 class="dailyTopic-column">{{ dailyTopic.getDescription() }}</h2>
@@ -253,7 +253,7 @@
           <h2 class="contact-column"></h2>
         </mat-list-item>
         <!-- Contacts content -->
-        <mat-list-item *ngFor="let contact of contactsOfSelectedStudent" role="listitem">
+        <mat-list-item *ngFor="let contact of contactsOfSelectedStudent" class="row" role="listitem">
           <h2 class="contact-column">{{ contact.getFirstName() }} {{ contact.getLastName() }}</h2>
           <h2 class="contact-column">{{ contact.getDescription() }}</h2>
           <h2 class="contact-column">{{ contact.getAffiliation() }}</h2>

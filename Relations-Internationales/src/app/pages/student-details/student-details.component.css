@@ -71,7 +71,12 @@ mat-expansion-panel {
 }
 
 .course-row {
+    line-height: 2rem;
     cursor: pointer !important;
+}
+
+.row {
+    line-height: 2rem;
 }
 
 .dailyTopic-column {

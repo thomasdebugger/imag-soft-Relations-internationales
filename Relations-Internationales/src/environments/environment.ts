@@ -20,6 +20,7 @@ export const environment = {
     get_courses: '/course/get_course.php',
     add_course: '/course/add_course.php',
     delete_course: '/course/delete_course.php',
+    update_status_course: '/course/update_status_course.php',
 
     get_contacts: '/contact/get_contact.php',
     add_contact: '/contact/add_contact.php',

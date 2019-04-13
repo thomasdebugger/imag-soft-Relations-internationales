@@ -207,34 +207,13 @@ export class StudentDetailsComponent implements OnInit {
 
   deleteCourse(idCourse: string) {
     this.courseService.deleteCourse(idCourse).subscribe(() => {
+      this.setCourses();
+    });
+  }
 
-      this.courseService.getCoursesByStudent(this.selectedStudent.getIdPerson())
-        .subscribe(coursesResult => {
-          this.coursesOfSelectedStudent = [];
-          this.coursesOfSelectedStudentNotRejected = [];
-
-          coursesResult.courses.map(course => {
-            this.coursesOfSelectedStudent.push(course);
-
-            if (course.getState() !== 'rejected') {
-              this.coursesOfSelectedStudentNotRejected.push(course);
-            }
-
-            this.markService.getMarksByStudent(course.getIdCourse(), this.selectedStudent.getIdPerson())
-              .subscribe(marks => {
-                this.marks = [];
-                const marksByCourse = { idCourse: course.getIdCourse(), marks: [] };
-                marks['marks'].forEach(mark => marksByCourse.marks.push(mark));
-                this.marks.push(marksByCourse);
-              });
-          });
-        });
-
-      this.marks.push({ idCourse: '', marks: [] });
-
-      if (this.selectedStudent.getIsLearningAgreementValid() === 'true') {
-        this.setIsLearningAgreementValid();
-      }
+  rejectCourse(idCourse: string) {
+    this.courseService.rejectCourse(idCourse).subscribe(() => {
+      this.setCourses();
     });
   }
 
@@ -271,5 +250,35 @@ export class StudentDetailsComponent implements OnInit {
 
   updateDailtTopic(): void {
     this.administratorService.updateDailyTopicOnSeeForAStudent(this.selectedStudent.getIdPerson()).subscribe();
+  }
+
+  setCourses() {
+    this.courseService.getCoursesByStudent(this.selectedStudent.getIdPerson())
+      .subscribe(coursesResult => {
+        this.coursesOfSelectedStudent = [];
+        this.coursesOfSelectedStudentNotRejected = [];
+
+        coursesResult.courses.map(course => {
+          this.coursesOfSelectedStudent.push(course);
+
+          if (course.getState() !== 'rejected') {
+            this.coursesOfSelectedStudentNotRejected.push(course);
+          }
+
+          this.markService.getMarksByStudent(course.getIdCourse(), this.selectedStudent.getIdPerson())
+            .subscribe(marks => {
+              this.marks = [];
+              const marksByCourse = { idCourse: course.getIdCourse(), marks: [] };
+              marks['marks'].forEach(mark => marksByCourse.marks.push(mark));
+              this.marks.push(marksByCourse);
+            });
+        });
+      });
+
+    this.marks.push({ idCourse: '', marks: [] });
+
+    if (this.selectedStudent.getIsLearningAgreementValid() === 'true') {
+      this.setIsLearningAgreementValid();
+    }
   }
 }

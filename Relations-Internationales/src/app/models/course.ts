@@ -65,5 +65,6 @@ export class Course {
     public setTeacherFullName(value: string): void { this.teacherFullName = value; }
     public setTeacherEmail(value: string): void { this.teacherEmail = value; }
     public setCodeUE(value: string): void { this.codeUE = value; }
-    public setCemester(value: string): void { this.semester = value; }
+    public setSemester(value: string): void { this.semester = value; }
+    public setState(value: string): void { this.state = value; }
 }
