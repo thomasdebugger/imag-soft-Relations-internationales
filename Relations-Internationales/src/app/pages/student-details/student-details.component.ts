@@ -103,23 +103,7 @@ export class StudentDetailsComponent implements OnInit {
         dialogRef = this.dialog.open(AddCourseDialogComponent, matDialogConfig);
         dialogRef.afterClosed().subscribe(result => {
           this.courseService.addCourse(result).subscribe(() => {
-
-            this.courseService.getCoursesByStudent(this.selectedStudent.getIdPerson())
-              .subscribe(coursesResult => {
-                this.coursesOfSelectedStudent = [];
-
-                coursesResult.courses.map(course => {
-                  this.coursesOfSelectedStudent.push(course);
-                  this.markService.getMarksByStudent(course.getIdCourse(), this.selectedStudent.getIdPerson())
-                    .subscribe(marks => {
-                      const marksByCourse = { idCourse: course.getIdCourse(), marks: [] };
-                      marks['marks'].forEach(mark => marksByCourse.marks.push(mark));
-                      this.marks.push(marksByCourse);
-                    });
-                });
-              });
-
-            this.marks.push({ idCourse: '', marks: [] });
+            this.setCourses();
           });
         });
         break;

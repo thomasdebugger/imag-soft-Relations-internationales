@@ -28,10 +28,12 @@
         <button mat-stroked-button (click)="generatePDF()">Generate PDF</button>
         <br />
         <button mat-stroked-button *ngIf="!selectedCourse"
-          [class.redColor]="selectedStudent.getIsLearningAgreementValid() === 'true'"
+          [class.redColor]="selectedStudent.getIsLearningAgreementValid() === 'true' && !isLAPending"
           (click)="setIsLearningAgreementValid()">
-          <a *ngIf="selectedStudent.getIsLearningAgreementValid() !== 'true'">Valid learning agreement</a>
-          <a *ngIf="selectedStudent.getIsLearningAgreementValid() === 'true'">Invalid learning agreement</a>
+          <a *ngIf="selectedStudent.getIsLearningAgreementValid() !== 'true' || isLAPending">Valid learning
+            agreement</a>
+          <a *ngIf="selectedStudent.getIsLearningAgreementValid() === 'true' && !isLAPending">Invalid learning
+            agreement</a>
         </button>
       </div>
     </div>
@@ -53,8 +55,7 @@
     <!-- Learning agreement -->
     <mat-expansion-panel [class.table-green]="selectedStudent.getIsLearningAgreementValid() === 'true'"
       [class.table-red]="selectedStudent.getIsLearningAgreementValid() === 'false' && !isLAPending"
-      [class.table-orange]="isLAPending && selectedStudent.getIsLearningAgreementValid() === 'false'"
-      (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      [class.table-orange]="isLAPending" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
       <!-- Panel header -->
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -62,11 +63,14 @@
         </mat-panel-title>
         <!-- Panel description -->
         <mat-panel-description>
-          <h3 *ngIf="selectedStudent.getIsLearningAgreementValid() === 'true'" class="greenColor">
+          <h3 *ngIf="selectedStudent.getIsLearningAgreementValid() === 'true' && !isLAPending" class="greenColor">
             Learning agreement : valid - {{ selectedStudent.getDateLearningAgreementValid() | date: 'dd-MM-yyyy' }}
           </h3>
           <h3 *ngIf="selectedStudent.getIsLearningAgreementValid() === 'false'" class="redColor">
             Learning agreement : unvalid - {{ selectedStudent.getDateLearningAgreementValid() | date: 'dd-MM-yyyy' }}
+          </h3>
+          <h3 *ngIf="isLAPending" class="orangeColor">
+            Learning agreement : pending - {{ selectedStudent.getDateLearningAgreementValid() | date: 'dd-MM-yyyy' }}
           </h3>
         </mat-panel-description>
 

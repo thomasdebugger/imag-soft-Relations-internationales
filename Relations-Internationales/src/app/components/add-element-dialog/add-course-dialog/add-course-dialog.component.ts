@@ -16,6 +16,7 @@ export class AddCourseDialogComponent implements OnInit {
   ects: number;
   teacherFullName: string;
   teacherEmail: string;
+  semester: string;
 
   isNameValid: boolean;
   isEctsValid: boolean;
@@ -38,7 +39,8 @@ export class AddCourseDialogComponent implements OnInit {
         ects: this.ects,
         teacherFullName: this.teacherFullName,
         teacherEmail: this.teacherEmail,
-        idPerson: this.injectedStudent.getIdPerson()
+        idPerson: this.injectedStudent.getIdPerson(),
+        semester: this.semester || ''
       });
 
       this.dialogRef.close(newCourse);
