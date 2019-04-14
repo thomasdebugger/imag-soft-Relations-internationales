@@ -159,14 +159,12 @@ export class StudentDetailsComponent implements OnInit {
   }
 
   setIsLearningAgreementValid(): void {
-    console.log('student 1', this.selectedStudent['isLearningAgreementValid']);
     this.selectedStudent.setIsLearningAgreementValid(
       this.selectedStudent.getIsLearningAgreementValid() === 'false' ? 'true' : 'false'
     );
     this.selectedStudent.setDateLearningAgreementValid(new Date());
     this.studentService.updateLAStudent(this.selectedStudent).subscribe(
       () => {
-        console.log('set courses nibbaaa');
         this.setCourses();
       },
       err => {
@@ -200,14 +198,24 @@ export class StudentDetailsComponent implements OnInit {
   }
 
   deleteCourse(idCourse: string) {
+    const isCourseInLA = this.coursesOfSelectedStudentNotRejected.find(course => course.getIdCourse() === idCourse);
+
     this.courseService.deleteCourse(idCourse).subscribe(() => {
       this.setCourses();
+
+      if (isCourseInLA && this.selectedStudent.getIsLearningAgreementValid() === 'true') {
+        this.setIsLearningAgreementValid();
+      }
     });
   }
 
   rejectCourse(idCourse: string) {
     this.courseService.rejectCourse(idCourse).subscribe(() => {
       this.setCourses();
+
+      if (this.selectedStudent.getIsLearningAgreementValid() === 'true') {
+        this.setIsLearningAgreementValid();
+      }
     });
   }
 
@@ -276,9 +284,5 @@ export class StudentDetailsComponent implements OnInit {
       });
 
     this.marks.push({ idCourse: '', marks: [] });
-
-    if (this.selectedStudent.getIsLearningAgreementValid() === 'true') {
-      this.setIsLearningAgreementValid();
-    }
   }
 }
