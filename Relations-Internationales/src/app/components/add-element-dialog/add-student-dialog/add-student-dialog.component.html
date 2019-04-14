@@ -8,21 +8,24 @@
         <div class="first-name-field">
           <h3 [class.invalid-field]="!isFormValid && !isFirstNameValid">First Name</h3>
           <mat-form-field>
-            <input matInput type="text" placeholder="Enter the first name" [(ngModel)]="firstName" name="studentFirstName">
+            <input matInput type="text" placeholder="Enter the first name" [(ngModel)]="firstName"
+              name="studentFirstName">
           </mat-form-field>
         </div>
         <!-- Field Email Address -->
         <div class="email-address-field">
           <h3 [class.invalid-field]="!isFormValid && !isEmailAddressValid">Email Address</h3>
           <mat-form-field>
-            <input matInput type="email" placeholder="Enter the email address" [(ngModel)]="emailAddress" name="studentEmailAddress">
+            <input matInput type="email" placeholder="Enter the email address" [(ngModel)]="emailAddress"
+              name="studentEmailAddress">
           </mat-form-field>
         </div>
         <!-- Field University -->
         <div class="university-field">
           <h3 [class.invalid-field]="!isFormValid && !isUniversity">University</h3>
           <mat-form-field>
-            <input matInput type="text" placeholder="Enter the university" [(ngModel)]="university" name="studentUniversity">
+            <input matInput type="text" placeholder="Enter the university" [(ngModel)]="university"
+              name="studentUniversity">
           </mat-form-field>
         </div>
         <!-- Field Is Entrant -->
@@ -42,15 +45,21 @@
         <div class="phone-number-field">
           <h3 [class.invalid-field]="!isFormValid && !isPhoneNumber">Phone Number</h3>
           <mat-form-field>
-            <input matInput type="text" placeholder="Enter the phone number" [(ngModel)]="phoneNumber" name="studentPhoneNumber">
+            <input matInput type="text" placeholder="Enter the phone number" [(ngModel)]="phoneNumber"
+              name="studentPhoneNumber">
           </mat-form-field>
         </div>
         <!-- Field Birth Date -->
         <div class="birth-date-field">
           <h3 [class.invalid-field]="!isFormValid && !isBirthDate">Birth date</h3>
           <mat-form-field>
-            <input matInput type="date" placeholder="Enter the birth date" [(ngModel)]="birthDate" name="studentBirthDate">
+            <input matInput type="date" placeholder="Enter the birth date" [(ngModel)]="birthDate"
+              name="studentBirthDate">
           </mat-form-field>
+        </div>
+        <!-- Login / password note -->
+        <div class="login-password-note">
+          <p>The default login and password are stucked firstname and lastname ({{ firstName }}{{ lastName }})</p>
         </div>
       </div>
     </div>

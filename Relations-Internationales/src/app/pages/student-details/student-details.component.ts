@@ -159,11 +159,11 @@ export class StudentDetailsComponent implements OnInit {
   }
 
   setIsLearningAgreementValid(): void {
+    console.log('student 1', this.selectedStudent['isLearningAgreementValid']);
     this.selectedStudent.setIsLearningAgreementValid(
       this.selectedStudent.getIsLearningAgreementValid() === 'false' ? 'true' : 'false'
     );
     this.selectedStudent.setDateLearningAgreementValid(new Date());
-    console.log(this.selectedStudent);
     this.studentService.updateLAStudent(this.selectedStudent).subscribe(
       () => {
         console.log('set courses nibbaaa');
