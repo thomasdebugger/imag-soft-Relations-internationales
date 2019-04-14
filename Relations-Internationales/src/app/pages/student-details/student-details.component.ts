@@ -104,6 +104,10 @@ export class StudentDetailsComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
           this.courseService.addCourse(result).subscribe(() => {
             this.setCourses();
+
+            if (this.selectedStudent.getIsLearningAgreementValid() === 'true') {
+              this.setIsLearningAgreementValid();
+            }
           });
         });
         break;
