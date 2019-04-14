@@ -66,7 +66,7 @@
           <h3 *ngIf="selectedStudent.getIsLearningAgreementValid() === 'true' && !isLAPending" class="greenColor">
             Learning agreement : valid - {{ selectedStudent.getDateLearningAgreementValid() | date: 'dd-MM-yyyy' }}
           </h3>
-          <h3 *ngIf="selectedStudent.getIsLearningAgreementValid() === 'false'" class="redColor">
+          <h3 *ngIf="selectedStudent.getIsLearningAgreementValid() === 'false' && !isLAPending" class="redColor">
             Learning agreement : unvalid - {{ selectedStudent.getDateLearningAgreementValid() | date: 'dd-MM-yyyy' }}
           </h3>
           <h3 *ngIf="isLAPending" class="orangeColor">
@@ -92,7 +92,10 @@
           <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getName() }}</h2>
           <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getEcts() }}</h2>
           <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getDescription() }}</h2>
-          <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getSemester() }}</h2>
+          <h2 class="course-column" *ngIf="course.getSemester() !== 'undefined'" (click)="setSelectedCourse(course)">
+            {{ course.getSemester()}}</h2>
+          <h2 class="course-column" *ngIf="course.getSemester() === 'undefined'" (click)="setSelectedCourse(course)">/
+          </h2>
           <h2 class="course-column--big" (click)="setSelectedCourse(course)">{{ course.getLastModification() }}</h2>
           <button mat-icon-button class="delete-column" (click)="rejectCourse(course.getIdCourse())">
             <mat-icon class="trash-icon">block</mat-icon>
@@ -133,7 +136,10 @@
           <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getName() }}</h2>
           <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getEcts() }}</h2>
           <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getDescription() }}</h2>
-          <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getSemester() }}</h2>
+          <h2 class="course-column" *ngIf="course.getSemester() !== 'undefined'" (click)="setSelectedCourse(course)">
+            {{ course.getSemester()}}</h2>
+          <h2 class="course-column" *ngIf="course.getSemester() === 'undefined'" (click)="setSelectedCourse(course)">/
+          </h2>
           <h2 class="course-column--big" (click)="setSelectedCourse(course)">
             {{ course.getState() }} -
             {{ course.getLastModification() |date : 'dd-MM-yyyy' }}

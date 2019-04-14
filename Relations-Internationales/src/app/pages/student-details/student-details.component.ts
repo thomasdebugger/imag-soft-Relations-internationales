@@ -163,7 +163,17 @@ export class StudentDetailsComponent implements OnInit {
       this.selectedStudent.getIsLearningAgreementValid() === 'false' ? 'true' : 'false'
     );
     this.selectedStudent.setDateLearningAgreementValid(new Date());
-    this.studentService.updateLAStudent(this.selectedStudent).subscribe();
+    console.log(this.selectedStudent);
+    this.studentService.updateLAStudent(this.selectedStudent).subscribe(
+      () => {
+        console.log('set courses nibbaaa');
+        this.setCourses();
+      },
+      err => {
+        console.log(err);
+        this.setCourses();
+      }
+    );
   }
 
   getNbEcts(): string {
@@ -239,11 +249,17 @@ export class StudentDetailsComponent implements OnInit {
   setCourses() {
     this.courseService.getCoursesByStudent(this.selectedStudent.getIdPerson())
       .subscribe(coursesResult => {
+        this.isLAPending = false;
+
         this.coursesOfSelectedStudent = [];
         this.coursesOfSelectedStudentNotRejected = [];
 
         coursesResult.courses.map(course => {
           this.coursesOfSelectedStudent.push(course);
+
+          if (course.getState() === 'pending') {
+            this.isLAPending = true;
+          }
 
           if (course.getState() !== 'rejected') {
             this.coursesOfSelectedStudentNotRejected.push(course);

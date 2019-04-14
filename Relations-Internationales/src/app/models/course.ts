@@ -14,21 +14,6 @@ export class Course {
     private state: string;
     private lastModification: Date;
 
-    // constructor(idCourse: string = null, name: string = null, description: string = null, ects: number = null,
-    //     teacher: { fullName: string, emailAddress: string }[] = [], student: Student = null, polls: Poll[] = [],
-    //     marks: Mark[] = []) {
-    //     this.idCourse = idCourse;
-    //     this.description = description;
-    //     this.name = name;
-    //     this.ects = ects;
-    //     this.student = student;
-    //     this.teachers = teacher;
-    //     this.polls = polls;
-    //     this.marks = marks;
-
-    //     this.student.getCourses().push(this);
-    // }
-
     constructor(data?: object) {
         const course = data || {};
 

@@ -52,6 +52,7 @@ export class StudentService {
   }
 
   updateLAStudent(student: object): Observable<any> {
+    console.log(student);
     // tslint:disable-next-line:max-line-length
     return this.http.get<object>(`${environment.ip_address}${environment.back.update_LA_student}?idPerson=${student['idPerson']}&isLearningAgreementValid=${student['isLearningAgreementValid']}`);
   }
