@@ -102,29 +102,31 @@ export class StudentDetailsComponent implements OnInit {
       case 'course':
         dialogRef = this.dialog.open(AddCourseDialogComponent, matDialogConfig);
         dialogRef.afterClosed().subscribe(result => {
-          this.courseService.addCourse(result).subscribe(() => {
-            this.setCourses();
+          if (result) {
+            this.courseService.addCourse(result).subscribe(() => {
+              this.setCourses();
 
-            if (this.selectedStudent.getIsLearningAgreementValid() === 'true') {
-              this.setIsLearningAgreementValid();
-            }
-          });
+              if (this.selectedStudent.getIsLearningAgreementValid() === 'true') {
+                this.setIsLearningAgreementValid();
+              }
+            });
+          }
         });
         break;
       case 'dailyTopic':
         dialogRef = this.dialog.open(AddDailyTopicDialogComponent, matDialogConfig);
         dialogRef.afterClosed().subscribe(result => {
           this.dailyTopicService.addDailyTopic(result).subscribe(() => {
+            if (result) {
+              this.dailyTopicService.getDailyTopicsByStudent(this.selectedStudent.getIdPerson())
+                .subscribe(dailyTopicsResult => {
+                  this.dailyTopicsOfSelectedStudent = [];
 
-            this.dailyTopicService.getDailyTopicsByStudent(this.selectedStudent.getIdPerson())
-              .subscribe(dailyTopicsResult => {
-                this.dailyTopicsOfSelectedStudent = [];
-
-                dailyTopicsResult.dailyTopics.map(dailyTopic => {
-                  this.dailyTopicsOfSelectedStudent.push(dailyTopic);
+                  dailyTopicsResult.dailyTopics.map(dailyTopic => {
+                    this.dailyTopicsOfSelectedStudent.push(dailyTopic);
+                  });
                 });
-              });
-
+            }
           });
         });
         break;
@@ -132,16 +134,16 @@ export class StudentDetailsComponent implements OnInit {
         dialogRef = this.dialog.open(AddContactDialogComponent, matDialogConfig);
         dialogRef.afterClosed().subscribe(result => {
           this.contactService.addContact(result).subscribe(() => {
+            if (result) {
+              this.contactService.getContactsByStudent(this.selectedStudent.getIdPerson())
+                .subscribe(contactsResult => {
+                  this.contactsOfSelectedStudent = [];
 
-            this.contactService.getContactsByStudent(this.selectedStudent.getIdPerson())
-              .subscribe(contactsResult => {
-                this.contactsOfSelectedStudent = [];
-
-                contactsResult.contacts.map(contact => {
-                  this.contactsOfSelectedStudent.push(contact);
+                  contactsResult.contacts.map(contact => {
+                    this.contactsOfSelectedStudent.push(contact);
+                  });
                 });
-              });
-
+            }
           });
         });
         break;
