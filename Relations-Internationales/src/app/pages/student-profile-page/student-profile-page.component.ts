@@ -37,6 +37,11 @@ export class StudentProfilePageComponent implements OnInit {
   codeUE : string = '' ;
   semester : string = '' ;
 
+  coursesValidated : Course[] = [];
+  coursesHystory : Course[] = [];
+
+  dailyTopicLife : DailyTopic[] = [];
+  dailyTopicCourse : DailyTopic[] = [];
 
   @Input() selectedStudent: Student = null;
   @Input() coursesOfSelectedStudent: Course[] = [];
@@ -44,14 +49,15 @@ export class StudentProfilePageComponent implements OnInit {
   @Input() dailyTopicsOfSelectedStudent: DailyTopic[] = [];
 
   private marks: { idCourse: string; marks: Mark[] }[] = [];
-  private selectedCourse: Course;
 
-  displayedColumnsMark: string[] = ['name', 'ects', 'description','codeUE','semester'];
-  displayedColumnsPL: string[] = ['name', 'dateDailyTopic', 'description'];
-  displayedTopicsCourses: string[] = ['name', 'dateDailyTopic', 'description'];
-  displayedColumnsContact: string[] = ['lastName', 'description', 'affiliation', 'emailAddress'];
+  displayedColumnsMark: string[] = ['name', 'ects', 'description','codeUE','semester','action'];
+  displayedColumnsNotValidated: string[] = ['name', 'ects', 'description','codeUE','semester'];
+  displayedColumnsPL: string[] = ['name', 'dateDailyTopic', 'description','action'];
+  displayedTopicsCourses: string[] = ['name', 'dateDailyTopic', 'description','action'];
+  displayedColumnsContact: string[] = ['lastName', 'description', 'affiliation', 'emailAddress','action'];
 
   dataSourceMark: MatTableDataSource<Course> = null;
+  dataSourceNotValidated: MatTableDataSource<Course> = null;
   dataSourcePL: MatTableDataSource<DailyTopic> = null;
   dataSourceTC: MatTableDataSource<DailyTopic> = null;
   dataSourceContact: MatTableDataSource<Contact> = null;
@@ -59,15 +65,22 @@ export class StudentProfilePageComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute, public dialog: MatDialog, private datePipe: DatePipe,
      private readonly markService: MarkService, private readonly pollService: PollService, private courseService : CourseService,
-     private contactService : ContactService, private privateService : DailyTopicsService) {
+     private contactService : ContactService, private dailyTopicService : DailyTopicsService) {
 
   }
 
 
   ngOnInit() {
 
+
     this.activatedRoute.data.subscribe(data => {
-      this.coursesOfSelectedStudent.forEach(course => {
+      this.coursesOfSelectedStudent.forEach(course => { 
+        if(course.getState() === 'rejected' || course.getState() === 'deleted'){
+          this.coursesHystory.push(course);
+        }
+        else{
+          this.coursesValidated.push(course);
+        }
         this.markService.getMarksByStudent(course.getIdCourse(), this.selectedStudent.getIdPerson())
           .subscribe(result => {
             const marksByCourse = { idCourse: course.getIdCourse(), marks: [] };
@@ -75,9 +88,21 @@ export class StudentProfilePageComponent implements OnInit {
             this.marks.push(marksByCourse);
           });
       });
-      this.dataSourceMark = new MatTableDataSource(this.coursesOfSelectedStudent);
-      this.dataSourcePL = new MatTableDataSource(this.dailyTopicsOfSelectedStudent);
-      this.dataSourceTC = new MatTableDataSource(this.dailyTopicsOfSelectedStudent);
+
+      this.dailyTopicsOfSelectedStudent.forEach(dailyTopic =>{
+        console.log(dailyTopic.getType());
+        if(dailyTopic.getType() === 'course'){
+          this.dailyTopicCourse.push(dailyTopic);
+        }
+        else{
+          this.dailyTopicLife.push(dailyTopic);
+        }
+      });
+
+      this.dataSourceMark = new MatTableDataSource(this.coursesValidated);
+      this.dataSourceNotValidated= new MatTableDataSource(this.coursesHystory);
+      this.dataSourcePL = new MatTableDataSource(this.dailyTopicLife);
+      this.dataSourceTC = new MatTableDataSource(this.dailyTopicCourse);
       this.dataSourceContact = new MatTableDataSource(this.contactsOfSelectedStudent);
     });
   }
@@ -110,9 +135,6 @@ export class StudentProfilePageComponent implements OnInit {
       this.courseService.addCourse(newCourse).subscribe();
       
      });
-
-
-
   }
 
 
@@ -171,7 +193,7 @@ export class StudentProfilePageComponent implements OnInit {
 
        newData.push(newDailyTopic);
        this.dataSourcePL.data = newData;
-       this.privateService.addDailyTopic(newDailyTopic).subscribe();
+       this.dailyTopicService.addDailyTopic(newDailyTopic).subscribe();
      });
   }
 
@@ -195,8 +217,40 @@ export class StudentProfilePageComponent implements OnInit {
 
        newData.push(newDailyTopic);
        this.dataSourcePL.data = newData;
-       this.privateService.addDailyTopic(newDailyTopic).subscribe();
+       this.dailyTopicService.addDailyTopic(newDailyTopic).subscribe();
      });
+  }
+
+  delCourse(course : Course){
+    const newData = this.dataSourceMark.data;
+    newData.splice(newData.indexOf(course),1);
+    this.dataSourceMark.data = newData;
+
+    this.courseService.deletedCourse(course.getIdCourse()).subscribe();
+  }
+  
+  delTopicLife(topic : DailyTopic){
+    const newData = this.dataSourcePL.data;
+    newData.splice(newData.indexOf(topic),1);
+    this.dataSourcePL.data = newData;
+
+    this.dailyTopicService.deleteDailyTopic(topic.getIdDailyTopic()).subscribe();
+  }
+
+  delTopicCourse(topic : DailyTopic){
+    const newData = this.dataSourcePL.data;
+    newData.splice(newData.indexOf(topic),1);
+    this.dataSourcePL.data = newData;
+
+    this.dailyTopicService.deleteDailyTopic(topic.getIdDailyTopic()).subscribe();
+  }
+
+  delContact(contact : Contact){
+    const newData = this.dataSourceContact.data;
+    newData.splice(newData.indexOf(contact),1);
+    this.dataSourceContact.data = newData;
+
+    this.contactService.deleteContact(contact.getIdContact()).subscribe();
   }
 
 }

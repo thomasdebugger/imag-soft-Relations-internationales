@@ -48,6 +48,7 @@ import { ContactsResolver } from './resolvers/contacts.resolver';
 import { DailyTopicsResolver } from './resolvers/dailyTopics.resolver';
 import { LoginResolver } from './resolvers/login.resolver';
 import { AuthenticationGuard } from './guards/authentication.guard';
+import { AddMarkModalComponent } from './pages/add-mark-modal/add-mark-modal.component';
 
 
 const appRoutes: Routes = [
@@ -130,6 +131,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         AddContactModalComponent,
         AddPrivateLifeModalComponent,
         SondageModalComponent,
+        AddMarkModalComponent,
     ],
     imports: [
         BrowserModule,
@@ -185,7 +187,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         SendEmailDialogComponent,
         AddPrivateLifeModalComponent,
         AddContactModalComponent,
-        AddCourseModalComponent
+        AddCourseModalComponent,
+        AddMarkModalComponent
     ],
 })
 export class AppModule { }
