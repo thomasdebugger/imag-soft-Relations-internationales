@@ -27,29 +27,17 @@
         <h3 *ngIf="selectedStudent.getIsEntrant() === 'false'"> Non entrant student</h3>
         <button mat-stroked-button (click)="generatePDF()">Generate PDF</button>
         <br />
-        <button mat-stroked-button *ngIf="!selectedCourse"
-          [class.redColor]="selectedStudent.getIsLearningAgreementValid() === 'true' && !isLAPending"
-          (click)="setIsLearningAgreementValid()">
-          <a *ngIf="selectedStudent.getIsLearningAgreementValid() !== 'true' || isLAPending">Valid learning
-            agreement</a>
-          <a *ngIf="selectedStudent.getIsLearningAgreementValid() === 'true' && !isLAPending">Invalid learning
-            agreement</a>
+        <button mat-stroked-button *ngIf="!selectedCourse" (click)="setIsLearningAgreementValid()"
+          [disabled]="selectedStudent.getIsLearningAgreementValid() === 'true' && !isLAPending">
+          <a>Valid learning agreement</a>
+        </button>
+        <button mat-stroked-button *ngIf="!selectedCourse" class="redColor" (click)="setIsLearningAgreementValid()"
+          [disabled]="selectedStudent.getIsLearningAgreementValid() !== 'true' || isLAPending">
+          <a>Invalid learning agreement</a>
         </button>
       </div>
     </div>
   </mat-card-header>
-
-
-
-
-
-
-
-
-
-
-
-
 
   <mat-card-content>
     <!-- Learning agreement -->
@@ -132,7 +120,9 @@
         </mat-list-item>
         <!-- Courses content -->
         <mat-list-item *ngFor="let course of coursesOfSelectedStudent; index as indexCourse" class="course-row"
-          role="listitem" [class.rejected-course-cell]="course.getState() === 'rejected'">
+          role="listitem" [class.rejected-course-cell]="course.getState() === 'rejected'"
+          [class.pending-course-cell]="course.getState() === 'pending'"
+          [class.accepted-course-cell]="course.getState() === 'accepted'">
           <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getName() }}</h2>
           <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getEcts() }}</h2>
           <h2 class="course-column" (click)="setSelectedCourse(course)">{{ course.getDescription() }}</h2>
@@ -151,18 +141,6 @@
       </mat-list>
     </mat-expansion-panel>
   </mat-card-content>
-
-
-
-
-
-
-
-
-
-
-
-
 
   <!-- Content -->
   <mat-card-content *ngIf="!selectedCourse">
