@@ -96,13 +96,13 @@ export class AdministratorSideComponent implements OnInit {
     } else {
       this.checkedStudents.forEach(student => {
         this.studentService.updateIsArchivedStudent(student.getIdPerson(), 'true').subscribe(() => {
-          this.nonArchivedStudents.splice(this.archivedStudents.indexOf(student), 1);
+          this.nonArchivedStudents.splice(this.nonArchivedStudents.indexOf(student), 1);
           this.archivedStudents.push(student);
           this.setDataSource();
         },
           err => {
             console.log(err);
-            this.nonArchivedStudents.splice(this.archivedStudents.indexOf(student), 1);
+            this.nonArchivedStudents.splice(this.nonArchivedStudents.indexOf(student), 1);
             this.archivedStudents.push(student);
             this.setDataSource();
           });
