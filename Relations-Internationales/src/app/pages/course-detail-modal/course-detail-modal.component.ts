@@ -79,8 +79,8 @@ export class CourseDetailModalComponent implements OnInit {
         idMark: null,
         idCourse: this.data.course.getIdCourse(),
         idPerson: this.data.idStudent,
-        typeMark: result.mark,
-        valueMark: result.typeMark
+        typeMark: result.typeMark,
+        valueMark: result.mark
       });
 
       newData.push(newMark);
