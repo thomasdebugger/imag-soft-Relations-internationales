@@ -75,17 +75,15 @@
   </mat-expansion-panel>
 </div>
 
-
 <div *ngFor="let poll of polls; let pollIndex = index" class="polls">
   <div>{{poll.getQuestion()}}</div>
-  <mat-form-field>
-      <mat-select placeholder="Selectionner votre réponse :" (selectionChange)="selectedAnswers[poll.getIdPoll()] = $event.value">
-        <mat-option *ngFor="let possibleAnswer of possibleAnswers[poll.getIdPoll()]" [value]="possibleAnswer.getValue()">
-            {{possibleAnswer.getValue()}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <button (click)="sendAnswer(poll.getIdPoll(), pollIndex)" class="button">
+  <mat-radio-group class="radio-group"  [(ngModel)]="pollChoice">
+    <mat-radio-button *ngFor="let possibleAnswer of possibleAnswers[poll.getIdPoll()]" [value]="possibleAnswer.getValue()">
+      {{possibleAnswer.getValue()}}
+    </mat-radio-button>
+  </mat-radio-group>
+  <textarea [(ngModel)]="textValue" placeholder="autre..." ></textarea>
+    <button (click)="sendAnswer(poll,pollChoice, pollIndex, textValue)" class="button">
       <a>ok</a>
     </button>
 </div>

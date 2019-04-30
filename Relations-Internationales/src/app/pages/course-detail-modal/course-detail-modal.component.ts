@@ -21,6 +21,7 @@ export class CourseDetailModalComponent implements OnInit {
 
   mark : string = '';
   typeMark : string = '';
+  textValue: string = '';
 
   private possibleAnswers: { [idPoll: string]: PossibleAnswer[] } = {};
   selectedAnswers: { [idPoll: string]: string } = {};
@@ -59,12 +60,18 @@ export class CourseDetailModalComponent implements OnInit {
       });
   }
 
-  sendAnswer(idPoll: string, index: number) {
-    if (this.selectedAnswers[idPoll]) {
-      this.pollService.update_poll(this.selectedAnswers[idPoll], idPoll).subscribe(() => {
+  sendAnswer(poll : Poll, idPoll: string, index: number, text : string) {
+    this.textValue= text;
+    if (this.textValue != '') {
+      this.pollService.update_poll(this.textValue, poll.getIdPoll()).subscribe(() => {
+        this.polls.splice(index, 1);
+      });
+    }else{
+      this.pollService.update_poll(idPoll, poll.getIdPoll()).subscribe(() => {
         this.polls.splice(index, 1);
       });
     }
+
   }
 
   addMark(){
@@ -89,4 +96,5 @@ export class CourseDetailModalComponent implements OnInit {
       
      });
   }
+
 }

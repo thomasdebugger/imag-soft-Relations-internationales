@@ -227,6 +227,10 @@ export class StudentProfilePageComponent implements OnInit {
     this.dataSourceMark.data = newData;
 
     this.courseService.deletedCourse(course.getIdCourse()).subscribe();
+
+    const hystoData = this.dataSourceNotValidated.data;
+    hystoData.push(course);
+    this.dataSourceNotValidated.data = hystoData;
   }
   
   delTopicLife(topic : DailyTopic){

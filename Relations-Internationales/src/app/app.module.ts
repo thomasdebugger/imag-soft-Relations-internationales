@@ -8,7 +8,8 @@ import {
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatExpansionModule } from '@angular/material/expansion';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatRadioModule } from '@angular/material/radio'; 
 
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -155,6 +156,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         MatCheckboxModule,
         MatSlideToggleModule,
         BrowserModule,
+        MatRadioModule,
         HttpClientModule,
         MatTabsModule,
         TranslateModule.forRoot({
