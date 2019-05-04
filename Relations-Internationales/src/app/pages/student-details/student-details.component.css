@@ -65,6 +65,13 @@ mat-expansion-panel {
     overflow: hidden;
 }
 
+.course-column--large {
+    width: 25%;
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
 .delete-column {
     width: 10%;
     text-align: center;
