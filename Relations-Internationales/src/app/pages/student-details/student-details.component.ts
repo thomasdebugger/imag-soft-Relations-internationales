@@ -18,6 +18,7 @@ import { DailyTopicsService } from 'src/app/services/back/daily-topics.service';
 import { ContactService } from 'src/app/services/back/contact.service';
 import { StudentService } from 'src/app/services/back/student.service';
 import { AdministratorService } from 'src/app/services/back/administrator.service';
+import * as html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-student-details',
@@ -196,19 +197,13 @@ export class StudentDetailsComponent implements OnInit {
   }
 
   async generatePDF() {
-    const pdf = new jsPDF();
-    const specialElementHandlers = {
-      '#editor': function (element, renderer) {
-        return true;
-      }
-    };
-
-    pdf.fromHTML(this.contentPdf.nativeElement, 15, 15, {
-      width: 190,
-      elementsHandlers: specialElementHandlers
+    html2canvas(this.contentPdf.nativeElement, { scale: 1 }).then(canvas => {
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const width = window.screen.width * 23 / pdf.internal.pageSize.getWidth();
+      const height = window.screen.height * 15 / pdf.internal.pageSize.getHeight();
+      pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, width, height);
+      pdf.save(`${this.selectedStudent.getFirstName()}_${this.selectedStudent.getLastName()}-${new Date().toLocaleDateString()}`);
     });
-
-    pdf.save(`${this.selectedStudent.getFirstName()}_${this.selectedStudent.getLastName()}-${new Date().toLocaleDateString()}`);
   }
 
   deleteCourse(idCourse: string) {
