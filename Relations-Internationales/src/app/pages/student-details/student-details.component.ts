@@ -199,8 +199,8 @@ export class StudentDetailsComponent implements OnInit {
   async generatePDF() {
     html2canvas(this.contentPdf.nativeElement, { scale: 1 }).then(canvas => {
       const pdf = new jsPDF('p', 'mm', 'a4');
-      const width = window.screen.width * 23 / pdf.internal.pageSize.getWidth();
-      const height = window.screen.height * 15 / pdf.internal.pageSize.getHeight();
+      const width = this.contentPdf.nativeElement.offsetWidth / pdf.internal.pageSize.getWidth() * 23;
+      const height = this.contentPdf.nativeElement.offsetHeight / pdf.internal.pageSize.getHeight() * 30;
       pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, width, height);
       pdf.save(`${this.selectedStudent.getFirstName()}_${this.selectedStudent.getLastName()}-${new Date().toLocaleDateString()}`);
     });
