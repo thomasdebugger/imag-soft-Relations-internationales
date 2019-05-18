@@ -18,7 +18,6 @@ import { DailyTopicsService } from 'src/app/services/back/daily-topics.service';
 import { ContactService } from 'src/app/services/back/contact.service';
 import { StudentService } from 'src/app/services/back/student.service';
 import { AdministratorService } from 'src/app/services/back/administrator.service';
-// import * as puppeteer from 'puppeteer';
 
 @Component({
   selector: 'app-student-details',
@@ -26,6 +25,8 @@ import { AdministratorService } from 'src/app/services/back/administrator.servic
   styleUrls: ['./student-details.component.css']
 })
 export class StudentDetailsComponent implements OnInit {
+
+  @ViewChild('contentPdf') contentPdf: ElementRef;
 
   constructor(private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
@@ -195,12 +196,19 @@ export class StudentDetailsComponent implements OnInit {
   }
 
   async generatePDF() {
-    // const browser = await puppeteer.launch();
-    // const page = await browser.newPage();
+    const pdf = new jsPDF();
+    const specialElementHandlers = {
+      '#editor': function (element, renderer) {
+        return true;
+      }
+    };
 
-    // await page.goto(this.router.url);
-    // await page.screenshot({ path: `${this.selectedStudent.getIdPerson()}_${new Date().toDateString()}` });
-    // await browser.close();
+    pdf.fromHTML(this.contentPdf.nativeElement, 15, 15, {
+      width: 190,
+      elementsHandlers: specialElementHandlers
+    });
+
+    pdf.save(`${this.selectedStudent.getFirstName()}_${this.selectedStudent.getLastName()}-${new Date().toLocaleDateString()}`);
   }
 
   deleteCourse(idCourse: string) {
