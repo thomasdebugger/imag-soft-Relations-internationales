@@ -23,9 +23,9 @@
       <!-- University -->
       <div class="student-university">
         <h2 class="university">{{ selectedStudent.getUniversity() }}</h2>
-        <h3 *ngIf="selectedStudent.getIsEntrant() === 'true'"> Entrant student</h3>
-        <h3 *ngIf="selectedStudent.getIsEntrant() === 'false'"> Non entrant student</h3>
-        <button mat-stroked-button (click)="generatePDF()">Generate PDF</button>
+        <h3 *ngIf="selectedStudent.getIsEntrant() === 'true'"> Incoming student</h3>
+        <h3 *ngIf="selectedStudent.getIsEntrant() === 'false'"> Outgoing student</h3>
+        <button *ngIf="!selectedCourse" mat-stroked-button (click)="generatePDF()">Generate PDF</button>
         <br />
         <button mat-stroked-button *ngIf="!selectedCourse" (click)="setIsLearningAgreementValid()"
           [disabled]="selectedStudent.getIsLearningAgreementValid() === 'true' && !isLAPending">
@@ -33,7 +33,7 @@
         </button>
         <button mat-stroked-button *ngIf="!selectedCourse" class="redColor" (click)="setIsLearningAgreementValid()"
           [disabled]="selectedStudent.getIsLearningAgreementValid() !== 'true' || isLAPending">
-          <a>Invalid learning agreement</a>
+          <a>Unvalid learning agreement</a>
         </button>
       </div>
     </div>

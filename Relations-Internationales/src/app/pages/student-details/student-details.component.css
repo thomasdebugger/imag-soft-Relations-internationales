@@ -152,3 +152,7 @@ mat-card-header button {
 .rejected-course-cell {
     background-color: #ff171721;
 }
+
+.mat-expansion-panel-header.mat-expanded:hover {
+    background: none;
+}
