@@ -8,7 +8,8 @@ import {
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatExpansionModule } from '@angular/material/expansion';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatRadioModule } from '@angular/material/radio'; 
 
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -48,6 +49,7 @@ import { ContactsResolver } from './resolvers/contacts.resolver';
 import { DailyTopicsResolver } from './resolvers/dailyTopics.resolver';
 import { LoginResolver } from './resolvers/login.resolver';
 import { AuthenticationGuard } from './guards/authentication.guard';
+import { AddMarkModalComponent } from './pages/add-mark-modal/add-mark-modal.component';
 
 
 const appRoutes: Routes = [
@@ -130,6 +132,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         AddContactModalComponent,
         AddPrivateLifeModalComponent,
         SondageModalComponent,
+        AddMarkModalComponent,
     ],
     imports: [
         BrowserModule,
@@ -153,6 +156,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         MatCheckboxModule,
         MatSlideToggleModule,
         BrowserModule,
+        MatRadioModule,
         HttpClientModule,
         MatTabsModule,
         TranslateModule.forRoot({
@@ -185,7 +189,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         SendEmailDialogComponent,
         AddPrivateLifeModalComponent,
         AddContactModalComponent,
-        AddCourseModalComponent
+        AddCourseModalComponent,
+        AddMarkModalComponent
     ],
 })
 export class AppModule { }

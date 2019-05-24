@@ -65,4 +65,9 @@ export class CourseService {
     // tslint:disable-next-line:max-line-length
     return this.http.get<object>(`${environment.ip_address}${environment.back.update_state_course}?idCourse=${idCourse}&stateToUpdate=rejected`);
   }
+
+  deletedCourse(idCourse: string): Observable<any> {
+    // tslint:disable-next-line:max-line-length
+    return this.http.get<object>(`${environment.ip_address}${environment.back.update_state_course}?idCourse=${idCourse}&stateToUpdate=deleted`);
+  }
 }
