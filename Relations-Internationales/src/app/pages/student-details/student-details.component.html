@@ -43,7 +43,7 @@
       <!-- Learning agreement -->
       <mat-expansion-panel [class.table-green]="selectedStudent.getIsLearningAgreementValid() === 'true'"
         [class.table-red]="selectedStudent.getIsLearningAgreementValid() === 'false' && !isLAPending"
-        [class.table-orange]="isLAPending" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        [class.table-orange]="isLAPending">
         <!-- Panel header -->
         <mat-expansion-panel-header>
           <mat-panel-title>
@@ -100,7 +100,7 @@
       </mat-expansion-panel>
 
       <!-- History -->
-      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel>
         <!-- Panel header -->
         <mat-expansion-panel-header>
           <mat-panel-title>
@@ -145,7 +145,7 @@
     <!-- Content -->
     <mat-card-content *ngIf="!selectedCourse">
       <!-- Courses -->
-      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel>
         <!-- Panel header -->
         <mat-expansion-panel-header>
           <mat-panel-title>
@@ -184,8 +184,7 @@
       </mat-expansion-panel>
 
       <!-- Topics -->
-      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
-        (click)="updateDailtTopic()">
+      <mat-expansion-panel (click)="updateDailtTopic()">
         <!-- Panel header -->
         <mat-expansion-panel-header>
           <mat-panel-title>
@@ -219,7 +218,7 @@
       </mat-expansion-panel>
 
       <!-- Contacts -->
-      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel>
         <!-- Panel header -->
         <mat-expansion-panel-header>
           <mat-panel-title>

@@ -14,7 +14,7 @@
     <h2 class="bold">Description</h2>
   </div>
   <div class="content">
-    <h2>{{ selectedCourse.description }}</h2>
+    <h2>{{ selectedCourse.getDescription() }}</h2>
   </div>
 </div>
 
@@ -23,7 +23,7 @@
     <h2 class="bold">ECTS</h2>
   </div>
   <div class="content">
-    <h2>{{ selectedCourse.ects }}</h2>
+    <h2>{{ selectedCourse.getEcts() }}</h2>
   </div>
 </div>
 
@@ -32,7 +32,7 @@
     <h2 class="bold">Semester</h2>
   </div>
   <div class="content">
-    <h2>{{ selectedCourse.semester }}</h2>
+    <h2>{{ selectedCourse.getSemester() }}</h2>
   </div>
 </div>
 
@@ -41,7 +41,7 @@
     <h2 class="bold">Teachers</h2>
   </div>
   <div class="content">
-    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel>
       <!-- Panel header -->
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -57,8 +57,8 @@
         </mat-list-item>
         <!-- Teacher content -->
         <mat-list-item role="listitem">
-          <h2 class="teacher-column">{{ selectedCourse.teacherFullName }}</h2>
-          <h2 class="teacher-column">{{ selectedCourse.teacherEmail }}</h2>
+          <h2 class="teacher-column">{{ selectedCourse.getTeacherFullName() }}</h2>
+          <h2 class="teacher-column">{{ selectedCourse.getTeacherEmail() }}</h2>
         </mat-list-item>
       </mat-list>
     </mat-expansion-panel>
@@ -70,7 +70,7 @@
     <h2 class="bold">Marks</h2>
   </div>
   <div class="content">
-    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel>
       <!-- Panel header -->
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -99,7 +99,7 @@
     <h2 class="bold">Polls</h2>
   </div>
   <div class="content">
-    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel>
       <!-- Panel header -->
       <mat-expansion-panel-header>
         <mat-panel-title>

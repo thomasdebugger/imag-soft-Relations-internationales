@@ -27,7 +27,6 @@ export class HeaderComponent implements OnInit {
   }
 
   changeLanguage(event): void {
-    console.log('Set the language to key ', event);
     this.currentLanguage = event.value;
   }
 

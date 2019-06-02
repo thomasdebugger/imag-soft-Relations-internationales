@@ -33,15 +33,15 @@ export class StudentProfilePageComponent implements OnInit {
   affiliation: String = '';
   mail: String = '';
   title: String = '';
-  teacherName : string = '';
-  codeUE : string = '' ;
-  semester : string = '' ;
+  teacherName: string = '';
+  codeUE: string = '';
+  semester: string = '';
 
-  coursesValidated : Course[] = [];
-  coursesHystory : Course[] = [];
+  coursesValidated: Course[] = [];
+  coursesHystory: Course[] = [];
 
-  dailyTopicLife : DailyTopic[] = [];
-  dailyTopicCourse : DailyTopic[] = [];
+  dailyTopicLife: DailyTopic[] = [];
+  dailyTopicCourse: DailyTopic[] = [];
 
   @Input() selectedStudent: Student = null;
   @Input() coursesOfSelectedStudent: Course[] = [];
@@ -50,11 +50,11 @@ export class StudentProfilePageComponent implements OnInit {
 
   private marks: { idCourse: string; marks: Mark[] }[] = [];
 
-  displayedColumnsMark: string[] = ['name', 'ects', 'description','codeUE','semester','action'];
-  displayedColumnsNotValidated: string[] = ['name', 'ects', 'description','codeUE','semester'];
-  displayedColumnsPL: string[] = ['name', 'dateDailyTopic', 'description','action'];
-  displayedTopicsCourses: string[] = ['name', 'dateDailyTopic', 'description','action'];
-  displayedColumnsContact: string[] = ['lastName', 'description', 'affiliation', 'emailAddress','action'];
+  displayedColumnsMark: string[] = ['name', 'ects', 'description', 'codeUE', 'semester', 'action'];
+  displayedColumnsNotValidated: string[] = ['name', 'ects', 'description', 'codeUE', 'semester'];
+  displayedColumnsPL: string[] = ['name', 'dateDailyTopic', 'description', 'action'];
+  displayedTopicsCourses: string[] = ['name', 'dateDailyTopic', 'description', 'action'];
+  displayedColumnsContact: string[] = ['lastName', 'description', 'affiliation', 'emailAddress', 'action'];
 
   dataSourceMark: MatTableDataSource<Course> = null;
   dataSourceNotValidated: MatTableDataSource<Course> = null;
@@ -64,8 +64,8 @@ export class StudentProfilePageComponent implements OnInit {
 
 
   constructor(private activatedRoute: ActivatedRoute, public dialog: MatDialog, private datePipe: DatePipe,
-     private readonly markService: MarkService, private readonly pollService: PollService, private courseService : CourseService,
-     private contactService : ContactService, private dailyTopicService : DailyTopicsService) {
+    private readonly markService: MarkService, private readonly pollService: PollService, private courseService: CourseService,
+    private contactService: ContactService, private dailyTopicService: DailyTopicsService) {
 
   }
 
@@ -74,11 +74,11 @@ export class StudentProfilePageComponent implements OnInit {
 
 
     this.activatedRoute.data.subscribe(data => {
-      this.coursesOfSelectedStudent.forEach(course => { 
-        if(course.getState() === 'rejected' || course.getState() === 'deleted'){
+      this.coursesOfSelectedStudent.forEach(course => {
+        if (course.getState() === 'rejected' || course.getState() === 'deleted') {
           this.coursesHystory.push(course);
         }
-        else{
+        else {
           this.coursesValidated.push(course);
         }
         this.markService.getMarksByStudent(course.getIdCourse(), this.selectedStudent.getIdPerson())
@@ -89,18 +89,17 @@ export class StudentProfilePageComponent implements OnInit {
           });
       });
 
-      this.dailyTopicsOfSelectedStudent.forEach(dailyTopic =>{
-        console.log(dailyTopic.getType());
-        if(dailyTopic.getType() === 'course'){
+      this.dailyTopicsOfSelectedStudent.forEach(dailyTopic => {
+        if (dailyTopic.getType() === 'course') {
           this.dailyTopicCourse.push(dailyTopic);
         }
-        else{
+        else {
           this.dailyTopicLife.push(dailyTopic);
         }
       });
 
       this.dataSourceMark = new MatTableDataSource(this.coursesValidated);
-      this.dataSourceNotValidated= new MatTableDataSource(this.coursesHystory);
+      this.dataSourceNotValidated = new MatTableDataSource(this.coursesHystory);
       this.dataSourcePL = new MatTableDataSource(this.dailyTopicLife);
       this.dataSourceTC = new MatTableDataSource(this.dailyTopicCourse);
       this.dataSourceContact = new MatTableDataSource(this.contactsOfSelectedStudent);
@@ -109,12 +108,14 @@ export class StudentProfilePageComponent implements OnInit {
 
   addMark() {
 
-     var newData = this.dataSourceMark.data;
-     const dialogRef = this.dialog.open(AddCourseModalComponent, {
-       width: '250px',
-       data: { name: this.name, ects: this.ects, description: this.description,
-         teacherName: this.teacherName, codeUE: this.codeUE, semester : this.semester, mail: this.mail}
-     });
+    var newData = this.dataSourceMark.data;
+    const dialogRef = this.dialog.open(AddCourseModalComponent, {
+      width: '250px',
+      data: {
+        name: this.name, ects: this.ects, description: this.description,
+        teacherName: this.teacherName, codeUE: this.codeUE, semester: this.semester, mail: this.mail
+      }
+    });
 
 
     dialogRef.afterClosed().subscribe(result => {
@@ -127,14 +128,14 @@ export class StudentProfilePageComponent implements OnInit {
         teacherFullName: result.teacherName,
         teacherEmail: result.mail,
         idPerson: this.selectedStudent.getIdPerson(),
-        codeUE : result.codeUE,
-        semester : result.semester
+        codeUE: result.codeUE,
+        semester: result.semester
       });
       newData.push(newCourse);
       this.dataSourceMark.data = newData;
       this.courseService.addCourse(newCourse).subscribe();
-      
-     });
+
+    });
   }
 
 
@@ -147,11 +148,11 @@ export class StudentProfilePageComponent implements OnInit {
 
   addContact() {
 
-     var newData = this.dataSourceContact.data;
-     const dialogRef = this.dialog.open(AddContactModalComponent, {
-       width: '250px',
-       data: { name: this.name, description: this.description, affiliation: this.affiliation, mail: this.mail }
-     });
+    var newData = this.dataSourceContact.data;
+    const dialogRef = this.dialog.open(AddContactModalComponent, {
+      width: '250px',
+      data: { name: this.name, description: this.description, affiliation: this.affiliation, mail: this.mail }
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       const newContact = new Contact({
@@ -164,11 +165,11 @@ export class StudentProfilePageComponent implements OnInit {
         affiliation: result.affiliation,
         description: result.description
       });
-       newData.push(newContact);
-       this.dataSourceContact.data = newData;
-       this.contactService.addContact(newContact).subscribe();
-       
-     });
+      newData.push(newContact);
+      this.dataSourceContact.data = newData;
+      this.contactService.addContact(newContact).subscribe();
+
+    });
 
 
   }
@@ -191,10 +192,10 @@ export class StudentProfilePageComponent implements OnInit {
         type: 'privateLife'
       });
 
-       newData.push(newDailyTopic);
-       this.dataSourcePL.data = newData;
-       this.dailyTopicService.addDailyTopic(newDailyTopic).subscribe();
-     });
+      newData.push(newDailyTopic);
+      this.dataSourcePL.data = newData;
+      this.dailyTopicService.addDailyTopic(newDailyTopic).subscribe();
+    });
   }
 
   addTopicsCourses() {
@@ -215,15 +216,15 @@ export class StudentProfilePageComponent implements OnInit {
         type: 'course'
       });
 
-       newData.push(newDailyTopic);
-       this.dataSourcePL.data = newData;
-       this.dailyTopicService.addDailyTopic(newDailyTopic).subscribe();
-     });
+      newData.push(newDailyTopic);
+      this.dataSourcePL.data = newData;
+      this.dailyTopicService.addDailyTopic(newDailyTopic).subscribe();
+    });
   }
 
-  delCourse(course : Course){
+  delCourse(course: Course) {
     const newData = this.dataSourceMark.data;
-    newData.splice(newData.indexOf(course),1);
+    newData.splice(newData.indexOf(course), 1);
     this.dataSourceMark.data = newData;
 
     this.courseService.deletedCourse(course.getIdCourse()).subscribe();
@@ -232,26 +233,26 @@ export class StudentProfilePageComponent implements OnInit {
     hystoData.push(course);
     this.dataSourceNotValidated.data = hystoData;
   }
-  
-  delTopicLife(topic : DailyTopic){
+
+  delTopicLife(topic: DailyTopic) {
     const newData = this.dataSourcePL.data;
-    newData.splice(newData.indexOf(topic),1);
+    newData.splice(newData.indexOf(topic), 1);
     this.dataSourcePL.data = newData;
 
     this.dailyTopicService.deleteDailyTopic(topic.getIdDailyTopic()).subscribe();
   }
 
-  delTopicCourse(topic : DailyTopic){
+  delTopicCourse(topic: DailyTopic) {
     const newData = this.dataSourcePL.data;
-    newData.splice(newData.indexOf(topic),1);
+    newData.splice(newData.indexOf(topic), 1);
     this.dataSourcePL.data = newData;
 
     this.dailyTopicService.deleteDailyTopic(topic.getIdDailyTopic()).subscribe();
   }
 
-  delContact(contact : Contact){
+  delContact(contact: Contact) {
     const newData = this.dataSourceContact.data;
-    newData.splice(newData.indexOf(contact),1);
+    newData.splice(newData.indexOf(contact), 1);
     this.dataSourceContact.data = newData;
 
     this.contactService.deleteContact(contact.getIdContact()).subscribe();

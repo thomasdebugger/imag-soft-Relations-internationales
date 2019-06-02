@@ -22,7 +22,7 @@
         </div>
         <!-- Field University -->
         <div class="university-field">
-          <h3 [class.invalid-field]="!isFormValid && !isUniversity">University</h3>
+          <h3 [class.invalid-field]="!isFormValid && !isUniversityValid">University</h3>
           <mat-form-field>
             <input matInput type="text" placeholder="Enter the university" [(ngModel)]="university"
               name="studentUniversity">
@@ -36,14 +36,14 @@
       <div class="column">
         <!-- Field Last Name -->
         <div class="last-name-field">
-          <h3 [class.invalid-field]="!isFormValid && !isLastName">Last Name</h3>
+          <h3 [class.invalid-field]="!isFormValid && !isLastNameValid">Last Name</h3>
           <mat-form-field>
             <input matInput type="text" placeholder="Enter the last name" [(ngModel)]="lastName" name="studentLastName">
           </mat-form-field>
         </div>
         <!-- Field Phone Number -->
         <div class="phone-number-field">
-          <h3 [class.invalid-field]="!isFormValid && !isPhoneNumber">Phone Number</h3>
+          <h3 [class.invalid-field]="!isFormValid && !isPhoneNumberValid">Phone Number</h3>
           <mat-form-field>
             <input matInput type="text" placeholder="Enter the phone number" [(ngModel)]="phoneNumber"
               name="studentPhoneNumber">
@@ -51,7 +51,7 @@
         </div>
         <!-- Field Birth Date -->
         <div class="birth-date-field">
-          <h3 [class.invalid-field]="!isFormValid && !isBirthDate">Birth date</h3>
+          <h3 [class.invalid-field]="!isFormValid && !isBirthDateValid">Birth date</h3>
           <mat-form-field>
             <input matInput type="date" placeholder="Enter the birth date" [(ngModel)]="birthDate"
               name="studentBirthDate">

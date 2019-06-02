@@ -19,8 +19,8 @@ export class CourseDetailModalComponent implements OnInit {
   marks: Mark[] = [];
   polls: Poll[] = [];
 
-  mark : string = '';
-  typeMark : string = '';
+  mark: string = '';
+  typeMark: string = '';
   textValue: string = '';
 
   private possibleAnswers: { [idPoll: string]: PossibleAnswer[] } = {};
@@ -31,7 +31,7 @@ export class CourseDetailModalComponent implements OnInit {
     private markService: MarkService,
     private possibleAnswerService: PossibleAnswerService,
     private pollService: PollService,
-    @Inject(MAT_DIALOG_DATA) public data: { course: Course, idStudent: string }) { }
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
 
 
   ngOnInit() {
@@ -60,13 +60,13 @@ export class CourseDetailModalComponent implements OnInit {
       });
   }
 
-  sendAnswer(poll : Poll, idPoll: string, index: number, text : string) {
-    this.textValue= text;
+  sendAnswer(poll: Poll, idPoll: string, index: number, text: string) {
+    this.textValue = text;
     if (this.textValue != '') {
       this.pollService.update_poll(this.textValue, poll.getIdPoll()).subscribe(() => {
         this.polls.splice(index, 1);
       });
-    }else{
+    } else {
       this.pollService.update_poll(idPoll, poll.getIdPoll()).subscribe(() => {
         this.polls.splice(index, 1);
       });
@@ -74,14 +74,14 @@ export class CourseDetailModalComponent implements OnInit {
 
   }
 
-  addMark(){
+  addMark() {
     var newData = this.marks;
-     const dialogRef = this.dialog.open(AddMarkModalComponent, {
-       width: '250px',
-       data: { mark: this.mark, typeMark: this.typeMark }
-     });
+    const dialogRef = this.dialog.open(AddMarkModalComponent, {
+      width: '250px',
+      data: { mark: this.mark, typeMark: this.typeMark }
+    });
 
-     dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(result => {
       const newMark = new Mark({
         idMark: null,
         idCourse: this.data.course.getIdCourse(),
@@ -93,8 +93,8 @@ export class CourseDetailModalComponent implements OnInit {
       newData.push(newMark);
       this.marks = newData;
       this.markService.addMark(newMark).subscribe();
-      
-     });
+
+    });
   }
 
 }

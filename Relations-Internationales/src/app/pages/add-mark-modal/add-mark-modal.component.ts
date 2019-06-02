@@ -8,7 +8,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 })
 export class AddMarkModalComponent implements OnInit {
 
-  constructor(public dialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: String){ }
+  constructor(public dialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
   }

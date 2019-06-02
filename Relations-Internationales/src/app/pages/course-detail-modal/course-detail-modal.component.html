@@ -21,72 +21,73 @@
 </div>
 
 <div class="course-teachers">
-<div class="content">
-  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-    <!-- Panel header -->
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        <h2>Expand the panel to see teacher</h2>
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-    <!-- Teachers list -->
-    <mat-list role="list">
-      <!-- Column header -->
-      <mat-list-item class="header" role="listitem">
-        <h2 class="teacher-column">Full name</h2>
-        <h2 class="teacher-column">Email address</h2>
-      </mat-list-item>
-      <!-- Teacher content -->
-      <mat-list-item role="listitem">
-        <h2 class="teacher-column">{{ data.course.getTeacherFullName() }}</h2>
-        <h2 class="teacher-column">{{ data.course.getTeacherEmail() }}</h2>
-      </mat-list-item>
-    </mat-list>
-  </mat-expansion-panel>
-</div>
+  <div class="content">
+    <mat-expansion-panel>
+      <!-- Panel header -->
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h2>Expand the panel to see teacher</h2>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <!-- Teachers list -->
+      <mat-list role="list">
+        <!-- Column header -->
+        <mat-list-item class="header" role="listitem">
+          <h2 class="teacher-column">Full name</h2>
+          <h2 class="teacher-column">Email address</h2>
+        </mat-list-item>
+        <!-- Teacher content -->
+        <mat-list-item role="listitem">
+          <h2 class="teacher-column">{{ data.course.getTeacherFullName() }}</h2>
+          <h2 class="teacher-column">{{ data.course.getTeacherEmail() }}</h2>
+        </mat-list-item>
+      </mat-list>
+    </mat-expansion-panel>
+  </div>
 
 
-<div class="course-marks">
-</div> 
-<div class="content">
-  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-    <!-- Panel header -->
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        <h2>Expand the panel to see marks...</h2>
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-    <!-- Marks list -->
-    <mat-list role="list">
-      <!-- Column header -->
-      <mat-list-item class="header" role="listitem">
-        <h2 class="mark-column">Mark</h2>
-        <h2 class="mark-column">Type</h2>
-      </mat-list-item>
-      <!-- Teacher content -->
-      <mat-list-item *ngFor="let mark of marks" role="listitem">
-        <h2 class="mark-column">{{ mark.getValueMark() }}</h2>
-        <h2 class="mark-column">{{ mark.getTypeMark() }}</h2>
-      </mat-list-item>
-    </mat-list>
-    <button mat-icon-button (click)="addMark()">
-      <mat-icon>add</mat-icon>
-    </button>
-  </mat-expansion-panel>
-</div>
+  <div class="course-marks">
+  </div>
+  <div class="content">
+    <mat-expansion-panel>
+      <!-- Panel header -->
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h2>Expand the panel to see marks...</h2>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <!-- Marks list -->
+      <mat-list role="list">
+        <!-- Column header -->
+        <mat-list-item class="header" role="listitem">
+          <h2 class="mark-column">Mark</h2>
+          <h2 class="mark-column">Type</h2>
+        </mat-list-item>
+        <!-- Teacher content -->
+        <mat-list-item *ngFor="let mark of marks" role="listitem">
+          <h2 class="mark-column">{{ mark.getValueMark() }}</h2>
+          <h2 class="mark-column">{{ mark.getTypeMark() }}</h2>
+        </mat-list-item>
+      </mat-list>
+      <button mat-icon-button (click)="addMark()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-expansion-panel>
+  </div>
 
-<div *ngFor="let poll of polls; let pollIndex = index" class="polls">
-  <div>{{poll.getQuestion()}}</div>
-  <mat-radio-group class="radio-group"  [(ngModel)]="pollChoice">
-    <mat-radio-button *ngFor="let possibleAnswer of possibleAnswers[poll.getIdPoll()]" [value]="possibleAnswer.getValue()">
-      {{possibleAnswer.getValue()}}
-    </mat-radio-button>
-  </mat-radio-group>
-  <textarea [(ngModel)]="textValue" placeholder="autre..." ></textarea>
+  <div *ngFor="let poll of polls; let pollIndex = index" class="polls">
+    <div>{{poll.getQuestion()}}</div>
+    <mat-radio-group class="radio-group" [(ngModel)]="pollChoice">
+      <mat-radio-button *ngFor="let possibleAnswer of possibleAnswers[poll.getIdPoll()]"
+        [value]="possibleAnswer.getValue()">
+        {{possibleAnswer.getValue()}}
+      </mat-radio-button>
+    </mat-radio-group>
+    <textarea [(ngModel)]="textValue" placeholder="autre..."></textarea>
     <button (click)="sendAnswer(poll,pollChoice, pollIndex, textValue)" class="button">
       <a>ok</a>
     </button>
-</div>
+  </div>
 
 
 </div>

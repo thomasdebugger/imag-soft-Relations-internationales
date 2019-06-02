@@ -9,7 +9,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 export class AddPrivateLifeModalComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<AddPrivateLifeModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: String) { }
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
   }

@@ -24,11 +24,11 @@ export class CourseDetailsComponent implements OnInit {
     private readonly pollService: PollService) { }
 
   @Input() selectedStudent: Student;
-  @Input() selectedCourse: Course;
+  @Input() selectedCourse = new Course();
   @Output() backToStudent: EventEmitter<boolean> = new EventEmitter();
 
-  private marks: Mark[] = [];
-  private polls: Poll[] = [];
+  marks: Mark[] = [];
+  polls: Poll[] = [];
 
   ngOnInit() {
     this.markService.getMarksByStudent(this.selectedCourse.getIdCourse(), this.selectedStudent.getIdPerson())
